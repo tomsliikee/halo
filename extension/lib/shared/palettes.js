@@ -44,9 +44,26 @@ export const palettes = {
 // Fixed, they do not follow the style.
 export const warn = {light: '#f2b600', dark: '#f5cc4a', on: '#3a2c00'};
 
+// Error and status colours of the design system: fixed, whatever the style.
+export const fixed = {
+    light: {error: '#ba1a1a', onError: '#ffffff', ec: '#ffdad6', onEc: '#93000a', good: '#2e7d32', onGood: '#ffffff'},
+    dark: {error: '#ffb4ab', onError: '#690005', ec: '#93000a', onEc: '#ffdad6', good: '#7bd88f', onGood: '#00390f'},
+};
+
 // An unknown colour falls back to blue, so a broken setting still draws.
+// Besides the style's roles: the fixed ones, and the inverse surface (the
+// island's pill, snackbars), which is the other scheme's highest surface.
 export function palette(colour, scheme) {
-    return palettes[colour]?.[scheme] ?? palettes.blue[scheme];
+    const style = palettes[colour] ?? palettes.blue;
+    const other = scheme === 'dark' ? 'light' : 'dark';
+    const roles = style[scheme];
+    return {
+        ...roles, ...fixed[scheme], inverse: style[other].highest, onInverse: style[other].on,
+        // A floating frame and the pills on it: in light the pills are the
+        // brightest surface; in dark the frame sinks so they still stand out.
+        well: scheme === 'light' ? roles.highest : roles.surf,
+        raised: scheme === 'light' ? roles.bright : roles.highest,
+    };
 }
 
 // "#rrggbb" to [r, g, b] in 0–1, for Cairo.

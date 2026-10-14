@@ -1,0 +1,2367 @@
+[
+ {
+  "key": "claude",
+  "label": "Claude",
+  "group": "brand",
+  "match": [
+   "claude"
+  ]
+ },
+ {
+  "key": "anthropic",
+  "label": "Anthropic",
+  "group": "brand",
+  "match": []
+ },
+ {
+  "key": "zen",
+  "label": "Zen",
+  "group": "brand",
+  "match": [
+   "zen",
+   "zen-browser",
+   "zen_browser"
+  ]
+ },
+ {
+  "key": "firefox",
+  "label": "Firefox",
+  "group": "brand",
+  "match": [
+   "firefox"
+  ]
+ },
+ {
+  "key": "librewolf",
+  "label": "LibreWolf",
+  "group": "brand",
+  "match": [
+   "librewolf"
+  ]
+ },
+ {
+  "key": "chrome",
+  "label": "Chrome",
+  "group": "brand",
+  "match": [
+   "google-chrome",
+   "chrome",
+   "chromium"
+  ]
+ },
+ {
+  "key": "brave",
+  "label": "Brave",
+  "group": "brand",
+  "match": [
+   "brave",
+   "brave-browser"
+  ]
+ },
+ {
+  "key": "vivaldi",
+  "label": "Vivaldi",
+  "group": "brand",
+  "match": [
+   "vivaldi",
+   "vivaldi-stable"
+  ]
+ },
+ {
+  "key": "opera",
+  "label": "Opera",
+  "group": "brand",
+  "match": [
+   "opera"
+  ]
+ },
+ {
+  "key": "tor",
+  "label": "Tor Browser",
+  "group": "brand",
+  "match": [
+   "torbrowser",
+   "torbrowser-launcher"
+  ]
+ },
+ {
+  "key": "libreoffice-writer",
+  "label": "LibreOffice Writer",
+  "group": "brand",
+  "match": [
+   "libreoffice-writer",
+   "libreoffice.writer"
+  ]
+ },
+ {
+  "key": "libreoffice-calc",
+  "label": "LibreOffice Calc",
+  "group": "brand",
+  "match": [
+   "libreoffice-calc",
+   "libreoffice.calc"
+  ]
+ },
+ {
+  "key": "libreoffice-impress",
+  "label": "LibreOffice Impress",
+  "group": "brand",
+  "match": [
+   "libreoffice-impress",
+   "libreoffice.impress"
+  ]
+ },
+ {
+  "key": "libreoffice-draw",
+  "label": "LibreOffice Draw",
+  "group": "brand",
+  "match": [
+   "libreoffice-draw",
+   "libreoffice.draw"
+  ]
+ },
+ {
+  "key": "libreoffice-base",
+  "label": "LibreOffice Base",
+  "group": "brand",
+  "match": [
+   "libreoffice-base",
+   "libreoffice.base"
+  ]
+ },
+ {
+  "key": "libreoffice-math",
+  "label": "LibreOffice Math",
+  "group": "brand",
+  "match": [
+   "libreoffice-math",
+   "libreoffice.math"
+  ]
+ },
+ {
+  "key": "libreoffice",
+  "label": "LibreOffice",
+  "group": "brand",
+  "match": [
+   "libreoffice",
+   "libreoffice-startcenter",
+   "libreoffice.libreoffice"
+  ]
+ },
+ {
+  "key": "gemini",
+  "label": "Gemini",
+  "group": "brand",
+  "match": [
+   "gemini"
+  ]
+ },
+ {
+  "key": "github",
+  "label": "GitHub",
+  "group": "brand",
+  "match": [
+   "github",
+   "github-desktop",
+   "githubdesktop"
+  ]
+ },
+ {
+  "key": "gitlab",
+  "label": "GitLab",
+  "group": "brand",
+  "match": [
+   "gitlab"
+  ]
+ },
+ {
+  "key": "google-drive",
+  "label": "Google Drive",
+  "group": "brand",
+  "match": [
+   "google-drive",
+   "googledrive"
+  ]
+ },
+ {
+  "key": "google-docs",
+  "label": "Google Docs",
+  "group": "brand",
+  "match": []
+ },
+ {
+  "key": "google-sheets",
+  "label": "Google Sheets",
+  "group": "brand",
+  "match": []
+ },
+ {
+  "key": "google-slides",
+  "label": "Google Slides",
+  "group": "brand",
+  "match": []
+ },
+ {
+  "key": "google-calendar",
+  "label": "Google Calendar",
+  "group": "brand",
+  "match": []
+ },
+ {
+  "key": "gmail",
+  "label": "Gmail",
+  "group": "brand",
+  "match": [
+   "gmail"
+  ]
+ },
+ {
+  "key": "vscodium",
+  "label": "VSCodium",
+  "group": "brand",
+  "match": [
+   "codium",
+   "vscodium"
+  ]
+ },
+ {
+  "key": "claude-code",
+  "label": "Claude Code",
+  "group": "brand",
+  "match": []
+ },
+ {
+  "key": "cursor",
+  "label": "Cursor",
+  "group": "brand",
+  "match": [
+   "cursor"
+  ]
+ },
+ {
+  "key": "zed",
+  "label": "Zed",
+  "group": "brand",
+  "match": [
+   "zed",
+   "dev.zed.zed"
+  ]
+ },
+ {
+  "key": "sublime-text",
+  "label": "Sublime Text",
+  "group": "brand",
+  "match": [
+   "sublime_text",
+   "sublime-text"
+  ]
+ },
+ {
+  "key": "neovim",
+  "label": "Neovim",
+  "group": "brand",
+  "match": [
+   "nvim",
+   "neovim"
+  ]
+ },
+ {
+  "key": "vim",
+  "label": "Vim",
+  "group": "brand",
+  "match": [
+   "vim",
+   "gvim"
+  ]
+ },
+ {
+  "key": "jetbrains",
+  "label": "JetBrains",
+  "group": "brand",
+  "match": [
+   "jetbrains-toolbox"
+  ]
+ },
+ {
+  "key": "intellij",
+  "label": "IntelliJ IDEA",
+  "group": "brand",
+  "match": [
+   "idea",
+   "intellij",
+   "jetbrains-idea"
+  ]
+ },
+ {
+  "key": "pycharm",
+  "label": "PyCharm",
+  "group": "brand",
+  "match": [
+   "pycharm",
+   "jetbrains-pycharm"
+  ]
+ },
+ {
+  "key": "webstorm",
+  "label": "WebStorm",
+  "group": "brand",
+  "match": [
+   "webstorm",
+   "jetbrains-webstorm"
+  ]
+ },
+ {
+  "key": "android-studio",
+  "label": "Android Studio",
+  "group": "brand",
+  "match": [
+   "android-studio",
+   "androidstudio"
+  ]
+ },
+ {
+  "key": "ghostty",
+  "label": "Ghostty",
+  "group": "brand",
+  "match": [
+   "ghostty"
+  ]
+ },
+ {
+  "key": "alacritty",
+  "label": "Alacritty",
+  "group": "brand",
+  "match": [
+   "alacritty"
+  ]
+ },
+ {
+  "key": "wezterm",
+  "label": "WezTerm",
+  "group": "brand",
+  "match": [
+   "wezterm"
+  ]
+ },
+ {
+  "key": "warp",
+  "label": "Warp",
+  "group": "brand",
+  "match": [
+   "warp",
+   "dev.warp.warp"
+  ]
+ },
+ {
+  "key": "gnome-terminal",
+  "label": "GNOME Terminal",
+  "group": "brand",
+  "match": []
+ },
+ {
+  "key": "docker",
+  "label": "Docker",
+  "group": "brand",
+  "match": [
+   "docker",
+   "docker-desktop"
+  ]
+ },
+ {
+  "key": "podman",
+  "label": "Podman",
+  "group": "brand",
+  "match": [
+   "podman",
+   "podman-desktop"
+  ]
+ },
+ {
+  "key": "postman",
+  "label": "Postman",
+  "group": "brand",
+  "match": [
+   "postman"
+  ]
+ },
+ {
+  "key": "insomnia",
+  "label": "Insomnia",
+  "group": "brand",
+  "match": [
+   "insomnia"
+  ]
+ },
+ {
+  "key": "wireshark",
+  "label": "Wireshark",
+  "group": "brand",
+  "match": [
+   "wireshark"
+  ]
+ },
+ {
+  "key": "ollama",
+  "label": "Ollama",
+  "group": "brand",
+  "match": [
+   "ollama"
+  ]
+ },
+ {
+  "key": "perplexity",
+  "label": "Perplexity",
+  "group": "brand",
+  "match": [
+   "perplexity"
+  ]
+ },
+ {
+  "key": "mistral",
+  "label": "Mistral",
+  "group": "brand",
+  "match": [
+   "mistral"
+  ]
+ },
+ {
+  "key": "hugging-face",
+  "label": "Hugging Face",
+  "group": "brand",
+  "match": []
+ },
+ {
+  "key": "deepl",
+  "label": "DeepL",
+  "group": "brand",
+  "match": [
+   "deepl"
+  ]
+ },
+ {
+  "key": "spotify",
+  "label": "Spotify",
+  "group": "brand",
+  "match": [
+   "spotify"
+  ]
+ },
+ {
+  "key": "tidal",
+  "label": "Tidal",
+  "group": "brand",
+  "match": [
+   "tidal",
+   "tidal-hifi"
+  ]
+ },
+ {
+  "key": "deezer",
+  "label": "Deezer",
+  "group": "brand",
+  "match": [
+   "deezer"
+  ]
+ },
+ {
+  "key": "soundcloud",
+  "label": "SoundCloud",
+  "group": "brand",
+  "match": [
+   "soundcloud"
+  ]
+ },
+ {
+  "key": "youtube",
+  "label": "YouTube",
+  "group": "brand",
+  "match": [
+   "youtube"
+  ]
+ },
+ {
+  "key": "youtube-music",
+  "label": "YouTube Music",
+  "group": "brand",
+  "match": [
+   "youtube-music",
+   "youtubemusic"
+  ]
+ },
+ {
+  "key": "netflix",
+  "label": "Netflix",
+  "group": "brand",
+  "match": [
+   "netflix"
+  ]
+ },
+ {
+  "key": "twitch",
+  "label": "Twitch",
+  "group": "brand",
+  "match": [
+   "twitch"
+  ]
+ },
+ {
+  "key": "jellyfin",
+  "label": "Jellyfin",
+  "group": "brand",
+  "match": [
+   "jellyfin",
+   "jellyfinmediaplayer"
+  ]
+ },
+ {
+  "key": "plex",
+  "label": "Plex",
+  "group": "brand",
+  "match": [
+   "plex",
+   "plexamp"
+  ]
+ },
+ {
+  "key": "kodi",
+  "label": "Kodi",
+  "group": "brand",
+  "match": [
+   "kodi"
+  ]
+ },
+ {
+  "key": "vlc",
+  "label": "VLC",
+  "group": "brand",
+  "match": [
+   "vlc"
+  ]
+ },
+ {
+  "key": "mpv",
+  "label": "mpv",
+  "group": "brand",
+  "match": [
+   "mpv"
+  ]
+ },
+ {
+  "key": "obs",
+  "label": "OBS Studio",
+  "group": "brand",
+  "match": [
+   "obs",
+   "obsproject",
+   "com.obsproject.studio"
+  ]
+ },
+ {
+  "key": "kdenlive",
+  "label": "Kdenlive",
+  "group": "brand",
+  "match": [
+   "kdenlive"
+  ]
+ },
+ {
+  "key": "audacity",
+  "label": "Audacity",
+  "group": "brand",
+  "match": [
+   "audacity"
+  ]
+ },
+ {
+  "key": "blender",
+  "label": "Blender",
+  "group": "brand",
+  "match": [
+   "blender"
+  ]
+ },
+ {
+  "key": "gimp",
+  "label": "GIMP",
+  "group": "brand",
+  "match": [
+   "gimp"
+  ]
+ },
+ {
+  "key": "inkscape",
+  "label": "Inkscape",
+  "group": "brand",
+  "match": [
+   "inkscape"
+  ]
+ },
+ {
+  "key": "krita",
+  "label": "Krita",
+  "group": "brand",
+  "match": [
+   "krita"
+  ]
+ },
+ {
+  "key": "figma",
+  "label": "Figma",
+  "group": "brand",
+  "match": [
+   "figma",
+   "figma-linux"
+  ]
+ },
+ {
+  "key": "penpot",
+  "label": "Penpot",
+  "group": "brand",
+  "match": [
+   "penpot"
+  ]
+ },
+ {
+  "key": "discord",
+  "label": "Discord",
+  "group": "brand",
+  "match": [
+   "discord",
+   "vesktop",
+   "webcord"
+  ]
+ },
+ {
+  "key": "signal",
+  "label": "Signal",
+  "group": "brand",
+  "match": [
+   "signal",
+   "signal-desktop",
+   "signaldesktop"
+  ]
+ },
+ {
+  "key": "telegram",
+  "label": "Telegram",
+  "group": "brand",
+  "match": [
+   "telegram",
+   "telegramdesktop",
+   "telegram-desktop"
+  ]
+ },
+ {
+  "key": "whatsapp",
+  "label": "WhatsApp",
+  "group": "brand",
+  "match": [
+   "whatsapp",
+   "whatsie",
+   "zapzap"
+  ]
+ },
+ {
+  "key": "element",
+  "label": "Element",
+  "group": "brand",
+  "match": [
+   "element",
+   "element-desktop"
+  ]
+ },
+ {
+  "key": "matrix",
+  "label": "Matrix",
+  "group": "brand",
+  "match": []
+ },
+ {
+  "key": "mastodon",
+  "label": "Mastodon",
+  "group": "brand",
+  "match": [
+   "mastodon",
+   "tuba"
+  ]
+ },
+ {
+  "key": "bluesky",
+  "label": "Bluesky",
+  "group": "brand",
+  "match": [
+   "bluesky"
+  ]
+ },
+ {
+  "key": "reddit",
+  "label": "Reddit",
+  "group": "brand",
+  "match": [
+   "reddit"
+  ]
+ },
+ {
+  "key": "x",
+  "label": "X",
+  "group": "brand",
+  "match": []
+ },
+ {
+  "key": "zoom",
+  "label": "Zoom",
+  "group": "brand",
+  "match": [
+   "zoom",
+   "us.zoom.zoom"
+  ]
+ },
+ {
+  "key": "thunderbird",
+  "label": "Thunderbird",
+  "group": "brand",
+  "match": [
+   "thunderbird"
+  ]
+ },
+ {
+  "key": "proton-mail",
+  "label": "Proton Mail",
+  "group": "brand",
+  "match": [
+   "proton-mail",
+   "protonmail"
+  ]
+ },
+ {
+  "key": "proton-vpn",
+  "label": "Proton VPN",
+  "group": "brand",
+  "match": [
+   "protonvpn",
+   "protonvpn-app"
+  ]
+ },
+ {
+  "key": "proton",
+  "label": "Proton",
+  "group": "brand",
+  "match": [
+   "proton-pass",
+   "proton-drive"
+  ]
+ },
+ {
+  "key": "bitwarden",
+  "label": "Bitwarden",
+  "group": "brand",
+  "match": [
+   "bitwarden"
+  ]
+ },
+ {
+  "key": "keepassxc",
+  "label": "KeePassXC",
+  "group": "brand",
+  "match": [
+   "keepassxc"
+  ]
+ },
+ {
+  "key": "1password",
+  "label": "1Password",
+  "group": "brand",
+  "match": [
+   "1password"
+  ]
+ },
+ {
+  "key": "notion",
+  "label": "Notion",
+  "group": "brand",
+  "match": [
+   "notion",
+   "notion-app"
+  ]
+ },
+ {
+  "key": "obsidian",
+  "label": "Obsidian",
+  "group": "brand",
+  "match": [
+   "obsidian"
+  ]
+ },
+ {
+  "key": "zotero",
+  "label": "Zotero",
+  "group": "brand",
+  "match": [
+   "zotero"
+  ]
+ },
+ {
+  "key": "anki",
+  "label": "Anki",
+  "group": "brand",
+  "match": [
+   "anki"
+  ]
+ },
+ {
+  "key": "evernote",
+  "label": "Evernote",
+  "group": "brand",
+  "match": [
+   "evernote"
+  ]
+ },
+ {
+  "key": "todoist",
+  "label": "Todoist",
+  "group": "brand",
+  "match": [
+   "todoist"
+  ]
+ },
+ {
+  "key": "trello",
+  "label": "Trello",
+  "group": "brand",
+  "match": [
+   "trello"
+  ]
+ },
+ {
+  "key": "nextcloud",
+  "label": "Nextcloud",
+  "group": "brand",
+  "match": [
+   "nextcloud"
+  ]
+ },
+ {
+  "key": "dropbox",
+  "label": "Dropbox",
+  "group": "brand",
+  "match": [
+   "dropbox"
+  ]
+ },
+ {
+  "key": "syncthing",
+  "label": "Syncthing",
+  "group": "brand",
+  "match": [
+   "syncthing",
+   "syncthingtray"
+  ]
+ },
+ {
+  "key": "tailscale",
+  "label": "Tailscale",
+  "group": "brand",
+  "match": [
+   "tailscale",
+   "trayscale"
+  ]
+ },
+ {
+  "key": "qbittorrent",
+  "label": "qBittorrent",
+  "group": "brand",
+  "match": [
+   "qbittorrent"
+  ]
+ },
+ {
+  "key": "transmission",
+  "label": "Transmission",
+  "group": "brand",
+  "match": [
+   "transmission",
+   "transmission-gtk"
+  ]
+ },
+ {
+  "key": "steam",
+  "label": "Steam",
+  "group": "brand",
+  "match": [
+   "steam"
+  ]
+ },
+ {
+  "key": "lutris",
+  "label": "Lutris",
+  "group": "brand",
+  "match": [
+   "lutris"
+  ]
+ },
+ {
+  "key": "heroic",
+  "label": "Heroic",
+  "group": "brand",
+  "match": [
+   "heroic",
+   "heroicgameslauncher"
+  ]
+ },
+ {
+  "key": "epic-games",
+  "label": "Epic Games",
+  "group": "brand",
+  "match": []
+ },
+ {
+  "key": "retroarch",
+  "label": "RetroArch",
+  "group": "brand",
+  "match": [
+   "retroarch"
+  ]
+ },
+ {
+  "key": "godot",
+  "label": "Godot",
+  "group": "brand",
+  "match": [
+   "godot",
+   "godotengine"
+  ]
+ },
+ {
+  "key": "unity",
+  "label": "Unity",
+  "group": "brand",
+  "match": [
+   "unityhub"
+  ]
+ },
+ {
+  "key": "unreal",
+  "label": "Unreal Engine",
+  "group": "brand",
+  "match": []
+ },
+ {
+  "key": "python",
+  "label": "Python",
+  "group": "brand",
+  "match": [
+   "python",
+   "idle"
+  ]
+ },
+ {
+  "key": "rust",
+  "label": "Rust",
+  "group": "brand",
+  "match": []
+ },
+ {
+  "key": "gnome",
+  "label": "GNOME",
+  "group": "brand",
+  "match": []
+ },
+ {
+  "key": "kde",
+  "label": "KDE",
+  "group": "brand",
+  "match": []
+ },
+ {
+  "key": "fedora",
+  "label": "Fedora",
+  "group": "brand",
+  "match": [
+   "fedora-media-writer",
+   "mediawriter"
+  ]
+ },
+ {
+  "key": "ubuntu",
+  "label": "Ubuntu",
+  "group": "brand",
+  "match": []
+ },
+ {
+  "key": "arch",
+  "label": "Arch Linux",
+  "group": "brand",
+  "match": []
+ },
+ {
+  "key": "linux",
+  "label": "Linux",
+  "group": "brand",
+  "match": []
+ },
+ {
+  "key": "flathub",
+  "label": "Flathub",
+  "group": "brand",
+  "match": []
+ },
+ {
+  "key": "flatpak",
+  "label": "Flatpak",
+  "group": "brand",
+  "match": []
+ },
+ {
+  "key": "folder",
+  "label": "Folder",
+  "group": "generic",
+  "match": [
+   "nautilus",
+   "files",
+   "nemo",
+   "thunar",
+   "dolphin",
+   "pcmanfm"
+  ]
+ },
+ {
+  "key": "terminal",
+  "label": "Terminal",
+  "group": "generic",
+  "match": [
+   "ptyxis",
+   "console",
+   "kgx",
+   "terminal",
+   "konsole",
+   "kitty",
+   "tilix",
+   "xterm",
+   "foot",
+   "blackbox"
+  ]
+ },
+ {
+  "key": "mail",
+  "label": "Mail",
+  "group": "generic",
+  "match": [
+   "geary",
+   "evolution",
+   "mail",
+   "mailspring"
+  ]
+ },
+ {
+  "key": "calendar",
+  "label": "Calendar",
+  "group": "generic",
+  "match": [
+   "calendar"
+  ]
+ },
+ {
+  "key": "music",
+  "label": "Music",
+  "group": "generic",
+  "match": [
+   "music",
+   "rhythmbox",
+   "lollypop",
+   "amberol",
+   "elisa",
+   "gnome-music",
+   "decibels"
+  ]
+ },
+ {
+  "key": "text",
+  "label": "Text",
+  "group": "generic",
+  "match": [
+   "texteditor",
+   "gedit",
+   "gnome-text-editor",
+   "kate",
+   "kwrite",
+   "mousepad"
+  ]
+ },
+ {
+  "key": "notes",
+  "label": "Notes",
+  "group": "generic",
+  "match": [
+   "notes",
+   "bijiben",
+   "gnome-notes",
+   "folio"
+  ]
+ },
+ {
+  "key": "settings",
+  "label": "Settings",
+  "group": "generic",
+  "match": [
+   "settings",
+   "control-center",
+   "gnome-control-center",
+   "systemsettings"
+  ]
+ },
+ {
+  "key": "tune",
+  "label": "Tweaks",
+  "group": "generic",
+  "match": [
+   "tweaks",
+   "gnome-tweaks",
+   "dconf-editor"
+  ]
+ },
+ {
+  "key": "extension",
+  "label": "Extensions",
+  "group": "generic",
+  "match": [
+   "extensions",
+   "extensionmanager",
+   "extension-manager"
+  ]
+ },
+ {
+  "key": "globe",
+  "label": "Web",
+  "group": "generic",
+  "match": [
+   "epiphany",
+   "web",
+   "browser",
+   "falkon",
+   "midori"
+  ]
+ },
+ {
+  "key": "image",
+  "label": "Image",
+  "group": "generic",
+  "match": [
+   "loupe",
+   "eog",
+   "image-viewer",
+   "gwenview"
+  ]
+ },
+ {
+  "key": "photos",
+  "label": "Photos",
+  "group": "generic",
+  "match": [
+   "photos",
+   "shotwell",
+   "digikam",
+   "darktable",
+   "rawtherapee"
+  ]
+ },
+ {
+  "key": "video",
+  "label": "Video",
+  "group": "generic",
+  "match": [
+   "totem",
+   "showtime",
+   "celluloid",
+   "videos",
+   "haruna",
+   "clapper"
+  ]
+ },
+ {
+  "key": "video-library",
+  "label": "Video library",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "tv",
+  "label": "TV",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "camera",
+  "label": "Camera",
+  "group": "generic",
+  "match": [
+   "snapshot",
+   "cheese",
+   "camera"
+  ]
+ },
+ {
+  "key": "screenshot",
+  "label": "Screenshot",
+  "group": "generic",
+  "match": [
+   "screenshot",
+   "flameshot",
+   "ksnip"
+  ]
+ },
+ {
+  "key": "record",
+  "label": "Screen recording",
+  "group": "generic",
+  "match": [
+   "kooha",
+   "peek",
+   "screen-recorder"
+  ]
+ },
+ {
+  "key": "calculator",
+  "label": "Calculator",
+  "group": "generic",
+  "match": [
+   "calculator",
+   "kcalc",
+   "qalculate"
+  ]
+ },
+ {
+  "key": "clock",
+  "label": "Clock",
+  "group": "generic",
+  "match": [
+   "clocks",
+   "clock"
+  ]
+ },
+ {
+  "key": "timer",
+  "label": "Timer",
+  "group": "generic",
+  "match": [
+   "timer",
+   "pomodoro",
+   "solanum"
+  ]
+ },
+ {
+  "key": "alarm",
+  "label": "Alarm",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "weather",
+  "label": "Weather",
+  "group": "generic",
+  "match": [
+   "weather"
+  ]
+ },
+ {
+  "key": "map",
+  "label": "Map",
+  "group": "generic",
+  "match": [
+   "maps"
+  ]
+ },
+ {
+  "key": "contacts",
+  "label": "Contacts",
+  "group": "generic",
+  "match": [
+   "contacts"
+  ]
+ },
+ {
+  "key": "document",
+  "label": "Document",
+  "group": "generic",
+  "match": [
+   "evince",
+   "papers",
+   "okular",
+   "zathura",
+   "document-viewer",
+   "pdf"
+  ]
+ },
+ {
+  "key": "draft",
+  "label": "Draft",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "description",
+  "label": "Description",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "table",
+  "label": "Table",
+  "group": "generic",
+  "match": [
+   "spreadsheet",
+   "gnumeric"
+  ]
+ },
+ {
+  "key": "slides",
+  "label": "Slides",
+  "group": "generic",
+  "match": [
+   "presentation"
+  ]
+ },
+ {
+  "key": "software",
+  "label": "Software",
+  "group": "generic",
+  "match": [
+   "software",
+   "gnome-software",
+   "discover",
+   "bazaar"
+  ]
+ },
+ {
+  "key": "package",
+  "label": "Package",
+  "group": "generic",
+  "match": [
+   "warehouse",
+   "flatseal"
+  ]
+ },
+ {
+  "key": "disk",
+  "label": "Disk",
+  "group": "generic",
+  "match": [
+   "disks",
+   "gnome-disks",
+   "gparted"
+  ]
+ },
+ {
+  "key": "disk-usage",
+  "label": "Disk usage",
+  "group": "generic",
+  "match": [
+   "baobab",
+   "disk-usage-analyzer",
+   "filelight"
+  ]
+ },
+ {
+  "key": "system-monitor",
+  "label": "System monitor",
+  "group": "generic",
+  "match": [
+   "system-monitor",
+   "gnome-system-monitor",
+   "resources",
+   "missioncenter",
+   "mission-center",
+   "htop",
+   "btop"
+  ]
+ },
+ {
+  "key": "computer",
+  "label": "Computer",
+  "group": "generic",
+  "match": [
+   "boxes",
+   "virt-manager",
+   "virtualbox",
+   "gnome-boxes"
+  ]
+ },
+ {
+  "key": "remote",
+  "label": "Remote desktop",
+  "group": "generic",
+  "match": [
+   "connections",
+   "remmina",
+   "rustdesk",
+   "anydesk"
+  ]
+ },
+ {
+  "key": "logs",
+  "label": "Logs",
+  "group": "generic",
+  "match": [
+   "logs",
+   "gnome-logs"
+  ]
+ },
+ {
+  "key": "help",
+  "label": "Help",
+  "group": "generic",
+  "match": [
+   "yelp",
+   "help"
+  ]
+ },
+ {
+  "key": "scanner",
+  "label": "Scanner",
+  "group": "generic",
+  "match": [
+   "simple-scan",
+   "document-scanner",
+   "skanlite"
+  ]
+ },
+ {
+  "key": "archive",
+  "label": "Archive",
+  "group": "generic",
+  "match": [
+   "file-roller",
+   "fileroller",
+   "ark",
+   "peazip"
+  ]
+ },
+ {
+  "key": "books",
+  "label": "Books",
+  "group": "generic",
+  "match": [
+   "foliate",
+   "books",
+   "calibre",
+   "bookworm"
+  ]
+ },
+ {
+  "key": "library",
+  "label": "Library",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "podcasts",
+  "label": "Podcasts",
+  "group": "generic",
+  "match": [
+   "podcasts",
+   "gpodder",
+   "kasts"
+  ]
+ },
+ {
+  "key": "news",
+  "label": "News",
+  "group": "generic",
+  "match": [
+   "newsflash",
+   "feeds",
+   "news",
+   "liferea"
+  ]
+ },
+ {
+  "key": "rss",
+  "label": "Feed",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "chat",
+  "label": "Chat",
+  "group": "generic",
+  "match": [
+   "fractal",
+   "dino",
+   "gajim",
+   "pidgin",
+   "hexchat",
+   "polari",
+   "chatty",
+   "chat"
+  ]
+ },
+ {
+  "key": "forum",
+  "label": "Forum",
+  "group": "generic",
+  "match": [
+   "slack"
+  ]
+ },
+ {
+  "key": "call",
+  "label": "Call",
+  "group": "generic",
+  "match": [
+   "calls"
+  ]
+ },
+ {
+  "key": "translate",
+  "label": "Translate",
+  "group": "generic",
+  "match": [
+   "dialect",
+   "translate"
+  ]
+ },
+ {
+  "key": "key",
+  "label": "Passwords",
+  "group": "generic",
+  "match": [
+   "seahorse",
+   "passwords",
+   "secrets",
+   "keyring"
+  ]
+ },
+ {
+  "key": "password",
+  "label": "Password",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "fingerprint",
+  "label": "Fingerprint",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "shield",
+  "label": "Shield",
+  "group": "generic",
+  "match": [
+   "firewall",
+   "firewall-config"
+  ]
+ },
+ {
+  "key": "lock",
+  "label": "Lock",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "vpn",
+  "label": "VPN",
+  "group": "generic",
+  "match": [
+   "vpn"
+  ]
+ },
+ {
+  "key": "backup",
+  "label": "Backup",
+  "group": "generic",
+  "match": [
+   "deja-dup",
+   "dejadup",
+   "pika-backup",
+   "timeshift",
+   "backup"
+  ]
+ },
+ {
+  "key": "download",
+  "label": "Download",
+  "group": "generic",
+  "match": [
+   "fragments",
+   "motrix",
+   "download"
+  ]
+ },
+ {
+  "key": "sync",
+  "label": "Sync",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "cloud",
+  "label": "Cloud",
+  "group": "generic",
+  "match": [
+   "cloud"
+  ]
+ },
+ {
+  "key": "cloud-sync",
+  "label": "Cloud sync",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "games",
+  "label": "Games",
+  "group": "generic",
+  "match": [
+   "games",
+   "bottles",
+   "mangohud",
+   "gamehub"
+  ]
+ },
+ {
+  "key": "controller",
+  "label": "Controller",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "joystick",
+  "label": "Joystick",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "casino",
+  "label": "Dice",
+  "group": "generic",
+  "match": [
+   "aisleriot",
+   "mines",
+   "sudoku",
+   "chess",
+   "quadrapassel"
+  ]
+ },
+ {
+  "key": "health",
+  "label": "Health",
+  "group": "generic",
+  "match": [
+   "health"
+  ]
+ },
+ {
+  "key": "checklist",
+  "label": "Tasks",
+  "group": "generic",
+  "match": [
+   "endeavour",
+   "todo",
+   "tasks",
+   "errands",
+   "planify"
+  ]
+ },
+ {
+  "key": "task",
+  "label": "Done",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "code",
+  "label": "Code",
+  "group": "generic",
+  "match": [
+   "code",
+   "builder",
+   "gnome-builder",
+   "kdevelop",
+   "geany",
+   "lapce"
+  ]
+ },
+ {
+  "key": "bug",
+  "label": "Bug",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "build",
+  "label": "Build",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "construction",
+  "label": "Construction",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "database",
+  "label": "Database",
+  "group": "generic",
+  "match": [
+   "dbeaver",
+   "beekeeper",
+   "pgadmin",
+   "sqlitebrowser"
+  ]
+ },
+ {
+  "key": "dns",
+  "label": "Server",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "storage",
+  "label": "Storage",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "memory",
+  "label": "Memory",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "board",
+  "label": "Board",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "hub",
+  "label": "Hub",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "deployed",
+  "label": "Box",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "token",
+  "label": "Token",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "characters",
+  "label": "Characters",
+  "group": "generic",
+  "match": [
+   "characters",
+   "gnome-characters",
+   "smile"
+  ]
+ },
+ {
+  "key": "fonts",
+  "label": "Fonts",
+  "group": "generic",
+  "match": [
+   "font-viewer",
+   "gnome-font-viewer",
+   "fontmanager"
+  ]
+ },
+ {
+  "key": "palette",
+  "label": "Palette",
+  "group": "generic",
+  "match": [
+   "eyedropper",
+   "gcolor3",
+   "palette"
+  ]
+ },
+ {
+  "key": "brush",
+  "label": "Brush",
+  "group": "generic",
+  "match": [
+   "pinta",
+   "drawing",
+   "mypaint"
+  ]
+ },
+ {
+  "key": "draw",
+  "label": "Draw",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "stylus",
+  "label": "Stylus",
+  "group": "generic",
+  "match": [
+   "xournal",
+   "xournalpp",
+   "rnote"
+  ]
+ },
+ {
+  "key": "format-paint",
+  "label": "Paint roller",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "gesture",
+  "label": "Gesture",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "collage",
+  "label": "Collage",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "print",
+  "label": "Print",
+  "group": "generic",
+  "match": [
+   "system-config-printer"
+  ]
+ },
+ {
+  "key": "keyboard",
+  "label": "Keyboard",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "mouse",
+  "label": "Mouse",
+  "group": "generic",
+  "match": [
+   "piper",
+   "solaar"
+  ]
+ },
+ {
+  "key": "monitor",
+  "label": "Monitor",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "wifi",
+  "label": "Network",
+  "group": "generic",
+  "match": [
+   "nm-connection-editor"
+  ]
+ },
+ {
+  "key": "network-check",
+  "label": "Network check",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "bluetooth",
+  "label": "Bluetooth",
+  "group": "generic",
+  "match": [
+   "blueman",
+   "bluetooth"
+  ]
+ },
+ {
+  "key": "admin",
+  "label": "Admin",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "encrypted",
+  "label": "Encrypted",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "headphones",
+  "label": "Headphones",
+  "group": "generic",
+  "match": [
+   "easyeffects",
+   "pavucontrol",
+   "helvum",
+   "qpwgraph"
+  ]
+ },
+ {
+  "key": "mic",
+  "label": "Microphone",
+  "group": "generic",
+  "match": [
+   "sound-recorder",
+   "gnome-sound-recorder",
+   "audio-recorder"
+  ]
+ },
+ {
+  "key": "equalizer",
+  "label": "Equalizer",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "queue-music",
+  "label": "Playlist",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "library-music",
+  "label": "Music library",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "audio-file",
+  "label": "Audio file",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "radio",
+  "label": "Radio",
+  "group": "generic",
+  "match": [
+   "shortwave",
+   "radio"
+  ]
+ },
+ {
+  "key": "album",
+  "label": "Album",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "piano",
+  "label": "Piano",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "videocam",
+  "label": "Video call",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "cast",
+  "label": "Cast",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "subtitles",
+  "label": "Subtitles",
+  "group": "generic",
+  "match": [
+   "subtitleeditor",
+   "gaupol"
+  ]
+ },
+ {
+  "key": "voice",
+  "label": "Voice",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "home",
+  "label": "Home",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "apps",
+  "label": "Apps",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "grid",
+  "label": "Grid",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "widgets",
+  "label": "Widgets",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "inventory",
+  "label": "Inventory",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "inbox",
+  "label": "Inbox",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "unread",
+  "label": "Unread mail",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "notifications",
+  "label": "Notifications",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "history",
+  "label": "History",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "search",
+  "label": "Search",
+  "group": "generic",
+  "match": [
+   "search"
+  ]
+ },
+ {
+  "key": "explore",
+  "label": "Explore",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "travel",
+  "label": "Travel explore",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "language",
+  "label": "Language",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "navigation",
+  "label": "Navigation",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "star",
+  "label": "Star",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "bolt",
+  "label": "Bolt",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "rocket",
+  "label": "Rocket",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "wand",
+  "label": "Magic",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "lightbulb",
+  "label": "Idea",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "psychology",
+  "label": "Mind",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "neurology",
+  "label": "Brain",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "robot",
+  "label": "Assistant",
+  "group": "generic",
+  "match": [
+   "assistant",
+   "alpaca",
+   "newelle",
+   "chatgpt",
+   "openai"
+  ]
+ },
+ {
+  "key": "science",
+  "label": "Science",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "school",
+  "label": "School",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "work",
+  "label": "Work",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "analytics",
+  "label": "Analytics",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "bar-chart",
+  "label": "Chart",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "trending",
+  "label": "Trending",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "query-stats",
+  "label": "Stats",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "account",
+  "label": "Account",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "shopping",
+  "label": "Shopping",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "store",
+  "label": "Store",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "shopping-bag",
+  "label": "Bag",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "savings",
+  "label": "Savings",
+  "group": "generic",
+  "match": [
+   "money",
+   "denaro",
+   "gnucash",
+   "homebank"
+  ]
+ },
+ {
+  "key": "payments",
+  "label": "Payments",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "receipt",
+  "label": "Receipt",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "bank",
+  "label": "Bank",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "pets",
+  "label": "Pets",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "coffee",
+  "label": "Coffee",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "restaurant",
+  "label": "Food",
+  "group": "generic",
+  "match": [
+   "recipes"
+  ]
+ },
+ {
+  "key": "fitness",
+  "label": "Fitness",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "soccer",
+  "label": "Football",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "basketball",
+  "label": "Basketball",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "hiking",
+  "label": "Hiking",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "sailing",
+  "label": "Sailing",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "flight",
+  "label": "Flight",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "car",
+  "label": "Car",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "eco",
+  "label": "Leaf",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "sunny",
+  "label": "Sun",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "dark-mode",
+  "label": "Moon",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "diamond",
+  "label": "Diamond",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "toys",
+  "label": "Toys",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "theater",
+  "label": "Theatre",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "book",
+  "label": "Book",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "stories",
+  "label": "Stories",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "text-snippet",
+  "label": "Snippet",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "note-stack",
+  "label": "Note stack",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "folder-open",
+  "label": "Open folder",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "folder-shared",
+  "label": "Shared folder",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "cloud-download",
+  "label": "Cloud download",
+  "group": "generic",
+  "match": []
+ },
+ {
+  "key": "forward-inbox",
+  "label": "Send mail",
+  "group": "generic",
+  "match": []
+ }
+]

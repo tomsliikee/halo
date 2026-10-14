@@ -1,13 +1,193 @@
 /* Structure only above the marker; colours below it, written once per
-   colour style and scheme by tools/build-stylesheet.js. */
+   colour style and scheme by tools/build-stylesheet.js. "$role@78" is the
+   role at 78 % opacity. */
 
-.halo-bar {
+/* The bar */
+
+.halo-frame {
+    border-radius: 22px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.halo-frame.halo-flat {
+    box-shadow: none;
+}
+
+.halo-group {
+    spacing: 8px;
+}
+
+.halo-pill {
+    height: 36px;
+    border-radius: 18px;
+    padding: 0 14px;
+    spacing: 8px;
+    transition-duration: 200ms;
+}
+
+.halo-plain {
+    height: 36px;
+    padding: 0 6px;
+    spacing: 8px;
+}
+
+/* Islands: each group is its own floating pill. */
+.halo-island-group {
     height: 44px;
+    border-radius: 22px;
+    padding: 0 4px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.halo-dots {
+    spacing: 6px;
+}
+
+.halo-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+}
+
+.halo-unread {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+}
+
+.halo-status {
+    spacing: 10px;
+}
+
+.halo-small-pill {
+    height: 36px;
+    border-radius: 18px;
+    padding: 0 12px;
+    spacing: 6px;
+}
+
+.halo-round-pill {
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+}
+
+.halo-chip {
+    height: 28px;
+    border-radius: 14px;
+    padding: 0 10px;
+    spacing: 6px;
 }
 
 /* themed */
 
+.halo-scheme .halo-frame {
+    background-color: $well;
+}
+
+.halo-scheme .halo-frame.halo-see-through {
+    background-color: $well@78;
+}
+
+.halo-scheme .halo-island-group {
+    background-color: $well;
+}
+
+.halo-scheme .halo-island-group.halo-see-through {
+    background-color: $well@78;
+}
+
 .halo-scheme .halo-pill {
-    background-color: $surf;
+    background-color: $raised;
     color: $on;
+}
+
+.halo-scheme .halo-pill:hover {
+    background-color: $high;
+}
+
+.halo-scheme .halo-island-group .halo-pill {
+    background-color: transparent;
+}
+
+.halo-scheme .halo-island-group .halo-pill:hover {
+    background-color: $high;
+}
+
+.halo-scheme .halo-pill.halo-active,
+.halo-scheme .halo-island-group .halo-pill.halo-active {
+    background-color: $primary;
+    color: $onPrimary;
+}
+
+.halo-scheme .halo-plain {
+    color: $on;
+}
+
+.halo-scheme .halo-dot {
+    background-color: $outline;
+}
+
+.halo-scheme .halo-dot.halo-current {
+    background-color: $primary;
+}
+
+.halo-scheme .halo-active .halo-dot.halo-current {
+    background-color: $onPrimary;
+}
+
+.halo-scheme .halo-app-icon {
+    color: $primary;
+}
+
+.halo-scheme .halo-app-name,
+.halo-scheme .halo-time {
+    color: $on;
+}
+
+.halo-scheme .halo-date,
+.halo-scheme .halo-kbd {
+    color: $onVar;
+}
+
+.halo-scheme .halo-active .halo-time,
+.halo-scheme .halo-active .halo-date,
+.halo-scheme .halo-active .halo-status-text {
+    color: $onPrimary;
+}
+
+.halo-scheme .halo-status-text {
+    color: $on;
+}
+
+.halo-scheme .halo-unread {
+    background-color: $primary;
+}
+
+.halo-scheme .halo-recording {
+    background-color: $error;
+    color: $onError;
+}
+
+.halo-scheme .halo-recording .halo-status-text {
+    color: $onError;
+}
+
+.halo-scheme .halo-privacy {
+    background-color: $tc;
+    color: $onTc;
+}
+
+.halo-scheme .halo-chip {
+    background-color: $tc;
+    color: $onTc;
+}
+
+.halo-scheme .halo-chip .halo-status-text {
+    color: $onTc;
+}
+
+.halo-scheme .halo-low,
+.halo-scheme .halo-status-text.halo-low {
+    color: $error;
 }

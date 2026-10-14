@@ -50,6 +50,8 @@ gsettings set org.gnome.shell disable-user-extensions false
 gsettings set org.gnome.shell welcome-dialog-last-shown-version "99"
 gsettings set org.gnome.desktop.interface color-scheme "$( [ "$HALO_SCHEME" = dark ] && echo prefer-dark || echo default )"
 gsettings set org.gnome.desktop.interface enable-hot-corners false
+gsettings set org.gnome.mutter dynamic-workspaces false
+gsettings set org.gnome.desktop.wm.preferences num-workspaces 4
 gsettings set org.gnome.desktop.background picture-options none
 gsettings set org.gnome.desktop.background color-shading-type solid
 gsettings set org.gnome.desktop.background primary-color "#101a38"

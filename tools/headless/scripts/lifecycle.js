@@ -7,7 +7,11 @@ export default async function ({extension, shot, sleep, note, set, Main}) {
         const r = Main.layoutManager.getWorkAreaForMonitor(Main.layoutManager.primaryIndex);
         return `${r.x},${r.y} ${r.width}x${r.height}`;
     };
-    note(`on: panel visible=${box.visible} tracked=${tracked()} work area=${area()}`);
+    note(`on: panel visible=${box.visible} tracked=${tracked()} work area=${area()} bars=${extension._bars?.all.map(b => b.monitorIndex).join(',')}`);
+    for (const i of Main.layoutManager.monitors.keys()) {
+        const r = Main.layoutManager.getWorkAreaForMonitor(i);
+        note(`monitor ${i}: work area ${r.x},${r.y} ${r.width}x${r.height}`);
+    }
     await shot('on');
     set('parts', {...extension._settings.current.parts, bar: false});
     await sleep(500);
