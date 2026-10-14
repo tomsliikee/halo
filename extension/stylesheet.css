@@ -8,7 +8,7 @@
 
 .halo-frame {
     border-radius: 22px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .halo-frame.halo-flat {
@@ -38,7 +38,7 @@
     height: 44px;
     border-radius: 22px;
     padding: 0 4px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .halo-dots {
@@ -79,6 +79,352 @@
     border-radius: 14px;
     padding: 0 10px;
     spacing: 6px;
+}
+
+/* Quick settings */
+
+.halo-qs {
+    padding: 14px;
+    border-radius: 32px;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.26);
+}
+
+.halo-qs-page {
+    spacing: 10px;
+}
+
+.halo-qs-header {
+    spacing: 8px;
+    padding: 2px 2px 4px 8px;
+}
+
+.halo-qs-header-buttons {
+    spacing: 8px;
+}
+
+.halo-qs-round {
+    width: 44px;
+    height: 44px;
+    border-radius: 22px;
+    transition-duration: 200ms;
+}
+
+.halo-qs-card {
+    padding: 10px;
+    border-radius: 26px;
+    spacing: 8px;
+}
+
+.halo-qs-sliders {
+    spacing: 6px;
+}
+
+.halo-qs-slider-row {
+    spacing: 8px;
+}
+
+.halo-qs-grid,
+.halo-qs-tile-row,
+.halo-qs-device-grid,
+.halo-qs-device-row,
+.halo-qs-swatch-row,
+.halo-qs-layout-row {
+    spacing: 8px;
+}
+
+.halo-tile {
+    height: 64px;
+    border-radius: 24px;
+    padding: 0 4px 0 12px;
+    spacing: 9px;
+    transition-duration: 220ms;
+}
+
+.halo-tile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    transition-duration: 220ms;
+}
+
+.halo-tile-chevron {
+    width: 26px;
+    border-radius: 16px;
+    transition-duration: 150ms;
+}
+
+.halo-qs-media {
+    spacing: 12px;
+}
+
+.halo-qs-art {
+    width: 60px;
+    height: 60px;
+    border-radius: 18px;
+}
+
+.halo-qs-media-controls {
+    spacing: 4px;
+}
+
+.halo-qs-media-button {
+    width: 40px;
+    height: 52px;
+    border-radius: 20px;
+    transition-duration: 150ms;
+}
+
+.halo-qs-play {
+    width: 56px;
+    height: 56px;
+    border-radius: 28px;
+}
+
+.halo-qs-play.halo-playing {
+    border-radius: 18px;
+}
+
+.halo-qs-background {
+    spacing: 4px;
+}
+
+.halo-qs-background-head {
+    height: 52px;
+    border-radius: 26px;
+    padding: 0 18px;
+    spacing: 12px;
+    transition-duration: 150ms;
+}
+
+.halo-qs-background-list {
+    spacing: 2px;
+    padding: 2px 4px 0;
+}
+
+.halo-qs-background-app {
+    height: 44px;
+    border-radius: 22px;
+    padding: 0 6px 0 14px;
+    spacing: 12px;
+    transition-duration: 150ms;
+}
+
+.halo-qs-quit {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+}
+
+.halo-qs-page-header {
+    spacing: 12px;
+    padding-bottom: 4px;
+}
+
+.halo-qs-caption {
+    padding: 6px 10px 0;
+}
+
+.halo-qs-list {
+    spacing: 6px;
+}
+
+.halo-qs-row {
+    min-height: 56px;
+    border-radius: 20px;
+    padding: 6px 14px;
+    spacing: 14px;
+    transition-duration: 200ms;
+}
+
+.halo-qs-row.halo-compact {
+    min-height: 40px;
+    padding: 2px 6px 2px 10px;
+}
+
+.halo-qs-link {
+    padding: 10px 12px 4px;
+}
+
+.halo-qs-empty,
+.halo-qs-auto-note {
+    padding: 4px 12px;
+}
+
+.halo-qs-connected {
+    height: 80px;
+    border-radius: 28px;
+    padding: 0 14px 0 16px;
+    spacing: 14px;
+}
+
+.halo-qs-connected-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+}
+
+.halo-qs-connected-gear {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.halo-qs-device {
+    padding: 14px 16px;
+    border-radius: 28px;
+    spacing: 6px;
+    transition-duration: 200ms;
+}
+
+.halo-qs-device-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.halo-qs-device-battery {
+    spacing: 6px;
+}
+
+.halo-qs-wide-button {
+    height: 52px;
+    border-radius: 26px;
+    padding: 0 18px;
+    spacing: 10px;
+}
+
+.halo-qs-battery {
+    padding: 16px;
+    spacing: 16px;
+}
+
+.halo-qs-segments {
+    spacing: 6px;
+}
+
+.halo-qs-segment {
+    height: 48px;
+    border-radius: 16px;
+    transition-duration: 200ms;
+}
+
+.halo-qs-segment.halo-chosen {
+    border-radius: 24px;
+}
+
+.halo-qs-segments.halo-small .halo-qs-segment {
+    height: 38px;
+    border-radius: 12px;
+}
+
+.halo-qs-segments.halo-small .halo-qs-segment.halo-chosen {
+    border-radius: 19px;
+}
+
+.halo-qs-segment-inner {
+    spacing: 8px;
+}
+
+.halo-qs-swatch {
+    height: 60px;
+    border-radius: 22px;
+    border: 3px solid transparent;
+    transition-duration: 200ms;
+}
+
+.halo-qs-swatch.halo-chosen {
+    border-radius: 18px;
+}
+
+.halo-qs-layout {
+    padding: 8px 6px 6px;
+    border-radius: 16px;
+    spacing: 6px;
+    transition-duration: 200ms;
+}
+
+.halo-qs-layout-picture {
+    height: 30px;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.halo-qs-layout-bar {
+    spacing: 3px;
+}
+
+.halo-qs-layout-spot {
+    height: 8px;
+    border-radius: 4px;
+}
+
+.halo-qs-layout-spot.halo-short {
+    width: 28px;
+}
+
+.halo-qs-warning {
+    padding: 12px 14px;
+    border-radius: 20px;
+    spacing: 12px;
+}
+
+.halo-qs-times {
+    spacing: 10px;
+    padding: 0 8px;
+}
+
+.halo-qs-stepper {
+    spacing: 4px;
+}
+
+.halo-qs-step {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+}
+
+.halo-qs-time {
+    padding: 0 4px;
+}
+
+.halo-qs-tile-list {
+    spacing: 4px;
+}
+
+.halo-qs-tile-item {
+    height: 44px;
+    border-radius: 16px;
+    padding: 0 6px 0 4px;
+    spacing: 10px;
+}
+
+.halo-qs-tile-item.halo-dragging {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.halo-qs-handle {
+    width: 28px;
+    height: 36px;
+}
+
+.halo-qs-eye {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+}
+
+/* Menus of other extensions, lent to a page. */
+.halo-qs-hosted .popup-menu-content,
+.halo-qs-hosted .quick-toggle-menu {
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.halo-qs-hosted .popup-menu-item {
+    border-radius: 16px;
 }
 
 .halo-scheme-blue-light .halo-frame {
@@ -192,6 +538,298 @@
     color: #ba1a1a;
 }
 
+/* Quick settings */
+
+.halo-scheme-blue-light .halo-qs {
+    background-color: #f3f2ff;
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-qs-round {
+    background-color: #fbf8ff;
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-qs-round:hover {
+    background-color: #e7e7f5;
+}
+
+.halo-scheme-blue-light .halo-qs-round.halo-on {
+    background-color: #0045fc;
+    color: #ffffff;
+}
+
+.halo-scheme-blue-light .halo-qs-round.halo-qs-power {
+    background-color: #eedbff;
+    color: #523d6c;
+}
+
+.halo-scheme-blue-light .halo-qs-big,
+.halo-scheme-blue-light .halo-qs-lasts,
+.halo-scheme-blue-light .halo-qs-row-title {
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-qs-small,
+.halo-scheme-blue-light .halo-qs-caption,
+.halo-scheme-blue-light .halo-qs-row-note,
+.halo-scheme-blue-light .halo-qs-row-icon,
+.halo-scheme-blue-light .halo-qs-row-end,
+.halo-scheme-blue-light .halo-qs-eye,
+.halo-scheme-blue-light .halo-qs-handle,
+.halo-scheme-blue-light .halo-tile-note {
+    color: #444654;
+}
+
+.halo-scheme-blue-light .halo-qs-card,
+.halo-scheme-blue-light .halo-qs-card-row {
+    background-color: #fbf8ff;
+}
+
+.halo-scheme-blue-light .halo-tile {
+    background-color: #fbf8ff;
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-tile:hover {
+    background-color: #e7e7f5;
+}
+
+.halo-scheme-blue-light .halo-tile-icon {
+    background-color: #e7e7f5;
+}
+
+.halo-scheme-blue-light .halo-tile-chevron:hover {
+    background-color: rgba(25,27,37,0.1);
+}
+
+.halo-scheme-blue-light .halo-tile.halo-on {
+    background-color: #0045fc;
+    color: #ffffff;
+}
+
+.halo-scheme-blue-light .halo-tile.halo-on .halo-tile-icon {
+    background-color: rgba(255,255,255,0.18);
+}
+
+.halo-scheme-blue-light .halo-tile.halo-on .halo-tile-note,
+.halo-scheme-blue-light .halo-tile.halo-on .halo-tile-chevron {
+    color: #ffffff;
+}
+
+.halo-scheme-blue-light .halo-tile.halo-on .halo-tile-chevron:hover {
+    background-color: rgba(255,255,255,0.18);
+}
+
+.halo-scheme-blue-light .halo-qs-art {
+    background-color: #eedbff;
+    color: #523d6c;
+}
+
+.halo-scheme-blue-light .halo-qs-track {
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-qs-artist {
+    color: #444654;
+}
+
+.halo-scheme-blue-light .halo-qs-media-button {
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-qs-media-button:hover {
+    background-color: #e7e7f5;
+}
+
+.halo-scheme-blue-light .halo-qs-media-button.halo-qs-play {
+    background-color: #0045fc;
+    color: #ffffff;
+}
+
+.halo-scheme-blue-light .halo-qs-background-head {
+    background-color: #fbf8ff;
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-qs-background-head:hover,
+.halo-scheme-blue-light .halo-qs-background-app:hover {
+    background-color: #e7e7f5;
+}
+
+.halo-scheme-blue-light .halo-qs-background-app {
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-qs-quit:hover {
+    background-color: #e7e7f5;
+}
+
+.halo-scheme-blue-light .halo-qs-row {
+    background-color: #fbf8ff;
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-qs-row:hover {
+    background-color: #e7e7f5;
+}
+
+.halo-scheme-blue-light .halo-qs-card .halo-qs-row {
+    background-color: transparent;
+}
+
+.halo-scheme-blue-light .halo-qs-card .halo-qs-row:hover {
+    background-color: #e7e7f5;
+}
+
+.halo-scheme-blue-light .halo-qs-row.halo-chosen,
+.halo-scheme-blue-light .halo-qs-row.halo-chosen:hover {
+    background-color: #dee1ff;
+    color: #0033c2;
+}
+
+.halo-scheme-blue-light .halo-qs-row.halo-chosen .halo-qs-row-title,
+.halo-scheme-blue-light .halo-qs-row.halo-chosen .halo-qs-row-note,
+.halo-scheme-blue-light .halo-qs-row.halo-chosen .halo-qs-row-icon,
+.halo-scheme-blue-light .halo-qs-row.halo-chosen .halo-qs-row-end {
+    color: #0033c2;
+}
+
+.halo-scheme-blue-light .halo-qs-link {
+    color: #0045fc;
+}
+
+.halo-scheme-blue-light .halo-qs-connected {
+    background-color: #0045fc;
+    color: #ffffff;
+}
+
+.halo-scheme-blue-light .halo-qs-connected-title,
+.halo-scheme-blue-light .halo-qs-connected-note {
+    color: #ffffff;
+}
+
+.halo-scheme-blue-light .halo-qs-connected-icon {
+    background-color: #ffffff;
+    color: #0045fc;
+}
+
+.halo-scheme-blue-light .halo-qs-connected-gear:hover {
+    background-color: rgba(255,255,255,0.18);
+}
+
+.halo-scheme-blue-light .halo-qs-device {
+    background-color: #fbf8ff;
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-qs-device-icon {
+    background-color: #e7e7f5;
+}
+
+.halo-scheme-blue-light .halo-qs-device-name,
+.halo-scheme-blue-light .halo-qs-device-percent {
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-qs-device-note {
+    color: #444654;
+}
+
+.halo-scheme-blue-light .halo-qs-device.halo-on {
+    background-color: #0045fc;
+    color: #ffffff;
+}
+
+.halo-scheme-blue-light .halo-qs-device.halo-on .halo-qs-device-icon {
+    background-color: #ffffff;
+    color: #0045fc;
+}
+
+.halo-scheme-blue-light .halo-qs-device.halo-on .halo-qs-device-name,
+.halo-scheme-blue-light .halo-qs-device.halo-on .halo-qs-device-percent,
+.halo-scheme-blue-light .halo-qs-device.halo-on .halo-qs-device-note {
+    color: #ffffff;
+}
+
+.halo-scheme-blue-light .halo-qs-device-percent.halo-low {
+    color: #ba1a1a;
+}
+
+.halo-scheme-blue-light .halo-qs-wide-button {
+    background-color: #e5deff;
+    color: #474364;
+}
+
+.halo-scheme-blue-light .halo-qs-badge-number {
+    color: #ffffff;
+}
+
+.halo-scheme-blue-light .halo-qs-segment {
+    background-color: #fbf8ff;
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-qs-card .halo-qs-segment {
+    background-color: #e7e7f5;
+}
+
+.halo-scheme-blue-light .halo-qs-segment.halo-chosen,
+.halo-scheme-blue-light .halo-qs-card .halo-qs-segment.halo-chosen {
+    background-color: #dee1ff;
+    color: #0033c2;
+}
+
+.halo-scheme-blue-light .halo-qs-layout {
+    background-color: #e7e7f5;
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-qs-layout.halo-chosen {
+    background-color: #dee1ff;
+}
+
+.halo-scheme-blue-light .halo-qs-layout.halo-chosen .halo-qs-layout-name {
+    color: #0033c2;
+}
+
+.halo-scheme-blue-light .halo-qs-layout-picture {
+    background-color: #dee1ff;
+}
+
+.halo-scheme-blue-light .halo-qs-layout-spot {
+    background-color: #0045fc;
+}
+
+.halo-scheme-blue-light .halo-qs-warning {
+    background-color: #ffdad6;
+    color: #93000a;
+}
+
+.halo-scheme-blue-light .halo-qs-step,
+.halo-scheme-blue-light .halo-qs-tile-item {
+    background-color: #e7e7f5;
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-qs-tile-item.halo-dragging {
+    background-color: #e2e1ef;
+}
+
+.halo-scheme-blue-light .halo-qs-tile-item.halo-hidden .halo-qs-row-title,
+.halo-scheme-blue-light .halo-qs-tile-item.halo-hidden .halo-qs-row-icon {
+    color: #757685;
+}
+
+.halo-scheme-blue-light .halo-qs-hosted .popup-menu-item {
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-qs-hosted .popup-menu-item:hover,
+.halo-scheme-blue-light .halo-qs-hosted .popup-menu-item:focus {
+    background-color: #e7e7f5;
+}
+
 .halo-scheme-blue-dark .halo-frame {
     background-color: #1d1f29;
 }
@@ -301,6 +939,298 @@
 .halo-scheme-blue-dark .halo-low,
 .halo-scheme-blue-dark .halo-status-text.halo-low {
     color: #ffb4ab;
+}
+
+/* Quick settings */
+
+.halo-scheme-blue-dark .halo-qs {
+    background-color: #1d1f29;
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-qs-round {
+    background-color: #282934;
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-qs-round:hover {
+    background-color: #373843;
+}
+
+.halo-scheme-blue-dark .halo-qs-round.halo-on {
+    background-color: #0033c2;
+    color: #dee1ff;
+}
+
+.halo-scheme-blue-dark .halo-qs-round.halo-qs-power {
+    background-color: #523d6c;
+    color: #eedbff;
+}
+
+.halo-scheme-blue-dark .halo-qs-big,
+.halo-scheme-blue-dark .halo-qs-lasts,
+.halo-scheme-blue-dark .halo-qs-row-title {
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-qs-small,
+.halo-scheme-blue-dark .halo-qs-caption,
+.halo-scheme-blue-dark .halo-qs-row-note,
+.halo-scheme-blue-dark .halo-qs-row-icon,
+.halo-scheme-blue-dark .halo-qs-row-end,
+.halo-scheme-blue-dark .halo-qs-eye,
+.halo-scheme-blue-dark .halo-qs-handle,
+.halo-scheme-blue-dark .halo-tile-note {
+    color: #c5c5d6;
+}
+
+.halo-scheme-blue-dark .halo-qs-card,
+.halo-scheme-blue-dark .halo-qs-card-row {
+    background-color: #282934;
+}
+
+.halo-scheme-blue-dark .halo-tile {
+    background-color: #282934;
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-tile:hover {
+    background-color: #373843;
+}
+
+.halo-scheme-blue-dark .halo-tile-icon {
+    background-color: #373843;
+}
+
+.halo-scheme-blue-dark .halo-tile-chevron:hover {
+    background-color: rgba(226,225,239,0.1);
+}
+
+.halo-scheme-blue-dark .halo-tile.halo-on {
+    background-color: #0033c2;
+    color: #dee1ff;
+}
+
+.halo-scheme-blue-dark .halo-tile.halo-on .halo-tile-icon {
+    background-color: rgba(222,225,255,0.18);
+}
+
+.halo-scheme-blue-dark .halo-tile.halo-on .halo-tile-note,
+.halo-scheme-blue-dark .halo-tile.halo-on .halo-tile-chevron {
+    color: #dee1ff;
+}
+
+.halo-scheme-blue-dark .halo-tile.halo-on .halo-tile-chevron:hover {
+    background-color: rgba(222,225,255,0.18);
+}
+
+.halo-scheme-blue-dark .halo-qs-art {
+    background-color: #523d6c;
+    color: #eedbff;
+}
+
+.halo-scheme-blue-dark .halo-qs-track {
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-qs-artist {
+    color: #c5c5d6;
+}
+
+.halo-scheme-blue-dark .halo-qs-media-button {
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-qs-media-button:hover {
+    background-color: #373843;
+}
+
+.halo-scheme-blue-dark .halo-qs-media-button.halo-qs-play {
+    background-color: #b9c3ff;
+    color: #00228b;
+}
+
+.halo-scheme-blue-dark .halo-qs-background-head {
+    background-color: #282934;
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-qs-background-head:hover,
+.halo-scheme-blue-dark .halo-qs-background-app:hover {
+    background-color: #373843;
+}
+
+.halo-scheme-blue-dark .halo-qs-background-app {
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-qs-quit:hover {
+    background-color: #282934;
+}
+
+.halo-scheme-blue-dark .halo-qs-row {
+    background-color: #282934;
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-qs-row:hover {
+    background-color: #373843;
+}
+
+.halo-scheme-blue-dark .halo-qs-card .halo-qs-row {
+    background-color: transparent;
+}
+
+.halo-scheme-blue-dark .halo-qs-card .halo-qs-row:hover {
+    background-color: #373843;
+}
+
+.halo-scheme-blue-dark .halo-qs-row.halo-chosen,
+.halo-scheme-blue-dark .halo-qs-row.halo-chosen:hover {
+    background-color: #b9c3ff;
+    color: #00228b;
+}
+
+.halo-scheme-blue-dark .halo-qs-row.halo-chosen .halo-qs-row-title,
+.halo-scheme-blue-dark .halo-qs-row.halo-chosen .halo-qs-row-note,
+.halo-scheme-blue-dark .halo-qs-row.halo-chosen .halo-qs-row-icon,
+.halo-scheme-blue-dark .halo-qs-row.halo-chosen .halo-qs-row-end {
+    color: #00228b;
+}
+
+.halo-scheme-blue-dark .halo-qs-link {
+    color: #b9c3ff;
+}
+
+.halo-scheme-blue-dark .halo-qs-connected {
+    background-color: #0033c2;
+    color: #dee1ff;
+}
+
+.halo-scheme-blue-dark .halo-qs-connected-title,
+.halo-scheme-blue-dark .halo-qs-connected-note {
+    color: #dee1ff;
+}
+
+.halo-scheme-blue-dark .halo-qs-connected-icon {
+    background-color: #dee1ff;
+    color: #0033c2;
+}
+
+.halo-scheme-blue-dark .halo-qs-connected-gear:hover {
+    background-color: rgba(222,225,255,0.18);
+}
+
+.halo-scheme-blue-dark .halo-qs-device {
+    background-color: #282934;
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-qs-device-icon {
+    background-color: #373843;
+}
+
+.halo-scheme-blue-dark .halo-qs-device-name,
+.halo-scheme-blue-dark .halo-qs-device-percent {
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-qs-device-note {
+    color: #c5c5d6;
+}
+
+.halo-scheme-blue-dark .halo-qs-device.halo-on {
+    background-color: #0033c2;
+    color: #dee1ff;
+}
+
+.halo-scheme-blue-dark .halo-qs-device.halo-on .halo-qs-device-icon {
+    background-color: #dee1ff;
+    color: #0033c2;
+}
+
+.halo-scheme-blue-dark .halo-qs-device.halo-on .halo-qs-device-name,
+.halo-scheme-blue-dark .halo-qs-device.halo-on .halo-qs-device-percent,
+.halo-scheme-blue-dark .halo-qs-device.halo-on .halo-qs-device-note {
+    color: #dee1ff;
+}
+
+.halo-scheme-blue-dark .halo-qs-device-percent.halo-low {
+    color: #ffb4ab;
+}
+
+.halo-scheme-blue-dark .halo-qs-wide-button {
+    background-color: #474364;
+    color: #e5deff;
+}
+
+.halo-scheme-blue-dark .halo-qs-badge-number {
+    color: #dee1ff;
+}
+
+.halo-scheme-blue-dark .halo-qs-segment {
+    background-color: #282934;
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-qs-card .halo-qs-segment {
+    background-color: #373843;
+}
+
+.halo-scheme-blue-dark .halo-qs-segment.halo-chosen,
+.halo-scheme-blue-dark .halo-qs-card .halo-qs-segment.halo-chosen {
+    background-color: #b9c3ff;
+    color: #00228b;
+}
+
+.halo-scheme-blue-dark .halo-qs-layout {
+    background-color: #373843;
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-qs-layout.halo-chosen {
+    background-color: #b9c3ff;
+}
+
+.halo-scheme-blue-dark .halo-qs-layout.halo-chosen .halo-qs-layout-name {
+    color: #00228b;
+}
+
+.halo-scheme-blue-dark .halo-qs-layout-picture {
+    background-color: #0033c2;
+}
+
+.halo-scheme-blue-dark .halo-qs-layout-spot {
+    background-color: #b9c3ff;
+}
+
+.halo-scheme-blue-dark .halo-qs-warning {
+    background-color: #93000a;
+    color: #ffdad6;
+}
+
+.halo-scheme-blue-dark .halo-qs-step,
+.halo-scheme-blue-dark .halo-qs-tile-item {
+    background-color: #373843;
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-qs-tile-item.halo-dragging {
+    background-color: #33343f;
+}
+
+.halo-scheme-blue-dark .halo-qs-tile-item.halo-hidden .halo-qs-row-title,
+.halo-scheme-blue-dark .halo-qs-tile-item.halo-hidden .halo-qs-row-icon {
+    color: #8e909f;
+}
+
+.halo-scheme-blue-dark .halo-qs-hosted .popup-menu-item {
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-qs-hosted .popup-menu-item:hover,
+.halo-scheme-blue-dark .halo-qs-hosted .popup-menu-item:focus {
+    background-color: #373843;
 }
 
 .halo-scheme-violet-light .halo-frame {
@@ -414,6 +1344,298 @@
     color: #ba1a1a;
 }
 
+/* Quick settings */
+
+.halo-scheme-violet-light .halo-qs {
+    background-color: #f9f1ff;
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-qs-round {
+    background-color: #fef7ff;
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-qs-round:hover {
+    background-color: #ede5f4;
+}
+
+.halo-scheme-violet-light .halo-qs-round.halo-on {
+    background-color: #7706ff;
+    color: #ffffff;
+}
+
+.halo-scheme-violet-light .halo-qs-round.halo-qs-power {
+    background-color: #ffd5ff;
+    color: #5e3962;
+}
+
+.halo-scheme-violet-light .halo-qs-big,
+.halo-scheme-violet-light .halo-qs-lasts,
+.halo-scheme-violet-light .halo-qs-row-title {
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-qs-small,
+.halo-scheme-violet-light .halo-qs-caption,
+.halo-scheme-violet-light .halo-qs-row-note,
+.halo-scheme-violet-light .halo-qs-row-icon,
+.halo-scheme-violet-light .halo-qs-row-end,
+.halo-scheme-violet-light .halo-qs-eye,
+.halo-scheme-violet-light .halo-qs-handle,
+.halo-scheme-violet-light .halo-tile-note {
+    color: #4a4453;
+}
+
+.halo-scheme-violet-light .halo-qs-card,
+.halo-scheme-violet-light .halo-qs-card-row {
+    background-color: #fef7ff;
+}
+
+.halo-scheme-violet-light .halo-tile {
+    background-color: #fef7ff;
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-tile:hover {
+    background-color: #ede5f4;
+}
+
+.halo-scheme-violet-light .halo-tile-icon {
+    background-color: #ede5f4;
+}
+
+.halo-scheme-violet-light .halo-tile-chevron:hover {
+    background-color: rgba(29,26,36,0.1);
+}
+
+.halo-scheme-violet-light .halo-tile.halo-on {
+    background-color: #7706ff;
+    color: #ffffff;
+}
+
+.halo-scheme-violet-light .halo-tile.halo-on .halo-tile-icon {
+    background-color: rgba(255,255,255,0.18);
+}
+
+.halo-scheme-violet-light .halo-tile.halo-on .halo-tile-note,
+.halo-scheme-violet-light .halo-tile.halo-on .halo-tile-chevron {
+    color: #ffffff;
+}
+
+.halo-scheme-violet-light .halo-tile.halo-on .halo-tile-chevron:hover {
+    background-color: rgba(255,255,255,0.18);
+}
+
+.halo-scheme-violet-light .halo-qs-art {
+    background-color: #ffd5ff;
+    color: #5e3962;
+}
+
+.halo-scheme-violet-light .halo-qs-track {
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-qs-artist {
+    color: #4a4453;
+}
+
+.halo-scheme-violet-light .halo-qs-media-button {
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-qs-media-button:hover {
+    background-color: #ede5f4;
+}
+
+.halo-scheme-violet-light .halo-qs-media-button.halo-qs-play {
+    background-color: #7706ff;
+    color: #ffffff;
+}
+
+.halo-scheme-violet-light .halo-qs-background-head {
+    background-color: #fef7ff;
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-qs-background-head:hover,
+.halo-scheme-violet-light .halo-qs-background-app:hover {
+    background-color: #ede5f4;
+}
+
+.halo-scheme-violet-light .halo-qs-background-app {
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-qs-quit:hover {
+    background-color: #ede5f4;
+}
+
+.halo-scheme-violet-light .halo-qs-row {
+    background-color: #fef7ff;
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-qs-row:hover {
+    background-color: #ede5f4;
+}
+
+.halo-scheme-violet-light .halo-qs-card .halo-qs-row {
+    background-color: transparent;
+}
+
+.halo-scheme-violet-light .halo-qs-card .halo-qs-row:hover {
+    background-color: #ede5f4;
+}
+
+.halo-scheme-violet-light .halo-qs-row.halo-chosen,
+.halo-scheme-violet-light .halo-qs-row.halo-chosen:hover {
+    background-color: #eaddff;
+    color: #5a00c6;
+}
+
+.halo-scheme-violet-light .halo-qs-row.halo-chosen .halo-qs-row-title,
+.halo-scheme-violet-light .halo-qs-row.halo-chosen .halo-qs-row-note,
+.halo-scheme-violet-light .halo-qs-row.halo-chosen .halo-qs-row-icon,
+.halo-scheme-violet-light .halo-qs-row.halo-chosen .halo-qs-row-end {
+    color: #5a00c6;
+}
+
+.halo-scheme-violet-light .halo-qs-link {
+    color: #7706ff;
+}
+
+.halo-scheme-violet-light .halo-qs-connected {
+    background-color: #7706ff;
+    color: #ffffff;
+}
+
+.halo-scheme-violet-light .halo-qs-connected-title,
+.halo-scheme-violet-light .halo-qs-connected-note {
+    color: #ffffff;
+}
+
+.halo-scheme-violet-light .halo-qs-connected-icon {
+    background-color: #ffffff;
+    color: #7706ff;
+}
+
+.halo-scheme-violet-light .halo-qs-connected-gear:hover {
+    background-color: rgba(255,255,255,0.18);
+}
+
+.halo-scheme-violet-light .halo-qs-device {
+    background-color: #fef7ff;
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-qs-device-icon {
+    background-color: #ede5f4;
+}
+
+.halo-scheme-violet-light .halo-qs-device-name,
+.halo-scheme-violet-light .halo-qs-device-percent {
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-qs-device-note {
+    color: #4a4453;
+}
+
+.halo-scheme-violet-light .halo-qs-device.halo-on {
+    background-color: #7706ff;
+    color: #ffffff;
+}
+
+.halo-scheme-violet-light .halo-qs-device.halo-on .halo-qs-device-icon {
+    background-color: #ffffff;
+    color: #7706ff;
+}
+
+.halo-scheme-violet-light .halo-qs-device.halo-on .halo-qs-device-name,
+.halo-scheme-violet-light .halo-qs-device.halo-on .halo-qs-device-percent,
+.halo-scheme-violet-light .halo-qs-device.halo-on .halo-qs-device-note {
+    color: #ffffff;
+}
+
+.halo-scheme-violet-light .halo-qs-device-percent.halo-low {
+    color: #ba1a1a;
+}
+
+.halo-scheme-violet-light .halo-qs-wide-button {
+    background-color: #f2daff;
+    color: #523f5f;
+}
+
+.halo-scheme-violet-light .halo-qs-badge-number {
+    color: #ffffff;
+}
+
+.halo-scheme-violet-light .halo-qs-segment {
+    background-color: #fef7ff;
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-qs-card .halo-qs-segment {
+    background-color: #ede5f4;
+}
+
+.halo-scheme-violet-light .halo-qs-segment.halo-chosen,
+.halo-scheme-violet-light .halo-qs-card .halo-qs-segment.halo-chosen {
+    background-color: #eaddff;
+    color: #5a00c6;
+}
+
+.halo-scheme-violet-light .halo-qs-layout {
+    background-color: #ede5f4;
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-qs-layout.halo-chosen {
+    background-color: #eaddff;
+}
+
+.halo-scheme-violet-light .halo-qs-layout.halo-chosen .halo-qs-layout-name {
+    color: #5a00c6;
+}
+
+.halo-scheme-violet-light .halo-qs-layout-picture {
+    background-color: #eaddff;
+}
+
+.halo-scheme-violet-light .halo-qs-layout-spot {
+    background-color: #7706ff;
+}
+
+.halo-scheme-violet-light .halo-qs-warning {
+    background-color: #ffdad6;
+    color: #93000a;
+}
+
+.halo-scheme-violet-light .halo-qs-step,
+.halo-scheme-violet-light .halo-qs-tile-item {
+    background-color: #ede5f4;
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-qs-tile-item.halo-dragging {
+    background-color: #e8dfee;
+}
+
+.halo-scheme-violet-light .halo-qs-tile-item.halo-hidden .halo-qs-row-title,
+.halo-scheme-violet-light .halo-qs-tile-item.halo-hidden .halo-qs-row-icon {
+    color: #7b7484;
+}
+
+.halo-scheme-violet-light .halo-qs-hosted .popup-menu-item {
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-qs-hosted .popup-menu-item:hover,
+.halo-scheme-violet-light .halo-qs-hosted .popup-menu-item:focus {
+    background-color: #ede5f4;
+}
+
 .halo-scheme-violet-dark .halo-frame {
     background-color: #221e28;
 }
@@ -523,6 +1745,298 @@
 .halo-scheme-violet-dark .halo-low,
 .halo-scheme-violet-dark .halo-status-text.halo-low {
     color: #ffb4ab;
+}
+
+/* Quick settings */
+
+.halo-scheme-violet-dark .halo-qs {
+    background-color: #221e28;
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-qs-round {
+    background-color: #2c2833;
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-qs-round:hover {
+    background-color: #3c3743;
+}
+
+.halo-scheme-violet-dark .halo-qs-round.halo-on {
+    background-color: #5a00c6;
+    color: #eaddff;
+}
+
+.halo-scheme-violet-dark .halo-qs-round.halo-qs-power {
+    background-color: #5e3962;
+    color: #ffd5ff;
+}
+
+.halo-scheme-violet-dark .halo-qs-big,
+.halo-scheme-violet-dark .halo-qs-lasts,
+.halo-scheme-violet-dark .halo-qs-row-title {
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-qs-small,
+.halo-scheme-violet-dark .halo-qs-caption,
+.halo-scheme-violet-dark .halo-qs-row-note,
+.halo-scheme-violet-dark .halo-qs-row-icon,
+.halo-scheme-violet-dark .halo-qs-row-end,
+.halo-scheme-violet-dark .halo-qs-eye,
+.halo-scheme-violet-dark .halo-qs-handle,
+.halo-scheme-violet-dark .halo-tile-note {
+    color: #ccc3d5;
+}
+
+.halo-scheme-violet-dark .halo-qs-card,
+.halo-scheme-violet-dark .halo-qs-card-row {
+    background-color: #2c2833;
+}
+
+.halo-scheme-violet-dark .halo-tile {
+    background-color: #2c2833;
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-tile:hover {
+    background-color: #3c3743;
+}
+
+.halo-scheme-violet-dark .halo-tile-icon {
+    background-color: #3c3743;
+}
+
+.halo-scheme-violet-dark .halo-tile-chevron:hover {
+    background-color: rgba(232,223,238,0.1);
+}
+
+.halo-scheme-violet-dark .halo-tile.halo-on {
+    background-color: #5a00c6;
+    color: #eaddff;
+}
+
+.halo-scheme-violet-dark .halo-tile.halo-on .halo-tile-icon {
+    background-color: rgba(234,221,255,0.18);
+}
+
+.halo-scheme-violet-dark .halo-tile.halo-on .halo-tile-note,
+.halo-scheme-violet-dark .halo-tile.halo-on .halo-tile-chevron {
+    color: #eaddff;
+}
+
+.halo-scheme-violet-dark .halo-tile.halo-on .halo-tile-chevron:hover {
+    background-color: rgba(234,221,255,0.18);
+}
+
+.halo-scheme-violet-dark .halo-qs-art {
+    background-color: #5e3962;
+    color: #ffd5ff;
+}
+
+.halo-scheme-violet-dark .halo-qs-track {
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-qs-artist {
+    color: #ccc3d5;
+}
+
+.halo-scheme-violet-dark .halo-qs-media-button {
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-qs-media-button:hover {
+    background-color: #3c3743;
+}
+
+.halo-scheme-violet-dark .halo-qs-media-button.halo-qs-play {
+    background-color: #d2bbff;
+    color: #3f008e;
+}
+
+.halo-scheme-violet-dark .halo-qs-background-head {
+    background-color: #2c2833;
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-qs-background-head:hover,
+.halo-scheme-violet-dark .halo-qs-background-app:hover {
+    background-color: #3c3743;
+}
+
+.halo-scheme-violet-dark .halo-qs-background-app {
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-qs-quit:hover {
+    background-color: #2c2833;
+}
+
+.halo-scheme-violet-dark .halo-qs-row {
+    background-color: #2c2833;
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-qs-row:hover {
+    background-color: #3c3743;
+}
+
+.halo-scheme-violet-dark .halo-qs-card .halo-qs-row {
+    background-color: transparent;
+}
+
+.halo-scheme-violet-dark .halo-qs-card .halo-qs-row:hover {
+    background-color: #3c3743;
+}
+
+.halo-scheme-violet-dark .halo-qs-row.halo-chosen,
+.halo-scheme-violet-dark .halo-qs-row.halo-chosen:hover {
+    background-color: #d2bbff;
+    color: #3f008e;
+}
+
+.halo-scheme-violet-dark .halo-qs-row.halo-chosen .halo-qs-row-title,
+.halo-scheme-violet-dark .halo-qs-row.halo-chosen .halo-qs-row-note,
+.halo-scheme-violet-dark .halo-qs-row.halo-chosen .halo-qs-row-icon,
+.halo-scheme-violet-dark .halo-qs-row.halo-chosen .halo-qs-row-end {
+    color: #3f008e;
+}
+
+.halo-scheme-violet-dark .halo-qs-link {
+    color: #d2bbff;
+}
+
+.halo-scheme-violet-dark .halo-qs-connected {
+    background-color: #5a00c6;
+    color: #eaddff;
+}
+
+.halo-scheme-violet-dark .halo-qs-connected-title,
+.halo-scheme-violet-dark .halo-qs-connected-note {
+    color: #eaddff;
+}
+
+.halo-scheme-violet-dark .halo-qs-connected-icon {
+    background-color: #eaddff;
+    color: #5a00c6;
+}
+
+.halo-scheme-violet-dark .halo-qs-connected-gear:hover {
+    background-color: rgba(234,221,255,0.18);
+}
+
+.halo-scheme-violet-dark .halo-qs-device {
+    background-color: #2c2833;
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-qs-device-icon {
+    background-color: #3c3743;
+}
+
+.halo-scheme-violet-dark .halo-qs-device-name,
+.halo-scheme-violet-dark .halo-qs-device-percent {
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-qs-device-note {
+    color: #ccc3d5;
+}
+
+.halo-scheme-violet-dark .halo-qs-device.halo-on {
+    background-color: #5a00c6;
+    color: #eaddff;
+}
+
+.halo-scheme-violet-dark .halo-qs-device.halo-on .halo-qs-device-icon {
+    background-color: #eaddff;
+    color: #5a00c6;
+}
+
+.halo-scheme-violet-dark .halo-qs-device.halo-on .halo-qs-device-name,
+.halo-scheme-violet-dark .halo-qs-device.halo-on .halo-qs-device-percent,
+.halo-scheme-violet-dark .halo-qs-device.halo-on .halo-qs-device-note {
+    color: #eaddff;
+}
+
+.halo-scheme-violet-dark .halo-qs-device-percent.halo-low {
+    color: #ffb4ab;
+}
+
+.halo-scheme-violet-dark .halo-qs-wide-button {
+    background-color: #523f5f;
+    color: #f2daff;
+}
+
+.halo-scheme-violet-dark .halo-qs-badge-number {
+    color: #eaddff;
+}
+
+.halo-scheme-violet-dark .halo-qs-segment {
+    background-color: #2c2833;
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-qs-card .halo-qs-segment {
+    background-color: #3c3743;
+}
+
+.halo-scheme-violet-dark .halo-qs-segment.halo-chosen,
+.halo-scheme-violet-dark .halo-qs-card .halo-qs-segment.halo-chosen {
+    background-color: #d2bbff;
+    color: #3f008e;
+}
+
+.halo-scheme-violet-dark .halo-qs-layout {
+    background-color: #3c3743;
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-qs-layout.halo-chosen {
+    background-color: #d2bbff;
+}
+
+.halo-scheme-violet-dark .halo-qs-layout.halo-chosen .halo-qs-layout-name {
+    color: #3f008e;
+}
+
+.halo-scheme-violet-dark .halo-qs-layout-picture {
+    background-color: #5a00c6;
+}
+
+.halo-scheme-violet-dark .halo-qs-layout-spot {
+    background-color: #d2bbff;
+}
+
+.halo-scheme-violet-dark .halo-qs-warning {
+    background-color: #93000a;
+    color: #ffdad6;
+}
+
+.halo-scheme-violet-dark .halo-qs-step,
+.halo-scheme-violet-dark .halo-qs-tile-item {
+    background-color: #3c3743;
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-qs-tile-item.halo-dragging {
+    background-color: #37333e;
+}
+
+.halo-scheme-violet-dark .halo-qs-tile-item.halo-hidden .halo-qs-row-title,
+.halo-scheme-violet-dark .halo-qs-tile-item.halo-hidden .halo-qs-row-icon {
+    color: #958e9e;
+}
+
+.halo-scheme-violet-dark .halo-qs-hosted .popup-menu-item {
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-qs-hosted .popup-menu-item:hover,
+.halo-scheme-violet-dark .halo-qs-hosted .popup-menu-item:focus {
+    background-color: #3c3743;
 }
 
 .halo-scheme-green-light .halo-frame {
@@ -636,6 +2150,298 @@
     color: #ba1a1a;
 }
 
+/* Quick settings */
+
+.halo-scheme-green-light .halo-qs {
+    background-color: #ecf7e8;
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-qs-round {
+    background-color: #f2fcee;
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-qs-round:hover {
+    background-color: #e1ebdd;
+}
+
+.halo-scheme-green-light .halo-qs-round.halo-on {
+    background-color: #006e2e;
+    color: #ffffff;
+}
+
+.halo-scheme-green-light .halo-qs-round.halo-qs-power {
+    background-color: #aaf0df;
+    color: #005045;
+}
+
+.halo-scheme-green-light .halo-qs-big,
+.halo-scheme-green-light .halo-qs-lasts,
+.halo-scheme-green-light .halo-qs-row-title {
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-qs-small,
+.halo-scheme-green-light .halo-qs-caption,
+.halo-scheme-green-light .halo-qs-row-note,
+.halo-scheme-green-light .halo-qs-row-icon,
+.halo-scheme-green-light .halo-qs-row-end,
+.halo-scheme-green-light .halo-qs-eye,
+.halo-scheme-green-light .halo-qs-handle,
+.halo-scheme-green-light .halo-tile-note {
+    color: #3e4a3d;
+}
+
+.halo-scheme-green-light .halo-qs-card,
+.halo-scheme-green-light .halo-qs-card-row {
+    background-color: #f2fcee;
+}
+
+.halo-scheme-green-light .halo-tile {
+    background-color: #f2fcee;
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-tile:hover {
+    background-color: #e1ebdd;
+}
+
+.halo-scheme-green-light .halo-tile-icon {
+    background-color: #e1ebdd;
+}
+
+.halo-scheme-green-light .halo-tile-chevron:hover {
+    background-color: rgba(21,30,21,0.1);
+}
+
+.halo-scheme-green-light .halo-tile.halo-on {
+    background-color: #006e2e;
+    color: #ffffff;
+}
+
+.halo-scheme-green-light .halo-tile.halo-on .halo-tile-icon {
+    background-color: rgba(255,255,255,0.18);
+}
+
+.halo-scheme-green-light .halo-tile.halo-on .halo-tile-note,
+.halo-scheme-green-light .halo-tile.halo-on .halo-tile-chevron {
+    color: #ffffff;
+}
+
+.halo-scheme-green-light .halo-tile.halo-on .halo-tile-chevron:hover {
+    background-color: rgba(255,255,255,0.18);
+}
+
+.halo-scheme-green-light .halo-qs-art {
+    background-color: #aaf0df;
+    color: #005045;
+}
+
+.halo-scheme-green-light .halo-qs-track {
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-qs-artist {
+    color: #3e4a3d;
+}
+
+.halo-scheme-green-light .halo-qs-media-button {
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-qs-media-button:hover {
+    background-color: #e1ebdd;
+}
+
+.halo-scheme-green-light .halo-qs-media-button.halo-qs-play {
+    background-color: #006e2e;
+    color: #ffffff;
+}
+
+.halo-scheme-green-light .halo-qs-background-head {
+    background-color: #f2fcee;
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-qs-background-head:hover,
+.halo-scheme-green-light .halo-qs-background-app:hover {
+    background-color: #e1ebdd;
+}
+
+.halo-scheme-green-light .halo-qs-background-app {
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-qs-quit:hover {
+    background-color: #e1ebdd;
+}
+
+.halo-scheme-green-light .halo-qs-row {
+    background-color: #f2fcee;
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-qs-row:hover {
+    background-color: #e1ebdd;
+}
+
+.halo-scheme-green-light .halo-qs-card .halo-qs-row {
+    background-color: transparent;
+}
+
+.halo-scheme-green-light .halo-qs-card .halo-qs-row:hover {
+    background-color: #e1ebdd;
+}
+
+.halo-scheme-green-light .halo-qs-row.halo-chosen,
+.halo-scheme-green-light .halo-qs-row.halo-chosen:hover {
+    background-color: #67ff8d;
+    color: #005321;
+}
+
+.halo-scheme-green-light .halo-qs-row.halo-chosen .halo-qs-row-title,
+.halo-scheme-green-light .halo-qs-row.halo-chosen .halo-qs-row-note,
+.halo-scheme-green-light .halo-qs-row.halo-chosen .halo-qs-row-icon,
+.halo-scheme-green-light .halo-qs-row.halo-chosen .halo-qs-row-end {
+    color: #005321;
+}
+
+.halo-scheme-green-light .halo-qs-link {
+    color: #006e2e;
+}
+
+.halo-scheme-green-light .halo-qs-connected {
+    background-color: #006e2e;
+    color: #ffffff;
+}
+
+.halo-scheme-green-light .halo-qs-connected-title,
+.halo-scheme-green-light .halo-qs-connected-note {
+    color: #ffffff;
+}
+
+.halo-scheme-green-light .halo-qs-connected-icon {
+    background-color: #ffffff;
+    color: #006e2e;
+}
+
+.halo-scheme-green-light .halo-qs-connected-gear:hover {
+    background-color: rgba(255,255,255,0.18);
+}
+
+.halo-scheme-green-light .halo-qs-device {
+    background-color: #f2fcee;
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-qs-device-icon {
+    background-color: #e1ebdd;
+}
+
+.halo-scheme-green-light .halo-qs-device-name,
+.halo-scheme-green-light .halo-qs-device-percent {
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-qs-device-note {
+    color: #3e4a3d;
+}
+
+.halo-scheme-green-light .halo-qs-device.halo-on {
+    background-color: #006e2e;
+    color: #ffffff;
+}
+
+.halo-scheme-green-light .halo-qs-device.halo-on .halo-qs-device-icon {
+    background-color: #ffffff;
+    color: #006e2e;
+}
+
+.halo-scheme-green-light .halo-qs-device.halo-on .halo-qs-device-name,
+.halo-scheme-green-light .halo-qs-device.halo-on .halo-qs-device-percent,
+.halo-scheme-green-light .halo-qs-device.halo-on .halo-qs-device-note {
+    color: #ffffff;
+}
+
+.halo-scheme-green-light .halo-qs-device-percent.halo-low {
+    color: #ba1a1a;
+}
+
+.halo-scheme-green-light .halo-qs-wide-button {
+    background-color: #c1ecd4;
+    color: #284e3c;
+}
+
+.halo-scheme-green-light .halo-qs-badge-number {
+    color: #ffffff;
+}
+
+.halo-scheme-green-light .halo-qs-segment {
+    background-color: #f2fcee;
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-qs-card .halo-qs-segment {
+    background-color: #e1ebdd;
+}
+
+.halo-scheme-green-light .halo-qs-segment.halo-chosen,
+.halo-scheme-green-light .halo-qs-card .halo-qs-segment.halo-chosen {
+    background-color: #67ff8d;
+    color: #005321;
+}
+
+.halo-scheme-green-light .halo-qs-layout {
+    background-color: #e1ebdd;
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-qs-layout.halo-chosen {
+    background-color: #67ff8d;
+}
+
+.halo-scheme-green-light .halo-qs-layout.halo-chosen .halo-qs-layout-name {
+    color: #005321;
+}
+
+.halo-scheme-green-light .halo-qs-layout-picture {
+    background-color: #67ff8d;
+}
+
+.halo-scheme-green-light .halo-qs-layout-spot {
+    background-color: #006e2e;
+}
+
+.halo-scheme-green-light .halo-qs-warning {
+    background-color: #ffdad6;
+    color: #93000a;
+}
+
+.halo-scheme-green-light .halo-qs-step,
+.halo-scheme-green-light .halo-qs-tile-item {
+    background-color: #e1ebdd;
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-qs-tile-item.halo-dragging {
+    background-color: #dbe5d7;
+}
+
+.halo-scheme-green-light .halo-qs-tile-item.halo-hidden .halo-qs-row-title,
+.halo-scheme-green-light .halo-qs-tile-item.halo-hidden .halo-qs-row-icon {
+    color: #6e7a6c;
+}
+
+.halo-scheme-green-light .halo-qs-hosted .popup-menu-item {
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-qs-hosted .popup-menu-item:hover,
+.halo-scheme-green-light .halo-qs-hosted .popup-menu-item:focus {
+    background-color: #e1ebdd;
+}
+
 .halo-scheme-green-dark .halo-frame {
     background-color: #192219;
 }
@@ -745,6 +2551,298 @@
 .halo-scheme-green-dark .halo-low,
 .halo-scheme-green-dark .halo-status-text.halo-low {
     color: #ffb4ab;
+}
+
+/* Quick settings */
+
+.halo-scheme-green-dark .halo-qs {
+    background-color: #192219;
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-qs-round {
+    background-color: #232c23;
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-qs-round:hover {
+    background-color: #323c32;
+}
+
+.halo-scheme-green-dark .halo-qs-round.halo-on {
+    background-color: #005321;
+    color: #67ff8d;
+}
+
+.halo-scheme-green-dark .halo-qs-round.halo-qs-power {
+    background-color: #005045;
+    color: #aaf0df;
+}
+
+.halo-scheme-green-dark .halo-qs-big,
+.halo-scheme-green-dark .halo-qs-lasts,
+.halo-scheme-green-dark .halo-qs-row-title {
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-qs-small,
+.halo-scheme-green-dark .halo-qs-caption,
+.halo-scheme-green-dark .halo-qs-row-note,
+.halo-scheme-green-dark .halo-qs-row-icon,
+.halo-scheme-green-dark .halo-qs-row-end,
+.halo-scheme-green-dark .halo-qs-eye,
+.halo-scheme-green-dark .halo-qs-handle,
+.halo-scheme-green-dark .halo-tile-note {
+    color: #bdcaba;
+}
+
+.halo-scheme-green-dark .halo-qs-card,
+.halo-scheme-green-dark .halo-qs-card-row {
+    background-color: #232c23;
+}
+
+.halo-scheme-green-dark .halo-tile {
+    background-color: #232c23;
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-tile:hover {
+    background-color: #323c32;
+}
+
+.halo-scheme-green-dark .halo-tile-icon {
+    background-color: #323c32;
+}
+
+.halo-scheme-green-dark .halo-tile-chevron:hover {
+    background-color: rgba(219,229,215,0.1);
+}
+
+.halo-scheme-green-dark .halo-tile.halo-on {
+    background-color: #005321;
+    color: #67ff8d;
+}
+
+.halo-scheme-green-dark .halo-tile.halo-on .halo-tile-icon {
+    background-color: rgba(103,255,141,0.18);
+}
+
+.halo-scheme-green-dark .halo-tile.halo-on .halo-tile-note,
+.halo-scheme-green-dark .halo-tile.halo-on .halo-tile-chevron {
+    color: #67ff8d;
+}
+
+.halo-scheme-green-dark .halo-tile.halo-on .halo-tile-chevron:hover {
+    background-color: rgba(103,255,141,0.18);
+}
+
+.halo-scheme-green-dark .halo-qs-art {
+    background-color: #005045;
+    color: #aaf0df;
+}
+
+.halo-scheme-green-dark .halo-qs-track {
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-qs-artist {
+    color: #bdcaba;
+}
+
+.halo-scheme-green-dark .halo-qs-media-button {
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-qs-media-button:hover {
+    background-color: #323c32;
+}
+
+.halo-scheme-green-dark .halo-qs-media-button.halo-qs-play {
+    background-color: #00e468;
+    color: #003915;
+}
+
+.halo-scheme-green-dark .halo-qs-background-head {
+    background-color: #232c23;
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-qs-background-head:hover,
+.halo-scheme-green-dark .halo-qs-background-app:hover {
+    background-color: #323c32;
+}
+
+.halo-scheme-green-dark .halo-qs-background-app {
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-qs-quit:hover {
+    background-color: #232c23;
+}
+
+.halo-scheme-green-dark .halo-qs-row {
+    background-color: #232c23;
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-qs-row:hover {
+    background-color: #323c32;
+}
+
+.halo-scheme-green-dark .halo-qs-card .halo-qs-row {
+    background-color: transparent;
+}
+
+.halo-scheme-green-dark .halo-qs-card .halo-qs-row:hover {
+    background-color: #323c32;
+}
+
+.halo-scheme-green-dark .halo-qs-row.halo-chosen,
+.halo-scheme-green-dark .halo-qs-row.halo-chosen:hover {
+    background-color: #00e468;
+    color: #003915;
+}
+
+.halo-scheme-green-dark .halo-qs-row.halo-chosen .halo-qs-row-title,
+.halo-scheme-green-dark .halo-qs-row.halo-chosen .halo-qs-row-note,
+.halo-scheme-green-dark .halo-qs-row.halo-chosen .halo-qs-row-icon,
+.halo-scheme-green-dark .halo-qs-row.halo-chosen .halo-qs-row-end {
+    color: #003915;
+}
+
+.halo-scheme-green-dark .halo-qs-link {
+    color: #00e468;
+}
+
+.halo-scheme-green-dark .halo-qs-connected {
+    background-color: #005321;
+    color: #67ff8d;
+}
+
+.halo-scheme-green-dark .halo-qs-connected-title,
+.halo-scheme-green-dark .halo-qs-connected-note {
+    color: #67ff8d;
+}
+
+.halo-scheme-green-dark .halo-qs-connected-icon {
+    background-color: #67ff8d;
+    color: #005321;
+}
+
+.halo-scheme-green-dark .halo-qs-connected-gear:hover {
+    background-color: rgba(103,255,141,0.18);
+}
+
+.halo-scheme-green-dark .halo-qs-device {
+    background-color: #232c23;
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-qs-device-icon {
+    background-color: #323c32;
+}
+
+.halo-scheme-green-dark .halo-qs-device-name,
+.halo-scheme-green-dark .halo-qs-device-percent {
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-qs-device-note {
+    color: #bdcaba;
+}
+
+.halo-scheme-green-dark .halo-qs-device.halo-on {
+    background-color: #005321;
+    color: #67ff8d;
+}
+
+.halo-scheme-green-dark .halo-qs-device.halo-on .halo-qs-device-icon {
+    background-color: #67ff8d;
+    color: #005321;
+}
+
+.halo-scheme-green-dark .halo-qs-device.halo-on .halo-qs-device-name,
+.halo-scheme-green-dark .halo-qs-device.halo-on .halo-qs-device-percent,
+.halo-scheme-green-dark .halo-qs-device.halo-on .halo-qs-device-note {
+    color: #67ff8d;
+}
+
+.halo-scheme-green-dark .halo-qs-device-percent.halo-low {
+    color: #ffb4ab;
+}
+
+.halo-scheme-green-dark .halo-qs-wide-button {
+    background-color: #284e3c;
+    color: #c1ecd4;
+}
+
+.halo-scheme-green-dark .halo-qs-badge-number {
+    color: #67ff8d;
+}
+
+.halo-scheme-green-dark .halo-qs-segment {
+    background-color: #232c23;
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-qs-card .halo-qs-segment {
+    background-color: #323c32;
+}
+
+.halo-scheme-green-dark .halo-qs-segment.halo-chosen,
+.halo-scheme-green-dark .halo-qs-card .halo-qs-segment.halo-chosen {
+    background-color: #00e468;
+    color: #003915;
+}
+
+.halo-scheme-green-dark .halo-qs-layout {
+    background-color: #323c32;
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-qs-layout.halo-chosen {
+    background-color: #00e468;
+}
+
+.halo-scheme-green-dark .halo-qs-layout.halo-chosen .halo-qs-layout-name {
+    color: #003915;
+}
+
+.halo-scheme-green-dark .halo-qs-layout-picture {
+    background-color: #005321;
+}
+
+.halo-scheme-green-dark .halo-qs-layout-spot {
+    background-color: #00e468;
+}
+
+.halo-scheme-green-dark .halo-qs-warning {
+    background-color: #93000a;
+    color: #ffdad6;
+}
+
+.halo-scheme-green-dark .halo-qs-step,
+.halo-scheme-green-dark .halo-qs-tile-item {
+    background-color: #323c32;
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-qs-tile-item.halo-dragging {
+    background-color: #2e372e;
+}
+
+.halo-scheme-green-dark .halo-qs-tile-item.halo-hidden .halo-qs-row-title,
+.halo-scheme-green-dark .halo-qs-tile-item.halo-hidden .halo-qs-row-icon {
+    color: #879485;
+}
+
+.halo-scheme-green-dark .halo-qs-hosted .popup-menu-item {
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-qs-hosted .popup-menu-item:hover,
+.halo-scheme-green-dark .halo-qs-hosted .popup-menu-item:focus {
+    background-color: #323c32;
 }
 
 .halo-scheme-teal-light .halo-frame {
@@ -858,6 +2956,298 @@
     color: #ba1a1a;
 }
 
+/* Quick settings */
+
+.halo-scheme-teal-light .halo-qs {
+    background-color: #e8f7f2;
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-qs-round {
+    background-color: #eefdf8;
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-qs-round:hover {
+    background-color: #ddebe7;
+}
+
+.halo-scheme-teal-light .halo-qs-round.halo-on {
+    background-color: #006b5f;
+    color: #ffffff;
+}
+
+.halo-scheme-teal-light .halo-qs-round.halo-qs-power {
+    background-color: #afecff;
+    color: #004e5d;
+}
+
+.halo-scheme-teal-light .halo-qs-big,
+.halo-scheme-teal-light .halo-qs-lasts,
+.halo-scheme-teal-light .halo-qs-row-title {
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-qs-small,
+.halo-scheme-teal-light .halo-qs-caption,
+.halo-scheme-teal-light .halo-qs-row-note,
+.halo-scheme-teal-light .halo-qs-row-icon,
+.halo-scheme-teal-light .halo-qs-row-end,
+.halo-scheme-teal-light .halo-qs-eye,
+.halo-scheme-teal-light .halo-qs-handle,
+.halo-scheme-teal-light .halo-tile-note {
+    color: #394a46;
+}
+
+.halo-scheme-teal-light .halo-qs-card,
+.halo-scheme-teal-light .halo-qs-card-row {
+    background-color: #eefdf8;
+}
+
+.halo-scheme-teal-light .halo-tile {
+    background-color: #eefdf8;
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-tile:hover {
+    background-color: #ddebe7;
+}
+
+.halo-scheme-teal-light .halo-tile-icon {
+    background-color: #ddebe7;
+}
+
+.halo-scheme-teal-light .halo-tile-chevron:hover {
+    background-color: rgba(17,30,27,0.1);
+}
+
+.halo-scheme-teal-light .halo-tile.halo-on {
+    background-color: #006b5f;
+    color: #ffffff;
+}
+
+.halo-scheme-teal-light .halo-tile.halo-on .halo-tile-icon {
+    background-color: rgba(255,255,255,0.18);
+}
+
+.halo-scheme-teal-light .halo-tile.halo-on .halo-tile-note,
+.halo-scheme-teal-light .halo-tile.halo-on .halo-tile-chevron {
+    color: #ffffff;
+}
+
+.halo-scheme-teal-light .halo-tile.halo-on .halo-tile-chevron:hover {
+    background-color: rgba(255,255,255,0.18);
+}
+
+.halo-scheme-teal-light .halo-qs-art {
+    background-color: #afecff;
+    color: #004e5d;
+}
+
+.halo-scheme-teal-light .halo-qs-track {
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-qs-artist {
+    color: #394a46;
+}
+
+.halo-scheme-teal-light .halo-qs-media-button {
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-qs-media-button:hover {
+    background-color: #ddebe7;
+}
+
+.halo-scheme-teal-light .halo-qs-media-button.halo-qs-play {
+    background-color: #006b5f;
+    color: #ffffff;
+}
+
+.halo-scheme-teal-light .halo-qs-background-head {
+    background-color: #eefdf8;
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-qs-background-head:hover,
+.halo-scheme-teal-light .halo-qs-background-app:hover {
+    background-color: #ddebe7;
+}
+
+.halo-scheme-teal-light .halo-qs-background-app {
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-qs-quit:hover {
+    background-color: #ddebe7;
+}
+
+.halo-scheme-teal-light .halo-qs-row {
+    background-color: #eefdf8;
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-qs-row:hover {
+    background-color: #ddebe7;
+}
+
+.halo-scheme-teal-light .halo-qs-card .halo-qs-row {
+    background-color: transparent;
+}
+
+.halo-scheme-teal-light .halo-qs-card .halo-qs-row:hover {
+    background-color: #ddebe7;
+}
+
+.halo-scheme-teal-light .halo-qs-row.halo-chosen,
+.halo-scheme-teal-light .halo-qs-row.halo-chosen:hover {
+    background-color: #00fee3;
+    color: #005047;
+}
+
+.halo-scheme-teal-light .halo-qs-row.halo-chosen .halo-qs-row-title,
+.halo-scheme-teal-light .halo-qs-row.halo-chosen .halo-qs-row-note,
+.halo-scheme-teal-light .halo-qs-row.halo-chosen .halo-qs-row-icon,
+.halo-scheme-teal-light .halo-qs-row.halo-chosen .halo-qs-row-end {
+    color: #005047;
+}
+
+.halo-scheme-teal-light .halo-qs-link {
+    color: #006b5f;
+}
+
+.halo-scheme-teal-light .halo-qs-connected {
+    background-color: #006b5f;
+    color: #ffffff;
+}
+
+.halo-scheme-teal-light .halo-qs-connected-title,
+.halo-scheme-teal-light .halo-qs-connected-note {
+    color: #ffffff;
+}
+
+.halo-scheme-teal-light .halo-qs-connected-icon {
+    background-color: #ffffff;
+    color: #006b5f;
+}
+
+.halo-scheme-teal-light .halo-qs-connected-gear:hover {
+    background-color: rgba(255,255,255,0.18);
+}
+
+.halo-scheme-teal-light .halo-qs-device {
+    background-color: #eefdf8;
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-qs-device-icon {
+    background-color: #ddebe7;
+}
+
+.halo-scheme-teal-light .halo-qs-device-name,
+.halo-scheme-teal-light .halo-qs-device-percent {
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-qs-device-note {
+    color: #394a46;
+}
+
+.halo-scheme-teal-light .halo-qs-device.halo-on {
+    background-color: #006b5f;
+    color: #ffffff;
+}
+
+.halo-scheme-teal-light .halo-qs-device.halo-on .halo-qs-device-icon {
+    background-color: #ffffff;
+    color: #006b5f;
+}
+
+.halo-scheme-teal-light .halo-qs-device.halo-on .halo-qs-device-name,
+.halo-scheme-teal-light .halo-qs-device.halo-on .halo-qs-device-percent,
+.halo-scheme-teal-light .halo-qs-device.halo-on .halo-qs-device-note {
+    color: #ffffff;
+}
+
+.halo-scheme-teal-light .halo-qs-device-percent.halo-low {
+    color: #ba1a1a;
+}
+
+.halo-scheme-teal-light .halo-qs-wide-button {
+    background-color: #bcebee;
+    color: #1e4d50;
+}
+
+.halo-scheme-teal-light .halo-qs-badge-number {
+    color: #ffffff;
+}
+
+.halo-scheme-teal-light .halo-qs-segment {
+    background-color: #eefdf8;
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-qs-card .halo-qs-segment {
+    background-color: #ddebe7;
+}
+
+.halo-scheme-teal-light .halo-qs-segment.halo-chosen,
+.halo-scheme-teal-light .halo-qs-card .halo-qs-segment.halo-chosen {
+    background-color: #00fee3;
+    color: #005047;
+}
+
+.halo-scheme-teal-light .halo-qs-layout {
+    background-color: #ddebe7;
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-qs-layout.halo-chosen {
+    background-color: #00fee3;
+}
+
+.halo-scheme-teal-light .halo-qs-layout.halo-chosen .halo-qs-layout-name {
+    color: #005047;
+}
+
+.halo-scheme-teal-light .halo-qs-layout-picture {
+    background-color: #00fee3;
+}
+
+.halo-scheme-teal-light .halo-qs-layout-spot {
+    background-color: #006b5f;
+}
+
+.halo-scheme-teal-light .halo-qs-warning {
+    background-color: #ffdad6;
+    color: #93000a;
+}
+
+.halo-scheme-teal-light .halo-qs-step,
+.halo-scheme-teal-light .halo-qs-tile-item {
+    background-color: #ddebe7;
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-qs-tile-item.halo-dragging {
+    background-color: #d7e6e1;
+}
+
+.halo-scheme-teal-light .halo-qs-tile-item.halo-hidden .halo-qs-row-title,
+.halo-scheme-teal-light .halo-qs-tile-item.halo-hidden .halo-qs-row-icon {
+    color: #697b76;
+}
+
+.halo-scheme-teal-light .halo-qs-hosted .popup-menu-item {
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-qs-hosted .popup-menu-item:hover,
+.halo-scheme-teal-light .halo-qs-hosted .popup-menu-item:focus {
+    background-color: #ddebe7;
+}
+
 .halo-scheme-teal-dark .halo-frame {
     background-color: #15221f;
 }
@@ -967,6 +3357,298 @@
 .halo-scheme-teal-dark .halo-low,
 .halo-scheme-teal-dark .halo-status-text.halo-low {
     color: #ffb4ab;
+}
+
+/* Quick settings */
+
+.halo-scheme-teal-dark .halo-qs {
+    background-color: #15221f;
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-qs-round {
+    background-color: #202c2a;
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-qs-round:hover {
+    background-color: #2f3c39;
+}
+
+.halo-scheme-teal-dark .halo-qs-round.halo-on {
+    background-color: #005047;
+    color: #00fee3;
+}
+
+.halo-scheme-teal-dark .halo-qs-round.halo-qs-power {
+    background-color: #004e5d;
+    color: #afecff;
+}
+
+.halo-scheme-teal-dark .halo-qs-big,
+.halo-scheme-teal-dark .halo-qs-lasts,
+.halo-scheme-teal-dark .halo-qs-row-title {
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-qs-small,
+.halo-scheme-teal-dark .halo-qs-caption,
+.halo-scheme-teal-dark .halo-qs-row-note,
+.halo-scheme-teal-dark .halo-qs-row-icon,
+.halo-scheme-teal-dark .halo-qs-row-end,
+.halo-scheme-teal-dark .halo-qs-eye,
+.halo-scheme-teal-dark .halo-qs-handle,
+.halo-scheme-teal-dark .halo-tile-note {
+    color: #b8cac5;
+}
+
+.halo-scheme-teal-dark .halo-qs-card,
+.halo-scheme-teal-dark .halo-qs-card-row {
+    background-color: #202c2a;
+}
+
+.halo-scheme-teal-dark .halo-tile {
+    background-color: #202c2a;
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-tile:hover {
+    background-color: #2f3c39;
+}
+
+.halo-scheme-teal-dark .halo-tile-icon {
+    background-color: #2f3c39;
+}
+
+.halo-scheme-teal-dark .halo-tile-chevron:hover {
+    background-color: rgba(215,230,225,0.1);
+}
+
+.halo-scheme-teal-dark .halo-tile.halo-on {
+    background-color: #005047;
+    color: #00fee3;
+}
+
+.halo-scheme-teal-dark .halo-tile.halo-on .halo-tile-icon {
+    background-color: rgba(0,254,227,0.18);
+}
+
+.halo-scheme-teal-dark .halo-tile.halo-on .halo-tile-note,
+.halo-scheme-teal-dark .halo-tile.halo-on .halo-tile-chevron {
+    color: #00fee3;
+}
+
+.halo-scheme-teal-dark .halo-tile.halo-on .halo-tile-chevron:hover {
+    background-color: rgba(0,254,227,0.18);
+}
+
+.halo-scheme-teal-dark .halo-qs-art {
+    background-color: #004e5d;
+    color: #afecff;
+}
+
+.halo-scheme-teal-dark .halo-qs-track {
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-qs-artist {
+    color: #b8cac5;
+}
+
+.halo-scheme-teal-dark .halo-qs-media-button {
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-qs-media-button:hover {
+    background-color: #2f3c39;
+}
+
+.halo-scheme-teal-dark .halo-qs-media-button.halo-qs-play {
+    background-color: #00dfc7;
+    color: #003731;
+}
+
+.halo-scheme-teal-dark .halo-qs-background-head {
+    background-color: #202c2a;
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-qs-background-head:hover,
+.halo-scheme-teal-dark .halo-qs-background-app:hover {
+    background-color: #2f3c39;
+}
+
+.halo-scheme-teal-dark .halo-qs-background-app {
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-qs-quit:hover {
+    background-color: #202c2a;
+}
+
+.halo-scheme-teal-dark .halo-qs-row {
+    background-color: #202c2a;
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-qs-row:hover {
+    background-color: #2f3c39;
+}
+
+.halo-scheme-teal-dark .halo-qs-card .halo-qs-row {
+    background-color: transparent;
+}
+
+.halo-scheme-teal-dark .halo-qs-card .halo-qs-row:hover {
+    background-color: #2f3c39;
+}
+
+.halo-scheme-teal-dark .halo-qs-row.halo-chosen,
+.halo-scheme-teal-dark .halo-qs-row.halo-chosen:hover {
+    background-color: #00dfc7;
+    color: #003731;
+}
+
+.halo-scheme-teal-dark .halo-qs-row.halo-chosen .halo-qs-row-title,
+.halo-scheme-teal-dark .halo-qs-row.halo-chosen .halo-qs-row-note,
+.halo-scheme-teal-dark .halo-qs-row.halo-chosen .halo-qs-row-icon,
+.halo-scheme-teal-dark .halo-qs-row.halo-chosen .halo-qs-row-end {
+    color: #003731;
+}
+
+.halo-scheme-teal-dark .halo-qs-link {
+    color: #00dfc7;
+}
+
+.halo-scheme-teal-dark .halo-qs-connected {
+    background-color: #005047;
+    color: #00fee3;
+}
+
+.halo-scheme-teal-dark .halo-qs-connected-title,
+.halo-scheme-teal-dark .halo-qs-connected-note {
+    color: #00fee3;
+}
+
+.halo-scheme-teal-dark .halo-qs-connected-icon {
+    background-color: #00fee3;
+    color: #005047;
+}
+
+.halo-scheme-teal-dark .halo-qs-connected-gear:hover {
+    background-color: rgba(0,254,227,0.18);
+}
+
+.halo-scheme-teal-dark .halo-qs-device {
+    background-color: #202c2a;
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-qs-device-icon {
+    background-color: #2f3c39;
+}
+
+.halo-scheme-teal-dark .halo-qs-device-name,
+.halo-scheme-teal-dark .halo-qs-device-percent {
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-qs-device-note {
+    color: #b8cac5;
+}
+
+.halo-scheme-teal-dark .halo-qs-device.halo-on {
+    background-color: #005047;
+    color: #00fee3;
+}
+
+.halo-scheme-teal-dark .halo-qs-device.halo-on .halo-qs-device-icon {
+    background-color: #00fee3;
+    color: #005047;
+}
+
+.halo-scheme-teal-dark .halo-qs-device.halo-on .halo-qs-device-name,
+.halo-scheme-teal-dark .halo-qs-device.halo-on .halo-qs-device-percent,
+.halo-scheme-teal-dark .halo-qs-device.halo-on .halo-qs-device-note {
+    color: #00fee3;
+}
+
+.halo-scheme-teal-dark .halo-qs-device-percent.halo-low {
+    color: #ffb4ab;
+}
+
+.halo-scheme-teal-dark .halo-qs-wide-button {
+    background-color: #1e4d50;
+    color: #bcebee;
+}
+
+.halo-scheme-teal-dark .halo-qs-badge-number {
+    color: #00fee3;
+}
+
+.halo-scheme-teal-dark .halo-qs-segment {
+    background-color: #202c2a;
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-qs-card .halo-qs-segment {
+    background-color: #2f3c39;
+}
+
+.halo-scheme-teal-dark .halo-qs-segment.halo-chosen,
+.halo-scheme-teal-dark .halo-qs-card .halo-qs-segment.halo-chosen {
+    background-color: #00dfc7;
+    color: #003731;
+}
+
+.halo-scheme-teal-dark .halo-qs-layout {
+    background-color: #2f3c39;
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-qs-layout.halo-chosen {
+    background-color: #00dfc7;
+}
+
+.halo-scheme-teal-dark .halo-qs-layout.halo-chosen .halo-qs-layout-name {
+    color: #003731;
+}
+
+.halo-scheme-teal-dark .halo-qs-layout-picture {
+    background-color: #005047;
+}
+
+.halo-scheme-teal-dark .halo-qs-layout-spot {
+    background-color: #00dfc7;
+}
+
+.halo-scheme-teal-dark .halo-qs-warning {
+    background-color: #93000a;
+    color: #ffdad6;
+}
+
+.halo-scheme-teal-dark .halo-qs-step,
+.halo-scheme-teal-dark .halo-qs-tile-item {
+    background-color: #2f3c39;
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-qs-tile-item.halo-dragging {
+    background-color: #2a3734;
+}
+
+.halo-scheme-teal-dark .halo-qs-tile-item.halo-hidden .halo-qs-row-title,
+.halo-scheme-teal-dark .halo-qs-tile-item.halo-hidden .halo-qs-row-icon {
+    color: #839490;
+}
+
+.halo-scheme-teal-dark .halo-qs-hosted .popup-menu-item {
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-qs-hosted .popup-menu-item:hover,
+.halo-scheme-teal-dark .halo-qs-hosted .popup-menu-item:focus {
+    background-color: #2f3c39;
 }
 
 .halo-scheme-orange-light .halo-frame {
@@ -1080,6 +3762,298 @@
     color: #ba1a1a;
 }
 
+/* Quick settings */
+
+.halo-scheme-orange-light .halo-qs {
+    background-color: #fff1ed;
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-qs-round {
+    background-color: #fff8f6;
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-qs-round:hover {
+    background-color: #ffe2da;
+}
+
+.halo-scheme-orange-light .halo-qs-round.halo-on {
+    background-color: #ab3500;
+    color: #ffffff;
+}
+
+.halo-scheme-orange-light .halo-qs-round.halo-qs-power {
+    background-color: #ffddb6;
+    color: #633f06;
+}
+
+.halo-scheme-orange-light .halo-qs-big,
+.halo-scheme-orange-light .halo-qs-lasts,
+.halo-scheme-orange-light .halo-qs-row-title {
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-qs-small,
+.halo-scheme-orange-light .halo-qs-caption,
+.halo-scheme-orange-light .halo-qs-row-note,
+.halo-scheme-orange-light .halo-qs-row-icon,
+.halo-scheme-orange-light .halo-qs-row-end,
+.halo-scheme-orange-light .halo-qs-eye,
+.halo-scheme-orange-light .halo-qs-handle,
+.halo-scheme-orange-light .halo-tile-note {
+    color: #58423a;
+}
+
+.halo-scheme-orange-light .halo-qs-card,
+.halo-scheme-orange-light .halo-qs-card-row {
+    background-color: #fff8f6;
+}
+
+.halo-scheme-orange-light .halo-tile {
+    background-color: #fff8f6;
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-tile:hover {
+    background-color: #ffe2da;
+}
+
+.halo-scheme-orange-light .halo-tile-icon {
+    background-color: #ffe2da;
+}
+
+.halo-scheme-orange-light .halo-tile-chevron:hover {
+    background-color: rgba(39,24,19,0.1);
+}
+
+.halo-scheme-orange-light .halo-tile.halo-on {
+    background-color: #ab3500;
+    color: #ffffff;
+}
+
+.halo-scheme-orange-light .halo-tile.halo-on .halo-tile-icon {
+    background-color: rgba(255,255,255,0.18);
+}
+
+.halo-scheme-orange-light .halo-tile.halo-on .halo-tile-note,
+.halo-scheme-orange-light .halo-tile.halo-on .halo-tile-chevron {
+    color: #ffffff;
+}
+
+.halo-scheme-orange-light .halo-tile.halo-on .halo-tile-chevron:hover {
+    background-color: rgba(255,255,255,0.18);
+}
+
+.halo-scheme-orange-light .halo-qs-art {
+    background-color: #ffddb6;
+    color: #633f06;
+}
+
+.halo-scheme-orange-light .halo-qs-track {
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-qs-artist {
+    color: #58423a;
+}
+
+.halo-scheme-orange-light .halo-qs-media-button {
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-qs-media-button:hover {
+    background-color: #ffe2da;
+}
+
+.halo-scheme-orange-light .halo-qs-media-button.halo-qs-play {
+    background-color: #ab3500;
+    color: #ffffff;
+}
+
+.halo-scheme-orange-light .halo-qs-background-head {
+    background-color: #fff8f6;
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-qs-background-head:hover,
+.halo-scheme-orange-light .halo-qs-background-app:hover {
+    background-color: #ffe2da;
+}
+
+.halo-scheme-orange-light .halo-qs-background-app {
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-qs-quit:hover {
+    background-color: #ffe2da;
+}
+
+.halo-scheme-orange-light .halo-qs-row {
+    background-color: #fff8f6;
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-qs-row:hover {
+    background-color: #ffe2da;
+}
+
+.halo-scheme-orange-light .halo-qs-card .halo-qs-row {
+    background-color: transparent;
+}
+
+.halo-scheme-orange-light .halo-qs-card .halo-qs-row:hover {
+    background-color: #ffe2da;
+}
+
+.halo-scheme-orange-light .halo-qs-row.halo-chosen,
+.halo-scheme-orange-light .halo-qs-row.halo-chosen:hover {
+    background-color: #ffdbd0;
+    color: #832700;
+}
+
+.halo-scheme-orange-light .halo-qs-row.halo-chosen .halo-qs-row-title,
+.halo-scheme-orange-light .halo-qs-row.halo-chosen .halo-qs-row-note,
+.halo-scheme-orange-light .halo-qs-row.halo-chosen .halo-qs-row-icon,
+.halo-scheme-orange-light .halo-qs-row.halo-chosen .halo-qs-row-end {
+    color: #832700;
+}
+
+.halo-scheme-orange-light .halo-qs-link {
+    color: #ab3500;
+}
+
+.halo-scheme-orange-light .halo-qs-connected {
+    background-color: #ab3500;
+    color: #ffffff;
+}
+
+.halo-scheme-orange-light .halo-qs-connected-title,
+.halo-scheme-orange-light .halo-qs-connected-note {
+    color: #ffffff;
+}
+
+.halo-scheme-orange-light .halo-qs-connected-icon {
+    background-color: #ffffff;
+    color: #ab3500;
+}
+
+.halo-scheme-orange-light .halo-qs-connected-gear:hover {
+    background-color: rgba(255,255,255,0.18);
+}
+
+.halo-scheme-orange-light .halo-qs-device {
+    background-color: #fff8f6;
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-qs-device-icon {
+    background-color: #ffe2da;
+}
+
+.halo-scheme-orange-light .halo-qs-device-name,
+.halo-scheme-orange-light .halo-qs-device-percent {
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-qs-device-note {
+    color: #58423a;
+}
+
+.halo-scheme-orange-light .halo-qs-device.halo-on {
+    background-color: #ab3500;
+    color: #ffffff;
+}
+
+.halo-scheme-orange-light .halo-qs-device.halo-on .halo-qs-device-icon {
+    background-color: #ffffff;
+    color: #ab3500;
+}
+
+.halo-scheme-orange-light .halo-qs-device.halo-on .halo-qs-device-name,
+.halo-scheme-orange-light .halo-qs-device.halo-on .halo-qs-device-percent,
+.halo-scheme-orange-light .halo-qs-device.halo-on .halo-qs-device-note {
+    color: #ffffff;
+}
+
+.halo-scheme-orange-light .halo-qs-device-percent.halo-low {
+    color: #ba1a1a;
+}
+
+.halo-scheme-orange-light .halo-qs-wide-button {
+    background-color: #ffdcc5;
+    color: #633e22;
+}
+
+.halo-scheme-orange-light .halo-qs-badge-number {
+    color: #ffffff;
+}
+
+.halo-scheme-orange-light .halo-qs-segment {
+    background-color: #fff8f6;
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-qs-card .halo-qs-segment {
+    background-color: #ffe2da;
+}
+
+.halo-scheme-orange-light .halo-qs-segment.halo-chosen,
+.halo-scheme-orange-light .halo-qs-card .halo-qs-segment.halo-chosen {
+    background-color: #ffdbd0;
+    color: #832700;
+}
+
+.halo-scheme-orange-light .halo-qs-layout {
+    background-color: #ffe2da;
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-qs-layout.halo-chosen {
+    background-color: #ffdbd0;
+}
+
+.halo-scheme-orange-light .halo-qs-layout.halo-chosen .halo-qs-layout-name {
+    color: #832700;
+}
+
+.halo-scheme-orange-light .halo-qs-layout-picture {
+    background-color: #ffdbd0;
+}
+
+.halo-scheme-orange-light .halo-qs-layout-spot {
+    background-color: #ab3500;
+}
+
+.halo-scheme-orange-light .halo-qs-warning {
+    background-color: #ffdad6;
+    color: #93000a;
+}
+
+.halo-scheme-orange-light .halo-qs-step,
+.halo-scheme-orange-light .halo-qs-tile-item {
+    background-color: #ffe2da;
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-qs-tile-item.halo-dragging {
+    background-color: #f9ddd4;
+}
+
+.halo-scheme-orange-light .halo-qs-tile-item.halo-hidden .halo-qs-row-title,
+.halo-scheme-orange-light .halo-qs-tile-item.halo-hidden .halo-qs-row-icon {
+    color: #8c7169;
+}
+
+.halo-scheme-orange-light .halo-qs-hosted .popup-menu-item {
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-qs-hosted .popup-menu-item:hover,
+.halo-scheme-orange-light .halo-qs-hosted .popup-menu-item:focus {
+    background-color: #ffe2da;
+}
+
 .halo-scheme-orange-dark .halo-frame {
     background-color: #2b1c17;
 }
@@ -1189,6 +4163,298 @@
 .halo-scheme-orange-dark .halo-low,
 .halo-scheme-orange-dark .halo-status-text.halo-low {
     color: #ffb4ab;
+}
+
+/* Quick settings */
+
+.halo-scheme-orange-dark .halo-qs {
+    background-color: #2b1c17;
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-qs-round {
+    background-color: #362621;
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-qs-round:hover {
+    background-color: #47352f;
+}
+
+.halo-scheme-orange-dark .halo-qs-round.halo-on {
+    background-color: #832700;
+    color: #ffdbd0;
+}
+
+.halo-scheme-orange-dark .halo-qs-round.halo-qs-power {
+    background-color: #633f06;
+    color: #ffddb6;
+}
+
+.halo-scheme-orange-dark .halo-qs-big,
+.halo-scheme-orange-dark .halo-qs-lasts,
+.halo-scheme-orange-dark .halo-qs-row-title {
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-qs-small,
+.halo-scheme-orange-dark .halo-qs-caption,
+.halo-scheme-orange-dark .halo-qs-row-note,
+.halo-scheme-orange-dark .halo-qs-row-icon,
+.halo-scheme-orange-dark .halo-qs-row-end,
+.halo-scheme-orange-dark .halo-qs-eye,
+.halo-scheme-orange-dark .halo-qs-handle,
+.halo-scheme-orange-dark .halo-tile-note {
+    color: #dfc0b6;
+}
+
+.halo-scheme-orange-dark .halo-qs-card,
+.halo-scheme-orange-dark .halo-qs-card-row {
+    background-color: #362621;
+}
+
+.halo-scheme-orange-dark .halo-tile {
+    background-color: #362621;
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-tile:hover {
+    background-color: #47352f;
+}
+
+.halo-scheme-orange-dark .halo-tile-icon {
+    background-color: #47352f;
+}
+
+.halo-scheme-orange-dark .halo-tile-chevron:hover {
+    background-color: rgba(249,221,212,0.1);
+}
+
+.halo-scheme-orange-dark .halo-tile.halo-on {
+    background-color: #832700;
+    color: #ffdbd0;
+}
+
+.halo-scheme-orange-dark .halo-tile.halo-on .halo-tile-icon {
+    background-color: rgba(255,219,208,0.18);
+}
+
+.halo-scheme-orange-dark .halo-tile.halo-on .halo-tile-note,
+.halo-scheme-orange-dark .halo-tile.halo-on .halo-tile-chevron {
+    color: #ffdbd0;
+}
+
+.halo-scheme-orange-dark .halo-tile.halo-on .halo-tile-chevron:hover {
+    background-color: rgba(255,219,208,0.18);
+}
+
+.halo-scheme-orange-dark .halo-qs-art {
+    background-color: #633f06;
+    color: #ffddb6;
+}
+
+.halo-scheme-orange-dark .halo-qs-track {
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-qs-artist {
+    color: #dfc0b6;
+}
+
+.halo-scheme-orange-dark .halo-qs-media-button {
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-qs-media-button:hover {
+    background-color: #47352f;
+}
+
+.halo-scheme-orange-dark .halo-qs-media-button.halo-qs-play {
+    background-color: #ffb59c;
+    color: #5c1900;
+}
+
+.halo-scheme-orange-dark .halo-qs-background-head {
+    background-color: #362621;
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-qs-background-head:hover,
+.halo-scheme-orange-dark .halo-qs-background-app:hover {
+    background-color: #47352f;
+}
+
+.halo-scheme-orange-dark .halo-qs-background-app {
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-qs-quit:hover {
+    background-color: #362621;
+}
+
+.halo-scheme-orange-dark .halo-qs-row {
+    background-color: #362621;
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-qs-row:hover {
+    background-color: #47352f;
+}
+
+.halo-scheme-orange-dark .halo-qs-card .halo-qs-row {
+    background-color: transparent;
+}
+
+.halo-scheme-orange-dark .halo-qs-card .halo-qs-row:hover {
+    background-color: #47352f;
+}
+
+.halo-scheme-orange-dark .halo-qs-row.halo-chosen,
+.halo-scheme-orange-dark .halo-qs-row.halo-chosen:hover {
+    background-color: #ffb59c;
+    color: #5c1900;
+}
+
+.halo-scheme-orange-dark .halo-qs-row.halo-chosen .halo-qs-row-title,
+.halo-scheme-orange-dark .halo-qs-row.halo-chosen .halo-qs-row-note,
+.halo-scheme-orange-dark .halo-qs-row.halo-chosen .halo-qs-row-icon,
+.halo-scheme-orange-dark .halo-qs-row.halo-chosen .halo-qs-row-end {
+    color: #5c1900;
+}
+
+.halo-scheme-orange-dark .halo-qs-link {
+    color: #ffb59c;
+}
+
+.halo-scheme-orange-dark .halo-qs-connected {
+    background-color: #832700;
+    color: #ffdbd0;
+}
+
+.halo-scheme-orange-dark .halo-qs-connected-title,
+.halo-scheme-orange-dark .halo-qs-connected-note {
+    color: #ffdbd0;
+}
+
+.halo-scheme-orange-dark .halo-qs-connected-icon {
+    background-color: #ffdbd0;
+    color: #832700;
+}
+
+.halo-scheme-orange-dark .halo-qs-connected-gear:hover {
+    background-color: rgba(255,219,208,0.18);
+}
+
+.halo-scheme-orange-dark .halo-qs-device {
+    background-color: #362621;
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-qs-device-icon {
+    background-color: #47352f;
+}
+
+.halo-scheme-orange-dark .halo-qs-device-name,
+.halo-scheme-orange-dark .halo-qs-device-percent {
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-qs-device-note {
+    color: #dfc0b6;
+}
+
+.halo-scheme-orange-dark .halo-qs-device.halo-on {
+    background-color: #832700;
+    color: #ffdbd0;
+}
+
+.halo-scheme-orange-dark .halo-qs-device.halo-on .halo-qs-device-icon {
+    background-color: #ffdbd0;
+    color: #832700;
+}
+
+.halo-scheme-orange-dark .halo-qs-device.halo-on .halo-qs-device-name,
+.halo-scheme-orange-dark .halo-qs-device.halo-on .halo-qs-device-percent,
+.halo-scheme-orange-dark .halo-qs-device.halo-on .halo-qs-device-note {
+    color: #ffdbd0;
+}
+
+.halo-scheme-orange-dark .halo-qs-device-percent.halo-low {
+    color: #ffb4ab;
+}
+
+.halo-scheme-orange-dark .halo-qs-wide-button {
+    background-color: #633e22;
+    color: #ffdcc5;
+}
+
+.halo-scheme-orange-dark .halo-qs-badge-number {
+    color: #ffdbd0;
+}
+
+.halo-scheme-orange-dark .halo-qs-segment {
+    background-color: #362621;
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-qs-card .halo-qs-segment {
+    background-color: #47352f;
+}
+
+.halo-scheme-orange-dark .halo-qs-segment.halo-chosen,
+.halo-scheme-orange-dark .halo-qs-card .halo-qs-segment.halo-chosen {
+    background-color: #ffb59c;
+    color: #5c1900;
+}
+
+.halo-scheme-orange-dark .halo-qs-layout {
+    background-color: #47352f;
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-qs-layout.halo-chosen {
+    background-color: #ffb59c;
+}
+
+.halo-scheme-orange-dark .halo-qs-layout.halo-chosen .halo-qs-layout-name {
+    color: #5c1900;
+}
+
+.halo-scheme-orange-dark .halo-qs-layout-picture {
+    background-color: #832700;
+}
+
+.halo-scheme-orange-dark .halo-qs-layout-spot {
+    background-color: #ffb59c;
+}
+
+.halo-scheme-orange-dark .halo-qs-warning {
+    background-color: #93000a;
+    color: #ffdad6;
+}
+
+.halo-scheme-orange-dark .halo-qs-step,
+.halo-scheme-orange-dark .halo-qs-tile-item {
+    background-color: #47352f;
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-qs-tile-item.halo-dragging {
+    background-color: #42312b;
+}
+
+.halo-scheme-orange-dark .halo-qs-tile-item.halo-hidden .halo-qs-row-title,
+.halo-scheme-orange-dark .halo-qs-tile-item.halo-hidden .halo-qs-row-icon {
+    color: #a78b82;
+}
+
+.halo-scheme-orange-dark .halo-qs-hosted .popup-menu-item {
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-qs-hosted .popup-menu-item:hover,
+.halo-scheme-orange-dark .halo-qs-hosted .popup-menu-item:focus {
+    background-color: #47352f;
 }
 
 .halo-scheme-salmon-light .halo-frame {
@@ -1302,6 +4568,298 @@
     color: #ba1a1a;
 }
 
+/* Quick settings */
+
+.halo-scheme-salmon-light .halo-qs {
+    background-color: #fff0ee;
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-qs-round {
+    background-color: #fff8f7;
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-qs-round:hover {
+    background-color: #ffe2de;
+}
+
+.halo-scheme-salmon-light .halo-qs-round.halo-on {
+    background-color: #c0000d;
+    color: #ffffff;
+}
+
+.halo-scheme-salmon-light .halo-qs-round.halo-qs-power {
+    background-color: #ffdcc1;
+    color: #683c0f;
+}
+
+.halo-scheme-salmon-light .halo-qs-big,
+.halo-scheme-salmon-light .halo-qs-lasts,
+.halo-scheme-salmon-light .halo-qs-row-title {
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-qs-small,
+.halo-scheme-salmon-light .halo-qs-caption,
+.halo-scheme-salmon-light .halo-qs-row-note,
+.halo-scheme-salmon-light .halo-qs-row-icon,
+.halo-scheme-salmon-light .halo-qs-row-end,
+.halo-scheme-salmon-light .halo-qs-eye,
+.halo-scheme-salmon-light .halo-qs-handle,
+.halo-scheme-salmon-light .halo-tile-note {
+    color: #58413e;
+}
+
+.halo-scheme-salmon-light .halo-qs-card,
+.halo-scheme-salmon-light .halo-qs-card-row {
+    background-color: #fff8f7;
+}
+
+.halo-scheme-salmon-light .halo-tile {
+    background-color: #fff8f7;
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-tile:hover {
+    background-color: #ffe2de;
+}
+
+.halo-scheme-salmon-light .halo-tile-icon {
+    background-color: #ffe2de;
+}
+
+.halo-scheme-salmon-light .halo-tile-chevron:hover {
+    background-color: rgba(39,24,22,0.1);
+}
+
+.halo-scheme-salmon-light .halo-tile.halo-on {
+    background-color: #c0000d;
+    color: #ffffff;
+}
+
+.halo-scheme-salmon-light .halo-tile.halo-on .halo-tile-icon {
+    background-color: rgba(255,255,255,0.18);
+}
+
+.halo-scheme-salmon-light .halo-tile.halo-on .halo-tile-note,
+.halo-scheme-salmon-light .halo-tile.halo-on .halo-tile-chevron {
+    color: #ffffff;
+}
+
+.halo-scheme-salmon-light .halo-tile.halo-on .halo-tile-chevron:hover {
+    background-color: rgba(255,255,255,0.18);
+}
+
+.halo-scheme-salmon-light .halo-qs-art {
+    background-color: #ffdcc1;
+    color: #683c0f;
+}
+
+.halo-scheme-salmon-light .halo-qs-track {
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-qs-artist {
+    color: #58413e;
+}
+
+.halo-scheme-salmon-light .halo-qs-media-button {
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-qs-media-button:hover {
+    background-color: #ffe2de;
+}
+
+.halo-scheme-salmon-light .halo-qs-media-button.halo-qs-play {
+    background-color: #c0000d;
+    color: #ffffff;
+}
+
+.halo-scheme-salmon-light .halo-qs-background-head {
+    background-color: #fff8f7;
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-qs-background-head:hover,
+.halo-scheme-salmon-light .halo-qs-background-app:hover {
+    background-color: #ffe2de;
+}
+
+.halo-scheme-salmon-light .halo-qs-background-app {
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-qs-quit:hover {
+    background-color: #ffe2de;
+}
+
+.halo-scheme-salmon-light .halo-qs-row {
+    background-color: #fff8f7;
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-qs-row:hover {
+    background-color: #ffe2de;
+}
+
+.halo-scheme-salmon-light .halo-qs-card .halo-qs-row {
+    background-color: transparent;
+}
+
+.halo-scheme-salmon-light .halo-qs-card .halo-qs-row:hover {
+    background-color: #ffe2de;
+}
+
+.halo-scheme-salmon-light .halo-qs-row.halo-chosen,
+.halo-scheme-salmon-light .halo-qs-row.halo-chosen:hover {
+    background-color: #ffdad5;
+    color: #930007;
+}
+
+.halo-scheme-salmon-light .halo-qs-row.halo-chosen .halo-qs-row-title,
+.halo-scheme-salmon-light .halo-qs-row.halo-chosen .halo-qs-row-note,
+.halo-scheme-salmon-light .halo-qs-row.halo-chosen .halo-qs-row-icon,
+.halo-scheme-salmon-light .halo-qs-row.halo-chosen .halo-qs-row-end {
+    color: #930007;
+}
+
+.halo-scheme-salmon-light .halo-qs-link {
+    color: #c0000d;
+}
+
+.halo-scheme-salmon-light .halo-qs-connected {
+    background-color: #c0000d;
+    color: #ffffff;
+}
+
+.halo-scheme-salmon-light .halo-qs-connected-title,
+.halo-scheme-salmon-light .halo-qs-connected-note {
+    color: #ffffff;
+}
+
+.halo-scheme-salmon-light .halo-qs-connected-icon {
+    background-color: #ffffff;
+    color: #c0000d;
+}
+
+.halo-scheme-salmon-light .halo-qs-connected-gear:hover {
+    background-color: rgba(255,255,255,0.18);
+}
+
+.halo-scheme-salmon-light .halo-qs-device {
+    background-color: #fff8f7;
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-qs-device-icon {
+    background-color: #ffe2de;
+}
+
+.halo-scheme-salmon-light .halo-qs-device-name,
+.halo-scheme-salmon-light .halo-qs-device-percent {
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-qs-device-note {
+    color: #58413e;
+}
+
+.halo-scheme-salmon-light .halo-qs-device.halo-on {
+    background-color: #c0000d;
+    color: #ffffff;
+}
+
+.halo-scheme-salmon-light .halo-qs-device.halo-on .halo-qs-device-icon {
+    background-color: #ffffff;
+    color: #c0000d;
+}
+
+.halo-scheme-salmon-light .halo-qs-device.halo-on .halo-qs-device-name,
+.halo-scheme-salmon-light .halo-qs-device.halo-on .halo-qs-device-percent,
+.halo-scheme-salmon-light .halo-qs-device.halo-on .halo-qs-device-note {
+    color: #ffffff;
+}
+
+.halo-scheme-salmon-light .halo-qs-device-percent.halo-low {
+    color: #ba1a1a;
+}
+
+.halo-scheme-salmon-light .halo-qs-wide-button {
+    background-color: #ffdbcc;
+    color: #653d29;
+}
+
+.halo-scheme-salmon-light .halo-qs-badge-number {
+    color: #ffffff;
+}
+
+.halo-scheme-salmon-light .halo-qs-segment {
+    background-color: #fff8f7;
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-qs-card .halo-qs-segment {
+    background-color: #ffe2de;
+}
+
+.halo-scheme-salmon-light .halo-qs-segment.halo-chosen,
+.halo-scheme-salmon-light .halo-qs-card .halo-qs-segment.halo-chosen {
+    background-color: #ffdad5;
+    color: #930007;
+}
+
+.halo-scheme-salmon-light .halo-qs-layout {
+    background-color: #ffe2de;
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-qs-layout.halo-chosen {
+    background-color: #ffdad5;
+}
+
+.halo-scheme-salmon-light .halo-qs-layout.halo-chosen .halo-qs-layout-name {
+    color: #930007;
+}
+
+.halo-scheme-salmon-light .halo-qs-layout-picture {
+    background-color: #ffdad5;
+}
+
+.halo-scheme-salmon-light .halo-qs-layout-spot {
+    background-color: #c0000d;
+}
+
+.halo-scheme-salmon-light .halo-qs-warning {
+    background-color: #ffdad6;
+    color: #93000a;
+}
+
+.halo-scheme-salmon-light .halo-qs-step,
+.halo-scheme-salmon-light .halo-qs-tile-item {
+    background-color: #ffe2de;
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-qs-tile-item.halo-dragging {
+    background-color: #f9dcd8;
+}
+
+.halo-scheme-salmon-light .halo-qs-tile-item.halo-hidden .halo-qs-row-title,
+.halo-scheme-salmon-light .halo-qs-tile-item.halo-hidden .halo-qs-row-icon {
+    color: #8c716d;
+}
+
+.halo-scheme-salmon-light .halo-qs-hosted .popup-menu-item {
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-qs-hosted .popup-menu-item:hover,
+.halo-scheme-salmon-light .halo-qs-hosted .popup-menu-item:focus {
+    background-color: #ffe2de;
+}
+
 .halo-scheme-salmon-dark .halo-frame {
     background-color: #2b1c1a;
 }
@@ -1411,6 +4969,298 @@
 .halo-scheme-salmon-dark .halo-low,
 .halo-scheme-salmon-dark .halo-status-text.halo-low {
     color: #ffb4ab;
+}
+
+/* Quick settings */
+
+.halo-scheme-salmon-dark .halo-qs {
+    background-color: #2b1c1a;
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-qs-round {
+    background-color: #372624;
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-qs-round:hover {
+    background-color: #473532;
+}
+
+.halo-scheme-salmon-dark .halo-qs-round.halo-on {
+    background-color: #930007;
+    color: #ffdad5;
+}
+
+.halo-scheme-salmon-dark .halo-qs-round.halo-qs-power {
+    background-color: #683c0f;
+    color: #ffdcc1;
+}
+
+.halo-scheme-salmon-dark .halo-qs-big,
+.halo-scheme-salmon-dark .halo-qs-lasts,
+.halo-scheme-salmon-dark .halo-qs-row-title {
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-qs-small,
+.halo-scheme-salmon-dark .halo-qs-caption,
+.halo-scheme-salmon-dark .halo-qs-row-note,
+.halo-scheme-salmon-dark .halo-qs-row-icon,
+.halo-scheme-salmon-dark .halo-qs-row-end,
+.halo-scheme-salmon-dark .halo-qs-eye,
+.halo-scheme-salmon-dark .halo-qs-handle,
+.halo-scheme-salmon-dark .halo-tile-note {
+    color: #dfbfbb;
+}
+
+.halo-scheme-salmon-dark .halo-qs-card,
+.halo-scheme-salmon-dark .halo-qs-card-row {
+    background-color: #372624;
+}
+
+.halo-scheme-salmon-dark .halo-tile {
+    background-color: #372624;
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-tile:hover {
+    background-color: #473532;
+}
+
+.halo-scheme-salmon-dark .halo-tile-icon {
+    background-color: #473532;
+}
+
+.halo-scheme-salmon-dark .halo-tile-chevron:hover {
+    background-color: rgba(249,220,216,0.1);
+}
+
+.halo-scheme-salmon-dark .halo-tile.halo-on {
+    background-color: #930007;
+    color: #ffdad5;
+}
+
+.halo-scheme-salmon-dark .halo-tile.halo-on .halo-tile-icon {
+    background-color: rgba(255,218,213,0.18);
+}
+
+.halo-scheme-salmon-dark .halo-tile.halo-on .halo-tile-note,
+.halo-scheme-salmon-dark .halo-tile.halo-on .halo-tile-chevron {
+    color: #ffdad5;
+}
+
+.halo-scheme-salmon-dark .halo-tile.halo-on .halo-tile-chevron:hover {
+    background-color: rgba(255,218,213,0.18);
+}
+
+.halo-scheme-salmon-dark .halo-qs-art {
+    background-color: #683c0f;
+    color: #ffdcc1;
+}
+
+.halo-scheme-salmon-dark .halo-qs-track {
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-qs-artist {
+    color: #dfbfbb;
+}
+
+.halo-scheme-salmon-dark .halo-qs-media-button {
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-qs-media-button:hover {
+    background-color: #473532;
+}
+
+.halo-scheme-salmon-dark .halo-qs-media-button.halo-qs-play {
+    background-color: #ffb4aa;
+    color: #690003;
+}
+
+.halo-scheme-salmon-dark .halo-qs-background-head {
+    background-color: #372624;
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-qs-background-head:hover,
+.halo-scheme-salmon-dark .halo-qs-background-app:hover {
+    background-color: #473532;
+}
+
+.halo-scheme-salmon-dark .halo-qs-background-app {
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-qs-quit:hover {
+    background-color: #372624;
+}
+
+.halo-scheme-salmon-dark .halo-qs-row {
+    background-color: #372624;
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-qs-row:hover {
+    background-color: #473532;
+}
+
+.halo-scheme-salmon-dark .halo-qs-card .halo-qs-row {
+    background-color: transparent;
+}
+
+.halo-scheme-salmon-dark .halo-qs-card .halo-qs-row:hover {
+    background-color: #473532;
+}
+
+.halo-scheme-salmon-dark .halo-qs-row.halo-chosen,
+.halo-scheme-salmon-dark .halo-qs-row.halo-chosen:hover {
+    background-color: #ffb4aa;
+    color: #690003;
+}
+
+.halo-scheme-salmon-dark .halo-qs-row.halo-chosen .halo-qs-row-title,
+.halo-scheme-salmon-dark .halo-qs-row.halo-chosen .halo-qs-row-note,
+.halo-scheme-salmon-dark .halo-qs-row.halo-chosen .halo-qs-row-icon,
+.halo-scheme-salmon-dark .halo-qs-row.halo-chosen .halo-qs-row-end {
+    color: #690003;
+}
+
+.halo-scheme-salmon-dark .halo-qs-link {
+    color: #ffb4aa;
+}
+
+.halo-scheme-salmon-dark .halo-qs-connected {
+    background-color: #930007;
+    color: #ffdad5;
+}
+
+.halo-scheme-salmon-dark .halo-qs-connected-title,
+.halo-scheme-salmon-dark .halo-qs-connected-note {
+    color: #ffdad5;
+}
+
+.halo-scheme-salmon-dark .halo-qs-connected-icon {
+    background-color: #ffdad5;
+    color: #930007;
+}
+
+.halo-scheme-salmon-dark .halo-qs-connected-gear:hover {
+    background-color: rgba(255,218,213,0.18);
+}
+
+.halo-scheme-salmon-dark .halo-qs-device {
+    background-color: #372624;
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-qs-device-icon {
+    background-color: #473532;
+}
+
+.halo-scheme-salmon-dark .halo-qs-device-name,
+.halo-scheme-salmon-dark .halo-qs-device-percent {
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-qs-device-note {
+    color: #dfbfbb;
+}
+
+.halo-scheme-salmon-dark .halo-qs-device.halo-on {
+    background-color: #930007;
+    color: #ffdad5;
+}
+
+.halo-scheme-salmon-dark .halo-qs-device.halo-on .halo-qs-device-icon {
+    background-color: #ffdad5;
+    color: #930007;
+}
+
+.halo-scheme-salmon-dark .halo-qs-device.halo-on .halo-qs-device-name,
+.halo-scheme-salmon-dark .halo-qs-device.halo-on .halo-qs-device-percent,
+.halo-scheme-salmon-dark .halo-qs-device.halo-on .halo-qs-device-note {
+    color: #ffdad5;
+}
+
+.halo-scheme-salmon-dark .halo-qs-device-percent.halo-low {
+    color: #ffb4ab;
+}
+
+.halo-scheme-salmon-dark .halo-qs-wide-button {
+    background-color: #653d29;
+    color: #ffdbcc;
+}
+
+.halo-scheme-salmon-dark .halo-qs-badge-number {
+    color: #ffdad5;
+}
+
+.halo-scheme-salmon-dark .halo-qs-segment {
+    background-color: #372624;
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-qs-card .halo-qs-segment {
+    background-color: #473532;
+}
+
+.halo-scheme-salmon-dark .halo-qs-segment.halo-chosen,
+.halo-scheme-salmon-dark .halo-qs-card .halo-qs-segment.halo-chosen {
+    background-color: #ffb4aa;
+    color: #690003;
+}
+
+.halo-scheme-salmon-dark .halo-qs-layout {
+    background-color: #473532;
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-qs-layout.halo-chosen {
+    background-color: #ffb4aa;
+}
+
+.halo-scheme-salmon-dark .halo-qs-layout.halo-chosen .halo-qs-layout-name {
+    color: #690003;
+}
+
+.halo-scheme-salmon-dark .halo-qs-layout-picture {
+    background-color: #930007;
+}
+
+.halo-scheme-salmon-dark .halo-qs-layout-spot {
+    background-color: #ffb4aa;
+}
+
+.halo-scheme-salmon-dark .halo-qs-warning {
+    background-color: #93000a;
+    color: #ffdad6;
+}
+
+.halo-scheme-salmon-dark .halo-qs-step,
+.halo-scheme-salmon-dark .halo-qs-tile-item {
+    background-color: #473532;
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-qs-tile-item.halo-dragging {
+    background-color: #42302e;
+}
+
+.halo-scheme-salmon-dark .halo-qs-tile-item.halo-hidden .halo-qs-row-title,
+.halo-scheme-salmon-dark .halo-qs-tile-item.halo-hidden .halo-qs-row-icon {
+    color: #a78a86;
+}
+
+.halo-scheme-salmon-dark .halo-qs-hosted .popup-menu-item {
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-qs-hosted .popup-menu-item:hover,
+.halo-scheme-salmon-dark .halo-qs-hosted .popup-menu-item:focus {
+    background-color: #473532;
 }
 
 .halo-scheme-pink-light .halo-frame {
@@ -1524,6 +5374,298 @@
     color: #ba1a1a;
 }
 
+/* Quick settings */
+
+.halo-scheme-pink-light .halo-qs {
+    background-color: #fff0f2;
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-qs-round {
+    background-color: #fff8f8;
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-qs-round:hover {
+    background-color: #fce2e6;
+}
+
+.halo-scheme-pink-light .halo-qs-round.halo-on {
+    background-color: #ba005b;
+    color: #ffffff;
+}
+
+.halo-scheme-pink-light .halo-qs-round.halo-qs-power {
+    background-color: #ffdbcf;
+    color: #6e3824;
+}
+
+.halo-scheme-pink-light .halo-qs-big,
+.halo-scheme-pink-light .halo-qs-lasts,
+.halo-scheme-pink-light .halo-qs-row-title {
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-qs-small,
+.halo-scheme-pink-light .halo-qs-caption,
+.halo-scheme-pink-light .halo-qs-row-note,
+.halo-scheme-pink-light .halo-qs-row-icon,
+.halo-scheme-pink-light .halo-qs-row-end,
+.halo-scheme-pink-light .halo-qs-eye,
+.halo-scheme-pink-light .halo-qs-handle,
+.halo-scheme-pink-light .halo-tile-note {
+    color: #564146;
+}
+
+.halo-scheme-pink-light .halo-qs-card,
+.halo-scheme-pink-light .halo-qs-card-row {
+    background-color: #fff8f8;
+}
+
+.halo-scheme-pink-light .halo-tile {
+    background-color: #fff8f8;
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-tile:hover {
+    background-color: #fce2e6;
+}
+
+.halo-scheme-pink-light .halo-tile-icon {
+    background-color: #fce2e6;
+}
+
+.halo-scheme-pink-light .halo-tile-chevron:hover {
+    background-color: rgba(38,24,27,0.1);
+}
+
+.halo-scheme-pink-light .halo-tile.halo-on {
+    background-color: #ba005b;
+    color: #ffffff;
+}
+
+.halo-scheme-pink-light .halo-tile.halo-on .halo-tile-icon {
+    background-color: rgba(255,255,255,0.18);
+}
+
+.halo-scheme-pink-light .halo-tile.halo-on .halo-tile-note,
+.halo-scheme-pink-light .halo-tile.halo-on .halo-tile-chevron {
+    color: #ffffff;
+}
+
+.halo-scheme-pink-light .halo-tile.halo-on .halo-tile-chevron:hover {
+    background-color: rgba(255,255,255,0.18);
+}
+
+.halo-scheme-pink-light .halo-qs-art {
+    background-color: #ffdbcf;
+    color: #6e3824;
+}
+
+.halo-scheme-pink-light .halo-qs-track {
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-qs-artist {
+    color: #564146;
+}
+
+.halo-scheme-pink-light .halo-qs-media-button {
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-qs-media-button:hover {
+    background-color: #fce2e6;
+}
+
+.halo-scheme-pink-light .halo-qs-media-button.halo-qs-play {
+    background-color: #ba005b;
+    color: #ffffff;
+}
+
+.halo-scheme-pink-light .halo-qs-background-head {
+    background-color: #fff8f8;
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-qs-background-head:hover,
+.halo-scheme-pink-light .halo-qs-background-app:hover {
+    background-color: #fce2e6;
+}
+
+.halo-scheme-pink-light .halo-qs-background-app {
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-qs-quit:hover {
+    background-color: #fce2e6;
+}
+
+.halo-scheme-pink-light .halo-qs-row {
+    background-color: #fff8f8;
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-qs-row:hover {
+    background-color: #fce2e6;
+}
+
+.halo-scheme-pink-light .halo-qs-card .halo-qs-row {
+    background-color: transparent;
+}
+
+.halo-scheme-pink-light .halo-qs-card .halo-qs-row:hover {
+    background-color: #fce2e6;
+}
+
+.halo-scheme-pink-light .halo-qs-row.halo-chosen,
+.halo-scheme-pink-light .halo-qs-row.halo-chosen:hover {
+    background-color: #ffd9e1;
+    color: #8f0044;
+}
+
+.halo-scheme-pink-light .halo-qs-row.halo-chosen .halo-qs-row-title,
+.halo-scheme-pink-light .halo-qs-row.halo-chosen .halo-qs-row-note,
+.halo-scheme-pink-light .halo-qs-row.halo-chosen .halo-qs-row-icon,
+.halo-scheme-pink-light .halo-qs-row.halo-chosen .halo-qs-row-end {
+    color: #8f0044;
+}
+
+.halo-scheme-pink-light .halo-qs-link {
+    color: #ba005b;
+}
+
+.halo-scheme-pink-light .halo-qs-connected {
+    background-color: #ba005b;
+    color: #ffffff;
+}
+
+.halo-scheme-pink-light .halo-qs-connected-title,
+.halo-scheme-pink-light .halo-qs-connected-note {
+    color: #ffffff;
+}
+
+.halo-scheme-pink-light .halo-qs-connected-icon {
+    background-color: #ffffff;
+    color: #ba005b;
+}
+
+.halo-scheme-pink-light .halo-qs-connected-gear:hover {
+    background-color: rgba(255,255,255,0.18);
+}
+
+.halo-scheme-pink-light .halo-qs-device {
+    background-color: #fff8f8;
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-qs-device-icon {
+    background-color: #fce2e6;
+}
+
+.halo-scheme-pink-light .halo-qs-device-name,
+.halo-scheme-pink-light .halo-qs-device-percent {
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-qs-device-note {
+    color: #564146;
+}
+
+.halo-scheme-pink-light .halo-qs-device.halo-on {
+    background-color: #ba005b;
+    color: #ffffff;
+}
+
+.halo-scheme-pink-light .halo-qs-device.halo-on .halo-qs-device-icon {
+    background-color: #ffffff;
+    color: #ba005b;
+}
+
+.halo-scheme-pink-light .halo-qs-device.halo-on .halo-qs-device-name,
+.halo-scheme-pink-light .halo-qs-device.halo-on .halo-qs-device-percent,
+.halo-scheme-pink-light .halo-qs-device.halo-on .halo-qs-device-note {
+    color: #ffffff;
+}
+
+.halo-scheme-pink-light .halo-qs-device-percent.halo-low {
+    color: #ba1a1a;
+}
+
+.halo-scheme-pink-light .halo-qs-wide-button {
+    background-color: #ffdad7;
+    color: #663b39;
+}
+
+.halo-scheme-pink-light .halo-qs-badge-number {
+    color: #ffffff;
+}
+
+.halo-scheme-pink-light .halo-qs-segment {
+    background-color: #fff8f8;
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-qs-card .halo-qs-segment {
+    background-color: #fce2e6;
+}
+
+.halo-scheme-pink-light .halo-qs-segment.halo-chosen,
+.halo-scheme-pink-light .halo-qs-card .halo-qs-segment.halo-chosen {
+    background-color: #ffd9e1;
+    color: #8f0044;
+}
+
+.halo-scheme-pink-light .halo-qs-layout {
+    background-color: #fce2e6;
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-qs-layout.halo-chosen {
+    background-color: #ffd9e1;
+}
+
+.halo-scheme-pink-light .halo-qs-layout.halo-chosen .halo-qs-layout-name {
+    color: #8f0044;
+}
+
+.halo-scheme-pink-light .halo-qs-layout-picture {
+    background-color: #ffd9e1;
+}
+
+.halo-scheme-pink-light .halo-qs-layout-spot {
+    background-color: #ba005b;
+}
+
+.halo-scheme-pink-light .halo-qs-warning {
+    background-color: #ffdad6;
+    color: #93000a;
+}
+
+.halo-scheme-pink-light .halo-qs-step,
+.halo-scheme-pink-light .halo-qs-tile-item {
+    background-color: #fce2e6;
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-qs-tile-item.halo-dragging {
+    background-color: #f6dce1;
+}
+
+.halo-scheme-pink-light .halo-qs-tile-item.halo-hidden .halo-qs-row-title,
+.halo-scheme-pink-light .halo-qs-tile-item.halo-hidden .halo-qs-row-icon {
+    color: #897176;
+}
+
+.halo-scheme-pink-light .halo-qs-hosted .popup-menu-item {
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-qs-hosted .popup-menu-item:hover,
+.halo-scheme-pink-light .halo-qs-hosted .popup-menu-item:focus {
+    background-color: #fce2e6;
+}
+
 .halo-scheme-pink-dark .halo-frame {
     background-color: #2a1c1f;
 }
@@ -1633,6 +5775,298 @@
 .halo-scheme-pink-dark .halo-low,
 .halo-scheme-pink-dark .halo-status-text.halo-low {
     color: #ffb4ab;
+}
+
+/* Quick settings */
+
+.halo-scheme-pink-dark .halo-qs {
+    background-color: #2a1c1f;
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-qs-round {
+    background-color: #352629;
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-qs-round:hover {
+    background-color: #453538;
+}
+
+.halo-scheme-pink-dark .halo-qs-round.halo-on {
+    background-color: #8f0044;
+    color: #ffd9e1;
+}
+
+.halo-scheme-pink-dark .halo-qs-round.halo-qs-power {
+    background-color: #6e3824;
+    color: #ffdbcf;
+}
+
+.halo-scheme-pink-dark .halo-qs-big,
+.halo-scheme-pink-dark .halo-qs-lasts,
+.halo-scheme-pink-dark .halo-qs-row-title {
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-qs-small,
+.halo-scheme-pink-dark .halo-qs-caption,
+.halo-scheme-pink-dark .halo-qs-row-note,
+.halo-scheme-pink-dark .halo-qs-row-icon,
+.halo-scheme-pink-dark .halo-qs-row-end,
+.halo-scheme-pink-dark .halo-qs-eye,
+.halo-scheme-pink-dark .halo-qs-handle,
+.halo-scheme-pink-dark .halo-tile-note {
+    color: #ddbfc5;
+}
+
+.halo-scheme-pink-dark .halo-qs-card,
+.halo-scheme-pink-dark .halo-qs-card-row {
+    background-color: #352629;
+}
+
+.halo-scheme-pink-dark .halo-tile {
+    background-color: #352629;
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-tile:hover {
+    background-color: #453538;
+}
+
+.halo-scheme-pink-dark .halo-tile-icon {
+    background-color: #453538;
+}
+
+.halo-scheme-pink-dark .halo-tile-chevron:hover {
+    background-color: rgba(246,220,225,0.1);
+}
+
+.halo-scheme-pink-dark .halo-tile.halo-on {
+    background-color: #8f0044;
+    color: #ffd9e1;
+}
+
+.halo-scheme-pink-dark .halo-tile.halo-on .halo-tile-icon {
+    background-color: rgba(255,217,225,0.18);
+}
+
+.halo-scheme-pink-dark .halo-tile.halo-on .halo-tile-note,
+.halo-scheme-pink-dark .halo-tile.halo-on .halo-tile-chevron {
+    color: #ffd9e1;
+}
+
+.halo-scheme-pink-dark .halo-tile.halo-on .halo-tile-chevron:hover {
+    background-color: rgba(255,217,225,0.18);
+}
+
+.halo-scheme-pink-dark .halo-qs-art {
+    background-color: #6e3824;
+    color: #ffdbcf;
+}
+
+.halo-scheme-pink-dark .halo-qs-track {
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-qs-artist {
+    color: #ddbfc5;
+}
+
+.halo-scheme-pink-dark .halo-qs-media-button {
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-qs-media-button:hover {
+    background-color: #453538;
+}
+
+.halo-scheme-pink-dark .halo-qs-media-button.halo-qs-play {
+    background-color: #ffb1c4;
+    color: #65002e;
+}
+
+.halo-scheme-pink-dark .halo-qs-background-head {
+    background-color: #352629;
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-qs-background-head:hover,
+.halo-scheme-pink-dark .halo-qs-background-app:hover {
+    background-color: #453538;
+}
+
+.halo-scheme-pink-dark .halo-qs-background-app {
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-qs-quit:hover {
+    background-color: #352629;
+}
+
+.halo-scheme-pink-dark .halo-qs-row {
+    background-color: #352629;
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-qs-row:hover {
+    background-color: #453538;
+}
+
+.halo-scheme-pink-dark .halo-qs-card .halo-qs-row {
+    background-color: transparent;
+}
+
+.halo-scheme-pink-dark .halo-qs-card .halo-qs-row:hover {
+    background-color: #453538;
+}
+
+.halo-scheme-pink-dark .halo-qs-row.halo-chosen,
+.halo-scheme-pink-dark .halo-qs-row.halo-chosen:hover {
+    background-color: #ffb1c4;
+    color: #65002e;
+}
+
+.halo-scheme-pink-dark .halo-qs-row.halo-chosen .halo-qs-row-title,
+.halo-scheme-pink-dark .halo-qs-row.halo-chosen .halo-qs-row-note,
+.halo-scheme-pink-dark .halo-qs-row.halo-chosen .halo-qs-row-icon,
+.halo-scheme-pink-dark .halo-qs-row.halo-chosen .halo-qs-row-end {
+    color: #65002e;
+}
+
+.halo-scheme-pink-dark .halo-qs-link {
+    color: #ffb1c4;
+}
+
+.halo-scheme-pink-dark .halo-qs-connected {
+    background-color: #8f0044;
+    color: #ffd9e1;
+}
+
+.halo-scheme-pink-dark .halo-qs-connected-title,
+.halo-scheme-pink-dark .halo-qs-connected-note {
+    color: #ffd9e1;
+}
+
+.halo-scheme-pink-dark .halo-qs-connected-icon {
+    background-color: #ffd9e1;
+    color: #8f0044;
+}
+
+.halo-scheme-pink-dark .halo-qs-connected-gear:hover {
+    background-color: rgba(255,217,225,0.18);
+}
+
+.halo-scheme-pink-dark .halo-qs-device {
+    background-color: #352629;
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-qs-device-icon {
+    background-color: #453538;
+}
+
+.halo-scheme-pink-dark .halo-qs-device-name,
+.halo-scheme-pink-dark .halo-qs-device-percent {
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-qs-device-note {
+    color: #ddbfc5;
+}
+
+.halo-scheme-pink-dark .halo-qs-device.halo-on {
+    background-color: #8f0044;
+    color: #ffd9e1;
+}
+
+.halo-scheme-pink-dark .halo-qs-device.halo-on .halo-qs-device-icon {
+    background-color: #ffd9e1;
+    color: #8f0044;
+}
+
+.halo-scheme-pink-dark .halo-qs-device.halo-on .halo-qs-device-name,
+.halo-scheme-pink-dark .halo-qs-device.halo-on .halo-qs-device-percent,
+.halo-scheme-pink-dark .halo-qs-device.halo-on .halo-qs-device-note {
+    color: #ffd9e1;
+}
+
+.halo-scheme-pink-dark .halo-qs-device-percent.halo-low {
+    color: #ffb4ab;
+}
+
+.halo-scheme-pink-dark .halo-qs-wide-button {
+    background-color: #663b39;
+    color: #ffdad7;
+}
+
+.halo-scheme-pink-dark .halo-qs-badge-number {
+    color: #ffd9e1;
+}
+
+.halo-scheme-pink-dark .halo-qs-segment {
+    background-color: #352629;
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-qs-card .halo-qs-segment {
+    background-color: #453538;
+}
+
+.halo-scheme-pink-dark .halo-qs-segment.halo-chosen,
+.halo-scheme-pink-dark .halo-qs-card .halo-qs-segment.halo-chosen {
+    background-color: #ffb1c4;
+    color: #65002e;
+}
+
+.halo-scheme-pink-dark .halo-qs-layout {
+    background-color: #453538;
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-qs-layout.halo-chosen {
+    background-color: #ffb1c4;
+}
+
+.halo-scheme-pink-dark .halo-qs-layout.halo-chosen .halo-qs-layout-name {
+    color: #65002e;
+}
+
+.halo-scheme-pink-dark .halo-qs-layout-picture {
+    background-color: #8f0044;
+}
+
+.halo-scheme-pink-dark .halo-qs-layout-spot {
+    background-color: #ffb1c4;
+}
+
+.halo-scheme-pink-dark .halo-qs-warning {
+    background-color: #93000a;
+    color: #ffdad6;
+}
+
+.halo-scheme-pink-dark .halo-qs-step,
+.halo-scheme-pink-dark .halo-qs-tile-item {
+    background-color: #453538;
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-qs-tile-item.halo-dragging {
+    background-color: #413034;
+}
+
+.halo-scheme-pink-dark .halo-qs-tile-item.halo-hidden .halo-qs-row-title,
+.halo-scheme-pink-dark .halo-qs-tile-item.halo-hidden .halo-qs-row-icon {
+    color: #a48a8f;
+}
+
+.halo-scheme-pink-dark .halo-qs-hosted .popup-menu-item {
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-qs-hosted .popup-menu-item:hover,
+.halo-scheme-pink-dark .halo-qs-hosted .popup-menu-item:focus {
+    background-color: #453538;
 }
 
 .halo-scheme-white-light .halo-frame {
@@ -1746,6 +6180,298 @@
     color: #ba1a1a;
 }
 
+/* Quick settings */
+
+.halo-scheme-white-light .halo-qs {
+    background-color: #f3f3f3;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-qs-round {
+    background-color: #f9f9f9;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-qs-round:hover {
+    background-color: #e8e8e8;
+}
+
+.halo-scheme-white-light .halo-qs-round.halo-on {
+    background-color: #000000;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-light .halo-qs-round.halo-qs-power {
+    background-color: #747474;
+    color: #ffffff;
+}
+
+.halo-scheme-white-light .halo-qs-big,
+.halo-scheme-white-light .halo-qs-lasts,
+.halo-scheme-white-light .halo-qs-row-title {
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-qs-small,
+.halo-scheme-white-light .halo-qs-caption,
+.halo-scheme-white-light .halo-qs-row-note,
+.halo-scheme-white-light .halo-qs-row-icon,
+.halo-scheme-white-light .halo-qs-row-end,
+.halo-scheme-white-light .halo-qs-eye,
+.halo-scheme-white-light .halo-qs-handle,
+.halo-scheme-white-light .halo-tile-note {
+    color: #474747;
+}
+
+.halo-scheme-white-light .halo-qs-card,
+.halo-scheme-white-light .halo-qs-card-row {
+    background-color: #f9f9f9;
+}
+
+.halo-scheme-white-light .halo-tile {
+    background-color: #f9f9f9;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-tile:hover {
+    background-color: #e8e8e8;
+}
+
+.halo-scheme-white-light .halo-tile-icon {
+    background-color: #e8e8e8;
+}
+
+.halo-scheme-white-light .halo-tile-chevron:hover {
+    background-color: rgba(27,27,27,0.1);
+}
+
+.halo-scheme-white-light .halo-tile.halo-on {
+    background-color: #000000;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-light .halo-tile.halo-on .halo-tile-icon {
+    background-color: rgba(226,226,226,0.18);
+}
+
+.halo-scheme-white-light .halo-tile.halo-on .halo-tile-note,
+.halo-scheme-white-light .halo-tile.halo-on .halo-tile-chevron {
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-light .halo-tile.halo-on .halo-tile-chevron:hover {
+    background-color: rgba(226,226,226,0.18);
+}
+
+.halo-scheme-white-light .halo-qs-art {
+    background-color: #747474;
+    color: #ffffff;
+}
+
+.halo-scheme-white-light .halo-qs-track {
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-qs-artist {
+    color: #474747;
+}
+
+.halo-scheme-white-light .halo-qs-media-button {
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-qs-media-button:hover {
+    background-color: #e8e8e8;
+}
+
+.halo-scheme-white-light .halo-qs-media-button.halo-qs-play {
+    background-color: #000000;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-light .halo-qs-background-head {
+    background-color: #f9f9f9;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-qs-background-head:hover,
+.halo-scheme-white-light .halo-qs-background-app:hover {
+    background-color: #e8e8e8;
+}
+
+.halo-scheme-white-light .halo-qs-background-app {
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-qs-quit:hover {
+    background-color: #e8e8e8;
+}
+
+.halo-scheme-white-light .halo-qs-row {
+    background-color: #f9f9f9;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-qs-row:hover {
+    background-color: #e8e8e8;
+}
+
+.halo-scheme-white-light .halo-qs-card .halo-qs-row {
+    background-color: transparent;
+}
+
+.halo-scheme-white-light .halo-qs-card .halo-qs-row:hover {
+    background-color: #e8e8e8;
+}
+
+.halo-scheme-white-light .halo-qs-row.halo-chosen,
+.halo-scheme-white-light .halo-qs-row.halo-chosen:hover {
+    background-color: #3b3b3b;
+    color: #ffffff;
+}
+
+.halo-scheme-white-light .halo-qs-row.halo-chosen .halo-qs-row-title,
+.halo-scheme-white-light .halo-qs-row.halo-chosen .halo-qs-row-note,
+.halo-scheme-white-light .halo-qs-row.halo-chosen .halo-qs-row-icon,
+.halo-scheme-white-light .halo-qs-row.halo-chosen .halo-qs-row-end {
+    color: #ffffff;
+}
+
+.halo-scheme-white-light .halo-qs-link {
+    color: #000000;
+}
+
+.halo-scheme-white-light .halo-qs-connected {
+    background-color: #000000;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-light .halo-qs-connected-title,
+.halo-scheme-white-light .halo-qs-connected-note {
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-light .halo-qs-connected-icon {
+    background-color: #e2e2e2;
+    color: #000000;
+}
+
+.halo-scheme-white-light .halo-qs-connected-gear:hover {
+    background-color: rgba(226,226,226,0.18);
+}
+
+.halo-scheme-white-light .halo-qs-device {
+    background-color: #f9f9f9;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-qs-device-icon {
+    background-color: #e8e8e8;
+}
+
+.halo-scheme-white-light .halo-qs-device-name,
+.halo-scheme-white-light .halo-qs-device-percent {
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-qs-device-note {
+    color: #474747;
+}
+
+.halo-scheme-white-light .halo-qs-device.halo-on {
+    background-color: #000000;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-light .halo-qs-device.halo-on .halo-qs-device-icon {
+    background-color: #e2e2e2;
+    color: #000000;
+}
+
+.halo-scheme-white-light .halo-qs-device.halo-on .halo-qs-device-name,
+.halo-scheme-white-light .halo-qs-device.halo-on .halo-qs-device-percent,
+.halo-scheme-white-light .halo-qs-device.halo-on .halo-qs-device-note {
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-light .halo-qs-device-percent.halo-low {
+    color: #ba1a1a;
+}
+
+.halo-scheme-white-light .halo-qs-wide-button {
+    background-color: #d4d4d4;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-qs-badge-number {
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-light .halo-qs-segment {
+    background-color: #f9f9f9;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-qs-card .halo-qs-segment {
+    background-color: #e8e8e8;
+}
+
+.halo-scheme-white-light .halo-qs-segment.halo-chosen,
+.halo-scheme-white-light .halo-qs-card .halo-qs-segment.halo-chosen {
+    background-color: #3b3b3b;
+    color: #ffffff;
+}
+
+.halo-scheme-white-light .halo-qs-layout {
+    background-color: #e8e8e8;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-qs-layout.halo-chosen {
+    background-color: #3b3b3b;
+}
+
+.halo-scheme-white-light .halo-qs-layout.halo-chosen .halo-qs-layout-name {
+    color: #ffffff;
+}
+
+.halo-scheme-white-light .halo-qs-layout-picture {
+    background-color: #3b3b3b;
+}
+
+.halo-scheme-white-light .halo-qs-layout-spot {
+    background-color: #000000;
+}
+
+.halo-scheme-white-light .halo-qs-warning {
+    background-color: #ffdad6;
+    color: #93000a;
+}
+
+.halo-scheme-white-light .halo-qs-step,
+.halo-scheme-white-light .halo-qs-tile-item {
+    background-color: #e8e8e8;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-qs-tile-item.halo-dragging {
+    background-color: #e2e2e2;
+}
+
+.halo-scheme-white-light .halo-qs-tile-item.halo-hidden .halo-qs-row-title,
+.halo-scheme-white-light .halo-qs-tile-item.halo-hidden .halo-qs-row-icon {
+    color: #777777;
+}
+
+.halo-scheme-white-light .halo-qs-hosted .popup-menu-item {
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-qs-hosted .popup-menu-item:hover,
+.halo-scheme-white-light .halo-qs-hosted .popup-menu-item:focus {
+    background-color: #e8e8e8;
+}
+
 .halo-scheme-white-dark .halo-frame {
     background-color: #1f1f1f;
 }
@@ -1855,4 +6581,296 @@
 .halo-scheme-white-dark .halo-low,
 .halo-scheme-white-dark .halo-status-text.halo-low {
     color: #ffb4ab;
+}
+
+/* Quick settings */
+
+.halo-scheme-white-dark .halo-qs {
+    background-color: #1f1f1f;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-qs-round {
+    background-color: #2a2a2a;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-qs-round:hover {
+    background-color: #393939;
+}
+
+.halo-scheme-white-dark .halo-qs-round.halo-on {
+    background-color: #d4d4d4;
+    color: #000000;
+}
+
+.halo-scheme-white-dark .halo-qs-round.halo-qs-power {
+    background-color: #919191;
+    color: #000000;
+}
+
+.halo-scheme-white-dark .halo-qs-big,
+.halo-scheme-white-dark .halo-qs-lasts,
+.halo-scheme-white-dark .halo-qs-row-title {
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-qs-small,
+.halo-scheme-white-dark .halo-qs-caption,
+.halo-scheme-white-dark .halo-qs-row-note,
+.halo-scheme-white-dark .halo-qs-row-icon,
+.halo-scheme-white-dark .halo-qs-row-end,
+.halo-scheme-white-dark .halo-qs-eye,
+.halo-scheme-white-dark .halo-qs-handle,
+.halo-scheme-white-dark .halo-tile-note {
+    color: #c6c6c6;
+}
+
+.halo-scheme-white-dark .halo-qs-card,
+.halo-scheme-white-dark .halo-qs-card-row {
+    background-color: #2a2a2a;
+}
+
+.halo-scheme-white-dark .halo-tile {
+    background-color: #2a2a2a;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-tile:hover {
+    background-color: #393939;
+}
+
+.halo-scheme-white-dark .halo-tile-icon {
+    background-color: #393939;
+}
+
+.halo-scheme-white-dark .halo-tile-chevron:hover {
+    background-color: rgba(226,226,226,0.1);
+}
+
+.halo-scheme-white-dark .halo-tile.halo-on {
+    background-color: #d4d4d4;
+    color: #000000;
+}
+
+.halo-scheme-white-dark .halo-tile.halo-on .halo-tile-icon {
+    background-color: rgba(0,0,0,0.18);
+}
+
+.halo-scheme-white-dark .halo-tile.halo-on .halo-tile-note,
+.halo-scheme-white-dark .halo-tile.halo-on .halo-tile-chevron {
+    color: #000000;
+}
+
+.halo-scheme-white-dark .halo-tile.halo-on .halo-tile-chevron:hover {
+    background-color: rgba(0,0,0,0.18);
+}
+
+.halo-scheme-white-dark .halo-qs-art {
+    background-color: #919191;
+    color: #000000;
+}
+
+.halo-scheme-white-dark .halo-qs-track {
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-qs-artist {
+    color: #c6c6c6;
+}
+
+.halo-scheme-white-dark .halo-qs-media-button {
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-qs-media-button:hover {
+    background-color: #393939;
+}
+
+.halo-scheme-white-dark .halo-qs-media-button.halo-qs-play {
+    background-color: #ffffff;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-dark .halo-qs-background-head {
+    background-color: #2a2a2a;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-qs-background-head:hover,
+.halo-scheme-white-dark .halo-qs-background-app:hover {
+    background-color: #393939;
+}
+
+.halo-scheme-white-dark .halo-qs-background-app {
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-qs-quit:hover {
+    background-color: #2a2a2a;
+}
+
+.halo-scheme-white-dark .halo-qs-row {
+    background-color: #2a2a2a;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-qs-row:hover {
+    background-color: #393939;
+}
+
+.halo-scheme-white-dark .halo-qs-card .halo-qs-row {
+    background-color: transparent;
+}
+
+.halo-scheme-white-dark .halo-qs-card .halo-qs-row:hover {
+    background-color: #393939;
+}
+
+.halo-scheme-white-dark .halo-qs-row.halo-chosen,
+.halo-scheme-white-dark .halo-qs-row.halo-chosen:hover {
+    background-color: #ffffff;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-dark .halo-qs-row.halo-chosen .halo-qs-row-title,
+.halo-scheme-white-dark .halo-qs-row.halo-chosen .halo-qs-row-note,
+.halo-scheme-white-dark .halo-qs-row.halo-chosen .halo-qs-row-icon,
+.halo-scheme-white-dark .halo-qs-row.halo-chosen .halo-qs-row-end {
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-dark .halo-qs-link {
+    color: #ffffff;
+}
+
+.halo-scheme-white-dark .halo-qs-connected {
+    background-color: #d4d4d4;
+    color: #000000;
+}
+
+.halo-scheme-white-dark .halo-qs-connected-title,
+.halo-scheme-white-dark .halo-qs-connected-note {
+    color: #000000;
+}
+
+.halo-scheme-white-dark .halo-qs-connected-icon {
+    background-color: #000000;
+    color: #d4d4d4;
+}
+
+.halo-scheme-white-dark .halo-qs-connected-gear:hover {
+    background-color: rgba(0,0,0,0.18);
+}
+
+.halo-scheme-white-dark .halo-qs-device {
+    background-color: #2a2a2a;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-qs-device-icon {
+    background-color: #393939;
+}
+
+.halo-scheme-white-dark .halo-qs-device-name,
+.halo-scheme-white-dark .halo-qs-device-percent {
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-qs-device-note {
+    color: #c6c6c6;
+}
+
+.halo-scheme-white-dark .halo-qs-device.halo-on {
+    background-color: #d4d4d4;
+    color: #000000;
+}
+
+.halo-scheme-white-dark .halo-qs-device.halo-on .halo-qs-device-icon {
+    background-color: #000000;
+    color: #d4d4d4;
+}
+
+.halo-scheme-white-dark .halo-qs-device.halo-on .halo-qs-device-name,
+.halo-scheme-white-dark .halo-qs-device.halo-on .halo-qs-device-percent,
+.halo-scheme-white-dark .halo-qs-device.halo-on .halo-qs-device-note {
+    color: #000000;
+}
+
+.halo-scheme-white-dark .halo-qs-device-percent.halo-low {
+    color: #ffb4ab;
+}
+
+.halo-scheme-white-dark .halo-qs-wide-button {
+    background-color: #474747;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-qs-badge-number {
+    color: #000000;
+}
+
+.halo-scheme-white-dark .halo-qs-segment {
+    background-color: #2a2a2a;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-qs-card .halo-qs-segment {
+    background-color: #393939;
+}
+
+.halo-scheme-white-dark .halo-qs-segment.halo-chosen,
+.halo-scheme-white-dark .halo-qs-card .halo-qs-segment.halo-chosen {
+    background-color: #ffffff;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-dark .halo-qs-layout {
+    background-color: #393939;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-qs-layout.halo-chosen {
+    background-color: #ffffff;
+}
+
+.halo-scheme-white-dark .halo-qs-layout.halo-chosen .halo-qs-layout-name {
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-dark .halo-qs-layout-picture {
+    background-color: #d4d4d4;
+}
+
+.halo-scheme-white-dark .halo-qs-layout-spot {
+    background-color: #ffffff;
+}
+
+.halo-scheme-white-dark .halo-qs-warning {
+    background-color: #93000a;
+    color: #ffdad6;
+}
+
+.halo-scheme-white-dark .halo-qs-step,
+.halo-scheme-white-dark .halo-qs-tile-item {
+    background-color: #393939;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-qs-tile-item.halo-dragging {
+    background-color: #353535;
+}
+
+.halo-scheme-white-dark .halo-qs-tile-item.halo-hidden .halo-qs-row-title,
+.halo-scheme-white-dark .halo-qs-tile-item.halo-hidden .halo-qs-row-icon {
+    color: #919191;
+}
+
+.halo-scheme-white-dark .halo-qs-hosted .popup-menu-item {
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-qs-hosted .popup-menu-item:hover,
+.halo-scheme-white-dark .halo-qs-hosted .popup-menu-item:focus {
+    background-color: #393939;
 }

@@ -21,7 +21,7 @@ export const ICONS = [
     'visibility', 'visibility_off', 'warning', 'info', 'tune', 'schedule', 'timer', 'pause', 'play_arrow',
     'skip_previous', 'skip_next', 'graphic_eq', 'music_note', 'album', 'call', 'call_end', 'chat', 'mail',
     'folder', 'install_desktop', 'speed', 'balance', 'energy_savings_leaf', 'eco', 'public', 'location_on',
-    'smart_toy', 'progress_activity', 'language', 'restart_alt',
+    'smart_toy', 'progress_activity', 'language', 'person', 'extension', 'remove',
     // Weather
     'sunny', 'moon_stars', 'partly_cloudy_day', 'partly_cloudy_night', 'cloud', 'foggy', 'rainy', 'weather_snowy',
     'thunderstorm', 'rainy_light', 'weather_mix',

@@ -6,7 +6,7 @@
 
 .halo-frame {
     border-radius: 22px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .halo-frame.halo-flat {
@@ -36,7 +36,7 @@
     height: 44px;
     border-radius: 22px;
     padding: 0 4px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .halo-dots {
@@ -77,6 +77,352 @@
     border-radius: 14px;
     padding: 0 10px;
     spacing: 6px;
+}
+
+/* Quick settings */
+
+.halo-qs {
+    padding: 14px;
+    border-radius: 32px;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.26);
+}
+
+.halo-qs-page {
+    spacing: 10px;
+}
+
+.halo-qs-header {
+    spacing: 8px;
+    padding: 2px 2px 4px 8px;
+}
+
+.halo-qs-header-buttons {
+    spacing: 8px;
+}
+
+.halo-qs-round {
+    width: 44px;
+    height: 44px;
+    border-radius: 22px;
+    transition-duration: 200ms;
+}
+
+.halo-qs-card {
+    padding: 10px;
+    border-radius: 26px;
+    spacing: 8px;
+}
+
+.halo-qs-sliders {
+    spacing: 6px;
+}
+
+.halo-qs-slider-row {
+    spacing: 8px;
+}
+
+.halo-qs-grid,
+.halo-qs-tile-row,
+.halo-qs-device-grid,
+.halo-qs-device-row,
+.halo-qs-swatch-row,
+.halo-qs-layout-row {
+    spacing: 8px;
+}
+
+.halo-tile {
+    height: 64px;
+    border-radius: 24px;
+    padding: 0 4px 0 12px;
+    spacing: 9px;
+    transition-duration: 220ms;
+}
+
+.halo-tile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    transition-duration: 220ms;
+}
+
+.halo-tile-chevron {
+    width: 26px;
+    border-radius: 16px;
+    transition-duration: 150ms;
+}
+
+.halo-qs-media {
+    spacing: 12px;
+}
+
+.halo-qs-art {
+    width: 60px;
+    height: 60px;
+    border-radius: 18px;
+}
+
+.halo-qs-media-controls {
+    spacing: 4px;
+}
+
+.halo-qs-media-button {
+    width: 40px;
+    height: 52px;
+    border-radius: 20px;
+    transition-duration: 150ms;
+}
+
+.halo-qs-play {
+    width: 56px;
+    height: 56px;
+    border-radius: 28px;
+}
+
+.halo-qs-play.halo-playing {
+    border-radius: 18px;
+}
+
+.halo-qs-background {
+    spacing: 4px;
+}
+
+.halo-qs-background-head {
+    height: 52px;
+    border-radius: 26px;
+    padding: 0 18px;
+    spacing: 12px;
+    transition-duration: 150ms;
+}
+
+.halo-qs-background-list {
+    spacing: 2px;
+    padding: 2px 4px 0;
+}
+
+.halo-qs-background-app {
+    height: 44px;
+    border-radius: 22px;
+    padding: 0 6px 0 14px;
+    spacing: 12px;
+    transition-duration: 150ms;
+}
+
+.halo-qs-quit {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+}
+
+.halo-qs-page-header {
+    spacing: 12px;
+    padding-bottom: 4px;
+}
+
+.halo-qs-caption {
+    padding: 6px 10px 0;
+}
+
+.halo-qs-list {
+    spacing: 6px;
+}
+
+.halo-qs-row {
+    min-height: 56px;
+    border-radius: 20px;
+    padding: 6px 14px;
+    spacing: 14px;
+    transition-duration: 200ms;
+}
+
+.halo-qs-row.halo-compact {
+    min-height: 40px;
+    padding: 2px 6px 2px 10px;
+}
+
+.halo-qs-link {
+    padding: 10px 12px 4px;
+}
+
+.halo-qs-empty,
+.halo-qs-auto-note {
+    padding: 4px 12px;
+}
+
+.halo-qs-connected {
+    height: 80px;
+    border-radius: 28px;
+    padding: 0 14px 0 16px;
+    spacing: 14px;
+}
+
+.halo-qs-connected-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+}
+
+.halo-qs-connected-gear {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.halo-qs-device {
+    padding: 14px 16px;
+    border-radius: 28px;
+    spacing: 6px;
+    transition-duration: 200ms;
+}
+
+.halo-qs-device-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.halo-qs-device-battery {
+    spacing: 6px;
+}
+
+.halo-qs-wide-button {
+    height: 52px;
+    border-radius: 26px;
+    padding: 0 18px;
+    spacing: 10px;
+}
+
+.halo-qs-battery {
+    padding: 16px;
+    spacing: 16px;
+}
+
+.halo-qs-segments {
+    spacing: 6px;
+}
+
+.halo-qs-segment {
+    height: 48px;
+    border-radius: 16px;
+    transition-duration: 200ms;
+}
+
+.halo-qs-segment.halo-chosen {
+    border-radius: 24px;
+}
+
+.halo-qs-segments.halo-small .halo-qs-segment {
+    height: 38px;
+    border-radius: 12px;
+}
+
+.halo-qs-segments.halo-small .halo-qs-segment.halo-chosen {
+    border-radius: 19px;
+}
+
+.halo-qs-segment-inner {
+    spacing: 8px;
+}
+
+.halo-qs-swatch {
+    height: 60px;
+    border-radius: 22px;
+    border: 3px solid transparent;
+    transition-duration: 200ms;
+}
+
+.halo-qs-swatch.halo-chosen {
+    border-radius: 18px;
+}
+
+.halo-qs-layout {
+    padding: 8px 6px 6px;
+    border-radius: 16px;
+    spacing: 6px;
+    transition-duration: 200ms;
+}
+
+.halo-qs-layout-picture {
+    height: 30px;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.halo-qs-layout-bar {
+    spacing: 3px;
+}
+
+.halo-qs-layout-spot {
+    height: 8px;
+    border-radius: 4px;
+}
+
+.halo-qs-layout-spot.halo-short {
+    width: 28px;
+}
+
+.halo-qs-warning {
+    padding: 12px 14px;
+    border-radius: 20px;
+    spacing: 12px;
+}
+
+.halo-qs-times {
+    spacing: 10px;
+    padding: 0 8px;
+}
+
+.halo-qs-stepper {
+    spacing: 4px;
+}
+
+.halo-qs-step {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+}
+
+.halo-qs-time {
+    padding: 0 4px;
+}
+
+.halo-qs-tile-list {
+    spacing: 4px;
+}
+
+.halo-qs-tile-item {
+    height: 44px;
+    border-radius: 16px;
+    padding: 0 6px 0 4px;
+    spacing: 10px;
+}
+
+.halo-qs-tile-item.halo-dragging {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.halo-qs-handle {
+    width: 28px;
+    height: 36px;
+}
+
+.halo-qs-eye {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+}
+
+/* Menus of other extensions, lent to a page. */
+.halo-qs-hosted .popup-menu-content,
+.halo-qs-hosted .quick-toggle-menu {
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.halo-qs-hosted .popup-menu-item {
+    border-radius: 16px;
 }
 
 /* themed */
@@ -190,4 +536,296 @@
 .halo-scheme .halo-low,
 .halo-scheme .halo-status-text.halo-low {
     color: $error;
+}
+
+/* Quick settings */
+
+.halo-scheme .halo-qs {
+    background-color: $panel;
+    color: $on;
+}
+
+.halo-scheme .halo-qs-round {
+    background-color: $card;
+    color: $on;
+}
+
+.halo-scheme .halo-qs-round:hover {
+    background-color: $dent;
+}
+
+.halo-scheme .halo-qs-round.halo-on {
+    background-color: $loud;
+    color: $onLoud;
+}
+
+.halo-scheme .halo-qs-round.halo-qs-power {
+    background-color: $tc;
+    color: $onTc;
+}
+
+.halo-scheme .halo-qs-big,
+.halo-scheme .halo-qs-lasts,
+.halo-scheme .halo-qs-row-title {
+    color: $on;
+}
+
+.halo-scheme .halo-qs-small,
+.halo-scheme .halo-qs-caption,
+.halo-scheme .halo-qs-row-note,
+.halo-scheme .halo-qs-row-icon,
+.halo-scheme .halo-qs-row-end,
+.halo-scheme .halo-qs-eye,
+.halo-scheme .halo-qs-handle,
+.halo-scheme .halo-tile-note {
+    color: $onVar;
+}
+
+.halo-scheme .halo-qs-card,
+.halo-scheme .halo-qs-card-row {
+    background-color: $card;
+}
+
+.halo-scheme .halo-tile {
+    background-color: $card;
+    color: $on;
+}
+
+.halo-scheme .halo-tile:hover {
+    background-color: $dent;
+}
+
+.halo-scheme .halo-tile-icon {
+    background-color: $dent;
+}
+
+.halo-scheme .halo-tile-chevron:hover {
+    background-color: $on@10;
+}
+
+.halo-scheme .halo-tile.halo-on {
+    background-color: $loud;
+    color: $onLoud;
+}
+
+.halo-scheme .halo-tile.halo-on .halo-tile-icon {
+    background-color: $onLoud@18;
+}
+
+.halo-scheme .halo-tile.halo-on .halo-tile-note,
+.halo-scheme .halo-tile.halo-on .halo-tile-chevron {
+    color: $onLoud;
+}
+
+.halo-scheme .halo-tile.halo-on .halo-tile-chevron:hover {
+    background-color: $onLoud@18;
+}
+
+.halo-scheme .halo-qs-art {
+    background-color: $tc;
+    color: $onTc;
+}
+
+.halo-scheme .halo-qs-track {
+    color: $on;
+}
+
+.halo-scheme .halo-qs-artist {
+    color: $onVar;
+}
+
+.halo-scheme .halo-qs-media-button {
+    color: $on;
+}
+
+.halo-scheme .halo-qs-media-button:hover {
+    background-color: $dent;
+}
+
+.halo-scheme .halo-qs-media-button.halo-qs-play {
+    background-color: $primary;
+    color: $onPrimary;
+}
+
+.halo-scheme .halo-qs-background-head {
+    background-color: $card;
+    color: $on;
+}
+
+.halo-scheme .halo-qs-background-head:hover,
+.halo-scheme .halo-qs-background-app:hover {
+    background-color: $dent;
+}
+
+.halo-scheme .halo-qs-background-app {
+    color: $on;
+}
+
+.halo-scheme .halo-qs-quit:hover {
+    background-color: $high;
+}
+
+.halo-scheme .halo-qs-row {
+    background-color: $card;
+    color: $on;
+}
+
+.halo-scheme .halo-qs-row:hover {
+    background-color: $dent;
+}
+
+.halo-scheme .halo-qs-card .halo-qs-row {
+    background-color: transparent;
+}
+
+.halo-scheme .halo-qs-card .halo-qs-row:hover {
+    background-color: $dent;
+}
+
+.halo-scheme .halo-qs-row.halo-chosen,
+.halo-scheme .halo-qs-row.halo-chosen:hover {
+    background-color: $chosen;
+    color: $onChosen;
+}
+
+.halo-scheme .halo-qs-row.halo-chosen .halo-qs-row-title,
+.halo-scheme .halo-qs-row.halo-chosen .halo-qs-row-note,
+.halo-scheme .halo-qs-row.halo-chosen .halo-qs-row-icon,
+.halo-scheme .halo-qs-row.halo-chosen .halo-qs-row-end {
+    color: $onChosen;
+}
+
+.halo-scheme .halo-qs-link {
+    color: $primary;
+}
+
+.halo-scheme .halo-qs-connected {
+    background-color: $loud;
+    color: $onLoud;
+}
+
+.halo-scheme .halo-qs-connected-title,
+.halo-scheme .halo-qs-connected-note {
+    color: $onLoud;
+}
+
+.halo-scheme .halo-qs-connected-icon {
+    background-color: $onLoud;
+    color: $loud;
+}
+
+.halo-scheme .halo-qs-connected-gear:hover {
+    background-color: $onLoud@18;
+}
+
+.halo-scheme .halo-qs-device {
+    background-color: $card;
+    color: $on;
+}
+
+.halo-scheme .halo-qs-device-icon {
+    background-color: $dent;
+}
+
+.halo-scheme .halo-qs-device-name,
+.halo-scheme .halo-qs-device-percent {
+    color: $on;
+}
+
+.halo-scheme .halo-qs-device-note {
+    color: $onVar;
+}
+
+.halo-scheme .halo-qs-device.halo-on {
+    background-color: $loud;
+    color: $onLoud;
+}
+
+.halo-scheme .halo-qs-device.halo-on .halo-qs-device-icon {
+    background-color: $onLoud;
+    color: $loud;
+}
+
+.halo-scheme .halo-qs-device.halo-on .halo-qs-device-name,
+.halo-scheme .halo-qs-device.halo-on .halo-qs-device-percent,
+.halo-scheme .halo-qs-device.halo-on .halo-qs-device-note {
+    color: $onLoud;
+}
+
+.halo-scheme .halo-qs-device-percent.halo-low {
+    color: $error;
+}
+
+.halo-scheme .halo-qs-wide-button {
+    background-color: $sc;
+    color: $onSc;
+}
+
+.halo-scheme .halo-qs-badge-number {
+    color: $onLoud;
+}
+
+.halo-scheme .halo-qs-segment {
+    background-color: $card;
+    color: $on;
+}
+
+.halo-scheme .halo-qs-card .halo-qs-segment {
+    background-color: $dent;
+}
+
+.halo-scheme .halo-qs-segment.halo-chosen,
+.halo-scheme .halo-qs-card .halo-qs-segment.halo-chosen {
+    background-color: $chosen;
+    color: $onChosen;
+}
+
+.halo-scheme .halo-qs-layout {
+    background-color: $dent;
+    color: $on;
+}
+
+.halo-scheme .halo-qs-layout.halo-chosen {
+    background-color: $chosen;
+}
+
+.halo-scheme .halo-qs-layout.halo-chosen .halo-qs-layout-name {
+    color: $onChosen;
+}
+
+.halo-scheme .halo-qs-layout-picture {
+    background-color: $pc;
+}
+
+.halo-scheme .halo-qs-layout-spot {
+    background-color: $primary;
+}
+
+.halo-scheme .halo-qs-warning {
+    background-color: $ec;
+    color: $onEc;
+}
+
+.halo-scheme .halo-qs-step,
+.halo-scheme .halo-qs-tile-item {
+    background-color: $dent;
+    color: $on;
+}
+
+.halo-scheme .halo-qs-tile-item.halo-dragging {
+    background-color: $highest;
+}
+
+.halo-scheme .halo-qs-tile-item.halo-hidden .halo-qs-row-title,
+.halo-scheme .halo-qs-tile-item.halo-hidden .halo-qs-row-icon {
+    color: $outline;
+}
+
+.halo-scheme .halo-qs-hosted .popup-menu-item {
+    color: $on;
+}
+
+.halo-scheme .halo-qs-hosted .popup-menu-item:hover,
+.halo-scheme .halo-qs-hosted .popup-menu-item:focus {
+    background-color: $dent;
 }

@@ -25,8 +25,8 @@ export default async function ({extension, shot, sleep, note, set, launch, deskt
     await click(bar.statusPill);
     await sleep(800);
     await shot('status-open');
-    note(`quick settings open=${Main.panel.statusArea.quickSettings.menu.isOpen}`);
-    Main.panel.statusArea.quickSettings.menu.close();
+    note(`halo quick settings open=${extension._qs.isOpen} status pill active=${bar.statusPill.has_style_class_name('halo-active')}`);
+    extension._qs.close();
     await sleep(400);
     await click(bar.clockPill);
     await sleep(800);

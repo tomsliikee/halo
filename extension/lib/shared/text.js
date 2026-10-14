@@ -32,6 +32,15 @@ export const ROLES = {
     'bar-app': {size: 15, weight: 700, width: 104},
     'bar-status': {size: 15, weight: 800, width: 106, tabular: true},
     'bar-chip': {size: 13, weight: 700, width: 100},
+    // Quick settings
+    'qs-page': {size: 24, weight: 750, width: 106},
+    'qs-tile': {size: 15, weight: 700, width: 104},
+    'qs-tile-note': {size: 12, weight: 450, width: 100},
+    'qs-row': {size: 15, weight: 600, width: 100},
+    'qs-row-note': {size: 12, weight: 400, width: 100},
+    'qs-caption': {size: 12, weight: 500, width: 100},
+    'qs-link': {size: 14, weight: 700, width: 100},
+    'qs-big': {size: 30, weight: 800, width: 112, tabular: true},
 };
 
 // The font description of a role; size is in pixels, scaled by the role

@@ -63,6 +63,18 @@ export function palette(colour, scheme) {
         // brightest surface; in dark the frame sinks so they still stand out.
         well: scheme === 'light' ? roles.highest : roles.surf,
         raised: scheme === 'light' ? roles.bright : roles.highest,
+        // What is switched on (a tile, a connected device): the strong
+        // primary in light; in dark the deep container, so it does not glare.
+        loud: scheme === 'light' ? roles.primary : roles.pc,
+        onLoud: scheme === 'light' ? roles.onPrimary : roles.onPc,
+        // The chosen row of a list: soft in light, bright in dark.
+        chosen: scheme === 'light' ? roles.pc : roles.primary,
+        onChosen: scheme === 'light' ? roles.onPc : roles.onPrimary,
+        // The quick settings: the panel, the cards on it, and what sits
+        // sunk into a card (an icon's circle, a row inside a card).
+        panel: scheme === 'light' ? roles.low : roles.surf,
+        card: scheme === 'light' ? roles.bright : roles.high,
+        dent: scheme === 'light' ? roles.high : roles.bright,
     };
 }
 

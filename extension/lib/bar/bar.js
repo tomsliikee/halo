@@ -12,6 +12,7 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
 import {expressive, spring, SPRINGS, stopSprings} from '../shared/choreo.js';
 import {icon, setIcon} from '../shared/icons.js';
+import {pressable} from '../shared/press.js';
 import {text} from '../shared/text.js';
 import {setScheme} from '../shared/theme.js';
 import {cornerRadius, frameRect, groupHeight, groupPositions, groupY, strutHeight} from './layout.js';
@@ -19,34 +20,6 @@ import {batteryIcon, batteryLow, elapsedText, layoutText, networkIcon, percentTe
 
 const DOT = 10;
 const CURRENT_DOT = 26;
-
-// Makes an actor answer a primary or secondary click with a short press,
-// without St.Button, whose press in GNOME 50 travels on to the parent.
-function pressable(actor, onClick) {
-    actor.reactive = true;
-    actor.track_hover = true;
-    actor.set_pivot_point(0.5, 0.5);
-    let pressed = 0;
-    actor.connect('button-press-event', (_actor, event) => {
-        pressed = event.get_button();
-        spring(actor, {scale_x: 0.94, scale_y: 0.94}, {spring: SPRINGS.press});
-        return Clutter.EVENT_STOP;
-    });
-    actor.connect('button-release-event', (_actor, event) => {
-        const button = pressed;
-        pressed = 0;
-        spring(actor, {scale_x: 1, scale_y: 1}, {spring: SPRINGS.release});
-        if (button && button === event.get_button())
-            onClick(event, button);
-        return Clutter.EVENT_STOP;
-    });
-    actor.connect('leave-event', () => {
-        if (pressed) {
-            pressed = 0;
-            spring(actor, {scale_x: 1, scale_y: 1}, {spring: SPRINGS.release});
-        }
-    });
-}
 
 export class Bar {
     // callbacks: {onWorkspace(index), onOverview(), onScroll(step), onClock(actor),
