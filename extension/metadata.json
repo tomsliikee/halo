@@ -1,0 +1,8 @@
+{
+    "uuid": "halo@thomashaiden",
+    "name": "Halo",
+    "description": "A top bar, Dynamic Island, notification center and quick settings in Toms Expressive Design.",
+    "shell-version": ["50"],
+    "session-modes": ["user", "unlock-dialog"],
+    "url": "https://github.com/tomsliikee/halo"
+}

@@ -1,0 +1,1 @@
+{"uuid": "halo-driver@test", "name": "Halo driver", "description": "Drives Halo in the headless test shell.", "shell-version": ["50"]}

@@ -1,0 +1,13 @@
+/* Structure only above the marker; colours below it, written once per
+   colour style and scheme by tools/build-stylesheet.js. */
+
+.halo-bar {
+    height: 44px;
+}
+
+/* themed */
+
+.halo-scheme .halo-pill {
+    background-color: $surf;
+    color: $on;
+}
