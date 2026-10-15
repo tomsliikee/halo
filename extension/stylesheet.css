@@ -628,6 +628,22 @@
     spacing: 8px;
 }
 
+.halo-island-dock {
+    height: 36px;
+    padding: 0 4px 0 16px;
+    spacing: 8px;
+}
+
+.halo-island-dock-line {
+    width: 1px;
+    height: 16px;
+    margin: 0 2px;
+}
+
+.halo-island-dock-mini {
+    spacing: 6px;
+}
+
 .halo-island-peek {
     padding: 2px 26px 18px 26px;
     spacing: 10px;
@@ -1191,6 +1207,10 @@
 
 .halo-scheme-blue-light .halo-island-dim {
     color: #444654;
+}
+
+.halo-scheme-blue-light .halo-island-dock-line {
+    background-color: rgba(68,70,84,0.4);
 }
 
 .halo-scheme-blue-light .halo-island-unread {
@@ -1903,6 +1923,10 @@
     color: #c5c5d6;
 }
 
+.halo-scheme-blue-dark .halo-island-dock-line {
+    background-color: rgba(197,197,214,0.4);
+}
+
 .halo-scheme-blue-dark .halo-island-unread {
     background-color: #b9c3ff;
 }
@@ -2611,6 +2635,10 @@
 
 .halo-scheme-violet-light .halo-island-dim {
     color: #4a4453;
+}
+
+.halo-scheme-violet-light .halo-island-dock-line {
+    background-color: rgba(74,68,83,0.4);
 }
 
 .halo-scheme-violet-light .halo-island-unread {
@@ -3323,6 +3351,10 @@
     color: #ccc3d5;
 }
 
+.halo-scheme-violet-dark .halo-island-dock-line {
+    background-color: rgba(204,195,213,0.4);
+}
+
 .halo-scheme-violet-dark .halo-island-unread {
     background-color: #d2bbff;
 }
@@ -4031,6 +4063,10 @@
 
 .halo-scheme-green-light .halo-island-dim {
     color: #3e4a3d;
+}
+
+.halo-scheme-green-light .halo-island-dock-line {
+    background-color: rgba(62,74,61,0.4);
 }
 
 .halo-scheme-green-light .halo-island-unread {
@@ -4743,6 +4779,10 @@
     color: #bdcaba;
 }
 
+.halo-scheme-green-dark .halo-island-dock-line {
+    background-color: rgba(189,202,186,0.4);
+}
+
 .halo-scheme-green-dark .halo-island-unread {
     background-color: #00e468;
 }
@@ -5451,6 +5491,10 @@
 
 .halo-scheme-teal-light .halo-island-dim {
     color: #394a46;
+}
+
+.halo-scheme-teal-light .halo-island-dock-line {
+    background-color: rgba(57,74,70,0.4);
 }
 
 .halo-scheme-teal-light .halo-island-unread {
@@ -6163,6 +6207,10 @@
     color: #b8cac5;
 }
 
+.halo-scheme-teal-dark .halo-island-dock-line {
+    background-color: rgba(184,202,197,0.4);
+}
+
 .halo-scheme-teal-dark .halo-island-unread {
     background-color: #00dfc7;
 }
@@ -6871,6 +6919,10 @@
 
 .halo-scheme-orange-light .halo-island-dim {
     color: #58423a;
+}
+
+.halo-scheme-orange-light .halo-island-dock-line {
+    background-color: rgba(88,66,58,0.4);
 }
 
 .halo-scheme-orange-light .halo-island-unread {
@@ -7583,6 +7635,10 @@
     color: #dfc0b6;
 }
 
+.halo-scheme-orange-dark .halo-island-dock-line {
+    background-color: rgba(223,192,182,0.4);
+}
+
 .halo-scheme-orange-dark .halo-island-unread {
     background-color: #ffb59c;
 }
@@ -8291,6 +8347,10 @@
 
 .halo-scheme-salmon-light .halo-island-dim {
     color: #58413e;
+}
+
+.halo-scheme-salmon-light .halo-island-dock-line {
+    background-color: rgba(88,65,62,0.4);
 }
 
 .halo-scheme-salmon-light .halo-island-unread {
@@ -9003,6 +9063,10 @@
     color: #dfbfbb;
 }
 
+.halo-scheme-salmon-dark .halo-island-dock-line {
+    background-color: rgba(223,191,187,0.4);
+}
+
 .halo-scheme-salmon-dark .halo-island-unread {
     background-color: #ffb4aa;
 }
@@ -9711,6 +9775,10 @@
 
 .halo-scheme-pink-light .halo-island-dim {
     color: #564146;
+}
+
+.halo-scheme-pink-light .halo-island-dock-line {
+    background-color: rgba(86,65,70,0.4);
 }
 
 .halo-scheme-pink-light .halo-island-unread {
@@ -10423,6 +10491,10 @@
     color: #ddbfc5;
 }
 
+.halo-scheme-pink-dark .halo-island-dock-line {
+    background-color: rgba(221,191,197,0.4);
+}
+
 .halo-scheme-pink-dark .halo-island-unread {
     background-color: #ffb1c4;
 }
@@ -11133,6 +11205,10 @@
     color: #474747;
 }
 
+.halo-scheme-white-light .halo-island-dock-line {
+    background-color: rgba(71,71,71,0.4);
+}
+
 .halo-scheme-white-light .halo-island-unread {
     background-color: #000000;
 }
@@ -11841,6 +11917,10 @@
 
 .halo-scheme-white-dark .halo-island-dim {
     color: #c6c6c6;
+}
+
+.halo-scheme-white-dark .halo-island-dock-line {
+    background-color: rgba(198,198,198,0.4);
 }
 
 .halo-scheme-white-dark .halo-island-unread {

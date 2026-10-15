@@ -112,11 +112,18 @@ export class Bars {
             bar.setIslandClock(on && bar === this.primary);
     }
 
-    // The island shows something: the main bar may step back around it.
-    setIslandFocus(on) {
-        this._islandFocus = on;
-        for (const bar of this._bars)
-            bar.setIslandFocus(on && bar === this.primary);
+    // The island hangs below the bar: the main bar shows its own clock
+    // meanwhile.
+    setIslandDropped(dropped) {
+        this._islandDropped = dropped;
+        this.primary?.setIslandDropped(dropped);
+    }
+
+    // Something is docked in the island's clock: the main bar's clock pill
+    // takes its width (0: its own) so the groups move apart.
+    setIslandDock(width) {
+        this._islandDock = width;
+        this.primary?.setIslandDock(width);
     }
 
     // {summary, text} of the next event shown as a chip beside the clock, or null.
@@ -171,7 +178,8 @@ export class Bars {
         for (const bar of this._bars)
             bar.setSettings(this._settings);
         this.setIslandClock(this._islandClock);
-        this.setIslandFocus(Boolean(this._islandFocus));
+        this.setIslandDock(this._islandDock ?? 0);
+        this.setIslandDropped(Boolean(this._islandDropped));
         this._syncFullscreen();
         this._update();
         this._menus.onRebuilt?.();

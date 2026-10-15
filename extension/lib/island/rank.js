@@ -72,3 +72,20 @@ export function accumulate(sum, amount) {
     const steps = Math.trunc(total);
     return {sum: total - steps, steps};
 }
+
+// Running things that may rise into the bar's clock and stay there. A call
+// wants to be answered and stays below.
+export const DOCKS = new Set(['media', 'timer', 'recording', 'claude', 'progress', 'privacy']);
+
+// Where the island is: {drop, docked}. drop: it hangs below the bar rather
+// than in it; docked: a running thing sits in the clock's pill. Something
+// new drops below the bar for `introMs`, a running thing then rises into
+// the clock when docking is on. An opened look always drops.
+export function placement({main, expanded = null, dock = true, now = 0, introMs = 0}) {
+    if (!main)
+        return {drop: false, docked: false};
+    if (main.hint || (expanded === main.id && main.large))
+        return {drop: true, docked: false};
+    const docked = dock && DOCKS.has(main.kind) && now >= main.at + introMs;
+    return {drop: !docked, docked};
+}

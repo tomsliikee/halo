@@ -28,7 +28,7 @@ const BAR_SWITCHES = [
     ['seeThrough', 'See-through', 'Lets the wallpaper show through the bar'],
     ['lightBar', 'Light bar', 'Stays light when the desktop is dark'],
     ['hideInFullscreen', 'Hide in fullscreen', 'Rest the pointer on the top edge to bring it back'],
-    ['islandFocusBar', 'Pills only behind the island', 'While the island shows something, only the side pills stay'],
+    ['islandDock', 'Active events hide in the top bar', 'Music, timers and more rise into the clock; off, they float below the bar'],
 ];
 
 const EVENT_NAMES = {

@@ -207,6 +207,84 @@ export function restView({date, time, unread}) {
     };
 }
 
+// Docked: the clock's pill with a running thing beside the time, as small
+// as the bar. Clicks, scrolls and the right click are the island's own.
+export function dockView(rest, activity) {
+    const dateLabel = text('bar-date', {styleClass: 'halo-island-dim', text: rest.date});
+    const timeLabel = text('bar-time', {styleClass: 'halo-island-text', text: rest.time});
+    const dot = new St.Widget({style_class: 'halo-island-unread', y_align: Clutter.ActorAlign.CENTER, visible: rest.unread});
+    const line = new St.Widget({style_class: 'halo-island-dock-line', y_align: Clutter.ActorAlign.CENTER});
+    const {actor: mini, update: updateMini} = dockMini(activity);
+    const actor = box('halo-island-dock', {children: [dateLabel, timeLabel, dot, line, mini]});
+    return {
+        actor,
+        update(next, state) {
+            dateLabel.text = state.date;
+            timeLabel.text = state.time;
+            dot.visible = state.unread;
+            updateMini(next);
+        },
+    };
+}
+
+// What a running thing shows of itself in the docked pill.
+function dockMini(activity) {
+    const {data, kind} = activity;
+    if (kind === 'media') {
+        const cover = coverSlot(data.cover, {size: 24, radius: 7});
+        const wave = waveform({width: 20, height: 16});
+        wave.setPlaying(data.playing);
+        let current = activity;
+        const play = round(data.playing ? 'pause' : 'play-arrow', () => current.onPlay(),
+            {square: true, size: 28, iconSize: 16, accessibleName: 'Play or pause'});
+        return {
+            actor: box('halo-island-dock-mini', {children: [cover.actor, wave.actor, play]}),
+            update(next) {
+                current = next;
+                cover.set(next.data.cover);
+                wave.setPlaying(next.data.playing);
+                play.child.gicon = iconGicon(next.data.playing ? 'pause' : 'play-arrow', true);
+            },
+        };
+    }
+    if (kind === 'timer') {
+        const dial = ring('timer', {size: 24});
+        dial.set(data.progress);
+        const time = text('bar-time', {styleClass: 'halo-island-text', text: clockText(data.shown, {countdown: data.countdown})});
+        return {
+            actor: box('halo-island-dock-mini', {children: [dial.actor, time]}),
+            update(next) {
+                dial.set(next.data.progress);
+                time.text = clockText(next.data.shown, {countdown: next.data.countdown});
+            },
+        };
+    }
+    if (kind === 'recording') {
+        const dot = new St.Widget({style_class: 'halo-island-rec-dot', y_align: Clutter.ActorAlign.CENTER});
+        const time = text('bar-time', {styleClass: 'halo-island-text', text: data.text});
+        return {
+            actor: box('halo-island-dock-mini', {children: [dot, time]}),
+            update(next) {
+                time.text = next.data.text;
+            },
+        };
+    }
+    // Claude, a download, the microphone or camera: its icon, maybe a number.
+    const name = data.icon ?? {claude: 'progress-activity', progress: 'download'}[kind] ?? 'more-horiz';
+    const glyph = icon(name, {size: 18, fill: true, styleClass: `halo-island-${kind === 'privacy' ? 'alarm' : 'accent'}-text`});
+    if (data.spin)
+        spinning(glyph);
+    const trailing = text('bar-time', {styleClass: 'halo-island-text', text: data.trailing ?? ''});
+    trailing.visible = Boolean(data.trailing);
+    return {
+        actor: box('halo-island-dock-mini', {children: [glyph, trailing]}),
+        update(next) {
+            trailing.text = next.data.trailing ?? '';
+            trailing.visible = Boolean(next.data.trailing);
+        },
+    };
+}
+
 // The hover preview: a small look with one more line below it, for what
 // the small island leaves out. view: a built view; the line is data.peek.
 export function withPeek(view, activity) {

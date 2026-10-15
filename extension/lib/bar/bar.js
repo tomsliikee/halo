@@ -34,8 +34,6 @@ export class Bar {
         this._relayoutId = 0;
         this._placed = false;
         this._hiddenForFullscreen = false;
-        this._islandFocus = false;
-        this._centreHidden = false;
 
         // Takes the work area off the top; the bar itself floats in it.
         this._strut = new St.Widget({name: 'haloStrut', reactive: false});
@@ -88,35 +86,32 @@ export class Bar {
         this._clock.reactive = !on;
     }
 
+    // While the island hangs below the bar the clock shows in its place;
+    // when the island rises back it covers the clock, which steps back.
+    setIslandDropped(dropped) {
+        if (!this._clock.has_style_class_name('halo-island-clock'))
+            return;
+        this._clock.reactive = dropped;
+        ease(this._clock, {opacity: dropped ? 255 : 0});
+    }
+
+    // The island docks a running thing in the clock: its pill is this wide,
+    // or as wide as it needs for 0.
+    setIslandDock(width) {
+        // A fixed width, not a minimum: Clutter aborts on a minimum above
+        // the natural width.
+        this._clock.width = width > 0 ? width : -1;
+    }
+
     // Whether the bar is out of sight over a fullscreen window.
     get hidden() {
         return !this.actor?.visible || (this.actor?.translation_y ?? 0) < -1;
     }
 
-    // The island shows something. With islandFocusBar the bar steps back to
-    // its pills around it, as the islands layout, so the island stands out.
-    setIslandFocus(on) {
-        if (on === this._islandFocus)
-            return;
-        const before = this._layout;
-        this._islandFocus = on;
-        if (!this._settings || this._layout === before)
-            return;
-        this._paint();
-        if (this._state)
-            this._fill(this._state);
-        this._place({animated: true});
-    }
-
-    get _focused() {
-        return this._islandFocus && Boolean(this._settings?.islandFocusBar) && !this._state?.locked;
-    }
-
     setSettings(settings) {
         const before = this._settings;
-        const layoutBefore = before ? this._layout : null;
         this._settings = settings;
-        const layoutChanged = !before || layoutBefore !== this._layout || before.floating !== settings.floating;
+        const layoutChanged = !before || before.barLayout !== settings.barLayout || before.floating !== settings.floating;
         this._paint();
         if (this._state)
             this._fill(this._state);
@@ -139,7 +134,7 @@ export class Bar {
     // The layout in use. On the lock screen only the status pill stays, as
     // in GNOME's panel there, standing on its own over the wallpaper.
     get _layout() {
-        return this._state?.locked || this._focused ? 'islands' : this._settings.barLayout;
+        return this._state?.locked ? 'islands' : this._settings.barLayout;
     }
 
     // Hides the bar over a fullscreen window, or brings it back.
@@ -288,11 +283,6 @@ export class Bar {
         const full = this._layout === 'full';
         this._left.visible = !state.locked;
         this._centre.visible = !state.locked;
-        // The clock's pill would show around the island's edge.
-        if (this._centreHidden !== this._focused) {
-            this._centreHidden = this._focused;
-            ease(this._centre, {opacity: this._focused ? 0 : 255});
-        }
 
         // Workspaces, or "Overview" while the overview is open.
         this._setDots(state.workspaces.count, state.workspaces.active);
@@ -312,8 +302,7 @@ export class Bar {
         this._date.text = full || this._layout === 'islands' ? state.date : state.dateShort;
         this._time.text = state.time;
         this._unread.visible = state.unread;
-        // Beside the island the event chip and the keyboard layout step back.
-        this._event.visible = Boolean(state.event) && !this._focused;
+        this._event.visible = Boolean(state.event);
         if (state.event) {
             this._eventText.text = state.event.text;
             this._event.accessible_name = `${state.event.summary}, ${state.event.text}`;
@@ -321,7 +310,7 @@ export class Bar {
         this._setActive(this._clock, state.clockOpen);
 
         this._keyboard.text = layoutText(state.keyboard);
-        this._keyboardBox.visible = Boolean(state.keyboard) && !this._focused;
+        this._keyboardBox.visible = Boolean(state.keyboard);
         this._recording.visible = state.recordingSeconds !== null;
         if (state.recordingSeconds !== null)
             this._recordingTime.text = elapsedText(state.recordingSeconds);

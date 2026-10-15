@@ -1,5 +1,5 @@
 import {crossed, readLimits} from '../extension/lib/island/limits.js';
-import {accumulate, pick, scrollIntent, shownWhileLocked} from '../extension/lib/island/rank.js';
+import {accumulate, pick, placement, scrollIntent, shownWhileLocked} from '../extension/lib/island/rank.js';
 import {
     claudeNote, claudePeek, clockText, copiedText, initials, isDecline, levelShare, limitNote, limitTitle, lockedNote, lowMark, osdIcon,
     mediaPeek, osdKind, plainText, soonText, timerPeek, trackTime, unitAppId,
@@ -153,4 +153,18 @@ test('the hover preview says a little more', () => equal([
     claudePeek([{project: 'halo'}, {project: 'ledge'}, {project: 'halo'}]),
 ], ['Spotify · 1:13 of 3:09 · scroll for volume', 'scroll for volume',
     'Ends at 13:05 · scroll for a minute more or less', 'Ends at 1:05 PM · scroll for a minute more or less', 'halo, ledge']));
+const playing = {id: 'media', kind: 'media', at: 1000};
+test('the resting island stays in the bar', () => equal(placement({main: null}), {drop: false, docked: false}));
+test('a hint drops below the bar', () => equal(
+    placement({main: {id: 'osd', kind: 'volume', hint: true, at: 0}, now: 9000, introMs: 2500}), {drop: true, docked: false}));
+test('music drops first, then rises into the clock', () => equal(
+    [placement({main: playing, now: 2000, introMs: 2500}), placement({main: playing, now: 3500, introMs: 2500})],
+    [{drop: true, docked: false}, {drop: false, docked: true}]));
+test('without docking music stays below', () => equal(
+    placement({main: playing, dock: false, now: 9000, introMs: 2500}), {drop: true, docked: false}));
+test('an opened look drops even when docked', () => equal(
+    placement({main: {...playing, large: 'mediaLarge'}, expanded: 'media', now: 9000, introMs: 2500}), {drop: true, docked: false}));
+test('a call never docks', () => equal(
+    placement({main: {id: 'c', kind: 'call', at: 0}, now: 9000, introMs: 2500}), {drop: true, docked: false}));
+
 done('island');

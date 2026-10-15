@@ -626,6 +626,22 @@
     spacing: 8px;
 }
 
+.halo-island-dock {
+    height: 36px;
+    padding: 0 4px 0 16px;
+    spacing: 8px;
+}
+
+.halo-island-dock-line {
+    width: 1px;
+    height: 16px;
+    margin: 0 2px;
+}
+
+.halo-island-dock-mini {
+    spacing: 6px;
+}
+
 .halo-island-peek {
     padding: 2px 26px 18px 26px;
     spacing: 10px;
@@ -1191,6 +1207,10 @@
 
 .halo-scheme .halo-island-dim {
     color: $onVar;
+}
+
+.halo-scheme .halo-island-dock-line {
+    background-color: $onVar@40;
 }
 
 .halo-scheme .halo-island-unread {

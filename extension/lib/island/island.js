@@ -17,7 +17,7 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import {expressive, spring, SPRINGS, stretch} from '../shared/choreo.js';
 import {islandScheme, palette} from '../shared/palettes.js';
 import {setScheme} from '../shared/theme.js';
-import {accumulate, pick, scrollIntent, shownWhileLocked} from './rank.js';
+import {accumulate, pick, placement, scrollIntent, shownWhileLocked} from './rank.js';
 import {IslandShape, MAX_RADIUS} from './shape.js';
 import * as Views from './views.js';
 
@@ -40,6 +40,9 @@ const HOVER_Y = 8;
 const EDIT = 36;
 // Below the bar, where the island hangs when there is no clock to grow from.
 const FALLBACK_TOP = 8;
+// Something running drops below the bar this long before it rises into the
+// clock.
+const INTRO_MS = HINT_MS;
 
 const BUILDERS = {
     level: Views.levelView,
@@ -57,15 +60,21 @@ export class Island {
     // anchor(): {x (centre), y (top), width, height, visible} of the clock
     // the island rests on; onClock(): the resting clock was clicked;
     // onSettings(): the pencil circle was, while the center is open;
-    // onActive(active): the island began or stopped showing something.
-    constructor({theme, settings, anchor, onClock, onSettings, onActive}) {
+    // onDock(width): the clock's pill should be this wide for what is docked
+    // in it, or 0 for its own width; onDrop(dropped): the island left the
+    // clock for below the bar, or came back.
+    constructor({theme, settings, anchor, onClock, onSettings, onDock, onDrop}) {
         this._theme = theme;
         this._settings = settings;
         this._anchor = anchor;
         this._onClock = onClock;
         this._onSettings = onSettings;
-        this._onActive = onActive;
-        this._active = false;
+        this._onDock = onDock;
+        this._onDrop = onDrop;
+        this._dropped = false;
+        this._dockWidth = 0;
+        this._docked = false;
+        this._dockWait = 0;
         this._activities = new Map();
         this._dismissed = new Set();
         this._focus = null;
@@ -126,11 +135,6 @@ export class Island {
         return this._settings.current.islandEvents[event] !== false;
     }
 
-    // Whether the island shows something rather than resting.
-    get active() {
-        return this._active;
-    }
-
     // The id of the activity shown in its large look, or null.
     get expanded() {
         return this._expanded;
@@ -189,7 +193,13 @@ export class Island {
             return;
         if (this._shown === null && this._view?.update)
             this._view.update(rest);
-        if (this._shown === null)
+        if (this._shown === null || this._docked)
+            this._render();
+    }
+
+    // The settings changed: where the island hangs may too.
+    refresh() {
+        if (!this._gone)
             this._render();
     }
 
@@ -265,9 +275,13 @@ export class Island {
         if (this._gone)
             return;
         const place = this._place();
-        this._shape.setAnchor(place.x, place.y);
-        if (this._shown !== null)
+        this._shape.setAnchor(place.x, this._top(place));
+        if (this._shown !== null && !this._docked)
             return;
+        if (this._docked) {
+            this._render();
+            return;
+        }
         this._shape.visible = place.visible;
         this._shape.reactive = place.visible;
         const {width, height} = this._restSize(place);
@@ -278,6 +292,9 @@ export class Island {
     }
 
     destroy() {
+        if (this._dockWait)
+            GLib.source_remove(this._dockWait);
+        this._dockWait = 0;
         if (this._outside)
             global.stage.disconnect(this._outside);
         this._outside = 0;
@@ -327,15 +344,74 @@ export class Island {
         };
     }
 
+    // Where the island is for what it shows: {drop, docked}. On the lock
+    // screen and where there is no clock it stays as it was.
+    _placement(main) {
+        const place = this._place();
+        const settings = this._settings.current;
+        if (this._locked || !place.visible)
+            return {drop: false, docked: false};
+        return placement({
+            main, expanded: this._expanded, dock: settings.islandDock,
+            now: Date.now(), introMs: INTRO_MS,
+        });
+    }
+
+    // The top the island hangs from: the clock's, or below the bar.
+    _top(place, where = this._placement(this._pick().main)) {
+        return where.drop ? place.dropY ?? place.y : place.y;
+    }
+
+    // A running thing rises into the clock once its intro is over.
+    _scheduleDock(main) {
+        if (this._dockWait)
+            GLib.source_remove(this._dockWait);
+        this._dockWait = 0;
+        if (!main || main.hint)
+            return;
+        const wait = main.at + INTRO_MS - Date.now();
+        if (wait <= 0)
+            return;
+        this._dockWait = GLib.timeout_add(GLib.PRIORITY_DEFAULT, wait + 16, () => {
+            this._dockWait = 0;
+            this._render();
+            return GLib.SOURCE_REMOVE;
+        });
+    }
+
     _render({animate = true} = {}) {
         if (this._gone)
             return;
         const {main, bubble} = this._pick();
         const place = this._place();
-        this._shape.setAnchor(place.x, place.y);
+        const where = this._placement(main);
+        this._docked = where.docked;
+        this._shape.setAnchor(place.x, this._top(place, where), {animate});
+        this._scheduleDock(main);
         this._syncPad(main, animate);
+        let dockWidth = 0;
 
-        if (!main) {
+        if (main && where.docked) {
+            // Docked: the clock's pill with the running thing beside the time.
+            const key = `dock:${main.kind}:${main.id}`;
+            this._shape.visible = true;
+            this._shape.reactive = true;
+            if (this._shown === main.id && this._viewKey === key && this._view?.update) {
+                this._view.update(main, this._rest);
+            } else {
+                this._shown = main.id;
+                this._viewKey = key;
+                this._view = Views.dockView(this._rest, main);
+                this._shape.setContent(this._view.actor, {height: place.height, animate});
+            }
+            const [, w] = this._view.actor.get_preferred_width(place.height);
+            const width = Math.max(Math.round(w), place.width);
+            dockWidth = width;
+            if (Math.round(this._view.actor.width) !== width) {
+                this._view.actor.set_size(width, place.height);
+                this._shape.resize(width, place.height, {animate});
+            }
+        } else if (!main) {
             // Resting: the clock, the pencil circle while the clock has
             // become the center, or nothing where there is no clock.
             this._expanded = null;
@@ -374,12 +450,22 @@ export class Island {
         // Beside the resting clock only a dismissed thing waits; while the
         // clock is the center the pencil circle is alone.
         const resting = !main && (this._rest.open || !place.visible);
-        this._renderBubble(resting ? null : bubble, main ? Views.BUBBLE : place.height || Views.BUBBLE);
+        const small = !main || where.docked;
+        this._renderBubble(resting ? null : bubble, small ? place.height || Views.BUBBLE : Views.BUBBLE);
+        this._syncDockWidth(dockWidth);
         this._syncOutside();
-        if (Boolean(main) !== this._active) {
-            this._active = Boolean(main);
-            this._onActive?.(this._active);
+        if (where.drop !== this._dropped) {
+            this._dropped = where.drop;
+            this._onDrop?.(where.drop);
         }
+    }
+
+    // The clock's pill makes room for what is docked in it.
+    _syncDockWidth(width) {
+        if (width === this._dockWidth)
+            return;
+        this._dockWidth = width;
+        this._onDock?.(width);
     }
 
     // A view that changed what it holds may want another size.
@@ -580,7 +666,7 @@ export class Island {
     // A small look under the pointer grows around itself; the clock, an
     // opened look and the lock screen stay as they are.
     _syncPad(main, animate = true) {
-        const on = Boolean(main) && this._shape.hover && !this._locked && !(this._expanded === main.id && main.large);
+        const on = Boolean(main) && this._shape.hover && !this._locked && !this._docked && !(this._expanded === main.id && main.large);
         this._shape.setPad(on ? HOVER_X : 0, on ? HOVER_Y : 0, {animate});
     }
 

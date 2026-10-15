@@ -32,6 +32,7 @@ class IslandShape extends St.Widget {
         // Where the shape hangs from: its centre on x, its top on y.
         this._anchorX = 0;
         this._anchorY = 0;
+        this._topTarget = null;
         // The size of what it holds, and room added around it (on hover).
         this._inner = {w: 0, h: 0};
         this._pad = {x: 0, y: 0};
@@ -81,11 +82,33 @@ class IslandShape extends St.Widget {
         this._bg.queue_repaint();
     }
 
-    // centreX, top: stage coordinates the shape grows from.
-    setAnchor(centreX, top) {
-        this._anchorX = Math.round(centreX);
-        this._anchorY = Math.round(top);
+    get boxTop() {
+        return this._anchorY;
+    }
+
+    set boxTop(value) {
+        this._anchorY = value;
         this._layout();
+    }
+
+    // centreX, top: stage coordinates the shape grows from. With animate a
+    // new top is sprung to (down below the bar and back up), the x follows
+    // at once.
+    setAnchor(centreX, top, {animate = false} = {}) {
+        top = Math.round(top);
+        this._anchorX = Math.round(centreX);
+        if (top === this._topTarget) {
+            this._layout();
+            return;
+        }
+        const down = this._topTarget !== null && top > this._topTarget;
+        this._topTarget = top;
+        if (animate && expressive() && this._w > 1) {
+            spring(this, {boxTop: top}, {spring: down ? SPRINGS.grow : SPRINGS.shrink});
+        } else {
+            stopSprings(this, ['boxTop']);
+            this.boxTop = top;
+        }
     }
 
     // Shows `actor` in the shape. The size is the actor's natural one unless
@@ -149,11 +172,12 @@ class IslandShape extends St.Widget {
         const w = Math.round(this._w);
         const h = Math.round(this._h);
         const x = this._anchorX - Math.round(w / 2);
+        const y = Math.round(this._anchorY);
         // A spring sets width and height one after the other, and its tail
         // moves less than a pixel: the shape is redrawn only when it moved.
-        const moved = x !== this.x || this._anchorY !== this.y || w !== this.width || h !== this.height;
+        const moved = x !== this.x || y !== this.y || w !== this.width || h !== this.height;
         if (moved) {
-            this.set_position(x, this._anchorY);
+            this.set_position(x, y);
             this.set_size(w, h);
             this._clip.set_size(w, h);
             this._bg.set_position(-SHADOW, -SHADOW);

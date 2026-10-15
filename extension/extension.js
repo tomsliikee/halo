@@ -165,7 +165,6 @@ export default class HaloExtension extends Extension {
             });
             this._bars.setSettings(settings);
             this._bars.setIslandClock(Boolean(this._island));
-            this._bars.setIslandFocus(Boolean(this._island?.active));
             this._showNextEvent();
         } else if (!settings.parts.bar && this._bars) {
             this._bars.destroy();
@@ -187,6 +186,8 @@ export default class HaloExtension extends Extension {
             this._startIsland();
         else if (!settings.parts.island && this._island)
             this._stopIsland();
+        else
+            this._island?.refresh();
     }
 
     _startCenter() {
@@ -258,7 +259,8 @@ export default class HaloExtension extends Extension {
                 this._center?.close();
                 this._openQuickSettings('settings', 'island');
             },
-            onActive: active => this._bars?.setIslandFocus(active),
+            onDock: width => this._bars?.setIslandDock(width),
+            onDrop: dropped => this._bars?.setIslandDropped(dropped),
         });
         const island = this._island;
         island.setLocked(Main.sessionMode.isLocked);
@@ -303,7 +305,8 @@ export default class HaloExtension extends Extension {
         this._island?.destroy();
         this._island = null;
         this._bars?.setIslandClock(false);
-        this._bars?.setIslandFocus(false);
+        this._bars?.setIslandDock(0);
+        this._bars?.setIslandDropped(false);
     }
 
     // The island goes where the main bar's clock goes.
@@ -336,6 +339,8 @@ export default class HaloExtension extends Extension {
                 x: x + w / 2, y, width: Math.round(w), height: Math.round(h),
                 visible: clock.is_mapped() && !bar.hidden,
                 fallbackY: monitor.y + PANEL_GAP,
+                // Below the bar, where something new drops to.
+                dropY: monitor.y + strutHeight(this._settings.current.floating) + (this._settings.current.floating ? 0 : PANEL_GAP),
             };
         }
         const dateMenu = Main.panel.statusArea.dateMenu;

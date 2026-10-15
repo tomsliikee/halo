@@ -86,8 +86,20 @@ export default async function ({extension, shot, sleep, note, click, move, moveT
     media._choose();
     await sleep(900);
     await shot('island-media');
-    note(`media ${size()}`);
-    await click(shape);
+    note(`media ${size()} top=${Math.round(shape.y)}`);
+    // After its intro it rises into the clock and stays there.
+    await sleep(2400);
+    await shot('island-media-docked');
+    note(`media docked=${island._docked} ${size()} top=${Math.round(shape.y)} clock=${Math.round(extension._bars.primary.clockPill.width)}`);
+    // Off, it floats below the bar.
+    set('islandDock', false);
+    await sleep(900);
+    await shot('island-media-floating');
+    note(`dock off: docked=${island._docked} ${size()} top=${Math.round(shape.y)}`);
+    set('islandDock', true);
+    await sleep(900);
+    note(`dock on: docked=${island._docked} ${size()} top=${Math.round(shape.y)}`);
+    await click(shape, 2);
     await sleep(900);
     await shot('island-media-large');
     note(`media large ${size()} expanded=${island.expanded}`);
@@ -104,16 +116,6 @@ export default async function ({extension, shot, sleep, note, click, move, moveT
     await click(shape, 3);
     await sleep(800);
     note(`right click: expanded=${island.expanded} ${size()}`);
-
-    // The bar steps back to its pills while the island shows something.
-    set('islandFocusBar', true);
-    await sleep(1200);
-    await shot('island-focus-bar');
-    const bar = extension._bars.primary;
-    note(`focus bar: layout=${bar._layout} frame=${bar._frame.visible}`);
-    set('islandFocusBar', false);
-    await sleep(800);
-    note(`focus bar off: layout=${bar._layout} frame=${bar._frame.visible}`);
 
     // A recording beside the music: the island splits.
     island.set({id: 'recording', kind: 'recording', view: 'recording', data: {seconds: 42, text: '00:42'}, onStop: () => note('stop')});
