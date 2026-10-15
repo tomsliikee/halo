@@ -195,6 +195,14 @@ export class Bar {
         this._clock.add_child(this._unread);
         pressable(this._clock, () => this._callbacks.onClock(this._clock));
         this._centre.add_child(this._clock);
+
+        // The next event of the day, shortly before it starts.
+        this._event = new St.BoxLayout({style_class: 'halo-chip halo-event-chip', y_align: Clutter.ActorAlign.CENTER, visible: false});
+        this._event.add_child(icon('event', {size: 16, fill: true}));
+        this._eventText = text('bar-chip', {styleClass: 'halo-status-text'});
+        this._event.add_child(this._eventText);
+        pressable(this._event, () => this._callbacks.onClock(this._clock));
+        this._centre.add_child(this._event);
     }
 
     _buildRight() {
@@ -261,6 +269,11 @@ export class Bar {
         this._date.text = full || settings.barLayout === 'islands' ? state.date : state.dateShort;
         this._time.text = state.time;
         this._unread.visible = state.unread;
+        this._event.visible = Boolean(state.event);
+        if (state.event) {
+            this._eventText.text = state.event.text;
+            this._event.accessible_name = `${state.event.summary}, ${state.event.text}`;
+        }
         this._setActive(this._clock, state.clockOpen);
 
         this._keyboard.text = layoutText(state.keyboard);

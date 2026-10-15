@@ -8,6 +8,12 @@ import {Bars} from './lib/bar/bars.js';
 import {GnomeMenus} from './lib/bar/gnomemenus.js';
 import {GnomePanel} from './lib/bar/gnomepanel.js';
 import {strutHeight} from './lib/bar/layout.js';
+import {untilText} from './lib/bar/words.js';
+import {Agenda} from './lib/center/agenda.js';
+import {CenterPanel} from './lib/center/center.js';
+import {NotificationModel} from './lib/center/notifications.js';
+import {CenterTakeover} from './lib/center/takeover.js';
+import {WeatherModel} from './lib/center/weather.js';
 import {Island} from './lib/island/island.js';
 import {BannerSource} from './lib/island/sources/banners.js';
 import {ClaudeSource} from './lib/island/sources/claude.js';
@@ -58,6 +64,14 @@ export default class HaloExtension extends Extension {
         this._bars = null;
         this._qs = null;
         this._takeover = null;
+        this._agenda = new Agenda();
+        this._agenda.connectObject('changed', () => this._showNextEvent(), this);
+        this._eventTick = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 30, () => {
+            this._showNextEvent();
+            return GLib.SOURCE_CONTINUE;
+        });
+        this._center = null;
+        this._centerTakeover = null;
         this._island = null;
         this._islandLater = 0;
         this._islandSources = [];
@@ -67,6 +81,12 @@ export default class HaloExtension extends Extension {
 
     disable() {
         this._stopIsland();
+        this._stopCenter();
+        GLib.source_remove(this._eventTick);
+        this._eventTick = 0;
+        this._agenda.disconnectObject(this);
+        this._agenda.destroy();
+        this._agenda = null;
         this._takeover?.destroy();
         this._takeover = null;
         this._qs?.destroy();
@@ -131,7 +151,7 @@ export default class HaloExtension extends Extension {
             this._bars = new Bars(this._barTheme, this._system, {
                 // Halo's center comes in a later step; until then, and
                 // whenever a part is off, GNOME's own opens here.
-                onClock: actor => this._gnomeMenus.toggle('dateMenu', actor),
+                onClock: actor => this._toggleCenter(actor),
                 onStatus: actor => (this._qs ? this._qs.toggle(actor) : this._gnomeMenus.toggle('quickSettings', actor)),
                 onRebuilt: () => this._followClock(),
                 // The island shows the date the bar has room for.
@@ -142,6 +162,7 @@ export default class HaloExtension extends Extension {
             });
             this._bars.setSettings(settings);
             this._bars.setIslandClock(Boolean(this._island));
+            this._showNextEvent();
         } else if (!settings.parts.bar && this._bars) {
             this._bars.destroy();
             this._bars = null;
@@ -153,10 +174,58 @@ export default class HaloExtension extends Extension {
             this._bars.setSettings(settings);
         }
 
+        if (settings.parts.center && !this._center)
+            this._startCenter();
+        else if (!settings.parts.center && this._center)
+            this._stopCenter();
+
         if (settings.parts.island && !this._island)
             this._startIsland();
         else if (!settings.parts.island && this._island)
             this._stopIsland();
+    }
+
+    _startCenter() {
+        this._notificationModel = new NotificationModel();
+        this._weather = new WeatherModel();
+        this._center = new CenterPanel({
+            theme: this._barTheme,
+            model: this._notificationModel,
+            agenda: this._agenda,
+            weather: this._weather,
+            anchor: () => {
+                const anchor = this._islandAnchor();
+                return {x: anchor?.x ?? Main.layoutManager.primaryMonitor.x + Main.layoutManager.primaryMonitor.width / 2, top: this._panelTop()};
+            },
+        }, open => this._bars?.setOpen('clock', open));
+        this._centerTakeover = new CenterTakeover(this._center);
+    }
+
+    _stopCenter() {
+        this._centerTakeover?.destroy();
+        this._centerTakeover = null;
+        this._center?.destroy();
+        this._center = null;
+        this._weather?.destroy();
+        this._weather = null;
+        this._notificationModel?.destroy();
+        this._notificationModel = null;
+    }
+
+    // The clock opens Halo's center, or GNOME's date menu while it is off.
+    _toggleCenter(actor) {
+        if (this._center)
+            this._center.toggle();
+        else if (actor)
+            this._gnomeMenus.toggle('dateMenu', actor);
+    }
+
+    // The bar's chip: the next event of today, from an hour before.
+    _showNextEvent() {
+        const event = this._agenda?.nextToday(60 * 60 * 1000);
+        this._bars?.setNextEvent(event
+            ? {summary: event.summary, text: untilText((event.start.getTime() - Date.now()) / 1000)}
+            : null);
     }
 
     _startIsland() {
@@ -164,11 +233,7 @@ export default class HaloExtension extends Extension {
             theme: this._theme,
             settings: this._settings,
             anchor: () => this._islandAnchor(),
-            onClock: () => {
-                const clock = this._bars?.primary?.clockPill;
-                if (clock)
-                    this._gnomeMenus.toggle('dateMenu', clock);
-            },
+            onClock: () => this._toggleCenter(this._bars?.primary?.clockPill ?? null),
         });
         const island = this._island;
         this._islandSources = [

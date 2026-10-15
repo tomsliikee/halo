@@ -44,6 +44,7 @@ export class Bars {
         this._tick = 0;
         this._peekId = 0;
         this._islandClock = false;
+        this._nextEvent = null;
 
         this._clock = new GnomeDesktop.WallClock();
         this._interface = new Gio.Settings({schema_id: 'org.gnome.desktop.interface'});
@@ -108,6 +109,14 @@ export class Bars {
         this._islandClock = on;
         for (const bar of this._bars)
             bar.setIslandClock(on && bar === this.primary);
+    }
+
+    // {summary, text} of the next event shown as a chip beside the clock, or null.
+    setNextEvent(event) {
+        if (JSON.stringify(event) === JSON.stringify(this._nextEvent))
+            return;
+        this._nextEvent = event;
+        this._update();
     }
 
     // name: "clock" or "status"; the pill shows the open state.
@@ -209,6 +218,7 @@ export class Bars {
             bluetooth: this._system.bluetooth,
             volumeIcon: this._system.volumeIcon,
             battery: this._system.battery,
+            event: this._nextEvent,
             clockOpen: this._open.clock,
             statusOpen: this._open.status,
         };

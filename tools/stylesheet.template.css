@@ -426,6 +426,183 @@
 }
 
 
+
+/* The notification center */
+
+.halo-center {
+    border-radius: 32px;
+    padding: 16px;
+    spacing: 16px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+}
+
+.halo-center-left {
+    spacing: 10px;
+}
+
+.halo-center-head {
+    padding: 6px 4px 4px 10px;
+}
+
+.halo-center-clear {
+    height: 40px;
+    padding: 0 18px;
+    border-radius: 20px;
+}
+
+.halo-center-list {
+    spacing: 8px;
+}
+
+.halo-center-card {
+    border-radius: 24px;
+    padding: 16px 18px;
+    spacing: 10px;
+}
+
+.halo-center-top {
+    spacing: 14px;
+}
+
+.halo-center-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+}
+
+.halo-center-words {
+    spacing: 2px;
+}
+
+.halo-center-header {
+    spacing: 8px;
+}
+
+.halo-center-close {
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+}
+
+.halo-center-sub {
+    margin-left: 54px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    spacing: 2px;
+}
+
+.halo-center-actions {
+    margin-left: 54px;
+    spacing: 8px;
+}
+
+.halo-center-action {
+    height: 40px;
+    padding: 0 18px;
+    border-radius: 20px;
+    border-width: 1px;
+}
+
+.halo-center-more {
+    height: 30px;
+    padding: 0 14px;
+    border-radius: 15px;
+}
+
+.halo-center-empty {
+    spacing: 10px;
+    padding: 60px 0;
+}
+
+.halo-center-dnd {
+    height: 56px;
+    padding: 0 16px;
+    border-radius: 24px;
+    spacing: 14px;
+}
+
+.halo-center-side-scroll {
+    width: 300px;
+}
+
+.halo-center-side {
+    spacing: 10px;
+}
+
+.halo-center-month {
+    padding: 16px 14px 12px 14px;
+    spacing: 10px;
+}
+
+.halo-center-month-head {
+    spacing: 6px;
+    padding: 0 4px;
+}
+
+.halo-center-nav {
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+}
+
+.halo-center-weekday {
+    text-align: center;
+    padding-bottom: 4px;
+}
+
+.halo-center-day {
+    width: 36px;
+    height: 36px;
+    border-radius: 14px;
+    padding-top: 7px;
+    transition-duration: 160ms;
+}
+
+.halo-center-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 2px;
+    margin-top: 1px;
+}
+
+.halo-center-caption {
+    padding: 4px 8px 0 8px;
+}
+
+.halo-center-events {
+    spacing: 6px;
+}
+
+.halo-center-event {
+    border-radius: 18px;
+    padding: 10px 14px 10px 12px;
+    spacing: 12px;
+}
+
+.halo-center-event-bar {
+    width: 4px;
+    border-radius: 2px;
+}
+
+.halo-center-quiet {
+    padding: 4px 8px;
+}
+
+.halo-center-pair {
+    spacing: 10px;
+}
+
+.halo-center-weather,
+.halo-center-clock {
+    padding: 14px 16px;
+    spacing: 4px;
+    border-radius: 24px;
+}
+
+.halo-center-clock {
+    border-radius: 24px 64px 24px 24px;
+}
+
 /* The timer page */
 
 .halo-qs-timer-now {
@@ -1118,4 +1295,190 @@
 
 .halo-scheme .halo-island-bubble {
     background-color: $highest;
+}
+
+
+/* The notification center */
+
+.halo-scheme .halo-center {
+    background-color: $panel;
+    color: $on;
+}
+
+.halo-scheme .halo-center-heading,
+.halo-scheme .halo-center-title,
+.halo-scheme .halo-center-date,
+.halo-scheme .halo-center-big,
+.halo-scheme .halo-center-event-title,
+.halo-scheme .halo-center-day-number {
+    color: $on;
+}
+
+.halo-scheme .halo-center-body {
+    color: $on;
+}
+
+.halo-scheme .halo-center-dim,
+.halo-scheme .halo-center-app,
+.halo-scheme .halo-center-weekday,
+.halo-scheme .halo-center-caption {
+    color: $onVar;
+}
+
+.halo-scheme .halo-center-clear,
+.halo-scheme .halo-center-card,
+.halo-scheme .halo-center-dnd,
+.halo-scheme .halo-center-event,
+.halo-scheme .halo-center-month,
+.halo-scheme .halo-center-weather,
+.halo-scheme .halo-center-clock {
+    background-color: $card;
+    color: $on;
+}
+
+.halo-scheme .halo-center-clear:hover,
+.halo-scheme .halo-center-dnd:hover {
+    background-color: $dent;
+}
+
+.halo-scheme .halo-center-card.halo-fresh {
+    background-color: $pc;
+}
+
+.halo-scheme .halo-center-card.halo-fresh .halo-center-title,
+.halo-scheme .halo-center-card.halo-fresh .halo-center-body,
+.halo-scheme .halo-center-card.halo-fresh .halo-center-app {
+    color: $onPc;
+}
+
+.halo-scheme .halo-center-icon {
+    background-color: $pc;
+    color: $onPc;
+}
+
+.halo-scheme .halo-center-card.halo-fresh .halo-center-icon {
+    background-color: $primary;
+    color: $onPrimary;
+}
+
+.halo-scheme .halo-center-icon.halo-center-picture {
+    background-color: transparent;
+}
+
+.halo-scheme .halo-center-close {
+    background-color: $dent;
+    color: $on;
+}
+
+.halo-scheme .halo-center-sub {
+    background-color: $dent;
+}
+
+.halo-scheme .halo-center-card.halo-fresh .halo-center-sub {
+    background-color: $bright;
+}
+
+.halo-scheme .halo-center-action {
+    border-color: $outline;
+    color: $on;
+}
+
+.halo-scheme .halo-center-action:hover {
+    background-color: $dent;
+}
+
+.halo-scheme .halo-center-action.halo-center-action-main {
+    border-color: $primary;
+    background-color: $primary;
+    color: $onPrimary;
+}
+
+.halo-scheme .halo-center-action.halo-center-action-tonal,
+.halo-scheme .halo-center-more {
+    border-color: transparent;
+    background-color: $pc;
+    color: $onPc;
+}
+
+.halo-scheme .halo-center-card.halo-fresh .halo-center-action-tonal,
+.halo-scheme .halo-center-card.halo-fresh .halo-center-more {
+    background-color: $bright;
+    color: $on;
+}
+
+.halo-scheme .halo-center-empty-icon,
+.halo-scheme .halo-center-dnd-icon {
+    color: $onVar;
+}
+
+.halo-scheme .halo-center-nav {
+    background-color: $dent;
+    color: $on;
+}
+
+.halo-scheme .halo-center-day:hover {
+    background-color: $dent;
+}
+
+.halo-scheme .halo-center-day.halo-chosen {
+    background-color: $pc;
+}
+
+.halo-scheme .halo-center-day.halo-chosen .halo-center-day-number {
+    color: $onPc;
+}
+
+.halo-scheme .halo-center-day.halo-today {
+    background-color: $primary;
+}
+
+.halo-scheme .halo-center-day.halo-today .halo-center-day-number {
+    color: $onPrimary;
+}
+
+.halo-scheme .halo-center-dot {
+    background-color: $primary;
+}
+
+.halo-scheme .halo-center-day.halo-today .halo-center-dot {
+    background-color: $onPrimary;
+}
+
+.halo-scheme .halo-center-event-bar {
+    background-color: $on;
+}
+
+.halo-scheme .halo-center-event.halo-soon {
+    background-color: $tc;
+}
+
+.halo-scheme .halo-center-event.halo-soon .halo-center-event-title,
+.halo-scheme .halo-center-event.halo-soon .halo-center-dim,
+.halo-scheme .halo-center-soon {
+    color: $onTc;
+}
+
+.halo-scheme .halo-center-event.halo-soon .halo-center-event-bar {
+    background-color: $onTc;
+}
+
+.halo-scheme .halo-center-event.halo-over .halo-center-event-title {
+    color: $onVar;
+}
+
+.halo-scheme .halo-center-event.halo-over .halo-center-event-bar {
+    background-color: $outVar;
+}
+
+.halo-scheme .halo-center-accent {
+    color: $primary;
+}
+
+.halo-scheme .halo-event-chip {
+    background-color: $tc;
+    color: $onTc;
+}
+
+.halo-scheme .halo-event-chip .halo-status-text {
+    color: $onTc;
 }

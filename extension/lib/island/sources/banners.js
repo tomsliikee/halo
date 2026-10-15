@@ -97,8 +97,12 @@ export class BannerSource {
             this._island.remove(id);
         };
         // Seen in the island is seen: it does not come back as a banner.
+        // A transient notification goes once it was shown, as GNOME does
+        // after its banner.
         const acknowledge = () => {
             notification.acknowledged = true;
+            if (notification.isTransient)
+                notification.destroy(MessageTray.NotificationDestroyedReason.EXPIRED);
         };
 
         if (call) {

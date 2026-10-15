@@ -72,6 +72,9 @@ export default class Driver extends Extension {
             shot, sleep, note, Main,
             desktop: new Gio.Settings({schema_id: 'org.gnome.desktop.interface'}),
             moveTo: (x, y) => pointer.notify_absolute_motion(time(), x, y),
+            // Holds the primary button down or lets it go, for drags.
+            hold: down => pointer.notify_button(time(), Clutter.BUTTON_PRIMARY,
+                down ? Clutter.ButtonState.PRESSED : Clutter.ButtonState.RELEASED),
             move: actor => {
                 const [x, y] = actor.get_transformed_position();
                 const [w, h] = actor.get_transformed_size();

@@ -34,6 +34,11 @@ export default async function ({extension, shot, sleep, note, set, Main}) {
             if (tile)
                 extension._qs.navigate('hosted', tile);
             await sleep(80);
+        } else if (extension._center) {
+            // The other times with the center open, and a hint in the island.
+            extension._center.open();
+            Main.osdWindowManager.showAll(new (await import('gi://Gio')).default.ThemedIcon({name: 'audio-volume-high-symbolic'}), null, 0.5, 1);
+            await sleep(80);
         }
         extension.disable();
         await sleep(100);
@@ -45,6 +50,7 @@ export default async function ({extension, shot, sleep, note, set, Main}) {
     note(`disabled: panel visible=${box.visible} tracked=${tracked()} work area=${area()}`);
     const qsMenu = Main.panel.statusArea.quickSettings.menu;
     note(`gnome qs restored: own open=${Object.hasOwn(qsMenu, 'open')} own toggle=${Object.hasOwn(Main.panel, 'toggleQuickSettings')} modal=${Main.modalCount}`);
+    note(`gnome center restored: own toggleCalendar=${Object.hasOwn(Main.panel, 'toggleCalendar')} own date open=${Object.hasOwn(Main.panel.statusArea.dateMenu.menu, 'open')} own osd=${Object.hasOwn(Main.osdWindowManager, '_showOsdWindow')} own banner=${Object.hasOwn(Main.messageTray, '_showNotification')}`);
     for (const [key, button] of Object.entries(Main.panel.statusArea)) {
         if (button?.menu?.box)
             note(`menu back: ${key} parent=${button.menu.box.get_parent()?.constructor.name} managed=${Main.panel.menuManager._menus.includes(button.menu)}`);

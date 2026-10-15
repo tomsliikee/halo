@@ -428,6 +428,183 @@
 }
 
 
+
+/* The notification center */
+
+.halo-center {
+    border-radius: 32px;
+    padding: 16px;
+    spacing: 16px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+}
+
+.halo-center-left {
+    spacing: 10px;
+}
+
+.halo-center-head {
+    padding: 6px 4px 4px 10px;
+}
+
+.halo-center-clear {
+    height: 40px;
+    padding: 0 18px;
+    border-radius: 20px;
+}
+
+.halo-center-list {
+    spacing: 8px;
+}
+
+.halo-center-card {
+    border-radius: 24px;
+    padding: 16px 18px;
+    spacing: 10px;
+}
+
+.halo-center-top {
+    spacing: 14px;
+}
+
+.halo-center-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+}
+
+.halo-center-words {
+    spacing: 2px;
+}
+
+.halo-center-header {
+    spacing: 8px;
+}
+
+.halo-center-close {
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+}
+
+.halo-center-sub {
+    margin-left: 54px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    spacing: 2px;
+}
+
+.halo-center-actions {
+    margin-left: 54px;
+    spacing: 8px;
+}
+
+.halo-center-action {
+    height: 40px;
+    padding: 0 18px;
+    border-radius: 20px;
+    border-width: 1px;
+}
+
+.halo-center-more {
+    height: 30px;
+    padding: 0 14px;
+    border-radius: 15px;
+}
+
+.halo-center-empty {
+    spacing: 10px;
+    padding: 60px 0;
+}
+
+.halo-center-dnd {
+    height: 56px;
+    padding: 0 16px;
+    border-radius: 24px;
+    spacing: 14px;
+}
+
+.halo-center-side-scroll {
+    width: 300px;
+}
+
+.halo-center-side {
+    spacing: 10px;
+}
+
+.halo-center-month {
+    padding: 16px 14px 12px 14px;
+    spacing: 10px;
+}
+
+.halo-center-month-head {
+    spacing: 6px;
+    padding: 0 4px;
+}
+
+.halo-center-nav {
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+}
+
+.halo-center-weekday {
+    text-align: center;
+    padding-bottom: 4px;
+}
+
+.halo-center-day {
+    width: 36px;
+    height: 36px;
+    border-radius: 14px;
+    padding-top: 7px;
+    transition-duration: 160ms;
+}
+
+.halo-center-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 2px;
+    margin-top: 1px;
+}
+
+.halo-center-caption {
+    padding: 4px 8px 0 8px;
+}
+
+.halo-center-events {
+    spacing: 6px;
+}
+
+.halo-center-event {
+    border-radius: 18px;
+    padding: 10px 14px 10px 12px;
+    spacing: 12px;
+}
+
+.halo-center-event-bar {
+    width: 4px;
+    border-radius: 2px;
+}
+
+.halo-center-quiet {
+    padding: 4px 8px;
+}
+
+.halo-center-pair {
+    spacing: 10px;
+}
+
+.halo-center-weather,
+.halo-center-clock {
+    padding: 14px 16px;
+    spacing: 4px;
+    border-radius: 24px;
+}
+
+.halo-center-clock {
+    border-radius: 24px 64px 24px 24px;
+}
+
 /* The timer page */
 
 .halo-qs-timer-now {
@@ -1120,6 +1297,192 @@
     background-color: #e2e1ef;
 }
 
+
+/* The notification center */
+
+.halo-scheme-blue-light .halo-center {
+    background-color: #f3f2ff;
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-center-heading,
+.halo-scheme-blue-light .halo-center-title,
+.halo-scheme-blue-light .halo-center-date,
+.halo-scheme-blue-light .halo-center-big,
+.halo-scheme-blue-light .halo-center-event-title,
+.halo-scheme-blue-light .halo-center-day-number {
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-center-body {
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-center-dim,
+.halo-scheme-blue-light .halo-center-app,
+.halo-scheme-blue-light .halo-center-weekday,
+.halo-scheme-blue-light .halo-center-caption {
+    color: #444654;
+}
+
+.halo-scheme-blue-light .halo-center-clear,
+.halo-scheme-blue-light .halo-center-card,
+.halo-scheme-blue-light .halo-center-dnd,
+.halo-scheme-blue-light .halo-center-event,
+.halo-scheme-blue-light .halo-center-month,
+.halo-scheme-blue-light .halo-center-weather,
+.halo-scheme-blue-light .halo-center-clock {
+    background-color: #fbf8ff;
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-center-clear:hover,
+.halo-scheme-blue-light .halo-center-dnd:hover {
+    background-color: #e7e7f5;
+}
+
+.halo-scheme-blue-light .halo-center-card.halo-fresh {
+    background-color: #dee1ff;
+}
+
+.halo-scheme-blue-light .halo-center-card.halo-fresh .halo-center-title,
+.halo-scheme-blue-light .halo-center-card.halo-fresh .halo-center-body,
+.halo-scheme-blue-light .halo-center-card.halo-fresh .halo-center-app {
+    color: #0033c2;
+}
+
+.halo-scheme-blue-light .halo-center-icon {
+    background-color: #dee1ff;
+    color: #0033c2;
+}
+
+.halo-scheme-blue-light .halo-center-card.halo-fresh .halo-center-icon {
+    background-color: #0045fc;
+    color: #ffffff;
+}
+
+.halo-scheme-blue-light .halo-center-icon.halo-center-picture {
+    background-color: transparent;
+}
+
+.halo-scheme-blue-light .halo-center-close {
+    background-color: #e7e7f5;
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-center-sub {
+    background-color: #e7e7f5;
+}
+
+.halo-scheme-blue-light .halo-center-card.halo-fresh .halo-center-sub {
+    background-color: #fbf8ff;
+}
+
+.halo-scheme-blue-light .halo-center-action {
+    border-color: #757685;
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-center-action:hover {
+    background-color: #e7e7f5;
+}
+
+.halo-scheme-blue-light .halo-center-action.halo-center-action-main {
+    border-color: #0045fc;
+    background-color: #0045fc;
+    color: #ffffff;
+}
+
+.halo-scheme-blue-light .halo-center-action.halo-center-action-tonal,
+.halo-scheme-blue-light .halo-center-more {
+    border-color: transparent;
+    background-color: #dee1ff;
+    color: #0033c2;
+}
+
+.halo-scheme-blue-light .halo-center-card.halo-fresh .halo-center-action-tonal,
+.halo-scheme-blue-light .halo-center-card.halo-fresh .halo-center-more {
+    background-color: #fbf8ff;
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-center-empty-icon,
+.halo-scheme-blue-light .halo-center-dnd-icon {
+    color: #444654;
+}
+
+.halo-scheme-blue-light .halo-center-nav {
+    background-color: #e7e7f5;
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-center-day:hover {
+    background-color: #e7e7f5;
+}
+
+.halo-scheme-blue-light .halo-center-day.halo-chosen {
+    background-color: #dee1ff;
+}
+
+.halo-scheme-blue-light .halo-center-day.halo-chosen .halo-center-day-number {
+    color: #0033c2;
+}
+
+.halo-scheme-blue-light .halo-center-day.halo-today {
+    background-color: #0045fc;
+}
+
+.halo-scheme-blue-light .halo-center-day.halo-today .halo-center-day-number {
+    color: #ffffff;
+}
+
+.halo-scheme-blue-light .halo-center-dot {
+    background-color: #0045fc;
+}
+
+.halo-scheme-blue-light .halo-center-day.halo-today .halo-center-dot {
+    background-color: #ffffff;
+}
+
+.halo-scheme-blue-light .halo-center-event-bar {
+    background-color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-center-event.halo-soon {
+    background-color: #eedbff;
+}
+
+.halo-scheme-blue-light .halo-center-event.halo-soon .halo-center-event-title,
+.halo-scheme-blue-light .halo-center-event.halo-soon .halo-center-dim,
+.halo-scheme-blue-light .halo-center-soon {
+    color: #523d6c;
+}
+
+.halo-scheme-blue-light .halo-center-event.halo-soon .halo-center-event-bar {
+    background-color: #523d6c;
+}
+
+.halo-scheme-blue-light .halo-center-event.halo-over .halo-center-event-title {
+    color: #444654;
+}
+
+.halo-scheme-blue-light .halo-center-event.halo-over .halo-center-event-bar {
+    background-color: #c5c5d6;
+}
+
+.halo-scheme-blue-light .halo-center-accent {
+    color: #0045fc;
+}
+
+.halo-scheme-blue-light .halo-event-chip {
+    background-color: #eedbff;
+    color: #523d6c;
+}
+
+.halo-scheme-blue-light .halo-event-chip .halo-status-text {
+    color: #523d6c;
+}
+
 .halo-scheme-blue-dark .halo-frame {
     background-color: #1d1f29;
 }
@@ -1651,6 +2014,192 @@
 
 .halo-scheme-blue-dark .halo-island-bubble {
     background-color: #33343f;
+}
+
+
+/* The notification center */
+
+.halo-scheme-blue-dark .halo-center {
+    background-color: #1d1f29;
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-center-heading,
+.halo-scheme-blue-dark .halo-center-title,
+.halo-scheme-blue-dark .halo-center-date,
+.halo-scheme-blue-dark .halo-center-big,
+.halo-scheme-blue-dark .halo-center-event-title,
+.halo-scheme-blue-dark .halo-center-day-number {
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-center-body {
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-center-dim,
+.halo-scheme-blue-dark .halo-center-app,
+.halo-scheme-blue-dark .halo-center-weekday,
+.halo-scheme-blue-dark .halo-center-caption {
+    color: #c5c5d6;
+}
+
+.halo-scheme-blue-dark .halo-center-clear,
+.halo-scheme-blue-dark .halo-center-card,
+.halo-scheme-blue-dark .halo-center-dnd,
+.halo-scheme-blue-dark .halo-center-event,
+.halo-scheme-blue-dark .halo-center-month,
+.halo-scheme-blue-dark .halo-center-weather,
+.halo-scheme-blue-dark .halo-center-clock {
+    background-color: #282934;
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-center-clear:hover,
+.halo-scheme-blue-dark .halo-center-dnd:hover {
+    background-color: #373843;
+}
+
+.halo-scheme-blue-dark .halo-center-card.halo-fresh {
+    background-color: #0033c2;
+}
+
+.halo-scheme-blue-dark .halo-center-card.halo-fresh .halo-center-title,
+.halo-scheme-blue-dark .halo-center-card.halo-fresh .halo-center-body,
+.halo-scheme-blue-dark .halo-center-card.halo-fresh .halo-center-app {
+    color: #dee1ff;
+}
+
+.halo-scheme-blue-dark .halo-center-icon {
+    background-color: #0033c2;
+    color: #dee1ff;
+}
+
+.halo-scheme-blue-dark .halo-center-card.halo-fresh .halo-center-icon {
+    background-color: #b9c3ff;
+    color: #00228b;
+}
+
+.halo-scheme-blue-dark .halo-center-icon.halo-center-picture {
+    background-color: transparent;
+}
+
+.halo-scheme-blue-dark .halo-center-close {
+    background-color: #373843;
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-center-sub {
+    background-color: #373843;
+}
+
+.halo-scheme-blue-dark .halo-center-card.halo-fresh .halo-center-sub {
+    background-color: #373843;
+}
+
+.halo-scheme-blue-dark .halo-center-action {
+    border-color: #8e909f;
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-center-action:hover {
+    background-color: #373843;
+}
+
+.halo-scheme-blue-dark .halo-center-action.halo-center-action-main {
+    border-color: #b9c3ff;
+    background-color: #b9c3ff;
+    color: #00228b;
+}
+
+.halo-scheme-blue-dark .halo-center-action.halo-center-action-tonal,
+.halo-scheme-blue-dark .halo-center-more {
+    border-color: transparent;
+    background-color: #0033c2;
+    color: #dee1ff;
+}
+
+.halo-scheme-blue-dark .halo-center-card.halo-fresh .halo-center-action-tonal,
+.halo-scheme-blue-dark .halo-center-card.halo-fresh .halo-center-more {
+    background-color: #373843;
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-center-empty-icon,
+.halo-scheme-blue-dark .halo-center-dnd-icon {
+    color: #c5c5d6;
+}
+
+.halo-scheme-blue-dark .halo-center-nav {
+    background-color: #373843;
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-center-day:hover {
+    background-color: #373843;
+}
+
+.halo-scheme-blue-dark .halo-center-day.halo-chosen {
+    background-color: #0033c2;
+}
+
+.halo-scheme-blue-dark .halo-center-day.halo-chosen .halo-center-day-number {
+    color: #dee1ff;
+}
+
+.halo-scheme-blue-dark .halo-center-day.halo-today {
+    background-color: #b9c3ff;
+}
+
+.halo-scheme-blue-dark .halo-center-day.halo-today .halo-center-day-number {
+    color: #00228b;
+}
+
+.halo-scheme-blue-dark .halo-center-dot {
+    background-color: #b9c3ff;
+}
+
+.halo-scheme-blue-dark .halo-center-day.halo-today .halo-center-dot {
+    background-color: #00228b;
+}
+
+.halo-scheme-blue-dark .halo-center-event-bar {
+    background-color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-center-event.halo-soon {
+    background-color: #523d6c;
+}
+
+.halo-scheme-blue-dark .halo-center-event.halo-soon .halo-center-event-title,
+.halo-scheme-blue-dark .halo-center-event.halo-soon .halo-center-dim,
+.halo-scheme-blue-dark .halo-center-soon {
+    color: #eedbff;
+}
+
+.halo-scheme-blue-dark .halo-center-event.halo-soon .halo-center-event-bar {
+    background-color: #eedbff;
+}
+
+.halo-scheme-blue-dark .halo-center-event.halo-over .halo-center-event-title {
+    color: #c5c5d6;
+}
+
+.halo-scheme-blue-dark .halo-center-event.halo-over .halo-center-event-bar {
+    background-color: #444654;
+}
+
+.halo-scheme-blue-dark .halo-center-accent {
+    color: #b9c3ff;
+}
+
+.halo-scheme-blue-dark .halo-event-chip {
+    background-color: #523d6c;
+    color: #eedbff;
+}
+
+.halo-scheme-blue-dark .halo-event-chip .halo-status-text {
+    color: #eedbff;
 }
 
 .halo-scheme-violet-light .halo-frame {
@@ -2186,6 +2735,192 @@
     background-color: #e8dfee;
 }
 
+
+/* The notification center */
+
+.halo-scheme-violet-light .halo-center {
+    background-color: #f9f1ff;
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-center-heading,
+.halo-scheme-violet-light .halo-center-title,
+.halo-scheme-violet-light .halo-center-date,
+.halo-scheme-violet-light .halo-center-big,
+.halo-scheme-violet-light .halo-center-event-title,
+.halo-scheme-violet-light .halo-center-day-number {
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-center-body {
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-center-dim,
+.halo-scheme-violet-light .halo-center-app,
+.halo-scheme-violet-light .halo-center-weekday,
+.halo-scheme-violet-light .halo-center-caption {
+    color: #4a4453;
+}
+
+.halo-scheme-violet-light .halo-center-clear,
+.halo-scheme-violet-light .halo-center-card,
+.halo-scheme-violet-light .halo-center-dnd,
+.halo-scheme-violet-light .halo-center-event,
+.halo-scheme-violet-light .halo-center-month,
+.halo-scheme-violet-light .halo-center-weather,
+.halo-scheme-violet-light .halo-center-clock {
+    background-color: #fef7ff;
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-center-clear:hover,
+.halo-scheme-violet-light .halo-center-dnd:hover {
+    background-color: #ede5f4;
+}
+
+.halo-scheme-violet-light .halo-center-card.halo-fresh {
+    background-color: #eaddff;
+}
+
+.halo-scheme-violet-light .halo-center-card.halo-fresh .halo-center-title,
+.halo-scheme-violet-light .halo-center-card.halo-fresh .halo-center-body,
+.halo-scheme-violet-light .halo-center-card.halo-fresh .halo-center-app {
+    color: #5a00c6;
+}
+
+.halo-scheme-violet-light .halo-center-icon {
+    background-color: #eaddff;
+    color: #5a00c6;
+}
+
+.halo-scheme-violet-light .halo-center-card.halo-fresh .halo-center-icon {
+    background-color: #7706ff;
+    color: #ffffff;
+}
+
+.halo-scheme-violet-light .halo-center-icon.halo-center-picture {
+    background-color: transparent;
+}
+
+.halo-scheme-violet-light .halo-center-close {
+    background-color: #ede5f4;
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-center-sub {
+    background-color: #ede5f4;
+}
+
+.halo-scheme-violet-light .halo-center-card.halo-fresh .halo-center-sub {
+    background-color: #fef7ff;
+}
+
+.halo-scheme-violet-light .halo-center-action {
+    border-color: #7b7484;
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-center-action:hover {
+    background-color: #ede5f4;
+}
+
+.halo-scheme-violet-light .halo-center-action.halo-center-action-main {
+    border-color: #7706ff;
+    background-color: #7706ff;
+    color: #ffffff;
+}
+
+.halo-scheme-violet-light .halo-center-action.halo-center-action-tonal,
+.halo-scheme-violet-light .halo-center-more {
+    border-color: transparent;
+    background-color: #eaddff;
+    color: #5a00c6;
+}
+
+.halo-scheme-violet-light .halo-center-card.halo-fresh .halo-center-action-tonal,
+.halo-scheme-violet-light .halo-center-card.halo-fresh .halo-center-more {
+    background-color: #fef7ff;
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-center-empty-icon,
+.halo-scheme-violet-light .halo-center-dnd-icon {
+    color: #4a4453;
+}
+
+.halo-scheme-violet-light .halo-center-nav {
+    background-color: #ede5f4;
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-center-day:hover {
+    background-color: #ede5f4;
+}
+
+.halo-scheme-violet-light .halo-center-day.halo-chosen {
+    background-color: #eaddff;
+}
+
+.halo-scheme-violet-light .halo-center-day.halo-chosen .halo-center-day-number {
+    color: #5a00c6;
+}
+
+.halo-scheme-violet-light .halo-center-day.halo-today {
+    background-color: #7706ff;
+}
+
+.halo-scheme-violet-light .halo-center-day.halo-today .halo-center-day-number {
+    color: #ffffff;
+}
+
+.halo-scheme-violet-light .halo-center-dot {
+    background-color: #7706ff;
+}
+
+.halo-scheme-violet-light .halo-center-day.halo-today .halo-center-dot {
+    background-color: #ffffff;
+}
+
+.halo-scheme-violet-light .halo-center-event-bar {
+    background-color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-center-event.halo-soon {
+    background-color: #ffd5ff;
+}
+
+.halo-scheme-violet-light .halo-center-event.halo-soon .halo-center-event-title,
+.halo-scheme-violet-light .halo-center-event.halo-soon .halo-center-dim,
+.halo-scheme-violet-light .halo-center-soon {
+    color: #5e3962;
+}
+
+.halo-scheme-violet-light .halo-center-event.halo-soon .halo-center-event-bar {
+    background-color: #5e3962;
+}
+
+.halo-scheme-violet-light .halo-center-event.halo-over .halo-center-event-title {
+    color: #4a4453;
+}
+
+.halo-scheme-violet-light .halo-center-event.halo-over .halo-center-event-bar {
+    background-color: #ccc3d5;
+}
+
+.halo-scheme-violet-light .halo-center-accent {
+    color: #7706ff;
+}
+
+.halo-scheme-violet-light .halo-event-chip {
+    background-color: #ffd5ff;
+    color: #5e3962;
+}
+
+.halo-scheme-violet-light .halo-event-chip .halo-status-text {
+    color: #5e3962;
+}
+
 .halo-scheme-violet-dark .halo-frame {
     background-color: #221e28;
 }
@@ -2717,6 +3452,192 @@
 
 .halo-scheme-violet-dark .halo-island-bubble {
     background-color: #37333e;
+}
+
+
+/* The notification center */
+
+.halo-scheme-violet-dark .halo-center {
+    background-color: #221e28;
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-center-heading,
+.halo-scheme-violet-dark .halo-center-title,
+.halo-scheme-violet-dark .halo-center-date,
+.halo-scheme-violet-dark .halo-center-big,
+.halo-scheme-violet-dark .halo-center-event-title,
+.halo-scheme-violet-dark .halo-center-day-number {
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-center-body {
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-center-dim,
+.halo-scheme-violet-dark .halo-center-app,
+.halo-scheme-violet-dark .halo-center-weekday,
+.halo-scheme-violet-dark .halo-center-caption {
+    color: #ccc3d5;
+}
+
+.halo-scheme-violet-dark .halo-center-clear,
+.halo-scheme-violet-dark .halo-center-card,
+.halo-scheme-violet-dark .halo-center-dnd,
+.halo-scheme-violet-dark .halo-center-event,
+.halo-scheme-violet-dark .halo-center-month,
+.halo-scheme-violet-dark .halo-center-weather,
+.halo-scheme-violet-dark .halo-center-clock {
+    background-color: #2c2833;
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-center-clear:hover,
+.halo-scheme-violet-dark .halo-center-dnd:hover {
+    background-color: #3c3743;
+}
+
+.halo-scheme-violet-dark .halo-center-card.halo-fresh {
+    background-color: #5a00c6;
+}
+
+.halo-scheme-violet-dark .halo-center-card.halo-fresh .halo-center-title,
+.halo-scheme-violet-dark .halo-center-card.halo-fresh .halo-center-body,
+.halo-scheme-violet-dark .halo-center-card.halo-fresh .halo-center-app {
+    color: #eaddff;
+}
+
+.halo-scheme-violet-dark .halo-center-icon {
+    background-color: #5a00c6;
+    color: #eaddff;
+}
+
+.halo-scheme-violet-dark .halo-center-card.halo-fresh .halo-center-icon {
+    background-color: #d2bbff;
+    color: #3f008e;
+}
+
+.halo-scheme-violet-dark .halo-center-icon.halo-center-picture {
+    background-color: transparent;
+}
+
+.halo-scheme-violet-dark .halo-center-close {
+    background-color: #3c3743;
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-center-sub {
+    background-color: #3c3743;
+}
+
+.halo-scheme-violet-dark .halo-center-card.halo-fresh .halo-center-sub {
+    background-color: #3c3743;
+}
+
+.halo-scheme-violet-dark .halo-center-action {
+    border-color: #958e9e;
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-center-action:hover {
+    background-color: #3c3743;
+}
+
+.halo-scheme-violet-dark .halo-center-action.halo-center-action-main {
+    border-color: #d2bbff;
+    background-color: #d2bbff;
+    color: #3f008e;
+}
+
+.halo-scheme-violet-dark .halo-center-action.halo-center-action-tonal,
+.halo-scheme-violet-dark .halo-center-more {
+    border-color: transparent;
+    background-color: #5a00c6;
+    color: #eaddff;
+}
+
+.halo-scheme-violet-dark .halo-center-card.halo-fresh .halo-center-action-tonal,
+.halo-scheme-violet-dark .halo-center-card.halo-fresh .halo-center-more {
+    background-color: #3c3743;
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-center-empty-icon,
+.halo-scheme-violet-dark .halo-center-dnd-icon {
+    color: #ccc3d5;
+}
+
+.halo-scheme-violet-dark .halo-center-nav {
+    background-color: #3c3743;
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-center-day:hover {
+    background-color: #3c3743;
+}
+
+.halo-scheme-violet-dark .halo-center-day.halo-chosen {
+    background-color: #5a00c6;
+}
+
+.halo-scheme-violet-dark .halo-center-day.halo-chosen .halo-center-day-number {
+    color: #eaddff;
+}
+
+.halo-scheme-violet-dark .halo-center-day.halo-today {
+    background-color: #d2bbff;
+}
+
+.halo-scheme-violet-dark .halo-center-day.halo-today .halo-center-day-number {
+    color: #3f008e;
+}
+
+.halo-scheme-violet-dark .halo-center-dot {
+    background-color: #d2bbff;
+}
+
+.halo-scheme-violet-dark .halo-center-day.halo-today .halo-center-dot {
+    background-color: #3f008e;
+}
+
+.halo-scheme-violet-dark .halo-center-event-bar {
+    background-color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-center-event.halo-soon {
+    background-color: #5e3962;
+}
+
+.halo-scheme-violet-dark .halo-center-event.halo-soon .halo-center-event-title,
+.halo-scheme-violet-dark .halo-center-event.halo-soon .halo-center-dim,
+.halo-scheme-violet-dark .halo-center-soon {
+    color: #ffd5ff;
+}
+
+.halo-scheme-violet-dark .halo-center-event.halo-soon .halo-center-event-bar {
+    background-color: #ffd5ff;
+}
+
+.halo-scheme-violet-dark .halo-center-event.halo-over .halo-center-event-title {
+    color: #ccc3d5;
+}
+
+.halo-scheme-violet-dark .halo-center-event.halo-over .halo-center-event-bar {
+    background-color: #4a4453;
+}
+
+.halo-scheme-violet-dark .halo-center-accent {
+    color: #d2bbff;
+}
+
+.halo-scheme-violet-dark .halo-event-chip {
+    background-color: #5e3962;
+    color: #ffd5ff;
+}
+
+.halo-scheme-violet-dark .halo-event-chip .halo-status-text {
+    color: #ffd5ff;
 }
 
 .halo-scheme-green-light .halo-frame {
@@ -3252,6 +4173,192 @@
     background-color: #dbe5d7;
 }
 
+
+/* The notification center */
+
+.halo-scheme-green-light .halo-center {
+    background-color: #ecf7e8;
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-center-heading,
+.halo-scheme-green-light .halo-center-title,
+.halo-scheme-green-light .halo-center-date,
+.halo-scheme-green-light .halo-center-big,
+.halo-scheme-green-light .halo-center-event-title,
+.halo-scheme-green-light .halo-center-day-number {
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-center-body {
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-center-dim,
+.halo-scheme-green-light .halo-center-app,
+.halo-scheme-green-light .halo-center-weekday,
+.halo-scheme-green-light .halo-center-caption {
+    color: #3e4a3d;
+}
+
+.halo-scheme-green-light .halo-center-clear,
+.halo-scheme-green-light .halo-center-card,
+.halo-scheme-green-light .halo-center-dnd,
+.halo-scheme-green-light .halo-center-event,
+.halo-scheme-green-light .halo-center-month,
+.halo-scheme-green-light .halo-center-weather,
+.halo-scheme-green-light .halo-center-clock {
+    background-color: #f2fcee;
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-center-clear:hover,
+.halo-scheme-green-light .halo-center-dnd:hover {
+    background-color: #e1ebdd;
+}
+
+.halo-scheme-green-light .halo-center-card.halo-fresh {
+    background-color: #67ff8d;
+}
+
+.halo-scheme-green-light .halo-center-card.halo-fresh .halo-center-title,
+.halo-scheme-green-light .halo-center-card.halo-fresh .halo-center-body,
+.halo-scheme-green-light .halo-center-card.halo-fresh .halo-center-app {
+    color: #005321;
+}
+
+.halo-scheme-green-light .halo-center-icon {
+    background-color: #67ff8d;
+    color: #005321;
+}
+
+.halo-scheme-green-light .halo-center-card.halo-fresh .halo-center-icon {
+    background-color: #006e2e;
+    color: #ffffff;
+}
+
+.halo-scheme-green-light .halo-center-icon.halo-center-picture {
+    background-color: transparent;
+}
+
+.halo-scheme-green-light .halo-center-close {
+    background-color: #e1ebdd;
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-center-sub {
+    background-color: #e1ebdd;
+}
+
+.halo-scheme-green-light .halo-center-card.halo-fresh .halo-center-sub {
+    background-color: #f2fcee;
+}
+
+.halo-scheme-green-light .halo-center-action {
+    border-color: #6e7a6c;
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-center-action:hover {
+    background-color: #e1ebdd;
+}
+
+.halo-scheme-green-light .halo-center-action.halo-center-action-main {
+    border-color: #006e2e;
+    background-color: #006e2e;
+    color: #ffffff;
+}
+
+.halo-scheme-green-light .halo-center-action.halo-center-action-tonal,
+.halo-scheme-green-light .halo-center-more {
+    border-color: transparent;
+    background-color: #67ff8d;
+    color: #005321;
+}
+
+.halo-scheme-green-light .halo-center-card.halo-fresh .halo-center-action-tonal,
+.halo-scheme-green-light .halo-center-card.halo-fresh .halo-center-more {
+    background-color: #f2fcee;
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-center-empty-icon,
+.halo-scheme-green-light .halo-center-dnd-icon {
+    color: #3e4a3d;
+}
+
+.halo-scheme-green-light .halo-center-nav {
+    background-color: #e1ebdd;
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-center-day:hover {
+    background-color: #e1ebdd;
+}
+
+.halo-scheme-green-light .halo-center-day.halo-chosen {
+    background-color: #67ff8d;
+}
+
+.halo-scheme-green-light .halo-center-day.halo-chosen .halo-center-day-number {
+    color: #005321;
+}
+
+.halo-scheme-green-light .halo-center-day.halo-today {
+    background-color: #006e2e;
+}
+
+.halo-scheme-green-light .halo-center-day.halo-today .halo-center-day-number {
+    color: #ffffff;
+}
+
+.halo-scheme-green-light .halo-center-dot {
+    background-color: #006e2e;
+}
+
+.halo-scheme-green-light .halo-center-day.halo-today .halo-center-dot {
+    background-color: #ffffff;
+}
+
+.halo-scheme-green-light .halo-center-event-bar {
+    background-color: #151e15;
+}
+
+.halo-scheme-green-light .halo-center-event.halo-soon {
+    background-color: #aaf0df;
+}
+
+.halo-scheme-green-light .halo-center-event.halo-soon .halo-center-event-title,
+.halo-scheme-green-light .halo-center-event.halo-soon .halo-center-dim,
+.halo-scheme-green-light .halo-center-soon {
+    color: #005045;
+}
+
+.halo-scheme-green-light .halo-center-event.halo-soon .halo-center-event-bar {
+    background-color: #005045;
+}
+
+.halo-scheme-green-light .halo-center-event.halo-over .halo-center-event-title {
+    color: #3e4a3d;
+}
+
+.halo-scheme-green-light .halo-center-event.halo-over .halo-center-event-bar {
+    background-color: #bdcaba;
+}
+
+.halo-scheme-green-light .halo-center-accent {
+    color: #006e2e;
+}
+
+.halo-scheme-green-light .halo-event-chip {
+    background-color: #aaf0df;
+    color: #005045;
+}
+
+.halo-scheme-green-light .halo-event-chip .halo-status-text {
+    color: #005045;
+}
+
 .halo-scheme-green-dark .halo-frame {
     background-color: #192219;
 }
@@ -3783,6 +4890,192 @@
 
 .halo-scheme-green-dark .halo-island-bubble {
     background-color: #2e372e;
+}
+
+
+/* The notification center */
+
+.halo-scheme-green-dark .halo-center {
+    background-color: #192219;
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-center-heading,
+.halo-scheme-green-dark .halo-center-title,
+.halo-scheme-green-dark .halo-center-date,
+.halo-scheme-green-dark .halo-center-big,
+.halo-scheme-green-dark .halo-center-event-title,
+.halo-scheme-green-dark .halo-center-day-number {
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-center-body {
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-center-dim,
+.halo-scheme-green-dark .halo-center-app,
+.halo-scheme-green-dark .halo-center-weekday,
+.halo-scheme-green-dark .halo-center-caption {
+    color: #bdcaba;
+}
+
+.halo-scheme-green-dark .halo-center-clear,
+.halo-scheme-green-dark .halo-center-card,
+.halo-scheme-green-dark .halo-center-dnd,
+.halo-scheme-green-dark .halo-center-event,
+.halo-scheme-green-dark .halo-center-month,
+.halo-scheme-green-dark .halo-center-weather,
+.halo-scheme-green-dark .halo-center-clock {
+    background-color: #232c23;
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-center-clear:hover,
+.halo-scheme-green-dark .halo-center-dnd:hover {
+    background-color: #323c32;
+}
+
+.halo-scheme-green-dark .halo-center-card.halo-fresh {
+    background-color: #005321;
+}
+
+.halo-scheme-green-dark .halo-center-card.halo-fresh .halo-center-title,
+.halo-scheme-green-dark .halo-center-card.halo-fresh .halo-center-body,
+.halo-scheme-green-dark .halo-center-card.halo-fresh .halo-center-app {
+    color: #67ff8d;
+}
+
+.halo-scheme-green-dark .halo-center-icon {
+    background-color: #005321;
+    color: #67ff8d;
+}
+
+.halo-scheme-green-dark .halo-center-card.halo-fresh .halo-center-icon {
+    background-color: #00e468;
+    color: #003915;
+}
+
+.halo-scheme-green-dark .halo-center-icon.halo-center-picture {
+    background-color: transparent;
+}
+
+.halo-scheme-green-dark .halo-center-close {
+    background-color: #323c32;
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-center-sub {
+    background-color: #323c32;
+}
+
+.halo-scheme-green-dark .halo-center-card.halo-fresh .halo-center-sub {
+    background-color: #323c32;
+}
+
+.halo-scheme-green-dark .halo-center-action {
+    border-color: #879485;
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-center-action:hover {
+    background-color: #323c32;
+}
+
+.halo-scheme-green-dark .halo-center-action.halo-center-action-main {
+    border-color: #00e468;
+    background-color: #00e468;
+    color: #003915;
+}
+
+.halo-scheme-green-dark .halo-center-action.halo-center-action-tonal,
+.halo-scheme-green-dark .halo-center-more {
+    border-color: transparent;
+    background-color: #005321;
+    color: #67ff8d;
+}
+
+.halo-scheme-green-dark .halo-center-card.halo-fresh .halo-center-action-tonal,
+.halo-scheme-green-dark .halo-center-card.halo-fresh .halo-center-more {
+    background-color: #323c32;
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-center-empty-icon,
+.halo-scheme-green-dark .halo-center-dnd-icon {
+    color: #bdcaba;
+}
+
+.halo-scheme-green-dark .halo-center-nav {
+    background-color: #323c32;
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-center-day:hover {
+    background-color: #323c32;
+}
+
+.halo-scheme-green-dark .halo-center-day.halo-chosen {
+    background-color: #005321;
+}
+
+.halo-scheme-green-dark .halo-center-day.halo-chosen .halo-center-day-number {
+    color: #67ff8d;
+}
+
+.halo-scheme-green-dark .halo-center-day.halo-today {
+    background-color: #00e468;
+}
+
+.halo-scheme-green-dark .halo-center-day.halo-today .halo-center-day-number {
+    color: #003915;
+}
+
+.halo-scheme-green-dark .halo-center-dot {
+    background-color: #00e468;
+}
+
+.halo-scheme-green-dark .halo-center-day.halo-today .halo-center-dot {
+    background-color: #003915;
+}
+
+.halo-scheme-green-dark .halo-center-event-bar {
+    background-color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-center-event.halo-soon {
+    background-color: #005045;
+}
+
+.halo-scheme-green-dark .halo-center-event.halo-soon .halo-center-event-title,
+.halo-scheme-green-dark .halo-center-event.halo-soon .halo-center-dim,
+.halo-scheme-green-dark .halo-center-soon {
+    color: #aaf0df;
+}
+
+.halo-scheme-green-dark .halo-center-event.halo-soon .halo-center-event-bar {
+    background-color: #aaf0df;
+}
+
+.halo-scheme-green-dark .halo-center-event.halo-over .halo-center-event-title {
+    color: #bdcaba;
+}
+
+.halo-scheme-green-dark .halo-center-event.halo-over .halo-center-event-bar {
+    background-color: #3e4a3d;
+}
+
+.halo-scheme-green-dark .halo-center-accent {
+    color: #00e468;
+}
+
+.halo-scheme-green-dark .halo-event-chip {
+    background-color: #005045;
+    color: #aaf0df;
+}
+
+.halo-scheme-green-dark .halo-event-chip .halo-status-text {
+    color: #aaf0df;
 }
 
 .halo-scheme-teal-light .halo-frame {
@@ -4318,6 +5611,192 @@
     background-color: #d7e6e1;
 }
 
+
+/* The notification center */
+
+.halo-scheme-teal-light .halo-center {
+    background-color: #e8f7f2;
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-center-heading,
+.halo-scheme-teal-light .halo-center-title,
+.halo-scheme-teal-light .halo-center-date,
+.halo-scheme-teal-light .halo-center-big,
+.halo-scheme-teal-light .halo-center-event-title,
+.halo-scheme-teal-light .halo-center-day-number {
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-center-body {
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-center-dim,
+.halo-scheme-teal-light .halo-center-app,
+.halo-scheme-teal-light .halo-center-weekday,
+.halo-scheme-teal-light .halo-center-caption {
+    color: #394a46;
+}
+
+.halo-scheme-teal-light .halo-center-clear,
+.halo-scheme-teal-light .halo-center-card,
+.halo-scheme-teal-light .halo-center-dnd,
+.halo-scheme-teal-light .halo-center-event,
+.halo-scheme-teal-light .halo-center-month,
+.halo-scheme-teal-light .halo-center-weather,
+.halo-scheme-teal-light .halo-center-clock {
+    background-color: #eefdf8;
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-center-clear:hover,
+.halo-scheme-teal-light .halo-center-dnd:hover {
+    background-color: #ddebe7;
+}
+
+.halo-scheme-teal-light .halo-center-card.halo-fresh {
+    background-color: #00fee3;
+}
+
+.halo-scheme-teal-light .halo-center-card.halo-fresh .halo-center-title,
+.halo-scheme-teal-light .halo-center-card.halo-fresh .halo-center-body,
+.halo-scheme-teal-light .halo-center-card.halo-fresh .halo-center-app {
+    color: #005047;
+}
+
+.halo-scheme-teal-light .halo-center-icon {
+    background-color: #00fee3;
+    color: #005047;
+}
+
+.halo-scheme-teal-light .halo-center-card.halo-fresh .halo-center-icon {
+    background-color: #006b5f;
+    color: #ffffff;
+}
+
+.halo-scheme-teal-light .halo-center-icon.halo-center-picture {
+    background-color: transparent;
+}
+
+.halo-scheme-teal-light .halo-center-close {
+    background-color: #ddebe7;
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-center-sub {
+    background-color: #ddebe7;
+}
+
+.halo-scheme-teal-light .halo-center-card.halo-fresh .halo-center-sub {
+    background-color: #eefdf8;
+}
+
+.halo-scheme-teal-light .halo-center-action {
+    border-color: #697b76;
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-center-action:hover {
+    background-color: #ddebe7;
+}
+
+.halo-scheme-teal-light .halo-center-action.halo-center-action-main {
+    border-color: #006b5f;
+    background-color: #006b5f;
+    color: #ffffff;
+}
+
+.halo-scheme-teal-light .halo-center-action.halo-center-action-tonal,
+.halo-scheme-teal-light .halo-center-more {
+    border-color: transparent;
+    background-color: #00fee3;
+    color: #005047;
+}
+
+.halo-scheme-teal-light .halo-center-card.halo-fresh .halo-center-action-tonal,
+.halo-scheme-teal-light .halo-center-card.halo-fresh .halo-center-more {
+    background-color: #eefdf8;
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-center-empty-icon,
+.halo-scheme-teal-light .halo-center-dnd-icon {
+    color: #394a46;
+}
+
+.halo-scheme-teal-light .halo-center-nav {
+    background-color: #ddebe7;
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-center-day:hover {
+    background-color: #ddebe7;
+}
+
+.halo-scheme-teal-light .halo-center-day.halo-chosen {
+    background-color: #00fee3;
+}
+
+.halo-scheme-teal-light .halo-center-day.halo-chosen .halo-center-day-number {
+    color: #005047;
+}
+
+.halo-scheme-teal-light .halo-center-day.halo-today {
+    background-color: #006b5f;
+}
+
+.halo-scheme-teal-light .halo-center-day.halo-today .halo-center-day-number {
+    color: #ffffff;
+}
+
+.halo-scheme-teal-light .halo-center-dot {
+    background-color: #006b5f;
+}
+
+.halo-scheme-teal-light .halo-center-day.halo-today .halo-center-dot {
+    background-color: #ffffff;
+}
+
+.halo-scheme-teal-light .halo-center-event-bar {
+    background-color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-center-event.halo-soon {
+    background-color: #afecff;
+}
+
+.halo-scheme-teal-light .halo-center-event.halo-soon .halo-center-event-title,
+.halo-scheme-teal-light .halo-center-event.halo-soon .halo-center-dim,
+.halo-scheme-teal-light .halo-center-soon {
+    color: #004e5d;
+}
+
+.halo-scheme-teal-light .halo-center-event.halo-soon .halo-center-event-bar {
+    background-color: #004e5d;
+}
+
+.halo-scheme-teal-light .halo-center-event.halo-over .halo-center-event-title {
+    color: #394a46;
+}
+
+.halo-scheme-teal-light .halo-center-event.halo-over .halo-center-event-bar {
+    background-color: #b8cac5;
+}
+
+.halo-scheme-teal-light .halo-center-accent {
+    color: #006b5f;
+}
+
+.halo-scheme-teal-light .halo-event-chip {
+    background-color: #afecff;
+    color: #004e5d;
+}
+
+.halo-scheme-teal-light .halo-event-chip .halo-status-text {
+    color: #004e5d;
+}
+
 .halo-scheme-teal-dark .halo-frame {
     background-color: #15221f;
 }
@@ -4849,6 +6328,192 @@
 
 .halo-scheme-teal-dark .halo-island-bubble {
     background-color: #2a3734;
+}
+
+
+/* The notification center */
+
+.halo-scheme-teal-dark .halo-center {
+    background-color: #15221f;
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-center-heading,
+.halo-scheme-teal-dark .halo-center-title,
+.halo-scheme-teal-dark .halo-center-date,
+.halo-scheme-teal-dark .halo-center-big,
+.halo-scheme-teal-dark .halo-center-event-title,
+.halo-scheme-teal-dark .halo-center-day-number {
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-center-body {
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-center-dim,
+.halo-scheme-teal-dark .halo-center-app,
+.halo-scheme-teal-dark .halo-center-weekday,
+.halo-scheme-teal-dark .halo-center-caption {
+    color: #b8cac5;
+}
+
+.halo-scheme-teal-dark .halo-center-clear,
+.halo-scheme-teal-dark .halo-center-card,
+.halo-scheme-teal-dark .halo-center-dnd,
+.halo-scheme-teal-dark .halo-center-event,
+.halo-scheme-teal-dark .halo-center-month,
+.halo-scheme-teal-dark .halo-center-weather,
+.halo-scheme-teal-dark .halo-center-clock {
+    background-color: #202c2a;
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-center-clear:hover,
+.halo-scheme-teal-dark .halo-center-dnd:hover {
+    background-color: #2f3c39;
+}
+
+.halo-scheme-teal-dark .halo-center-card.halo-fresh {
+    background-color: #005047;
+}
+
+.halo-scheme-teal-dark .halo-center-card.halo-fresh .halo-center-title,
+.halo-scheme-teal-dark .halo-center-card.halo-fresh .halo-center-body,
+.halo-scheme-teal-dark .halo-center-card.halo-fresh .halo-center-app {
+    color: #00fee3;
+}
+
+.halo-scheme-teal-dark .halo-center-icon {
+    background-color: #005047;
+    color: #00fee3;
+}
+
+.halo-scheme-teal-dark .halo-center-card.halo-fresh .halo-center-icon {
+    background-color: #00dfc7;
+    color: #003731;
+}
+
+.halo-scheme-teal-dark .halo-center-icon.halo-center-picture {
+    background-color: transparent;
+}
+
+.halo-scheme-teal-dark .halo-center-close {
+    background-color: #2f3c39;
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-center-sub {
+    background-color: #2f3c39;
+}
+
+.halo-scheme-teal-dark .halo-center-card.halo-fresh .halo-center-sub {
+    background-color: #2f3c39;
+}
+
+.halo-scheme-teal-dark .halo-center-action {
+    border-color: #839490;
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-center-action:hover {
+    background-color: #2f3c39;
+}
+
+.halo-scheme-teal-dark .halo-center-action.halo-center-action-main {
+    border-color: #00dfc7;
+    background-color: #00dfc7;
+    color: #003731;
+}
+
+.halo-scheme-teal-dark .halo-center-action.halo-center-action-tonal,
+.halo-scheme-teal-dark .halo-center-more {
+    border-color: transparent;
+    background-color: #005047;
+    color: #00fee3;
+}
+
+.halo-scheme-teal-dark .halo-center-card.halo-fresh .halo-center-action-tonal,
+.halo-scheme-teal-dark .halo-center-card.halo-fresh .halo-center-more {
+    background-color: #2f3c39;
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-center-empty-icon,
+.halo-scheme-teal-dark .halo-center-dnd-icon {
+    color: #b8cac5;
+}
+
+.halo-scheme-teal-dark .halo-center-nav {
+    background-color: #2f3c39;
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-center-day:hover {
+    background-color: #2f3c39;
+}
+
+.halo-scheme-teal-dark .halo-center-day.halo-chosen {
+    background-color: #005047;
+}
+
+.halo-scheme-teal-dark .halo-center-day.halo-chosen .halo-center-day-number {
+    color: #00fee3;
+}
+
+.halo-scheme-teal-dark .halo-center-day.halo-today {
+    background-color: #00dfc7;
+}
+
+.halo-scheme-teal-dark .halo-center-day.halo-today .halo-center-day-number {
+    color: #003731;
+}
+
+.halo-scheme-teal-dark .halo-center-dot {
+    background-color: #00dfc7;
+}
+
+.halo-scheme-teal-dark .halo-center-day.halo-today .halo-center-dot {
+    background-color: #003731;
+}
+
+.halo-scheme-teal-dark .halo-center-event-bar {
+    background-color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-center-event.halo-soon {
+    background-color: #004e5d;
+}
+
+.halo-scheme-teal-dark .halo-center-event.halo-soon .halo-center-event-title,
+.halo-scheme-teal-dark .halo-center-event.halo-soon .halo-center-dim,
+.halo-scheme-teal-dark .halo-center-soon {
+    color: #afecff;
+}
+
+.halo-scheme-teal-dark .halo-center-event.halo-soon .halo-center-event-bar {
+    background-color: #afecff;
+}
+
+.halo-scheme-teal-dark .halo-center-event.halo-over .halo-center-event-title {
+    color: #b8cac5;
+}
+
+.halo-scheme-teal-dark .halo-center-event.halo-over .halo-center-event-bar {
+    background-color: #394a46;
+}
+
+.halo-scheme-teal-dark .halo-center-accent {
+    color: #00dfc7;
+}
+
+.halo-scheme-teal-dark .halo-event-chip {
+    background-color: #004e5d;
+    color: #afecff;
+}
+
+.halo-scheme-teal-dark .halo-event-chip .halo-status-text {
+    color: #afecff;
 }
 
 .halo-scheme-orange-light .halo-frame {
@@ -5384,6 +7049,192 @@
     background-color: #f9ddd4;
 }
 
+
+/* The notification center */
+
+.halo-scheme-orange-light .halo-center {
+    background-color: #fff1ed;
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-center-heading,
+.halo-scheme-orange-light .halo-center-title,
+.halo-scheme-orange-light .halo-center-date,
+.halo-scheme-orange-light .halo-center-big,
+.halo-scheme-orange-light .halo-center-event-title,
+.halo-scheme-orange-light .halo-center-day-number {
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-center-body {
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-center-dim,
+.halo-scheme-orange-light .halo-center-app,
+.halo-scheme-orange-light .halo-center-weekday,
+.halo-scheme-orange-light .halo-center-caption {
+    color: #58423a;
+}
+
+.halo-scheme-orange-light .halo-center-clear,
+.halo-scheme-orange-light .halo-center-card,
+.halo-scheme-orange-light .halo-center-dnd,
+.halo-scheme-orange-light .halo-center-event,
+.halo-scheme-orange-light .halo-center-month,
+.halo-scheme-orange-light .halo-center-weather,
+.halo-scheme-orange-light .halo-center-clock {
+    background-color: #fff8f6;
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-center-clear:hover,
+.halo-scheme-orange-light .halo-center-dnd:hover {
+    background-color: #ffe2da;
+}
+
+.halo-scheme-orange-light .halo-center-card.halo-fresh {
+    background-color: #ffdbd0;
+}
+
+.halo-scheme-orange-light .halo-center-card.halo-fresh .halo-center-title,
+.halo-scheme-orange-light .halo-center-card.halo-fresh .halo-center-body,
+.halo-scheme-orange-light .halo-center-card.halo-fresh .halo-center-app {
+    color: #832700;
+}
+
+.halo-scheme-orange-light .halo-center-icon {
+    background-color: #ffdbd0;
+    color: #832700;
+}
+
+.halo-scheme-orange-light .halo-center-card.halo-fresh .halo-center-icon {
+    background-color: #ab3500;
+    color: #ffffff;
+}
+
+.halo-scheme-orange-light .halo-center-icon.halo-center-picture {
+    background-color: transparent;
+}
+
+.halo-scheme-orange-light .halo-center-close {
+    background-color: #ffe2da;
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-center-sub {
+    background-color: #ffe2da;
+}
+
+.halo-scheme-orange-light .halo-center-card.halo-fresh .halo-center-sub {
+    background-color: #fff8f6;
+}
+
+.halo-scheme-orange-light .halo-center-action {
+    border-color: #8c7169;
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-center-action:hover {
+    background-color: #ffe2da;
+}
+
+.halo-scheme-orange-light .halo-center-action.halo-center-action-main {
+    border-color: #ab3500;
+    background-color: #ab3500;
+    color: #ffffff;
+}
+
+.halo-scheme-orange-light .halo-center-action.halo-center-action-tonal,
+.halo-scheme-orange-light .halo-center-more {
+    border-color: transparent;
+    background-color: #ffdbd0;
+    color: #832700;
+}
+
+.halo-scheme-orange-light .halo-center-card.halo-fresh .halo-center-action-tonal,
+.halo-scheme-orange-light .halo-center-card.halo-fresh .halo-center-more {
+    background-color: #fff8f6;
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-center-empty-icon,
+.halo-scheme-orange-light .halo-center-dnd-icon {
+    color: #58423a;
+}
+
+.halo-scheme-orange-light .halo-center-nav {
+    background-color: #ffe2da;
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-center-day:hover {
+    background-color: #ffe2da;
+}
+
+.halo-scheme-orange-light .halo-center-day.halo-chosen {
+    background-color: #ffdbd0;
+}
+
+.halo-scheme-orange-light .halo-center-day.halo-chosen .halo-center-day-number {
+    color: #832700;
+}
+
+.halo-scheme-orange-light .halo-center-day.halo-today {
+    background-color: #ab3500;
+}
+
+.halo-scheme-orange-light .halo-center-day.halo-today .halo-center-day-number {
+    color: #ffffff;
+}
+
+.halo-scheme-orange-light .halo-center-dot {
+    background-color: #ab3500;
+}
+
+.halo-scheme-orange-light .halo-center-day.halo-today .halo-center-dot {
+    background-color: #ffffff;
+}
+
+.halo-scheme-orange-light .halo-center-event-bar {
+    background-color: #271813;
+}
+
+.halo-scheme-orange-light .halo-center-event.halo-soon {
+    background-color: #ffddb6;
+}
+
+.halo-scheme-orange-light .halo-center-event.halo-soon .halo-center-event-title,
+.halo-scheme-orange-light .halo-center-event.halo-soon .halo-center-dim,
+.halo-scheme-orange-light .halo-center-soon {
+    color: #633f06;
+}
+
+.halo-scheme-orange-light .halo-center-event.halo-soon .halo-center-event-bar {
+    background-color: #633f06;
+}
+
+.halo-scheme-orange-light .halo-center-event.halo-over .halo-center-event-title {
+    color: #58423a;
+}
+
+.halo-scheme-orange-light .halo-center-event.halo-over .halo-center-event-bar {
+    background-color: #dfc0b6;
+}
+
+.halo-scheme-orange-light .halo-center-accent {
+    color: #ab3500;
+}
+
+.halo-scheme-orange-light .halo-event-chip {
+    background-color: #ffddb6;
+    color: #633f06;
+}
+
+.halo-scheme-orange-light .halo-event-chip .halo-status-text {
+    color: #633f06;
+}
+
 .halo-scheme-orange-dark .halo-frame {
     background-color: #2b1c17;
 }
@@ -5915,6 +7766,192 @@
 
 .halo-scheme-orange-dark .halo-island-bubble {
     background-color: #42312b;
+}
+
+
+/* The notification center */
+
+.halo-scheme-orange-dark .halo-center {
+    background-color: #2b1c17;
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-center-heading,
+.halo-scheme-orange-dark .halo-center-title,
+.halo-scheme-orange-dark .halo-center-date,
+.halo-scheme-orange-dark .halo-center-big,
+.halo-scheme-orange-dark .halo-center-event-title,
+.halo-scheme-orange-dark .halo-center-day-number {
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-center-body {
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-center-dim,
+.halo-scheme-orange-dark .halo-center-app,
+.halo-scheme-orange-dark .halo-center-weekday,
+.halo-scheme-orange-dark .halo-center-caption {
+    color: #dfc0b6;
+}
+
+.halo-scheme-orange-dark .halo-center-clear,
+.halo-scheme-orange-dark .halo-center-card,
+.halo-scheme-orange-dark .halo-center-dnd,
+.halo-scheme-orange-dark .halo-center-event,
+.halo-scheme-orange-dark .halo-center-month,
+.halo-scheme-orange-dark .halo-center-weather,
+.halo-scheme-orange-dark .halo-center-clock {
+    background-color: #362621;
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-center-clear:hover,
+.halo-scheme-orange-dark .halo-center-dnd:hover {
+    background-color: #47352f;
+}
+
+.halo-scheme-orange-dark .halo-center-card.halo-fresh {
+    background-color: #832700;
+}
+
+.halo-scheme-orange-dark .halo-center-card.halo-fresh .halo-center-title,
+.halo-scheme-orange-dark .halo-center-card.halo-fresh .halo-center-body,
+.halo-scheme-orange-dark .halo-center-card.halo-fresh .halo-center-app {
+    color: #ffdbd0;
+}
+
+.halo-scheme-orange-dark .halo-center-icon {
+    background-color: #832700;
+    color: #ffdbd0;
+}
+
+.halo-scheme-orange-dark .halo-center-card.halo-fresh .halo-center-icon {
+    background-color: #ffb59c;
+    color: #5c1900;
+}
+
+.halo-scheme-orange-dark .halo-center-icon.halo-center-picture {
+    background-color: transparent;
+}
+
+.halo-scheme-orange-dark .halo-center-close {
+    background-color: #47352f;
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-center-sub {
+    background-color: #47352f;
+}
+
+.halo-scheme-orange-dark .halo-center-card.halo-fresh .halo-center-sub {
+    background-color: #47352f;
+}
+
+.halo-scheme-orange-dark .halo-center-action {
+    border-color: #a78b82;
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-center-action:hover {
+    background-color: #47352f;
+}
+
+.halo-scheme-orange-dark .halo-center-action.halo-center-action-main {
+    border-color: #ffb59c;
+    background-color: #ffb59c;
+    color: #5c1900;
+}
+
+.halo-scheme-orange-dark .halo-center-action.halo-center-action-tonal,
+.halo-scheme-orange-dark .halo-center-more {
+    border-color: transparent;
+    background-color: #832700;
+    color: #ffdbd0;
+}
+
+.halo-scheme-orange-dark .halo-center-card.halo-fresh .halo-center-action-tonal,
+.halo-scheme-orange-dark .halo-center-card.halo-fresh .halo-center-more {
+    background-color: #47352f;
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-center-empty-icon,
+.halo-scheme-orange-dark .halo-center-dnd-icon {
+    color: #dfc0b6;
+}
+
+.halo-scheme-orange-dark .halo-center-nav {
+    background-color: #47352f;
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-center-day:hover {
+    background-color: #47352f;
+}
+
+.halo-scheme-orange-dark .halo-center-day.halo-chosen {
+    background-color: #832700;
+}
+
+.halo-scheme-orange-dark .halo-center-day.halo-chosen .halo-center-day-number {
+    color: #ffdbd0;
+}
+
+.halo-scheme-orange-dark .halo-center-day.halo-today {
+    background-color: #ffb59c;
+}
+
+.halo-scheme-orange-dark .halo-center-day.halo-today .halo-center-day-number {
+    color: #5c1900;
+}
+
+.halo-scheme-orange-dark .halo-center-dot {
+    background-color: #ffb59c;
+}
+
+.halo-scheme-orange-dark .halo-center-day.halo-today .halo-center-dot {
+    background-color: #5c1900;
+}
+
+.halo-scheme-orange-dark .halo-center-event-bar {
+    background-color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-center-event.halo-soon {
+    background-color: #633f06;
+}
+
+.halo-scheme-orange-dark .halo-center-event.halo-soon .halo-center-event-title,
+.halo-scheme-orange-dark .halo-center-event.halo-soon .halo-center-dim,
+.halo-scheme-orange-dark .halo-center-soon {
+    color: #ffddb6;
+}
+
+.halo-scheme-orange-dark .halo-center-event.halo-soon .halo-center-event-bar {
+    background-color: #ffddb6;
+}
+
+.halo-scheme-orange-dark .halo-center-event.halo-over .halo-center-event-title {
+    color: #dfc0b6;
+}
+
+.halo-scheme-orange-dark .halo-center-event.halo-over .halo-center-event-bar {
+    background-color: #58423a;
+}
+
+.halo-scheme-orange-dark .halo-center-accent {
+    color: #ffb59c;
+}
+
+.halo-scheme-orange-dark .halo-event-chip {
+    background-color: #633f06;
+    color: #ffddb6;
+}
+
+.halo-scheme-orange-dark .halo-event-chip .halo-status-text {
+    color: #ffddb6;
 }
 
 .halo-scheme-salmon-light .halo-frame {
@@ -6450,6 +8487,192 @@
     background-color: #f9dcd8;
 }
 
+
+/* The notification center */
+
+.halo-scheme-salmon-light .halo-center {
+    background-color: #fff0ee;
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-center-heading,
+.halo-scheme-salmon-light .halo-center-title,
+.halo-scheme-salmon-light .halo-center-date,
+.halo-scheme-salmon-light .halo-center-big,
+.halo-scheme-salmon-light .halo-center-event-title,
+.halo-scheme-salmon-light .halo-center-day-number {
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-center-body {
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-center-dim,
+.halo-scheme-salmon-light .halo-center-app,
+.halo-scheme-salmon-light .halo-center-weekday,
+.halo-scheme-salmon-light .halo-center-caption {
+    color: #58413e;
+}
+
+.halo-scheme-salmon-light .halo-center-clear,
+.halo-scheme-salmon-light .halo-center-card,
+.halo-scheme-salmon-light .halo-center-dnd,
+.halo-scheme-salmon-light .halo-center-event,
+.halo-scheme-salmon-light .halo-center-month,
+.halo-scheme-salmon-light .halo-center-weather,
+.halo-scheme-salmon-light .halo-center-clock {
+    background-color: #fff8f7;
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-center-clear:hover,
+.halo-scheme-salmon-light .halo-center-dnd:hover {
+    background-color: #ffe2de;
+}
+
+.halo-scheme-salmon-light .halo-center-card.halo-fresh {
+    background-color: #ffdad5;
+}
+
+.halo-scheme-salmon-light .halo-center-card.halo-fresh .halo-center-title,
+.halo-scheme-salmon-light .halo-center-card.halo-fresh .halo-center-body,
+.halo-scheme-salmon-light .halo-center-card.halo-fresh .halo-center-app {
+    color: #930007;
+}
+
+.halo-scheme-salmon-light .halo-center-icon {
+    background-color: #ffdad5;
+    color: #930007;
+}
+
+.halo-scheme-salmon-light .halo-center-card.halo-fresh .halo-center-icon {
+    background-color: #c0000d;
+    color: #ffffff;
+}
+
+.halo-scheme-salmon-light .halo-center-icon.halo-center-picture {
+    background-color: transparent;
+}
+
+.halo-scheme-salmon-light .halo-center-close {
+    background-color: #ffe2de;
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-center-sub {
+    background-color: #ffe2de;
+}
+
+.halo-scheme-salmon-light .halo-center-card.halo-fresh .halo-center-sub {
+    background-color: #fff8f7;
+}
+
+.halo-scheme-salmon-light .halo-center-action {
+    border-color: #8c716d;
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-center-action:hover {
+    background-color: #ffe2de;
+}
+
+.halo-scheme-salmon-light .halo-center-action.halo-center-action-main {
+    border-color: #c0000d;
+    background-color: #c0000d;
+    color: #ffffff;
+}
+
+.halo-scheme-salmon-light .halo-center-action.halo-center-action-tonal,
+.halo-scheme-salmon-light .halo-center-more {
+    border-color: transparent;
+    background-color: #ffdad5;
+    color: #930007;
+}
+
+.halo-scheme-salmon-light .halo-center-card.halo-fresh .halo-center-action-tonal,
+.halo-scheme-salmon-light .halo-center-card.halo-fresh .halo-center-more {
+    background-color: #fff8f7;
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-center-empty-icon,
+.halo-scheme-salmon-light .halo-center-dnd-icon {
+    color: #58413e;
+}
+
+.halo-scheme-salmon-light .halo-center-nav {
+    background-color: #ffe2de;
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-center-day:hover {
+    background-color: #ffe2de;
+}
+
+.halo-scheme-salmon-light .halo-center-day.halo-chosen {
+    background-color: #ffdad5;
+}
+
+.halo-scheme-salmon-light .halo-center-day.halo-chosen .halo-center-day-number {
+    color: #930007;
+}
+
+.halo-scheme-salmon-light .halo-center-day.halo-today {
+    background-color: #c0000d;
+}
+
+.halo-scheme-salmon-light .halo-center-day.halo-today .halo-center-day-number {
+    color: #ffffff;
+}
+
+.halo-scheme-salmon-light .halo-center-dot {
+    background-color: #c0000d;
+}
+
+.halo-scheme-salmon-light .halo-center-day.halo-today .halo-center-dot {
+    background-color: #ffffff;
+}
+
+.halo-scheme-salmon-light .halo-center-event-bar {
+    background-color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-center-event.halo-soon {
+    background-color: #ffdcc1;
+}
+
+.halo-scheme-salmon-light .halo-center-event.halo-soon .halo-center-event-title,
+.halo-scheme-salmon-light .halo-center-event.halo-soon .halo-center-dim,
+.halo-scheme-salmon-light .halo-center-soon {
+    color: #683c0f;
+}
+
+.halo-scheme-salmon-light .halo-center-event.halo-soon .halo-center-event-bar {
+    background-color: #683c0f;
+}
+
+.halo-scheme-salmon-light .halo-center-event.halo-over .halo-center-event-title {
+    color: #58413e;
+}
+
+.halo-scheme-salmon-light .halo-center-event.halo-over .halo-center-event-bar {
+    background-color: #dfbfbb;
+}
+
+.halo-scheme-salmon-light .halo-center-accent {
+    color: #c0000d;
+}
+
+.halo-scheme-salmon-light .halo-event-chip {
+    background-color: #ffdcc1;
+    color: #683c0f;
+}
+
+.halo-scheme-salmon-light .halo-event-chip .halo-status-text {
+    color: #683c0f;
+}
+
 .halo-scheme-salmon-dark .halo-frame {
     background-color: #2b1c1a;
 }
@@ -6981,6 +9204,192 @@
 
 .halo-scheme-salmon-dark .halo-island-bubble {
     background-color: #42302e;
+}
+
+
+/* The notification center */
+
+.halo-scheme-salmon-dark .halo-center {
+    background-color: #2b1c1a;
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-center-heading,
+.halo-scheme-salmon-dark .halo-center-title,
+.halo-scheme-salmon-dark .halo-center-date,
+.halo-scheme-salmon-dark .halo-center-big,
+.halo-scheme-salmon-dark .halo-center-event-title,
+.halo-scheme-salmon-dark .halo-center-day-number {
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-center-body {
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-center-dim,
+.halo-scheme-salmon-dark .halo-center-app,
+.halo-scheme-salmon-dark .halo-center-weekday,
+.halo-scheme-salmon-dark .halo-center-caption {
+    color: #dfbfbb;
+}
+
+.halo-scheme-salmon-dark .halo-center-clear,
+.halo-scheme-salmon-dark .halo-center-card,
+.halo-scheme-salmon-dark .halo-center-dnd,
+.halo-scheme-salmon-dark .halo-center-event,
+.halo-scheme-salmon-dark .halo-center-month,
+.halo-scheme-salmon-dark .halo-center-weather,
+.halo-scheme-salmon-dark .halo-center-clock {
+    background-color: #372624;
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-center-clear:hover,
+.halo-scheme-salmon-dark .halo-center-dnd:hover {
+    background-color: #473532;
+}
+
+.halo-scheme-salmon-dark .halo-center-card.halo-fresh {
+    background-color: #930007;
+}
+
+.halo-scheme-salmon-dark .halo-center-card.halo-fresh .halo-center-title,
+.halo-scheme-salmon-dark .halo-center-card.halo-fresh .halo-center-body,
+.halo-scheme-salmon-dark .halo-center-card.halo-fresh .halo-center-app {
+    color: #ffdad5;
+}
+
+.halo-scheme-salmon-dark .halo-center-icon {
+    background-color: #930007;
+    color: #ffdad5;
+}
+
+.halo-scheme-salmon-dark .halo-center-card.halo-fresh .halo-center-icon {
+    background-color: #ffb4aa;
+    color: #690003;
+}
+
+.halo-scheme-salmon-dark .halo-center-icon.halo-center-picture {
+    background-color: transparent;
+}
+
+.halo-scheme-salmon-dark .halo-center-close {
+    background-color: #473532;
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-center-sub {
+    background-color: #473532;
+}
+
+.halo-scheme-salmon-dark .halo-center-card.halo-fresh .halo-center-sub {
+    background-color: #473532;
+}
+
+.halo-scheme-salmon-dark .halo-center-action {
+    border-color: #a78a86;
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-center-action:hover {
+    background-color: #473532;
+}
+
+.halo-scheme-salmon-dark .halo-center-action.halo-center-action-main {
+    border-color: #ffb4aa;
+    background-color: #ffb4aa;
+    color: #690003;
+}
+
+.halo-scheme-salmon-dark .halo-center-action.halo-center-action-tonal,
+.halo-scheme-salmon-dark .halo-center-more {
+    border-color: transparent;
+    background-color: #930007;
+    color: #ffdad5;
+}
+
+.halo-scheme-salmon-dark .halo-center-card.halo-fresh .halo-center-action-tonal,
+.halo-scheme-salmon-dark .halo-center-card.halo-fresh .halo-center-more {
+    background-color: #473532;
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-center-empty-icon,
+.halo-scheme-salmon-dark .halo-center-dnd-icon {
+    color: #dfbfbb;
+}
+
+.halo-scheme-salmon-dark .halo-center-nav {
+    background-color: #473532;
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-center-day:hover {
+    background-color: #473532;
+}
+
+.halo-scheme-salmon-dark .halo-center-day.halo-chosen {
+    background-color: #930007;
+}
+
+.halo-scheme-salmon-dark .halo-center-day.halo-chosen .halo-center-day-number {
+    color: #ffdad5;
+}
+
+.halo-scheme-salmon-dark .halo-center-day.halo-today {
+    background-color: #ffb4aa;
+}
+
+.halo-scheme-salmon-dark .halo-center-day.halo-today .halo-center-day-number {
+    color: #690003;
+}
+
+.halo-scheme-salmon-dark .halo-center-dot {
+    background-color: #ffb4aa;
+}
+
+.halo-scheme-salmon-dark .halo-center-day.halo-today .halo-center-dot {
+    background-color: #690003;
+}
+
+.halo-scheme-salmon-dark .halo-center-event-bar {
+    background-color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-center-event.halo-soon {
+    background-color: #683c0f;
+}
+
+.halo-scheme-salmon-dark .halo-center-event.halo-soon .halo-center-event-title,
+.halo-scheme-salmon-dark .halo-center-event.halo-soon .halo-center-dim,
+.halo-scheme-salmon-dark .halo-center-soon {
+    color: #ffdcc1;
+}
+
+.halo-scheme-salmon-dark .halo-center-event.halo-soon .halo-center-event-bar {
+    background-color: #ffdcc1;
+}
+
+.halo-scheme-salmon-dark .halo-center-event.halo-over .halo-center-event-title {
+    color: #dfbfbb;
+}
+
+.halo-scheme-salmon-dark .halo-center-event.halo-over .halo-center-event-bar {
+    background-color: #58413e;
+}
+
+.halo-scheme-salmon-dark .halo-center-accent {
+    color: #ffb4aa;
+}
+
+.halo-scheme-salmon-dark .halo-event-chip {
+    background-color: #683c0f;
+    color: #ffdcc1;
+}
+
+.halo-scheme-salmon-dark .halo-event-chip .halo-status-text {
+    color: #ffdcc1;
 }
 
 .halo-scheme-pink-light .halo-frame {
@@ -7516,6 +9925,192 @@
     background-color: #f6dce1;
 }
 
+
+/* The notification center */
+
+.halo-scheme-pink-light .halo-center {
+    background-color: #fff0f2;
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-center-heading,
+.halo-scheme-pink-light .halo-center-title,
+.halo-scheme-pink-light .halo-center-date,
+.halo-scheme-pink-light .halo-center-big,
+.halo-scheme-pink-light .halo-center-event-title,
+.halo-scheme-pink-light .halo-center-day-number {
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-center-body {
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-center-dim,
+.halo-scheme-pink-light .halo-center-app,
+.halo-scheme-pink-light .halo-center-weekday,
+.halo-scheme-pink-light .halo-center-caption {
+    color: #564146;
+}
+
+.halo-scheme-pink-light .halo-center-clear,
+.halo-scheme-pink-light .halo-center-card,
+.halo-scheme-pink-light .halo-center-dnd,
+.halo-scheme-pink-light .halo-center-event,
+.halo-scheme-pink-light .halo-center-month,
+.halo-scheme-pink-light .halo-center-weather,
+.halo-scheme-pink-light .halo-center-clock {
+    background-color: #fff8f8;
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-center-clear:hover,
+.halo-scheme-pink-light .halo-center-dnd:hover {
+    background-color: #fce2e6;
+}
+
+.halo-scheme-pink-light .halo-center-card.halo-fresh {
+    background-color: #ffd9e1;
+}
+
+.halo-scheme-pink-light .halo-center-card.halo-fresh .halo-center-title,
+.halo-scheme-pink-light .halo-center-card.halo-fresh .halo-center-body,
+.halo-scheme-pink-light .halo-center-card.halo-fresh .halo-center-app {
+    color: #8f0044;
+}
+
+.halo-scheme-pink-light .halo-center-icon {
+    background-color: #ffd9e1;
+    color: #8f0044;
+}
+
+.halo-scheme-pink-light .halo-center-card.halo-fresh .halo-center-icon {
+    background-color: #ba005b;
+    color: #ffffff;
+}
+
+.halo-scheme-pink-light .halo-center-icon.halo-center-picture {
+    background-color: transparent;
+}
+
+.halo-scheme-pink-light .halo-center-close {
+    background-color: #fce2e6;
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-center-sub {
+    background-color: #fce2e6;
+}
+
+.halo-scheme-pink-light .halo-center-card.halo-fresh .halo-center-sub {
+    background-color: #fff8f8;
+}
+
+.halo-scheme-pink-light .halo-center-action {
+    border-color: #897176;
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-center-action:hover {
+    background-color: #fce2e6;
+}
+
+.halo-scheme-pink-light .halo-center-action.halo-center-action-main {
+    border-color: #ba005b;
+    background-color: #ba005b;
+    color: #ffffff;
+}
+
+.halo-scheme-pink-light .halo-center-action.halo-center-action-tonal,
+.halo-scheme-pink-light .halo-center-more {
+    border-color: transparent;
+    background-color: #ffd9e1;
+    color: #8f0044;
+}
+
+.halo-scheme-pink-light .halo-center-card.halo-fresh .halo-center-action-tonal,
+.halo-scheme-pink-light .halo-center-card.halo-fresh .halo-center-more {
+    background-color: #fff8f8;
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-center-empty-icon,
+.halo-scheme-pink-light .halo-center-dnd-icon {
+    color: #564146;
+}
+
+.halo-scheme-pink-light .halo-center-nav {
+    background-color: #fce2e6;
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-center-day:hover {
+    background-color: #fce2e6;
+}
+
+.halo-scheme-pink-light .halo-center-day.halo-chosen {
+    background-color: #ffd9e1;
+}
+
+.halo-scheme-pink-light .halo-center-day.halo-chosen .halo-center-day-number {
+    color: #8f0044;
+}
+
+.halo-scheme-pink-light .halo-center-day.halo-today {
+    background-color: #ba005b;
+}
+
+.halo-scheme-pink-light .halo-center-day.halo-today .halo-center-day-number {
+    color: #ffffff;
+}
+
+.halo-scheme-pink-light .halo-center-dot {
+    background-color: #ba005b;
+}
+
+.halo-scheme-pink-light .halo-center-day.halo-today .halo-center-dot {
+    background-color: #ffffff;
+}
+
+.halo-scheme-pink-light .halo-center-event-bar {
+    background-color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-center-event.halo-soon {
+    background-color: #ffdbcf;
+}
+
+.halo-scheme-pink-light .halo-center-event.halo-soon .halo-center-event-title,
+.halo-scheme-pink-light .halo-center-event.halo-soon .halo-center-dim,
+.halo-scheme-pink-light .halo-center-soon {
+    color: #6e3824;
+}
+
+.halo-scheme-pink-light .halo-center-event.halo-soon .halo-center-event-bar {
+    background-color: #6e3824;
+}
+
+.halo-scheme-pink-light .halo-center-event.halo-over .halo-center-event-title {
+    color: #564146;
+}
+
+.halo-scheme-pink-light .halo-center-event.halo-over .halo-center-event-bar {
+    background-color: #ddbfc5;
+}
+
+.halo-scheme-pink-light .halo-center-accent {
+    color: #ba005b;
+}
+
+.halo-scheme-pink-light .halo-event-chip {
+    background-color: #ffdbcf;
+    color: #6e3824;
+}
+
+.halo-scheme-pink-light .halo-event-chip .halo-status-text {
+    color: #6e3824;
+}
+
 .halo-scheme-pink-dark .halo-frame {
     background-color: #2a1c1f;
 }
@@ -8047,6 +10642,192 @@
 
 .halo-scheme-pink-dark .halo-island-bubble {
     background-color: #413034;
+}
+
+
+/* The notification center */
+
+.halo-scheme-pink-dark .halo-center {
+    background-color: #2a1c1f;
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-center-heading,
+.halo-scheme-pink-dark .halo-center-title,
+.halo-scheme-pink-dark .halo-center-date,
+.halo-scheme-pink-dark .halo-center-big,
+.halo-scheme-pink-dark .halo-center-event-title,
+.halo-scheme-pink-dark .halo-center-day-number {
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-center-body {
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-center-dim,
+.halo-scheme-pink-dark .halo-center-app,
+.halo-scheme-pink-dark .halo-center-weekday,
+.halo-scheme-pink-dark .halo-center-caption {
+    color: #ddbfc5;
+}
+
+.halo-scheme-pink-dark .halo-center-clear,
+.halo-scheme-pink-dark .halo-center-card,
+.halo-scheme-pink-dark .halo-center-dnd,
+.halo-scheme-pink-dark .halo-center-event,
+.halo-scheme-pink-dark .halo-center-month,
+.halo-scheme-pink-dark .halo-center-weather,
+.halo-scheme-pink-dark .halo-center-clock {
+    background-color: #352629;
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-center-clear:hover,
+.halo-scheme-pink-dark .halo-center-dnd:hover {
+    background-color: #453538;
+}
+
+.halo-scheme-pink-dark .halo-center-card.halo-fresh {
+    background-color: #8f0044;
+}
+
+.halo-scheme-pink-dark .halo-center-card.halo-fresh .halo-center-title,
+.halo-scheme-pink-dark .halo-center-card.halo-fresh .halo-center-body,
+.halo-scheme-pink-dark .halo-center-card.halo-fresh .halo-center-app {
+    color: #ffd9e1;
+}
+
+.halo-scheme-pink-dark .halo-center-icon {
+    background-color: #8f0044;
+    color: #ffd9e1;
+}
+
+.halo-scheme-pink-dark .halo-center-card.halo-fresh .halo-center-icon {
+    background-color: #ffb1c4;
+    color: #65002e;
+}
+
+.halo-scheme-pink-dark .halo-center-icon.halo-center-picture {
+    background-color: transparent;
+}
+
+.halo-scheme-pink-dark .halo-center-close {
+    background-color: #453538;
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-center-sub {
+    background-color: #453538;
+}
+
+.halo-scheme-pink-dark .halo-center-card.halo-fresh .halo-center-sub {
+    background-color: #453538;
+}
+
+.halo-scheme-pink-dark .halo-center-action {
+    border-color: #a48a8f;
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-center-action:hover {
+    background-color: #453538;
+}
+
+.halo-scheme-pink-dark .halo-center-action.halo-center-action-main {
+    border-color: #ffb1c4;
+    background-color: #ffb1c4;
+    color: #65002e;
+}
+
+.halo-scheme-pink-dark .halo-center-action.halo-center-action-tonal,
+.halo-scheme-pink-dark .halo-center-more {
+    border-color: transparent;
+    background-color: #8f0044;
+    color: #ffd9e1;
+}
+
+.halo-scheme-pink-dark .halo-center-card.halo-fresh .halo-center-action-tonal,
+.halo-scheme-pink-dark .halo-center-card.halo-fresh .halo-center-more {
+    background-color: #453538;
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-center-empty-icon,
+.halo-scheme-pink-dark .halo-center-dnd-icon {
+    color: #ddbfc5;
+}
+
+.halo-scheme-pink-dark .halo-center-nav {
+    background-color: #453538;
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-center-day:hover {
+    background-color: #453538;
+}
+
+.halo-scheme-pink-dark .halo-center-day.halo-chosen {
+    background-color: #8f0044;
+}
+
+.halo-scheme-pink-dark .halo-center-day.halo-chosen .halo-center-day-number {
+    color: #ffd9e1;
+}
+
+.halo-scheme-pink-dark .halo-center-day.halo-today {
+    background-color: #ffb1c4;
+}
+
+.halo-scheme-pink-dark .halo-center-day.halo-today .halo-center-day-number {
+    color: #65002e;
+}
+
+.halo-scheme-pink-dark .halo-center-dot {
+    background-color: #ffb1c4;
+}
+
+.halo-scheme-pink-dark .halo-center-day.halo-today .halo-center-dot {
+    background-color: #65002e;
+}
+
+.halo-scheme-pink-dark .halo-center-event-bar {
+    background-color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-center-event.halo-soon {
+    background-color: #6e3824;
+}
+
+.halo-scheme-pink-dark .halo-center-event.halo-soon .halo-center-event-title,
+.halo-scheme-pink-dark .halo-center-event.halo-soon .halo-center-dim,
+.halo-scheme-pink-dark .halo-center-soon {
+    color: #ffdbcf;
+}
+
+.halo-scheme-pink-dark .halo-center-event.halo-soon .halo-center-event-bar {
+    background-color: #ffdbcf;
+}
+
+.halo-scheme-pink-dark .halo-center-event.halo-over .halo-center-event-title {
+    color: #ddbfc5;
+}
+
+.halo-scheme-pink-dark .halo-center-event.halo-over .halo-center-event-bar {
+    background-color: #564146;
+}
+
+.halo-scheme-pink-dark .halo-center-accent {
+    color: #ffb1c4;
+}
+
+.halo-scheme-pink-dark .halo-event-chip {
+    background-color: #6e3824;
+    color: #ffdbcf;
+}
+
+.halo-scheme-pink-dark .halo-event-chip .halo-status-text {
+    color: #ffdbcf;
 }
 
 .halo-scheme-white-light .halo-frame {
@@ -8582,6 +11363,192 @@
     background-color: #e2e2e2;
 }
 
+
+/* The notification center */
+
+.halo-scheme-white-light .halo-center {
+    background-color: #f3f3f3;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-center-heading,
+.halo-scheme-white-light .halo-center-title,
+.halo-scheme-white-light .halo-center-date,
+.halo-scheme-white-light .halo-center-big,
+.halo-scheme-white-light .halo-center-event-title,
+.halo-scheme-white-light .halo-center-day-number {
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-center-body {
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-center-dim,
+.halo-scheme-white-light .halo-center-app,
+.halo-scheme-white-light .halo-center-weekday,
+.halo-scheme-white-light .halo-center-caption {
+    color: #474747;
+}
+
+.halo-scheme-white-light .halo-center-clear,
+.halo-scheme-white-light .halo-center-card,
+.halo-scheme-white-light .halo-center-dnd,
+.halo-scheme-white-light .halo-center-event,
+.halo-scheme-white-light .halo-center-month,
+.halo-scheme-white-light .halo-center-weather,
+.halo-scheme-white-light .halo-center-clock {
+    background-color: #f9f9f9;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-center-clear:hover,
+.halo-scheme-white-light .halo-center-dnd:hover {
+    background-color: #e8e8e8;
+}
+
+.halo-scheme-white-light .halo-center-card.halo-fresh {
+    background-color: #3b3b3b;
+}
+
+.halo-scheme-white-light .halo-center-card.halo-fresh .halo-center-title,
+.halo-scheme-white-light .halo-center-card.halo-fresh .halo-center-body,
+.halo-scheme-white-light .halo-center-card.halo-fresh .halo-center-app {
+    color: #ffffff;
+}
+
+.halo-scheme-white-light .halo-center-icon {
+    background-color: #3b3b3b;
+    color: #ffffff;
+}
+
+.halo-scheme-white-light .halo-center-card.halo-fresh .halo-center-icon {
+    background-color: #000000;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-light .halo-center-icon.halo-center-picture {
+    background-color: transparent;
+}
+
+.halo-scheme-white-light .halo-center-close {
+    background-color: #e8e8e8;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-center-sub {
+    background-color: #e8e8e8;
+}
+
+.halo-scheme-white-light .halo-center-card.halo-fresh .halo-center-sub {
+    background-color: #f9f9f9;
+}
+
+.halo-scheme-white-light .halo-center-action {
+    border-color: #777777;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-center-action:hover {
+    background-color: #e8e8e8;
+}
+
+.halo-scheme-white-light .halo-center-action.halo-center-action-main {
+    border-color: #000000;
+    background-color: #000000;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-light .halo-center-action.halo-center-action-tonal,
+.halo-scheme-white-light .halo-center-more {
+    border-color: transparent;
+    background-color: #3b3b3b;
+    color: #ffffff;
+}
+
+.halo-scheme-white-light .halo-center-card.halo-fresh .halo-center-action-tonal,
+.halo-scheme-white-light .halo-center-card.halo-fresh .halo-center-more {
+    background-color: #f9f9f9;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-center-empty-icon,
+.halo-scheme-white-light .halo-center-dnd-icon {
+    color: #474747;
+}
+
+.halo-scheme-white-light .halo-center-nav {
+    background-color: #e8e8e8;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-center-day:hover {
+    background-color: #e8e8e8;
+}
+
+.halo-scheme-white-light .halo-center-day.halo-chosen {
+    background-color: #3b3b3b;
+}
+
+.halo-scheme-white-light .halo-center-day.halo-chosen .halo-center-day-number {
+    color: #ffffff;
+}
+
+.halo-scheme-white-light .halo-center-day.halo-today {
+    background-color: #000000;
+}
+
+.halo-scheme-white-light .halo-center-day.halo-today .halo-center-day-number {
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-light .halo-center-dot {
+    background-color: #000000;
+}
+
+.halo-scheme-white-light .halo-center-day.halo-today .halo-center-dot {
+    background-color: #e2e2e2;
+}
+
+.halo-scheme-white-light .halo-center-event-bar {
+    background-color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-center-event.halo-soon {
+    background-color: #747474;
+}
+
+.halo-scheme-white-light .halo-center-event.halo-soon .halo-center-event-title,
+.halo-scheme-white-light .halo-center-event.halo-soon .halo-center-dim,
+.halo-scheme-white-light .halo-center-soon {
+    color: #ffffff;
+}
+
+.halo-scheme-white-light .halo-center-event.halo-soon .halo-center-event-bar {
+    background-color: #ffffff;
+}
+
+.halo-scheme-white-light .halo-center-event.halo-over .halo-center-event-title {
+    color: #474747;
+}
+
+.halo-scheme-white-light .halo-center-event.halo-over .halo-center-event-bar {
+    background-color: #c6c6c6;
+}
+
+.halo-scheme-white-light .halo-center-accent {
+    color: #000000;
+}
+
+.halo-scheme-white-light .halo-event-chip {
+    background-color: #747474;
+    color: #ffffff;
+}
+
+.halo-scheme-white-light .halo-event-chip .halo-status-text {
+    color: #ffffff;
+}
+
 .halo-scheme-white-dark .halo-frame {
     background-color: #1f1f1f;
 }
@@ -9113,4 +12080,190 @@
 
 .halo-scheme-white-dark .halo-island-bubble {
     background-color: #353535;
+}
+
+
+/* The notification center */
+
+.halo-scheme-white-dark .halo-center {
+    background-color: #1f1f1f;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-center-heading,
+.halo-scheme-white-dark .halo-center-title,
+.halo-scheme-white-dark .halo-center-date,
+.halo-scheme-white-dark .halo-center-big,
+.halo-scheme-white-dark .halo-center-event-title,
+.halo-scheme-white-dark .halo-center-day-number {
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-center-body {
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-center-dim,
+.halo-scheme-white-dark .halo-center-app,
+.halo-scheme-white-dark .halo-center-weekday,
+.halo-scheme-white-dark .halo-center-caption {
+    color: #c6c6c6;
+}
+
+.halo-scheme-white-dark .halo-center-clear,
+.halo-scheme-white-dark .halo-center-card,
+.halo-scheme-white-dark .halo-center-dnd,
+.halo-scheme-white-dark .halo-center-event,
+.halo-scheme-white-dark .halo-center-month,
+.halo-scheme-white-dark .halo-center-weather,
+.halo-scheme-white-dark .halo-center-clock {
+    background-color: #2a2a2a;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-center-clear:hover,
+.halo-scheme-white-dark .halo-center-dnd:hover {
+    background-color: #393939;
+}
+
+.halo-scheme-white-dark .halo-center-card.halo-fresh {
+    background-color: #d4d4d4;
+}
+
+.halo-scheme-white-dark .halo-center-card.halo-fresh .halo-center-title,
+.halo-scheme-white-dark .halo-center-card.halo-fresh .halo-center-body,
+.halo-scheme-white-dark .halo-center-card.halo-fresh .halo-center-app {
+    color: #000000;
+}
+
+.halo-scheme-white-dark .halo-center-icon {
+    background-color: #d4d4d4;
+    color: #000000;
+}
+
+.halo-scheme-white-dark .halo-center-card.halo-fresh .halo-center-icon {
+    background-color: #ffffff;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-dark .halo-center-icon.halo-center-picture {
+    background-color: transparent;
+}
+
+.halo-scheme-white-dark .halo-center-close {
+    background-color: #393939;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-center-sub {
+    background-color: #393939;
+}
+
+.halo-scheme-white-dark .halo-center-card.halo-fresh .halo-center-sub {
+    background-color: #393939;
+}
+
+.halo-scheme-white-dark .halo-center-action {
+    border-color: #919191;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-center-action:hover {
+    background-color: #393939;
+}
+
+.halo-scheme-white-dark .halo-center-action.halo-center-action-main {
+    border-color: #ffffff;
+    background-color: #ffffff;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-dark .halo-center-action.halo-center-action-tonal,
+.halo-scheme-white-dark .halo-center-more {
+    border-color: transparent;
+    background-color: #d4d4d4;
+    color: #000000;
+}
+
+.halo-scheme-white-dark .halo-center-card.halo-fresh .halo-center-action-tonal,
+.halo-scheme-white-dark .halo-center-card.halo-fresh .halo-center-more {
+    background-color: #393939;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-center-empty-icon,
+.halo-scheme-white-dark .halo-center-dnd-icon {
+    color: #c6c6c6;
+}
+
+.halo-scheme-white-dark .halo-center-nav {
+    background-color: #393939;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-center-day:hover {
+    background-color: #393939;
+}
+
+.halo-scheme-white-dark .halo-center-day.halo-chosen {
+    background-color: #d4d4d4;
+}
+
+.halo-scheme-white-dark .halo-center-day.halo-chosen .halo-center-day-number {
+    color: #000000;
+}
+
+.halo-scheme-white-dark .halo-center-day.halo-today {
+    background-color: #ffffff;
+}
+
+.halo-scheme-white-dark .halo-center-day.halo-today .halo-center-day-number {
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-dark .halo-center-dot {
+    background-color: #ffffff;
+}
+
+.halo-scheme-white-dark .halo-center-day.halo-today .halo-center-dot {
+    background-color: #1b1b1b;
+}
+
+.halo-scheme-white-dark .halo-center-event-bar {
+    background-color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-center-event.halo-soon {
+    background-color: #919191;
+}
+
+.halo-scheme-white-dark .halo-center-event.halo-soon .halo-center-event-title,
+.halo-scheme-white-dark .halo-center-event.halo-soon .halo-center-dim,
+.halo-scheme-white-dark .halo-center-soon {
+    color: #000000;
+}
+
+.halo-scheme-white-dark .halo-center-event.halo-soon .halo-center-event-bar {
+    background-color: #000000;
+}
+
+.halo-scheme-white-dark .halo-center-event.halo-over .halo-center-event-title {
+    color: #c6c6c6;
+}
+
+.halo-scheme-white-dark .halo-center-event.halo-over .halo-center-event-bar {
+    background-color: #474747;
+}
+
+.halo-scheme-white-dark .halo-center-accent {
+    color: #ffffff;
+}
+
+.halo-scheme-white-dark .halo-event-chip {
+    background-color: #919191;
+    color: #000000;
+}
+
+.halo-scheme-white-dark .halo-event-chip .halo-status-text {
+    color: #000000;
 }
