@@ -16,6 +16,7 @@ import {CenterTakeover} from './lib/center/takeover.js';
 import {WeatherModel} from './lib/center/weather.js';
 import {Island} from './lib/island/island.js';
 import {BannerSource} from './lib/island/sources/banners.js';
+import {LockBox} from './lib/island/lockbox.js';
 import {ClaudeSource} from './lib/island/sources/claude.js';
 import {EventsSource} from './lib/island/sources/events.js';
 import {MediaSource} from './lib/island/sources/media.js';
@@ -221,6 +222,7 @@ export default class HaloExtension extends Extension {
     _lockChanged() {
         const locked = Main.sessionMode.isLocked;
         this._island?.setLocked(locked);
+        this._lockBox?.update();
         if (locked) {
             this._center?.close({animated: false});
             this._qs?.close({animated: false});
@@ -258,7 +260,10 @@ export default class HaloExtension extends Extension {
         });
         const island = this._island;
         island.setLocked(Main.sessionMode.isLocked);
+        this._lockBox = new LockBox(() => island.allows('notifications'));
+        this._lockBox.update();
         this._islandSources = [
+            this._lockBox,
             new OsdSource(island),
             new BannerSource(island),
             new MediaSource(island),
@@ -292,6 +297,7 @@ export default class HaloExtension extends Extension {
         for (const source of this._islandSources.reverse())
             source.destroy();
         this._islandSources = [];
+        this._lockBox = null;
         this._island?.destroy();
         this._island = null;
         this._bars?.setIslandClock(false);

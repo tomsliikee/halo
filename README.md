@@ -59,7 +59,7 @@ Each of the four parts can be switched off in Halo's settings. GNOME's own part 
 
 The island rests on the clock. It is always the opposite of the desktop: white on a dark desktop, black on a light one. When something happens it grows out of the clock to about twice its size with a spring that overshoots a little; its content fades in without one.
 
-- **Click:** Opens the large look. A right click closes it or sends the thing away.
+- **Click:** Opens the large look. A right click closes it or sends the thing away. Something still going (music, a timer, a recording) then waits as a small circle beside the island, or beside the clock when nothing else shows; a click on the circle brings it back, and a right click on the clock brings back everything sent away.
 - **Hover:** The pointer on a short message holds it. Resting on a small look for a moment shows one more line: the player and the track's time, when the timer ends, which projects Claude works on, the app behind a download.
 - **Two at Once:** The more important lasting thing takes the island; the other waits beside it as a small bubble. A click on the bubble, a sideways touchpad swipe or Shift with the wheel swaps them.
 - **Scroll:** On music the wheel or two fingers change the volume; on a timer they add or take a minute.
@@ -121,6 +121,7 @@ A click on the clock opens it, and it grows out of the clock as the island does:
 Halo runs in GNOME's **unlock-dialog** mode as well, like GNOME's own panel:
 
 - **Bar:** Only the status pill stays, standing on its own; GNOME's lock screen shows the clock.
+- **GNOME's list:** GNOME's own list of notifications and its media player under the clock stay hidden while the island takes notifications, so nothing shows twice. A new notification still wakes the screen.
 - **Island:** Volume, brightness, music, the timer and charging show as usual. A notification shows only its app and **New notification**, or its title where GNOME's notification settings let details show on the lock screen. Calls show **Incoming call** without a name. Claude's work, copied text and events stay out.
 - **Notification Center:** Does not open.
 - **Quick Settings:** No settings gear, no lock button, no links into GNOME Settings, no list of background apps.
@@ -247,7 +248,7 @@ Colours come from **`extension/lib/shared/palettes.js`**: each style is Material
 | **Unit tests** | `for t in tests/*.test.js; do gjs -m "$t"; done` |
 | **Stylesheet** | `gjs -m tools/build-stylesheet.js` |
 | **Icons and symbols** | `gjs -m tools/build-icons.js`, `gjs -m tools/build-symbols.js` |
-| **Headless shell** | `tools/headless/run.sh <script> [seconds]` with a script from **`tools/headless/scripts`** (`bar`, `qs`, `island`, `center`, `morph`, `gestures`, `lock`, `lock-input`, `states`, `lifecycle`); screenshots land in **`$TMPDIR/halo-headless`** |
+| **Headless shell** | `tools/headless/run.sh <script> [seconds]` with a script from **`tools/headless/scripts`** (`bar`, `qs`, `island`, `center`, `morph`, `gestures`, `dismiss`, `lock`, `lock-input`, `states`, `lifecycle`); screenshots land in **`$TMPDIR/halo-headless`** |
 | **Dark desktop** | `HALO_SCHEME=dark tools/headless/run.sh center` |
 | **Two monitors** | `HALO_MONITORS=2 tools/headless/run.sh lifecycle` |
 | **Beside other extensions** | `HALO_WITH="<uuid>=<path to its extension folder>" tools/headless/run.sh lifecycle` |
@@ -258,12 +259,13 @@ Colours come from **`extension/lib/shared/palettes.js`**: each style is Material
 
 | Area | Evidence |
 | :--- | :--- |
-| **Settings, layouts, ranking, words, calendar grid, grouping, swipe rule, palettes, springs, lock rules, the center's growth, scroll steps** | ***Tested:*** 146 unit tests. |
+| **Settings, layouts, ranking, words, calendar grid, grouping, swipe rule, palettes, springs, lock rules, the center's growth, scroll steps, the circle for what was sent away** | ***Tested:*** 149 unit tests. |
 | **Top bar in five layouts, options, two monitors, overview, fullscreen** | ***Tested*** in the headless shell (`bar`, `states`), light and dark. |
 | **Quick settings, every page, tiles of other extensions, drag to reorder, colour style written to the family** | ***Tested*** in the headless shell (`qs`, `siblings`) beside Harbor, Tally, Ember, Torch and Ledge. |
 | **Every island look, each brought about the way the system would** (OSD calls, the tray, a D-Bus call with category, the timer file, the battery) | ***Tested*** in the headless shell (`island`), light and dark. |
 | **The center growing out of the clock and back, the pencil circle, an event while the center is open** | ***Tested*** in the headless shell (`morph`); the motion itself checked on frames held at points of the spring, as the headless screenshots are too slow to catch it. |
 | **Hover preview, wheel on the timer, a touchpad swipe swapping, the wheel on music** | ***Tested*** in the headless shell (`gestures`) with a virtual pointer; a real touchpad not yet. |
+| **A right click sending a thing to the circle and a click bringing it back; GNOME's lock screen list hidden** | ***Tested*** in the headless shell (`dismiss`) with a virtual pointer and a test notification while locked. |
 | **Notification center: grouping, opening, swipe and spring back, Do not disturb, Super + V, another day, Clear all** | ***Tested*** in the headless shell (`center`) with a virtual pointer. |
 | **Lock screen** | ***Tested*** in the headless shell (`lock`, `lock-input`): GNOME's screen shield locks and unlocks, and a click reaches its password prompt after five ways of locking. |
 | **Switching parts off and on, enable and disable** | ***Tested:*** 10 cycles (`lifecycle`) beside five other extensions; GNOME's top bar, OSD, banners, date menu and quick settings come back. |

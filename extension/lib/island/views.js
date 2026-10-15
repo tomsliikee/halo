@@ -452,18 +452,21 @@ export function callView(activity) {
     return {actor};
 }
 
-// The small bubble beside the island for the second thing going on.
-export function bubbleView(activity) {
+// The small bubble beside the island for the second thing going on, or
+// for a dismissed one; `size` is smaller beside the resting clock.
+export function bubbleView(activity, size = BUBBLE) {
+    // What it holds keeps readable in the circle beside the clock.
+    const k = Math.max(0.7, size / BUBBLE);
     const kind = activity.kind;
     let child;
     let update = null;
     if (kind === 'media') {
-        const wave = waveform({width: 22, height: 20});
+        const wave = waveform({width: Math.round(22 * k), height: Math.round(20 * k)});
         wave.setPlaying(activity.data.playing);
         child = wave.actor;
         update = next => wave.setPlaying(next.data.playing);
     } else if (kind === 'timer') {
-        const dial = ring('timer', {size: 40});
+        const dial = ring('timer', {size: Math.round(40 * k)});
         dial.set(activity.data.progress);
         child = dial.actor;
         update = next => dial.set(next.data.progress);
@@ -471,13 +474,13 @@ export function bubbleView(activity) {
         child = new St.Widget({style_class: 'halo-island-rec-dot', y_align: Clutter.ActorAlign.CENTER, x_align: Clutter.ActorAlign.CENTER});
     } else {
         const name = {call: 'call', claude: 'progress-activity', progress: 'download', privacy: activity.data?.icon ?? 'mic'}[kind] ?? 'more-horiz';
-        child = icon(name, {size: 26, fill: true, styleClass: `halo-island-${kind === 'call' ? 'good' : 'accent'}-text`});
+        child = icon(name, {size: Math.round(26 * k), fill: true, styleClass: `halo-island-${kind === 'call' ? 'good' : 'accent'}-text`});
         if (kind === 'claude')
             spinning(child);
     }
     child.x_align = Clutter.ActorAlign.CENTER;
     child.y_align = Clutter.ActorAlign.CENTER;
-    const actor = new St.Bin({style_class: 'halo-island-bubble', child, width: BUBBLE, height: BUBBLE});
+    const actor = new St.Bin({style_class: 'halo-island-bubble', child, width: size, height: size});
     return {actor, update};
 }
 

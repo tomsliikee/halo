@@ -30,7 +30,12 @@ test('the higher rank wins, the next waits beside it', () => equal(ids(pick([med
 test('a hint shows over what lasts', () => equal(ids(pick([media, volume])), ['volume', 'media']));
 test('the newest hint wins', () => equal(ids(pick([volume, note])), ['note', null]));
 test('a call wins over hints', () => equal(ids(pick([media, call, note])), ['call', 'media']));
-test('dismissed things step aside', () => equal(ids(pick([media, timer], new Set(['timer']))), ['media', null]));
+test('a dismissed thing steps aside into the bubble', () => equal(ids(pick([media, timer], new Set(['timer']))), ['media', 'timer']));
+test('what is not dismissed goes before what is', () => equal(
+    ids(pick([media, timer, recording], new Set(['rec']))), ['timer', 'media']));
+test('a dismissed thing waits beside the clock', () => equal(
+    [...ids(pick([media], new Set(['media']))), pick([media], new Set(['media'])).hidden?.id], [null, 'media', 'media']));
+test('a dismissed hint is never kept', () => equal(pick([volume], new Set(['volume'])).hidden, null));
 test('a clicked bubble comes first', () => equal(ids(pick([media, timer], new Set(), 'media')), ['media', 'timer']));
 test('the newer of the same rank', () => equal(
     ids(pick([{id: 'a', kind: 'privacy', at: 1}, {id: 'b', kind: 'recording', at: 5}])), ['b', 'a']));

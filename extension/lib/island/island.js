@@ -66,6 +66,7 @@ export class Island {
         this._shown = null;
         this._fill = '#000000';
         this._bubbleShown = null;
+        this._bubbleSize = 0;
         this._view = null;
         this._bubbleView = null;
         this._rest = {date: '', time: '', unread: false, open: false};
@@ -323,7 +324,10 @@ export class Island {
                 this._shape.setContent(this._view.actor, {animate});
             }
         }
-        this._renderBubble(main ? bubble : null);
+        // Beside the resting clock only a dismissed thing waits; while the
+        // clock is the center the pencil circle is alone.
+        const resting = !main && (this._rest.open || !place.visible);
+        this._renderBubble(resting ? null : bubble, main ? Views.BUBBLE : place.height || Views.BUBBLE);
     }
 
     // A view that changed what it holds may want another size.
@@ -337,25 +341,27 @@ export class Island {
         this._shape.resize(Math.round(w), Math.round(h), {animate});
     }
 
-    _renderBubble(bubble) {
+    _renderBubble(bubble, size) {
         const shape = this._bubble;
         if (!bubble) {
             if (this._bubbleShown !== null) {
                 this._bubbleShown = null;
+                this._bubbleSize = 0;
                 this._bubbleView = null;
                 spring(shape, {scale_x: 0.4, scale_y: 0.4, opacity: 0}, {spring: SPRINGS.leave, onDone: () => shape.hide()});
             }
             return;
         }
-        if (this._bubbleShown === bubble.id) {
+        if (this._bubbleShown === bubble.id && this._bubbleSize === size) {
             this._bubbleView?.update?.(bubble);
             return;
         }
         const first = this._bubbleShown === null;
         this._bubbleShown = bubble.id;
-        this._bubbleView = Views.bubbleView(bubble);
+        this._bubbleSize = size;
+        this._bubbleView = Views.bubbleView(bubble, size);
         shape.show();
-        shape.setContent(this._bubbleView.actor, {width: Views.BUBBLE, height: Views.BUBBLE, animate: !first});
+        shape.setContent(this._bubbleView.actor, {width: size, height: size, animate: !first});
         this._placeBubble();
         if (first) {
             if (expressive()) {
@@ -374,15 +380,18 @@ export class Island {
         if (this._gone)
             return;
         const main = this._shape;
-        const top = main.y + Math.max(0, Math.min(main.boxHeight, COMPACT) - Views.BUBBLE) / 2;
-        this._bubble.setAnchor(main.x + main.boxWidth + BUBBLE_GAP + Views.BUBBLE / 2, top);
+        const size = this._bubbleSize || Views.BUBBLE;
+        const top = main.y + Math.max(0, Math.min(main.boxHeight, COMPACT) - size) / 2;
+        this._bubble.setAnchor(main.x + main.boxWidth + BUBBLE_GAP + size / 2, top);
     }
 
     _clicked(shape, button) {
         const {main, bubble} = this._pick();
         if (shape === this._bubble) {
-            // The bubble's thing takes the island; what was there moves aside.
+            // The bubble's thing takes the island, also one that was
+            // dismissed; what was there moves aside.
             if (bubble) {
+                this._dismissed.delete(bubble.id);
                 this._focus = bubble.id;
                 this._render();
             }
@@ -472,10 +481,16 @@ export class Island {
     }
 
     // A right click: an open island closes to its small look, a small one
-    // gives way to what comes next.
+    // gives way to what comes next and waits in the bubble. On the resting
+    // clock it brings back everything dismissed.
     _collapse(main) {
-        if (!main)
+        if (!main) {
+            if (this._dismissed.size > 0 && !this._rest.open) {
+                this._dismissed.clear();
+                this._render();
+            }
             return;
+        }
         if (this._expanded === main.id) {
             this._expanded = null;
         } else if (main.hint) {

@@ -17,24 +17,28 @@ export function byRank(a, b) {
     return rankOf(b) - rankOf(a) || b.at - a.at;
 }
 
-// {main, bubble}: what the island shows and what waits beside it; either
-// may be null. A call always wins. A hint comes next and shows over what
-// lasts, which moves into the bubble meanwhile. Dismissed ids are left out
-// until they come again; a focused id (the bubble that was clicked) goes
-// before the rest of what lasts.
+// {main, bubble, hidden}: what the island shows and what waits beside it;
+// any may be null. A call always wins. A hint comes next and shows over
+// what lasts, which moves into the bubble meanwhile. A focused id (the
+// bubble that was clicked) goes before the rest of what lasts.
+//
+// Dismissed ids step aside, but a lasting thing is still going: the
+// highest of them is `hidden` and waits in the bubble where nothing else
+// takes it, also beside the resting clock, so a click brings it back.
 export function pick(activities, dismissed = new Set(), focus = null) {
     const live = activities.filter(activity => !dismissed.has(activity.id));
     const lasting = live.filter(activity => !activity.hint).sort(byRank);
     const focused = lasting.findIndex(activity => activity.id === focus);
     if (focused > 0)
         lasting.unshift(...lasting.splice(focused, 1));
+    const hidden = activities.filter(activity => !activity.hint && dismissed.has(activity.id)).sort(byRank)[0] ?? null;
     const hints = live.filter(activity => activity.hint).sort((a, b) => b.at - a.at);
     const call = lasting.find(activity => activity.kind === 'call');
     if (call)
-        return {main: call, bubble: lasting.find(activity => activity !== call) ?? null};
+        return {main: call, bubble: lasting.find(activity => activity !== call) ?? hidden, hidden};
     if (hints.length > 0)
-        return {main: hints[0], bubble: lasting[0] ?? null};
-    return {main: lasting[0] ?? null, bubble: lasting[1] ?? null};
+        return {main: hints[0], bubble: lasting[0] ?? hidden, hidden};
+    return {main: lasting[0] ?? null, bubble: lasting[1] ?? hidden, hidden};
 }
 
 // Kinds that tell what someone says, plans or works on. On the lock screen
