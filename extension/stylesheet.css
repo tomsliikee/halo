@@ -427,6 +427,166 @@
     border-radius: 16px;
 }
 
+
+/* The timer page */
+
+.halo-qs-timer-now {
+    padding: 18px 20px;
+}
+
+/* The island. Its shape is drawn in Cairo; these place what it holds. */
+
+/* The bar's clock makes room for the island's resting pill over it. */
+.halo-plain.halo-island-clock {
+    padding: 0 16px;
+}
+
+.halo-island-rest {
+    height: 36px;
+    padding: 0 16px;
+    spacing: 8px;
+}
+
+.halo-island-level,
+.halo-island-info,
+.halo-island-timer,
+.halo-island-media,
+.halo-island-recording {
+    height: 56px;
+    padding: 0 20px 0 8px;
+    spacing: 14px;
+}
+
+.halo-island-info,
+.halo-island-timer {
+    min-width: 300px;
+}
+
+.halo-island-timer {
+    padding: 0 22px 0 8px;
+    spacing: 14px;
+}
+
+.halo-island-media {
+    padding: 0 6px 0 6px;
+}
+
+.halo-island-recording {
+    padding: 0 10px 0 22px;
+    spacing: 14px;
+}
+
+.halo-island-symbol {
+    width: 56px;
+    height: 56px;
+}
+
+.halo-island-symbol > * {
+    margin: 16px;
+}
+
+.halo-island-column {
+    spacing: 1px;
+}
+
+.halo-island-badge {
+    border-radius: 999px;
+}
+
+.halo-island-badge.halo-island-square {
+    border-radius: 14px;
+}
+
+.halo-island-picture-bin {
+    border-radius: 12px;
+}
+
+.halo-island-track {
+    height: 10px;
+    border-radius: 5px;
+}
+
+.halo-island-track.halo-island-thin {
+    height: 6px;
+    border-radius: 3px;
+}
+
+.halo-island-fill {
+    border-radius: 5px;
+}
+
+.halo-island-thin .halo-island-fill {
+    border-radius: 3px;
+}
+
+.halo-island-percent {
+    min-width: 64px;
+    text-align: right;
+}
+
+.halo-island-trailing {
+    padding-left: 18px;
+}
+
+.halo-island-timer-time {
+    padding-left: 28px;
+}
+
+.halo-island-rec-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 7px;
+}
+
+.halo-island-large {
+    padding: 22px 24px 20px 24px;
+    spacing: 14px;
+}
+
+.halo-island-media-head {
+    spacing: 18px;
+}
+
+.halo-island-progress {
+    spacing: 12px;
+}
+
+.halo-island-controls {
+    spacing: 28px;
+}
+
+.halo-island-note-top {
+    spacing: 16px;
+}
+
+.halo-island-body {
+    padding-top: 2px;
+}
+
+.halo-island-actions {
+    spacing: 8px;
+}
+
+.halo-island-action {
+    height: 40px;
+    padding: 0 18px;
+    border-radius: 20px;
+    border-width: 1px;
+}
+
+.halo-island-call {
+    padding: 18px 20px;
+    spacing: 16px;
+}
+
+.halo-island-avatar {
+    border-radius: 28px;
+}
+
+.halo-island-bubble {
+    border-radius: 28px;
+}
+
 .halo-scheme-blue-light .halo-frame {
     background-color: #e2e1ef;
 }
@@ -828,6 +988,136 @@
 .halo-scheme-blue-light .halo-qs-hosted .popup-menu-item:hover,
 .halo-scheme-blue-light .halo-qs-hosted .popup-menu-item:focus {
     background-color: #e7e7f5;
+}
+
+
+/* The island: always on its dark surface, so these come from the dark scheme. */
+
+.halo-scheme-blue-light .halo-island-text {
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-island-dim {
+    color: #444654;
+}
+
+.halo-scheme-blue-light .halo-island-unread {
+    background-color: #0045fc;
+}
+
+.halo-scheme-blue-light .halo-island-open {
+    background-color: #0045fc;
+    border-radius: 18px;
+}
+
+.halo-scheme-blue-light .halo-island-open .halo-island-text,
+.halo-scheme-blue-light .halo-island-open .halo-island-dim {
+    color: #ffffff;
+}
+
+.halo-scheme-blue-light .halo-island-primary {
+    background-color: #0045fc;
+    color: #ffffff;
+}
+
+.halo-scheme-blue-light .halo-island-soft {
+    background-color: #0033c2;
+    color: #dee1ff;
+}
+
+.halo-scheme-blue-light .halo-island-tertiary {
+    background-color: #523d6c;
+    color: #eedbff;
+}
+
+.halo-scheme-blue-light .halo-island-good {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-blue-light .halo-island-go {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-blue-light .halo-island-alarm {
+    background-color: #ba1a1a;
+    color: #ffffff;
+}
+
+.halo-scheme-blue-light .halo-island-dim-badge,
+.halo-scheme-blue-light .halo-island-plain {
+    background-color: transparent;
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-island-plain:hover {
+    background-color: #fbf8ff;
+}
+
+.halo-scheme-blue-light .halo-island-track {
+    background-color: #fbf8ff;
+}
+
+.halo-scheme-blue-light .halo-island-fill {
+    background-color: #0045fc;
+}
+
+.halo-scheme-blue-light .halo-island-plain-text {
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-island-good-text {
+    color: #2e7d32;
+}
+
+.halo-scheme-blue-light .halo-island-alarm-text {
+    color: #ba1a1a;
+}
+
+.halo-scheme-blue-light .halo-island-accent-text {
+    color: #0045fc;
+}
+
+.halo-scheme-blue-light .halo-island-wave {
+    color: #0045fc;
+}
+
+.halo-scheme-blue-light .halo-island-ring {
+    color: #0045fc;
+    background-color: #fbf8ff;
+}
+
+.halo-scheme-blue-light .halo-island-ring-icon {
+    color: #0045fc;
+}
+
+.halo-scheme-blue-light .halo-island-rec-dot {
+    background-color: #ba1a1a;
+}
+
+.halo-scheme-blue-light .halo-island-action {
+    border-color: #757685;
+    color: #191b25;
+}
+
+.halo-scheme-blue-light .halo-island-action:hover {
+    background-color: #fbf8ff;
+}
+
+.halo-scheme-blue-light .halo-island-action.halo-island-action-main {
+    border-color: #0045fc;
+    background-color: #0045fc;
+    color: #ffffff;
+}
+
+.halo-scheme-blue-light .halo-island-avatar {
+    background-color: #0033c2;
+    color: #dee1ff;
+}
+
+.halo-scheme-blue-light .halo-island-bubble {
+    background-color: #e2e1ef;
 }
 
 .halo-scheme-blue-dark .halo-frame {
@@ -1233,6 +1523,136 @@
     background-color: #373843;
 }
 
+
+/* The island: always on its dark surface, so these come from the dark scheme. */
+
+.halo-scheme-blue-dark .halo-island-text {
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-island-dim {
+    color: #c5c5d6;
+}
+
+.halo-scheme-blue-dark .halo-island-unread {
+    background-color: #b9c3ff;
+}
+
+.halo-scheme-blue-dark .halo-island-open {
+    background-color: #b9c3ff;
+    border-radius: 18px;
+}
+
+.halo-scheme-blue-dark .halo-island-open .halo-island-text,
+.halo-scheme-blue-dark .halo-island-open .halo-island-dim {
+    color: #00228b;
+}
+
+.halo-scheme-blue-dark .halo-island-primary {
+    background-color: #b9c3ff;
+    color: #00228b;
+}
+
+.halo-scheme-blue-dark .halo-island-soft {
+    background-color: #dee1ff;
+    color: #0033c2;
+}
+
+.halo-scheme-blue-dark .halo-island-tertiary {
+    background-color: #eedbff;
+    color: #523d6c;
+}
+
+.halo-scheme-blue-dark .halo-island-good {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-blue-dark .halo-island-go {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-blue-dark .halo-island-alarm {
+    background-color: #ba1a1a;
+    color: #ffffff;
+}
+
+.halo-scheme-blue-dark .halo-island-dim-badge,
+.halo-scheme-blue-dark .halo-island-plain {
+    background-color: transparent;
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-island-plain:hover {
+    background-color: #373843;
+}
+
+.halo-scheme-blue-dark .halo-island-track {
+    background-color: #373843;
+}
+
+.halo-scheme-blue-dark .halo-island-fill {
+    background-color: #b9c3ff;
+}
+
+.halo-scheme-blue-dark .halo-island-plain-text {
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-island-good-text {
+    color: #7bd88f;
+}
+
+.halo-scheme-blue-dark .halo-island-alarm-text {
+    color: #ffb4ab;
+}
+
+.halo-scheme-blue-dark .halo-island-accent-text {
+    color: #b9c3ff;
+}
+
+.halo-scheme-blue-dark .halo-island-wave {
+    color: #b9c3ff;
+}
+
+.halo-scheme-blue-dark .halo-island-ring {
+    color: #b9c3ff;
+    background-color: #373843;
+}
+
+.halo-scheme-blue-dark .halo-island-ring-icon {
+    color: #b9c3ff;
+}
+
+.halo-scheme-blue-dark .halo-island-rec-dot {
+    background-color: #ba1a1a;
+}
+
+.halo-scheme-blue-dark .halo-island-action {
+    border-color: #8e909f;
+    color: #e2e1ef;
+}
+
+.halo-scheme-blue-dark .halo-island-action:hover {
+    background-color: #373843;
+}
+
+.halo-scheme-blue-dark .halo-island-action.halo-island-action-main {
+    border-color: #b9c3ff;
+    background-color: #b9c3ff;
+    color: #00228b;
+}
+
+.halo-scheme-blue-dark .halo-island-avatar {
+    background-color: #dee1ff;
+    color: #0033c2;
+}
+
+.halo-scheme-blue-dark .halo-island-bubble {
+    background-color: #33343f;
+}
+
 .halo-scheme-violet-light .halo-frame {
     background-color: #e8dfee;
 }
@@ -1634,6 +2054,136 @@
 .halo-scheme-violet-light .halo-qs-hosted .popup-menu-item:hover,
 .halo-scheme-violet-light .halo-qs-hosted .popup-menu-item:focus {
     background-color: #ede5f4;
+}
+
+
+/* The island: always on its dark surface, so these come from the dark scheme. */
+
+.halo-scheme-violet-light .halo-island-text {
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-island-dim {
+    color: #4a4453;
+}
+
+.halo-scheme-violet-light .halo-island-unread {
+    background-color: #7706ff;
+}
+
+.halo-scheme-violet-light .halo-island-open {
+    background-color: #7706ff;
+    border-radius: 18px;
+}
+
+.halo-scheme-violet-light .halo-island-open .halo-island-text,
+.halo-scheme-violet-light .halo-island-open .halo-island-dim {
+    color: #ffffff;
+}
+
+.halo-scheme-violet-light .halo-island-primary {
+    background-color: #7706ff;
+    color: #ffffff;
+}
+
+.halo-scheme-violet-light .halo-island-soft {
+    background-color: #5a00c6;
+    color: #eaddff;
+}
+
+.halo-scheme-violet-light .halo-island-tertiary {
+    background-color: #5e3962;
+    color: #ffd5ff;
+}
+
+.halo-scheme-violet-light .halo-island-good {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-violet-light .halo-island-go {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-violet-light .halo-island-alarm {
+    background-color: #ba1a1a;
+    color: #ffffff;
+}
+
+.halo-scheme-violet-light .halo-island-dim-badge,
+.halo-scheme-violet-light .halo-island-plain {
+    background-color: transparent;
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-island-plain:hover {
+    background-color: #fef7ff;
+}
+
+.halo-scheme-violet-light .halo-island-track {
+    background-color: #fef7ff;
+}
+
+.halo-scheme-violet-light .halo-island-fill {
+    background-color: #7706ff;
+}
+
+.halo-scheme-violet-light .halo-island-plain-text {
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-island-good-text {
+    color: #2e7d32;
+}
+
+.halo-scheme-violet-light .halo-island-alarm-text {
+    color: #ba1a1a;
+}
+
+.halo-scheme-violet-light .halo-island-accent-text {
+    color: #7706ff;
+}
+
+.halo-scheme-violet-light .halo-island-wave {
+    color: #7706ff;
+}
+
+.halo-scheme-violet-light .halo-island-ring {
+    color: #7706ff;
+    background-color: #fef7ff;
+}
+
+.halo-scheme-violet-light .halo-island-ring-icon {
+    color: #7706ff;
+}
+
+.halo-scheme-violet-light .halo-island-rec-dot {
+    background-color: #ba1a1a;
+}
+
+.halo-scheme-violet-light .halo-island-action {
+    border-color: #7b7484;
+    color: #1d1a24;
+}
+
+.halo-scheme-violet-light .halo-island-action:hover {
+    background-color: #fef7ff;
+}
+
+.halo-scheme-violet-light .halo-island-action.halo-island-action-main {
+    border-color: #7706ff;
+    background-color: #7706ff;
+    color: #ffffff;
+}
+
+.halo-scheme-violet-light .halo-island-avatar {
+    background-color: #5a00c6;
+    color: #eaddff;
+}
+
+.halo-scheme-violet-light .halo-island-bubble {
+    background-color: #e8dfee;
 }
 
 .halo-scheme-violet-dark .halo-frame {
@@ -2039,6 +2589,136 @@
     background-color: #3c3743;
 }
 
+
+/* The island: always on its dark surface, so these come from the dark scheme. */
+
+.halo-scheme-violet-dark .halo-island-text {
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-island-dim {
+    color: #ccc3d5;
+}
+
+.halo-scheme-violet-dark .halo-island-unread {
+    background-color: #d2bbff;
+}
+
+.halo-scheme-violet-dark .halo-island-open {
+    background-color: #d2bbff;
+    border-radius: 18px;
+}
+
+.halo-scheme-violet-dark .halo-island-open .halo-island-text,
+.halo-scheme-violet-dark .halo-island-open .halo-island-dim {
+    color: #3f008e;
+}
+
+.halo-scheme-violet-dark .halo-island-primary {
+    background-color: #d2bbff;
+    color: #3f008e;
+}
+
+.halo-scheme-violet-dark .halo-island-soft {
+    background-color: #eaddff;
+    color: #5a00c6;
+}
+
+.halo-scheme-violet-dark .halo-island-tertiary {
+    background-color: #ffd5ff;
+    color: #5e3962;
+}
+
+.halo-scheme-violet-dark .halo-island-good {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-violet-dark .halo-island-go {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-violet-dark .halo-island-alarm {
+    background-color: #ba1a1a;
+    color: #ffffff;
+}
+
+.halo-scheme-violet-dark .halo-island-dim-badge,
+.halo-scheme-violet-dark .halo-island-plain {
+    background-color: transparent;
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-island-plain:hover {
+    background-color: #3c3743;
+}
+
+.halo-scheme-violet-dark .halo-island-track {
+    background-color: #3c3743;
+}
+
+.halo-scheme-violet-dark .halo-island-fill {
+    background-color: #d2bbff;
+}
+
+.halo-scheme-violet-dark .halo-island-plain-text {
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-island-good-text {
+    color: #7bd88f;
+}
+
+.halo-scheme-violet-dark .halo-island-alarm-text {
+    color: #ffb4ab;
+}
+
+.halo-scheme-violet-dark .halo-island-accent-text {
+    color: #d2bbff;
+}
+
+.halo-scheme-violet-dark .halo-island-wave {
+    color: #d2bbff;
+}
+
+.halo-scheme-violet-dark .halo-island-ring {
+    color: #d2bbff;
+    background-color: #3c3743;
+}
+
+.halo-scheme-violet-dark .halo-island-ring-icon {
+    color: #d2bbff;
+}
+
+.halo-scheme-violet-dark .halo-island-rec-dot {
+    background-color: #ba1a1a;
+}
+
+.halo-scheme-violet-dark .halo-island-action {
+    border-color: #958e9e;
+    color: #e8dfee;
+}
+
+.halo-scheme-violet-dark .halo-island-action:hover {
+    background-color: #3c3743;
+}
+
+.halo-scheme-violet-dark .halo-island-action.halo-island-action-main {
+    border-color: #d2bbff;
+    background-color: #d2bbff;
+    color: #3f008e;
+}
+
+.halo-scheme-violet-dark .halo-island-avatar {
+    background-color: #eaddff;
+    color: #5a00c6;
+}
+
+.halo-scheme-violet-dark .halo-island-bubble {
+    background-color: #37333e;
+}
+
 .halo-scheme-green-light .halo-frame {
     background-color: #dbe5d7;
 }
@@ -2440,6 +3120,136 @@
 .halo-scheme-green-light .halo-qs-hosted .popup-menu-item:hover,
 .halo-scheme-green-light .halo-qs-hosted .popup-menu-item:focus {
     background-color: #e1ebdd;
+}
+
+
+/* The island: always on its dark surface, so these come from the dark scheme. */
+
+.halo-scheme-green-light .halo-island-text {
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-island-dim {
+    color: #3e4a3d;
+}
+
+.halo-scheme-green-light .halo-island-unread {
+    background-color: #006e2e;
+}
+
+.halo-scheme-green-light .halo-island-open {
+    background-color: #006e2e;
+    border-radius: 18px;
+}
+
+.halo-scheme-green-light .halo-island-open .halo-island-text,
+.halo-scheme-green-light .halo-island-open .halo-island-dim {
+    color: #ffffff;
+}
+
+.halo-scheme-green-light .halo-island-primary {
+    background-color: #006e2e;
+    color: #ffffff;
+}
+
+.halo-scheme-green-light .halo-island-soft {
+    background-color: #005321;
+    color: #67ff8d;
+}
+
+.halo-scheme-green-light .halo-island-tertiary {
+    background-color: #005045;
+    color: #aaf0df;
+}
+
+.halo-scheme-green-light .halo-island-good {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-green-light .halo-island-go {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-green-light .halo-island-alarm {
+    background-color: #ba1a1a;
+    color: #ffffff;
+}
+
+.halo-scheme-green-light .halo-island-dim-badge,
+.halo-scheme-green-light .halo-island-plain {
+    background-color: transparent;
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-island-plain:hover {
+    background-color: #f2fcee;
+}
+
+.halo-scheme-green-light .halo-island-track {
+    background-color: #f2fcee;
+}
+
+.halo-scheme-green-light .halo-island-fill {
+    background-color: #006e2e;
+}
+
+.halo-scheme-green-light .halo-island-plain-text {
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-island-good-text {
+    color: #2e7d32;
+}
+
+.halo-scheme-green-light .halo-island-alarm-text {
+    color: #ba1a1a;
+}
+
+.halo-scheme-green-light .halo-island-accent-text {
+    color: #006e2e;
+}
+
+.halo-scheme-green-light .halo-island-wave {
+    color: #006e2e;
+}
+
+.halo-scheme-green-light .halo-island-ring {
+    color: #006e2e;
+    background-color: #f2fcee;
+}
+
+.halo-scheme-green-light .halo-island-ring-icon {
+    color: #006e2e;
+}
+
+.halo-scheme-green-light .halo-island-rec-dot {
+    background-color: #ba1a1a;
+}
+
+.halo-scheme-green-light .halo-island-action {
+    border-color: #6e7a6c;
+    color: #151e15;
+}
+
+.halo-scheme-green-light .halo-island-action:hover {
+    background-color: #f2fcee;
+}
+
+.halo-scheme-green-light .halo-island-action.halo-island-action-main {
+    border-color: #006e2e;
+    background-color: #006e2e;
+    color: #ffffff;
+}
+
+.halo-scheme-green-light .halo-island-avatar {
+    background-color: #005321;
+    color: #67ff8d;
+}
+
+.halo-scheme-green-light .halo-island-bubble {
+    background-color: #dbe5d7;
 }
 
 .halo-scheme-green-dark .halo-frame {
@@ -2845,6 +3655,136 @@
     background-color: #323c32;
 }
 
+
+/* The island: always on its dark surface, so these come from the dark scheme. */
+
+.halo-scheme-green-dark .halo-island-text {
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-island-dim {
+    color: #bdcaba;
+}
+
+.halo-scheme-green-dark .halo-island-unread {
+    background-color: #00e468;
+}
+
+.halo-scheme-green-dark .halo-island-open {
+    background-color: #00e468;
+    border-radius: 18px;
+}
+
+.halo-scheme-green-dark .halo-island-open .halo-island-text,
+.halo-scheme-green-dark .halo-island-open .halo-island-dim {
+    color: #003915;
+}
+
+.halo-scheme-green-dark .halo-island-primary {
+    background-color: #00e468;
+    color: #003915;
+}
+
+.halo-scheme-green-dark .halo-island-soft {
+    background-color: #67ff8d;
+    color: #005321;
+}
+
+.halo-scheme-green-dark .halo-island-tertiary {
+    background-color: #aaf0df;
+    color: #005045;
+}
+
+.halo-scheme-green-dark .halo-island-good {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-green-dark .halo-island-go {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-green-dark .halo-island-alarm {
+    background-color: #ba1a1a;
+    color: #ffffff;
+}
+
+.halo-scheme-green-dark .halo-island-dim-badge,
+.halo-scheme-green-dark .halo-island-plain {
+    background-color: transparent;
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-island-plain:hover {
+    background-color: #323c32;
+}
+
+.halo-scheme-green-dark .halo-island-track {
+    background-color: #323c32;
+}
+
+.halo-scheme-green-dark .halo-island-fill {
+    background-color: #00e468;
+}
+
+.halo-scheme-green-dark .halo-island-plain-text {
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-island-good-text {
+    color: #7bd88f;
+}
+
+.halo-scheme-green-dark .halo-island-alarm-text {
+    color: #ffb4ab;
+}
+
+.halo-scheme-green-dark .halo-island-accent-text {
+    color: #00e468;
+}
+
+.halo-scheme-green-dark .halo-island-wave {
+    color: #00e468;
+}
+
+.halo-scheme-green-dark .halo-island-ring {
+    color: #00e468;
+    background-color: #323c32;
+}
+
+.halo-scheme-green-dark .halo-island-ring-icon {
+    color: #00e468;
+}
+
+.halo-scheme-green-dark .halo-island-rec-dot {
+    background-color: #ba1a1a;
+}
+
+.halo-scheme-green-dark .halo-island-action {
+    border-color: #879485;
+    color: #dbe5d7;
+}
+
+.halo-scheme-green-dark .halo-island-action:hover {
+    background-color: #323c32;
+}
+
+.halo-scheme-green-dark .halo-island-action.halo-island-action-main {
+    border-color: #00e468;
+    background-color: #00e468;
+    color: #003915;
+}
+
+.halo-scheme-green-dark .halo-island-avatar {
+    background-color: #67ff8d;
+    color: #005321;
+}
+
+.halo-scheme-green-dark .halo-island-bubble {
+    background-color: #2e372e;
+}
+
 .halo-scheme-teal-light .halo-frame {
     background-color: #d7e6e1;
 }
@@ -3246,6 +4186,136 @@
 .halo-scheme-teal-light .halo-qs-hosted .popup-menu-item:hover,
 .halo-scheme-teal-light .halo-qs-hosted .popup-menu-item:focus {
     background-color: #ddebe7;
+}
+
+
+/* The island: always on its dark surface, so these come from the dark scheme. */
+
+.halo-scheme-teal-light .halo-island-text {
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-island-dim {
+    color: #394a46;
+}
+
+.halo-scheme-teal-light .halo-island-unread {
+    background-color: #006b5f;
+}
+
+.halo-scheme-teal-light .halo-island-open {
+    background-color: #006b5f;
+    border-radius: 18px;
+}
+
+.halo-scheme-teal-light .halo-island-open .halo-island-text,
+.halo-scheme-teal-light .halo-island-open .halo-island-dim {
+    color: #ffffff;
+}
+
+.halo-scheme-teal-light .halo-island-primary {
+    background-color: #006b5f;
+    color: #ffffff;
+}
+
+.halo-scheme-teal-light .halo-island-soft {
+    background-color: #005047;
+    color: #00fee3;
+}
+
+.halo-scheme-teal-light .halo-island-tertiary {
+    background-color: #004e5d;
+    color: #afecff;
+}
+
+.halo-scheme-teal-light .halo-island-good {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-teal-light .halo-island-go {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-teal-light .halo-island-alarm {
+    background-color: #ba1a1a;
+    color: #ffffff;
+}
+
+.halo-scheme-teal-light .halo-island-dim-badge,
+.halo-scheme-teal-light .halo-island-plain {
+    background-color: transparent;
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-island-plain:hover {
+    background-color: #eefdf8;
+}
+
+.halo-scheme-teal-light .halo-island-track {
+    background-color: #eefdf8;
+}
+
+.halo-scheme-teal-light .halo-island-fill {
+    background-color: #006b5f;
+}
+
+.halo-scheme-teal-light .halo-island-plain-text {
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-island-good-text {
+    color: #2e7d32;
+}
+
+.halo-scheme-teal-light .halo-island-alarm-text {
+    color: #ba1a1a;
+}
+
+.halo-scheme-teal-light .halo-island-accent-text {
+    color: #006b5f;
+}
+
+.halo-scheme-teal-light .halo-island-wave {
+    color: #006b5f;
+}
+
+.halo-scheme-teal-light .halo-island-ring {
+    color: #006b5f;
+    background-color: #eefdf8;
+}
+
+.halo-scheme-teal-light .halo-island-ring-icon {
+    color: #006b5f;
+}
+
+.halo-scheme-teal-light .halo-island-rec-dot {
+    background-color: #ba1a1a;
+}
+
+.halo-scheme-teal-light .halo-island-action {
+    border-color: #697b76;
+    color: #111e1b;
+}
+
+.halo-scheme-teal-light .halo-island-action:hover {
+    background-color: #eefdf8;
+}
+
+.halo-scheme-teal-light .halo-island-action.halo-island-action-main {
+    border-color: #006b5f;
+    background-color: #006b5f;
+    color: #ffffff;
+}
+
+.halo-scheme-teal-light .halo-island-avatar {
+    background-color: #005047;
+    color: #00fee3;
+}
+
+.halo-scheme-teal-light .halo-island-bubble {
+    background-color: #d7e6e1;
 }
 
 .halo-scheme-teal-dark .halo-frame {
@@ -3651,6 +4721,136 @@
     background-color: #2f3c39;
 }
 
+
+/* The island: always on its dark surface, so these come from the dark scheme. */
+
+.halo-scheme-teal-dark .halo-island-text {
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-island-dim {
+    color: #b8cac5;
+}
+
+.halo-scheme-teal-dark .halo-island-unread {
+    background-color: #00dfc7;
+}
+
+.halo-scheme-teal-dark .halo-island-open {
+    background-color: #00dfc7;
+    border-radius: 18px;
+}
+
+.halo-scheme-teal-dark .halo-island-open .halo-island-text,
+.halo-scheme-teal-dark .halo-island-open .halo-island-dim {
+    color: #003731;
+}
+
+.halo-scheme-teal-dark .halo-island-primary {
+    background-color: #00dfc7;
+    color: #003731;
+}
+
+.halo-scheme-teal-dark .halo-island-soft {
+    background-color: #00fee3;
+    color: #005047;
+}
+
+.halo-scheme-teal-dark .halo-island-tertiary {
+    background-color: #afecff;
+    color: #004e5d;
+}
+
+.halo-scheme-teal-dark .halo-island-good {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-teal-dark .halo-island-go {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-teal-dark .halo-island-alarm {
+    background-color: #ba1a1a;
+    color: #ffffff;
+}
+
+.halo-scheme-teal-dark .halo-island-dim-badge,
+.halo-scheme-teal-dark .halo-island-plain {
+    background-color: transparent;
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-island-plain:hover {
+    background-color: #2f3c39;
+}
+
+.halo-scheme-teal-dark .halo-island-track {
+    background-color: #2f3c39;
+}
+
+.halo-scheme-teal-dark .halo-island-fill {
+    background-color: #00dfc7;
+}
+
+.halo-scheme-teal-dark .halo-island-plain-text {
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-island-good-text {
+    color: #7bd88f;
+}
+
+.halo-scheme-teal-dark .halo-island-alarm-text {
+    color: #ffb4ab;
+}
+
+.halo-scheme-teal-dark .halo-island-accent-text {
+    color: #00dfc7;
+}
+
+.halo-scheme-teal-dark .halo-island-wave {
+    color: #00dfc7;
+}
+
+.halo-scheme-teal-dark .halo-island-ring {
+    color: #00dfc7;
+    background-color: #2f3c39;
+}
+
+.halo-scheme-teal-dark .halo-island-ring-icon {
+    color: #00dfc7;
+}
+
+.halo-scheme-teal-dark .halo-island-rec-dot {
+    background-color: #ba1a1a;
+}
+
+.halo-scheme-teal-dark .halo-island-action {
+    border-color: #839490;
+    color: #d7e6e1;
+}
+
+.halo-scheme-teal-dark .halo-island-action:hover {
+    background-color: #2f3c39;
+}
+
+.halo-scheme-teal-dark .halo-island-action.halo-island-action-main {
+    border-color: #00dfc7;
+    background-color: #00dfc7;
+    color: #003731;
+}
+
+.halo-scheme-teal-dark .halo-island-avatar {
+    background-color: #00fee3;
+    color: #005047;
+}
+
+.halo-scheme-teal-dark .halo-island-bubble {
+    background-color: #2a3734;
+}
+
 .halo-scheme-orange-light .halo-frame {
     background-color: #f9ddd4;
 }
@@ -4052,6 +5252,136 @@
 .halo-scheme-orange-light .halo-qs-hosted .popup-menu-item:hover,
 .halo-scheme-orange-light .halo-qs-hosted .popup-menu-item:focus {
     background-color: #ffe2da;
+}
+
+
+/* The island: always on its dark surface, so these come from the dark scheme. */
+
+.halo-scheme-orange-light .halo-island-text {
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-island-dim {
+    color: #58423a;
+}
+
+.halo-scheme-orange-light .halo-island-unread {
+    background-color: #ab3500;
+}
+
+.halo-scheme-orange-light .halo-island-open {
+    background-color: #ab3500;
+    border-radius: 18px;
+}
+
+.halo-scheme-orange-light .halo-island-open .halo-island-text,
+.halo-scheme-orange-light .halo-island-open .halo-island-dim {
+    color: #ffffff;
+}
+
+.halo-scheme-orange-light .halo-island-primary {
+    background-color: #ab3500;
+    color: #ffffff;
+}
+
+.halo-scheme-orange-light .halo-island-soft {
+    background-color: #832700;
+    color: #ffdbd0;
+}
+
+.halo-scheme-orange-light .halo-island-tertiary {
+    background-color: #633f06;
+    color: #ffddb6;
+}
+
+.halo-scheme-orange-light .halo-island-good {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-orange-light .halo-island-go {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-orange-light .halo-island-alarm {
+    background-color: #ba1a1a;
+    color: #ffffff;
+}
+
+.halo-scheme-orange-light .halo-island-dim-badge,
+.halo-scheme-orange-light .halo-island-plain {
+    background-color: transparent;
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-island-plain:hover {
+    background-color: #fff8f6;
+}
+
+.halo-scheme-orange-light .halo-island-track {
+    background-color: #fff8f6;
+}
+
+.halo-scheme-orange-light .halo-island-fill {
+    background-color: #ab3500;
+}
+
+.halo-scheme-orange-light .halo-island-plain-text {
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-island-good-text {
+    color: #2e7d32;
+}
+
+.halo-scheme-orange-light .halo-island-alarm-text {
+    color: #ba1a1a;
+}
+
+.halo-scheme-orange-light .halo-island-accent-text {
+    color: #ab3500;
+}
+
+.halo-scheme-orange-light .halo-island-wave {
+    color: #ab3500;
+}
+
+.halo-scheme-orange-light .halo-island-ring {
+    color: #ab3500;
+    background-color: #fff8f6;
+}
+
+.halo-scheme-orange-light .halo-island-ring-icon {
+    color: #ab3500;
+}
+
+.halo-scheme-orange-light .halo-island-rec-dot {
+    background-color: #ba1a1a;
+}
+
+.halo-scheme-orange-light .halo-island-action {
+    border-color: #8c7169;
+    color: #271813;
+}
+
+.halo-scheme-orange-light .halo-island-action:hover {
+    background-color: #fff8f6;
+}
+
+.halo-scheme-orange-light .halo-island-action.halo-island-action-main {
+    border-color: #ab3500;
+    background-color: #ab3500;
+    color: #ffffff;
+}
+
+.halo-scheme-orange-light .halo-island-avatar {
+    background-color: #832700;
+    color: #ffdbd0;
+}
+
+.halo-scheme-orange-light .halo-island-bubble {
+    background-color: #f9ddd4;
 }
 
 .halo-scheme-orange-dark .halo-frame {
@@ -4457,6 +5787,136 @@
     background-color: #47352f;
 }
 
+
+/* The island: always on its dark surface, so these come from the dark scheme. */
+
+.halo-scheme-orange-dark .halo-island-text {
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-island-dim {
+    color: #dfc0b6;
+}
+
+.halo-scheme-orange-dark .halo-island-unread {
+    background-color: #ffb59c;
+}
+
+.halo-scheme-orange-dark .halo-island-open {
+    background-color: #ffb59c;
+    border-radius: 18px;
+}
+
+.halo-scheme-orange-dark .halo-island-open .halo-island-text,
+.halo-scheme-orange-dark .halo-island-open .halo-island-dim {
+    color: #5c1900;
+}
+
+.halo-scheme-orange-dark .halo-island-primary {
+    background-color: #ffb59c;
+    color: #5c1900;
+}
+
+.halo-scheme-orange-dark .halo-island-soft {
+    background-color: #ffdbd0;
+    color: #832700;
+}
+
+.halo-scheme-orange-dark .halo-island-tertiary {
+    background-color: #ffddb6;
+    color: #633f06;
+}
+
+.halo-scheme-orange-dark .halo-island-good {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-orange-dark .halo-island-go {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-orange-dark .halo-island-alarm {
+    background-color: #ba1a1a;
+    color: #ffffff;
+}
+
+.halo-scheme-orange-dark .halo-island-dim-badge,
+.halo-scheme-orange-dark .halo-island-plain {
+    background-color: transparent;
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-island-plain:hover {
+    background-color: #47352f;
+}
+
+.halo-scheme-orange-dark .halo-island-track {
+    background-color: #47352f;
+}
+
+.halo-scheme-orange-dark .halo-island-fill {
+    background-color: #ffb59c;
+}
+
+.halo-scheme-orange-dark .halo-island-plain-text {
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-island-good-text {
+    color: #7bd88f;
+}
+
+.halo-scheme-orange-dark .halo-island-alarm-text {
+    color: #ffb4ab;
+}
+
+.halo-scheme-orange-dark .halo-island-accent-text {
+    color: #ffb59c;
+}
+
+.halo-scheme-orange-dark .halo-island-wave {
+    color: #ffb59c;
+}
+
+.halo-scheme-orange-dark .halo-island-ring {
+    color: #ffb59c;
+    background-color: #47352f;
+}
+
+.halo-scheme-orange-dark .halo-island-ring-icon {
+    color: #ffb59c;
+}
+
+.halo-scheme-orange-dark .halo-island-rec-dot {
+    background-color: #ba1a1a;
+}
+
+.halo-scheme-orange-dark .halo-island-action {
+    border-color: #a78b82;
+    color: #f9ddd4;
+}
+
+.halo-scheme-orange-dark .halo-island-action:hover {
+    background-color: #47352f;
+}
+
+.halo-scheme-orange-dark .halo-island-action.halo-island-action-main {
+    border-color: #ffb59c;
+    background-color: #ffb59c;
+    color: #5c1900;
+}
+
+.halo-scheme-orange-dark .halo-island-avatar {
+    background-color: #ffdbd0;
+    color: #832700;
+}
+
+.halo-scheme-orange-dark .halo-island-bubble {
+    background-color: #42312b;
+}
+
 .halo-scheme-salmon-light .halo-frame {
     background-color: #f9dcd8;
 }
@@ -4858,6 +6318,136 @@
 .halo-scheme-salmon-light .halo-qs-hosted .popup-menu-item:hover,
 .halo-scheme-salmon-light .halo-qs-hosted .popup-menu-item:focus {
     background-color: #ffe2de;
+}
+
+
+/* The island: always on its dark surface, so these come from the dark scheme. */
+
+.halo-scheme-salmon-light .halo-island-text {
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-island-dim {
+    color: #58413e;
+}
+
+.halo-scheme-salmon-light .halo-island-unread {
+    background-color: #c0000d;
+}
+
+.halo-scheme-salmon-light .halo-island-open {
+    background-color: #c0000d;
+    border-radius: 18px;
+}
+
+.halo-scheme-salmon-light .halo-island-open .halo-island-text,
+.halo-scheme-salmon-light .halo-island-open .halo-island-dim {
+    color: #ffffff;
+}
+
+.halo-scheme-salmon-light .halo-island-primary {
+    background-color: #c0000d;
+    color: #ffffff;
+}
+
+.halo-scheme-salmon-light .halo-island-soft {
+    background-color: #930007;
+    color: #ffdad5;
+}
+
+.halo-scheme-salmon-light .halo-island-tertiary {
+    background-color: #683c0f;
+    color: #ffdcc1;
+}
+
+.halo-scheme-salmon-light .halo-island-good {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-salmon-light .halo-island-go {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-salmon-light .halo-island-alarm {
+    background-color: #ba1a1a;
+    color: #ffffff;
+}
+
+.halo-scheme-salmon-light .halo-island-dim-badge,
+.halo-scheme-salmon-light .halo-island-plain {
+    background-color: transparent;
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-island-plain:hover {
+    background-color: #fff8f7;
+}
+
+.halo-scheme-salmon-light .halo-island-track {
+    background-color: #fff8f7;
+}
+
+.halo-scheme-salmon-light .halo-island-fill {
+    background-color: #c0000d;
+}
+
+.halo-scheme-salmon-light .halo-island-plain-text {
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-island-good-text {
+    color: #2e7d32;
+}
+
+.halo-scheme-salmon-light .halo-island-alarm-text {
+    color: #ba1a1a;
+}
+
+.halo-scheme-salmon-light .halo-island-accent-text {
+    color: #c0000d;
+}
+
+.halo-scheme-salmon-light .halo-island-wave {
+    color: #c0000d;
+}
+
+.halo-scheme-salmon-light .halo-island-ring {
+    color: #c0000d;
+    background-color: #fff8f7;
+}
+
+.halo-scheme-salmon-light .halo-island-ring-icon {
+    color: #c0000d;
+}
+
+.halo-scheme-salmon-light .halo-island-rec-dot {
+    background-color: #ba1a1a;
+}
+
+.halo-scheme-salmon-light .halo-island-action {
+    border-color: #8c716d;
+    color: #271816;
+}
+
+.halo-scheme-salmon-light .halo-island-action:hover {
+    background-color: #fff8f7;
+}
+
+.halo-scheme-salmon-light .halo-island-action.halo-island-action-main {
+    border-color: #c0000d;
+    background-color: #c0000d;
+    color: #ffffff;
+}
+
+.halo-scheme-salmon-light .halo-island-avatar {
+    background-color: #930007;
+    color: #ffdad5;
+}
+
+.halo-scheme-salmon-light .halo-island-bubble {
+    background-color: #f9dcd8;
 }
 
 .halo-scheme-salmon-dark .halo-frame {
@@ -5263,6 +6853,136 @@
     background-color: #473532;
 }
 
+
+/* The island: always on its dark surface, so these come from the dark scheme. */
+
+.halo-scheme-salmon-dark .halo-island-text {
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-island-dim {
+    color: #dfbfbb;
+}
+
+.halo-scheme-salmon-dark .halo-island-unread {
+    background-color: #ffb4aa;
+}
+
+.halo-scheme-salmon-dark .halo-island-open {
+    background-color: #ffb4aa;
+    border-radius: 18px;
+}
+
+.halo-scheme-salmon-dark .halo-island-open .halo-island-text,
+.halo-scheme-salmon-dark .halo-island-open .halo-island-dim {
+    color: #690003;
+}
+
+.halo-scheme-salmon-dark .halo-island-primary {
+    background-color: #ffb4aa;
+    color: #690003;
+}
+
+.halo-scheme-salmon-dark .halo-island-soft {
+    background-color: #ffdad5;
+    color: #930007;
+}
+
+.halo-scheme-salmon-dark .halo-island-tertiary {
+    background-color: #ffdcc1;
+    color: #683c0f;
+}
+
+.halo-scheme-salmon-dark .halo-island-good {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-salmon-dark .halo-island-go {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-salmon-dark .halo-island-alarm {
+    background-color: #ba1a1a;
+    color: #ffffff;
+}
+
+.halo-scheme-salmon-dark .halo-island-dim-badge,
+.halo-scheme-salmon-dark .halo-island-plain {
+    background-color: transparent;
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-island-plain:hover {
+    background-color: #473532;
+}
+
+.halo-scheme-salmon-dark .halo-island-track {
+    background-color: #473532;
+}
+
+.halo-scheme-salmon-dark .halo-island-fill {
+    background-color: #ffb4aa;
+}
+
+.halo-scheme-salmon-dark .halo-island-plain-text {
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-island-good-text {
+    color: #7bd88f;
+}
+
+.halo-scheme-salmon-dark .halo-island-alarm-text {
+    color: #ffb4ab;
+}
+
+.halo-scheme-salmon-dark .halo-island-accent-text {
+    color: #ffb4aa;
+}
+
+.halo-scheme-salmon-dark .halo-island-wave {
+    color: #ffb4aa;
+}
+
+.halo-scheme-salmon-dark .halo-island-ring {
+    color: #ffb4aa;
+    background-color: #473532;
+}
+
+.halo-scheme-salmon-dark .halo-island-ring-icon {
+    color: #ffb4aa;
+}
+
+.halo-scheme-salmon-dark .halo-island-rec-dot {
+    background-color: #ba1a1a;
+}
+
+.halo-scheme-salmon-dark .halo-island-action {
+    border-color: #a78a86;
+    color: #f9dcd8;
+}
+
+.halo-scheme-salmon-dark .halo-island-action:hover {
+    background-color: #473532;
+}
+
+.halo-scheme-salmon-dark .halo-island-action.halo-island-action-main {
+    border-color: #ffb4aa;
+    background-color: #ffb4aa;
+    color: #690003;
+}
+
+.halo-scheme-salmon-dark .halo-island-avatar {
+    background-color: #ffdad5;
+    color: #930007;
+}
+
+.halo-scheme-salmon-dark .halo-island-bubble {
+    background-color: #42302e;
+}
+
 .halo-scheme-pink-light .halo-frame {
     background-color: #f6dce1;
 }
@@ -5664,6 +7384,136 @@
 .halo-scheme-pink-light .halo-qs-hosted .popup-menu-item:hover,
 .halo-scheme-pink-light .halo-qs-hosted .popup-menu-item:focus {
     background-color: #fce2e6;
+}
+
+
+/* The island: always on its dark surface, so these come from the dark scheme. */
+
+.halo-scheme-pink-light .halo-island-text {
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-island-dim {
+    color: #564146;
+}
+
+.halo-scheme-pink-light .halo-island-unread {
+    background-color: #ba005b;
+}
+
+.halo-scheme-pink-light .halo-island-open {
+    background-color: #ba005b;
+    border-radius: 18px;
+}
+
+.halo-scheme-pink-light .halo-island-open .halo-island-text,
+.halo-scheme-pink-light .halo-island-open .halo-island-dim {
+    color: #ffffff;
+}
+
+.halo-scheme-pink-light .halo-island-primary {
+    background-color: #ba005b;
+    color: #ffffff;
+}
+
+.halo-scheme-pink-light .halo-island-soft {
+    background-color: #8f0044;
+    color: #ffd9e1;
+}
+
+.halo-scheme-pink-light .halo-island-tertiary {
+    background-color: #6e3824;
+    color: #ffdbcf;
+}
+
+.halo-scheme-pink-light .halo-island-good {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-pink-light .halo-island-go {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-pink-light .halo-island-alarm {
+    background-color: #ba1a1a;
+    color: #ffffff;
+}
+
+.halo-scheme-pink-light .halo-island-dim-badge,
+.halo-scheme-pink-light .halo-island-plain {
+    background-color: transparent;
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-island-plain:hover {
+    background-color: #fff8f8;
+}
+
+.halo-scheme-pink-light .halo-island-track {
+    background-color: #fff8f8;
+}
+
+.halo-scheme-pink-light .halo-island-fill {
+    background-color: #ba005b;
+}
+
+.halo-scheme-pink-light .halo-island-plain-text {
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-island-good-text {
+    color: #2e7d32;
+}
+
+.halo-scheme-pink-light .halo-island-alarm-text {
+    color: #ba1a1a;
+}
+
+.halo-scheme-pink-light .halo-island-accent-text {
+    color: #ba005b;
+}
+
+.halo-scheme-pink-light .halo-island-wave {
+    color: #ba005b;
+}
+
+.halo-scheme-pink-light .halo-island-ring {
+    color: #ba005b;
+    background-color: #fff8f8;
+}
+
+.halo-scheme-pink-light .halo-island-ring-icon {
+    color: #ba005b;
+}
+
+.halo-scheme-pink-light .halo-island-rec-dot {
+    background-color: #ba1a1a;
+}
+
+.halo-scheme-pink-light .halo-island-action {
+    border-color: #897176;
+    color: #26181b;
+}
+
+.halo-scheme-pink-light .halo-island-action:hover {
+    background-color: #fff8f8;
+}
+
+.halo-scheme-pink-light .halo-island-action.halo-island-action-main {
+    border-color: #ba005b;
+    background-color: #ba005b;
+    color: #ffffff;
+}
+
+.halo-scheme-pink-light .halo-island-avatar {
+    background-color: #8f0044;
+    color: #ffd9e1;
+}
+
+.halo-scheme-pink-light .halo-island-bubble {
+    background-color: #f6dce1;
 }
 
 .halo-scheme-pink-dark .halo-frame {
@@ -6069,6 +7919,136 @@
     background-color: #453538;
 }
 
+
+/* The island: always on its dark surface, so these come from the dark scheme. */
+
+.halo-scheme-pink-dark .halo-island-text {
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-island-dim {
+    color: #ddbfc5;
+}
+
+.halo-scheme-pink-dark .halo-island-unread {
+    background-color: #ffb1c4;
+}
+
+.halo-scheme-pink-dark .halo-island-open {
+    background-color: #ffb1c4;
+    border-radius: 18px;
+}
+
+.halo-scheme-pink-dark .halo-island-open .halo-island-text,
+.halo-scheme-pink-dark .halo-island-open .halo-island-dim {
+    color: #65002e;
+}
+
+.halo-scheme-pink-dark .halo-island-primary {
+    background-color: #ffb1c4;
+    color: #65002e;
+}
+
+.halo-scheme-pink-dark .halo-island-soft {
+    background-color: #ffd9e1;
+    color: #8f0044;
+}
+
+.halo-scheme-pink-dark .halo-island-tertiary {
+    background-color: #ffdbcf;
+    color: #6e3824;
+}
+
+.halo-scheme-pink-dark .halo-island-good {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-pink-dark .halo-island-go {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-pink-dark .halo-island-alarm {
+    background-color: #ba1a1a;
+    color: #ffffff;
+}
+
+.halo-scheme-pink-dark .halo-island-dim-badge,
+.halo-scheme-pink-dark .halo-island-plain {
+    background-color: transparent;
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-island-plain:hover {
+    background-color: #453538;
+}
+
+.halo-scheme-pink-dark .halo-island-track {
+    background-color: #453538;
+}
+
+.halo-scheme-pink-dark .halo-island-fill {
+    background-color: #ffb1c4;
+}
+
+.halo-scheme-pink-dark .halo-island-plain-text {
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-island-good-text {
+    color: #7bd88f;
+}
+
+.halo-scheme-pink-dark .halo-island-alarm-text {
+    color: #ffb4ab;
+}
+
+.halo-scheme-pink-dark .halo-island-accent-text {
+    color: #ffb1c4;
+}
+
+.halo-scheme-pink-dark .halo-island-wave {
+    color: #ffb1c4;
+}
+
+.halo-scheme-pink-dark .halo-island-ring {
+    color: #ffb1c4;
+    background-color: #453538;
+}
+
+.halo-scheme-pink-dark .halo-island-ring-icon {
+    color: #ffb1c4;
+}
+
+.halo-scheme-pink-dark .halo-island-rec-dot {
+    background-color: #ba1a1a;
+}
+
+.halo-scheme-pink-dark .halo-island-action {
+    border-color: #a48a8f;
+    color: #f6dce1;
+}
+
+.halo-scheme-pink-dark .halo-island-action:hover {
+    background-color: #453538;
+}
+
+.halo-scheme-pink-dark .halo-island-action.halo-island-action-main {
+    border-color: #ffb1c4;
+    background-color: #ffb1c4;
+    color: #65002e;
+}
+
+.halo-scheme-pink-dark .halo-island-avatar {
+    background-color: #ffd9e1;
+    color: #8f0044;
+}
+
+.halo-scheme-pink-dark .halo-island-bubble {
+    background-color: #413034;
+}
+
 .halo-scheme-white-light .halo-frame {
     background-color: #e2e2e2;
 }
@@ -6472,6 +8452,136 @@
     background-color: #e8e8e8;
 }
 
+
+/* The island: always on its dark surface, so these come from the dark scheme. */
+
+.halo-scheme-white-light .halo-island-text {
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-island-dim {
+    color: #474747;
+}
+
+.halo-scheme-white-light .halo-island-unread {
+    background-color: #000000;
+}
+
+.halo-scheme-white-light .halo-island-open {
+    background-color: #000000;
+    border-radius: 18px;
+}
+
+.halo-scheme-white-light .halo-island-open .halo-island-text,
+.halo-scheme-white-light .halo-island-open .halo-island-dim {
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-light .halo-island-primary {
+    background-color: #000000;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-light .halo-island-soft {
+    background-color: #ffffff;
+    color: #3b3b3b;
+}
+
+.halo-scheme-white-light .halo-island-tertiary {
+    background-color: #ffffff;
+    color: #747474;
+}
+
+.halo-scheme-white-light .halo-island-good {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-white-light .halo-island-go {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-white-light .halo-island-alarm {
+    background-color: #ba1a1a;
+    color: #ffffff;
+}
+
+.halo-scheme-white-light .halo-island-dim-badge,
+.halo-scheme-white-light .halo-island-plain {
+    background-color: transparent;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-island-plain:hover {
+    background-color: #f9f9f9;
+}
+
+.halo-scheme-white-light .halo-island-track {
+    background-color: #f9f9f9;
+}
+
+.halo-scheme-white-light .halo-island-fill {
+    background-color: #000000;
+}
+
+.halo-scheme-white-light .halo-island-plain-text {
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-island-good-text {
+    color: #2e7d32;
+}
+
+.halo-scheme-white-light .halo-island-alarm-text {
+    color: #ba1a1a;
+}
+
+.halo-scheme-white-light .halo-island-accent-text {
+    color: #000000;
+}
+
+.halo-scheme-white-light .halo-island-wave {
+    color: #000000;
+}
+
+.halo-scheme-white-light .halo-island-ring {
+    color: #000000;
+    background-color: #f9f9f9;
+}
+
+.halo-scheme-white-light .halo-island-ring-icon {
+    color: #000000;
+}
+
+.halo-scheme-white-light .halo-island-rec-dot {
+    background-color: #ba1a1a;
+}
+
+.halo-scheme-white-light .halo-island-action {
+    border-color: #777777;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-light .halo-island-action:hover {
+    background-color: #f9f9f9;
+}
+
+.halo-scheme-white-light .halo-island-action.halo-island-action-main {
+    border-color: #000000;
+    background-color: #000000;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-light .halo-island-avatar {
+    background-color: #ffffff;
+    color: #3b3b3b;
+}
+
+.halo-scheme-white-light .halo-island-bubble {
+    background-color: #e2e2e2;
+}
+
 .halo-scheme-white-dark .halo-frame {
     background-color: #1f1f1f;
 }
@@ -6873,4 +8983,134 @@
 .halo-scheme-white-dark .halo-qs-hosted .popup-menu-item:hover,
 .halo-scheme-white-dark .halo-qs-hosted .popup-menu-item:focus {
     background-color: #393939;
+}
+
+
+/* The island: always on its dark surface, so these come from the dark scheme. */
+
+.halo-scheme-white-dark .halo-island-text {
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-island-dim {
+    color: #c6c6c6;
+}
+
+.halo-scheme-white-dark .halo-island-unread {
+    background-color: #ffffff;
+}
+
+.halo-scheme-white-dark .halo-island-open {
+    background-color: #ffffff;
+    border-radius: 18px;
+}
+
+.halo-scheme-white-dark .halo-island-open .halo-island-text,
+.halo-scheme-white-dark .halo-island-open .halo-island-dim {
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-dark .halo-island-primary {
+    background-color: #ffffff;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-dark .halo-island-soft {
+    background-color: #000000;
+    color: #d4d4d4;
+}
+
+.halo-scheme-white-dark .halo-island-tertiary {
+    background-color: #000000;
+    color: #919191;
+}
+
+.halo-scheme-white-dark .halo-island-good {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-white-dark .halo-island-go {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.halo-scheme-white-dark .halo-island-alarm {
+    background-color: #ba1a1a;
+    color: #ffffff;
+}
+
+.halo-scheme-white-dark .halo-island-dim-badge,
+.halo-scheme-white-dark .halo-island-plain {
+    background-color: transparent;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-island-plain:hover {
+    background-color: #393939;
+}
+
+.halo-scheme-white-dark .halo-island-track {
+    background-color: #393939;
+}
+
+.halo-scheme-white-dark .halo-island-fill {
+    background-color: #ffffff;
+}
+
+.halo-scheme-white-dark .halo-island-plain-text {
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-island-good-text {
+    color: #7bd88f;
+}
+
+.halo-scheme-white-dark .halo-island-alarm-text {
+    color: #ffb4ab;
+}
+
+.halo-scheme-white-dark .halo-island-accent-text {
+    color: #ffffff;
+}
+
+.halo-scheme-white-dark .halo-island-wave {
+    color: #ffffff;
+}
+
+.halo-scheme-white-dark .halo-island-ring {
+    color: #ffffff;
+    background-color: #393939;
+}
+
+.halo-scheme-white-dark .halo-island-ring-icon {
+    color: #ffffff;
+}
+
+.halo-scheme-white-dark .halo-island-rec-dot {
+    background-color: #ba1a1a;
+}
+
+.halo-scheme-white-dark .halo-island-action {
+    border-color: #919191;
+    color: #e2e2e2;
+}
+
+.halo-scheme-white-dark .halo-island-action:hover {
+    background-color: #393939;
+}
+
+.halo-scheme-white-dark .halo-island-action.halo-island-action-main {
+    border-color: #ffffff;
+    background-color: #ffffff;
+    color: #1b1b1b;
+}
+
+.halo-scheme-white-dark .halo-island-avatar {
+    background-color: #000000;
+    color: #d4d4d4;
+}
+
+.halo-scheme-white-dark .halo-island-bubble {
+    background-color: #353535;
 }

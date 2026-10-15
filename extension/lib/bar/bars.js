@@ -30,7 +30,9 @@ function harborSymbols() {
 }
 
 export class Bars {
-    // menus: {onClock(actor), onStatus(actor)}: who opens what from the bar.
+    // menus: {onClock(actor), onStatus(actor)}: who opens what from the bar;
+    // onRebuilt() after the bars were made anew, onState(state) after each
+    // update, for the island resting on the clock.
     constructor(theme, system, menus) {
         this._theme = theme;
         this._system = system;
@@ -41,6 +43,7 @@ export class Bars {
         this._symbols = harborSymbols();
         this._tick = 0;
         this._peekId = 0;
+        this._islandClock = false;
 
         this._clock = new GnomeDesktop.WallClock();
         this._interface = new Gio.Settings({schema_id: 'org.gnome.desktop.interface'});
@@ -100,6 +103,13 @@ export class Bars {
         this._update();
     }
 
+    // The island rests over the main bar's clock.
+    setIslandClock(on) {
+        this._islandClock = on;
+        for (const bar of this._bars)
+            bar.setIslandClock(on && bar === this.primary);
+    }
+
     // name: "clock" or "status"; the pill shows the open state.
     setOpen(name, open) {
         this._open[name] = open;
@@ -142,8 +152,10 @@ export class Bars {
         }));
         for (const bar of this._bars)
             bar.setSettings(this._settings);
+        this.setIslandClock(this._islandClock);
         this._syncFullscreen();
         this._update();
+        this._menus.onRebuilt?.();
     }
 
     _scrollWorkspace(step) {
@@ -208,6 +220,7 @@ export class Bars {
         const state = this._state();
         for (const bar of this._bars)
             bar.update(state);
+        this._menus.onState?.(state);
     }
 
     _syncFullscreen() {

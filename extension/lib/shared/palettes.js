@@ -75,6 +75,12 @@ export function palette(colour, scheme) {
         panel: scheme === 'light' ? roles.low : roles.surf,
         card: scheme === 'light' ? roles.bright : roles.high,
         dent: scheme === 'light' ? roles.high : roles.bright,
+        // Strong red and green on the island's dark surface (hang up,
+        // answer, stop): the light scheme's, which hold white text.
+        alarm: fixed.light.error,
+        onAlarm: fixed.light.onError,
+        go: fixed.light.good,
+        onGo: fixed.light.onGood,
     };
 }
 

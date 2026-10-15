@@ -16,6 +16,8 @@ import {EventEmitter} from 'resource:///org/gnome/shell/misc/signals.js';
 import {PopupMenuBase} from 'resource:///org/gnome/shell/ui/popupMenu.js';
 
 import {networkIcon} from '../bar/words.js';
+import {clockText} from '../island/words.js';
+import {isPaused, pausedNote, runningTimer} from '../shared/timers.js';
 import {COLOUR_NAMES, PROFILES, bluetoothNote, darkNote, nightLightNote, onOff, orderTiles} from './words.js';
 
 class Tile extends EventEmitter {
@@ -240,6 +242,58 @@ class DoNotDisturbTile extends WatchingTile {
     }
 }
 
+// The timer, the stopwatch and the pomodoro shared with Ledge. A tap
+// pauses what runs or goes on with what was paused; nothing yet, it starts
+// a pomodoro. The page holds the rest.
+class TimerTile extends WatchingTile {
+    constructor(store) {
+        super('timer');
+        this.title = 'Timer';
+        this.icon = 'timer';
+        this.page = 'timer';
+        this.store = store;
+        this._tick = 0;
+        this._watch(store, ['changed']);
+        this.update();
+    }
+
+    update() {
+        const now = Date.now();
+        const running = runningTimer(this.store.timers, now);
+        this._set({
+            active: Boolean(running),
+            note: running ? clockText(running.shown, {countdown: running.countdown}) : pausedNote(this.store.timers),
+        });
+        if (running && !this._tick) {
+            this._tick = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 1, () => {
+                this.update();
+                return this._tick ? GLib.SOURCE_CONTINUE : GLib.SOURCE_REMOVE;
+            });
+        } else if (!running && this._tick) {
+            GLib.source_remove(this._tick);
+            this._tick = 0;
+        }
+    }
+
+    activate() {
+        const timers = this.store.timers;
+        const running = runningTimer(timers, Date.now());
+        if (running) {
+            this.store.toggle(running.kind);
+            return;
+        }
+        const paused = ['pomodoro', 'timer', 'stopwatch'].find(kind => isPaused(timers, kind));
+        this.store.toggle(paused ?? 'pomodoro');
+    }
+
+    destroy() {
+        if (this._tick)
+            GLib.source_remove(this._tick);
+        this._tick = 0;
+        super.destroy();
+    }
+}
+
 class VpnTile extends WatchingTile {
     constructor(qs) {
         super('vpn');
@@ -413,11 +467,11 @@ export class ButtonTile extends Tile {
 }
 
 // Halo's tiles first, in the design's order; the timer comes with the island.
-export const HALO_TILES = ['wifi', 'bluetooth', 'power', 'nightLight', 'darkStyle', 'colourStyle', 'dnd', 'vpn'];
+export const HALO_TILES = ['wifi', 'bluetooth', 'power', 'nightLight', 'darkStyle', 'colourStyle', 'dnd', 'vpn', 'timer'];
 
 export const TILE_NAMES = {
     wifi: 'Wi‑Fi', bluetooth: 'Bluetooth', power: 'Energy', nightLight: 'Night light',
-    darkStyle: 'Dark style', colourStyle: 'Colour style', dnd: 'Do not disturb', vpn: 'VPN',
+    darkStyle: 'Dark style', colourStyle: 'Colour style', dnd: 'Do not disturb', vpn: 'VPN', timer: 'Timer',
     'gnome-wired': 'Wired', 'gnome-modem': 'Mobile broadband', 'gnome-tether': 'Bluetooth tethering',
     'gnome-keyboard-light': 'Keyboard light', 'gnome-airplane': 'Airplane mode', 'gnome-rotate': 'Auto rotate',
     'gnome-unsafe': 'Unsafe mode',
@@ -425,11 +479,12 @@ export const TILE_NAMES = {
 
 // Every tile there is right now, Halo's first, then GNOME's rarer ones,
 // then other extensions' toggles and buttons.
-export function buildTiles(gnome, appearance) {
+export function buildTiles(gnome, appearance, timers) {
     const qs = gnome.qs;
     const tiles = [
         new WifiTile(qs), new BluetoothTile(qs), new PowerTile(qs), new NightLightTile(),
         new DarkStyleTile(appearance), new ColourStyleTile(appearance), new DoNotDisturbTile(), new VpnTile(qs),
+        new TimerTile(timers),
     ];
     for (const [id, toggle] of gnome.plain)
         tiles.push(new ToggleTile(id, toggle));
@@ -450,11 +505,12 @@ export function buildTiles(gnome, appearance) {
 // and with the hidden ones the settings say. Emits "changed" when the list
 // or the order changed; each tile emits its own "changed".
 export class TileSet extends EventEmitter {
-    constructor(gnome, appearance, settings) {
+    constructor(gnome, appearance, settings, timers) {
         super();
         this._gnome = gnome;
         this._appearance = appearance;
         this._settings = settings;
+        this._timers = timers;
         this.all = [];
         if (gnome.ready)
             this._rebuild();
@@ -496,7 +552,7 @@ export class TileSet extends EventEmitter {
     // ones lets go of them before they are destroyed.
     _rebuild() {
         const old = this.all;
-        this.all = buildTiles(this._gnome, this._appearance);
+        this.all = buildTiles(this._gnome, this._appearance, this._timers);
         this.emit('changed');
         for (const tile of old)
             tile.destroy();

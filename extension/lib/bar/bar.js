@@ -74,6 +74,22 @@ export class Bar {
         return this._clock;
     }
 
+    // The island rests over the clock: the clock makes room for its pill
+    // and steps back behind it.
+    setIslandClock(on) {
+        if (on)
+            this._clock.add_style_class_name('halo-island-clock');
+        else
+            this._clock.remove_style_class_name('halo-island-clock');
+        this._clock.opacity = on ? 0 : 255;
+        this._clock.reactive = !on;
+    }
+
+    // Whether the bar is out of sight over a fullscreen window.
+    get hidden() {
+        return !this.actor?.visible || (this.actor?.translation_y ?? 0) < -1;
+    }
+
     setSettings(settings) {
         const before = this._settings;
         this._settings = settings;

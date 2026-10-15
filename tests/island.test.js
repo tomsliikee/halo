@@ -1,0 +1,109 @@
+import {crossed, readLimits} from '../extension/lib/island/limits.js';
+import {pick} from '../extension/lib/island/rank.js';
+import {
+    claudeNote, clockText, copiedText, initials, isDecline, levelShare, limitNote, limitTitle, lowMark, osdIcon,
+    osdKind, plainText, soonText, trackTime,
+} from '../extension/lib/island/words.js';
+import * as Pomodoro from '../extension/lib/shared/pomodoro.js';
+import * as Timer from '../extension/lib/shared/timer.js';
+import {isPaused, parseTimers, pausedNote, runningTimer} from '../extension/lib/shared/timers.js';
+import {test, equal, done} from './harness.js';
+
+const ids = ({main, bubble}) => [main?.id ?? null, bubble?.id ?? null];
+const media = {id: 'media', kind: 'media', at: 1};
+const timer = {id: 'timer', kind: 'timer', at: 2};
+const recording = {id: 'rec', kind: 'recording', at: 3};
+const call = {id: 'call', kind: 'call', at: 0};
+const volume = {id: 'volume', kind: 'volume', hint: true, at: 10};
+const note = {id: 'note', kind: 'notification', hint: true, at: 11};
+
+test('nothing going on', () => equal(ids(pick([])), [null, null]));
+test('one lasting thing', () => equal(ids(pick([media])), ['media', null]));
+test('the higher rank wins, the next waits beside it', () => equal(ids(pick([media, timer, recording])), ['rec', 'timer']));
+test('a hint shows over what lasts', () => equal(ids(pick([media, volume])), ['volume', 'media']));
+test('the newest hint wins', () => equal(ids(pick([volume, note])), ['note', null]));
+test('a call wins over hints', () => equal(ids(pick([media, call, note])), ['call', 'media']));
+test('dismissed things step aside', () => equal(ids(pick([media, timer], new Set(['timer']))), ['media', null]));
+test('a clicked bubble comes first', () => equal(ids(pick([media, timer], new Set(), 'media')), ['media', 'timer']));
+test('the newer of the same rank', () => equal(
+    ids(pick([{id: 'a', kind: 'privacy', at: 1}, {id: 'b', kind: 'recording', at: 5}])), ['b', 'a']));
+
+test('osd kinds', () => equal(
+    ['audio-volume-high-symbolic', 'display-brightness-symbolic', 'keyboard-brightness-symbolic',
+        'microphone-sensitivity-muted-symbolic', 'input-touchpad-symbolic'].map(osdKind),
+    ['volume', 'brightness', 'keyboardLight', 'microphone', 'other']));
+test('osd icons', () => equal(
+    [osdIcon('volume', 0.8, false), osdIcon('volume', 0.2, false), osdIcon('volume', 0, false), osdIcon('volume', 0.5, true)],
+    ['volume-up', 'volume-down', 'volume-mute', 'no-sound']));
+test('level share past 100 %', () => equal([levelShare(0.72, 1), levelShare(1.5, 1.5), levelShare(2, 1)], [0.72, 1, 1]));
+
+test('countdown rounds up', () => equal([clockText(983000, {countdown: true}), clockText(500, {countdown: true})], ['16:23', '00:01']));
+test('clock text past an hour', () => equal(clockText(3723000), '1:02:03'));
+
+test('battery passes 20 % on the way down', () => equal(
+    lowMark({percent: 21, charging: false}, {percent: 20, charging: false}), 20));
+test('battery passes 10 %', () => equal(lowMark({percent: 12, charging: false}, {percent: 9, charging: false}), 10));
+test('a charging battery says nothing', () => equal(lowMark({percent: 21, charging: false}, {percent: 19, charging: true}), null));
+test('no mark passed', () => equal(lowMark({percent: 50, charging: false}, {percent: 49, charging: false}), null));
+
+test('claude notes', () => equal(
+    [claudeNote({project: 'halo', state: 'working', since: 0}, 180000), claudeNote({project: 'halo', state: 'waiting'}, 0)],
+    ['halo · working for 3 min', 'halo · waiting for you']));
+
+const limitsAt = (session, week) => JSON.stringify({at: 5, limits: {session: {percent: session, resetsAt: 7200000}, week: {percent: week}}});
+test('a limit crossing 80 %', () => equal(
+    crossed(readLimits(limitsAt(70, 10), null, 0), readLimits(limitsAt(81, 10), null, 0)).map(c => [c.window, c.mark]),
+    [['session', 80]]));
+test('a limit crossing 95 % in the week', () => equal(
+    crossed(readLimits(limitsAt(10, 90), null, 0), readLimits(limitsAt(10, 96), null, 0)).map(c => [c.window, c.mark]),
+    [['week', 95]]));
+test('the first reading says nothing', () => equal(crossed(null, readLimits(limitsAt(99, 99), null, 0)), []));
+test('limit words', () => equal(
+    [limitTitle({window: 'session', mark: 80}), limitNote({resetsAt: 7200000}, 0)],
+    ['Claude session at 80 %', 'Resets in 2 h']));
+test('statusline record', () => equal(
+    readLimits(null, JSON.stringify({at: 9, rate_limits: {five_hour: {used_percentage: 42, resets_at: 10}}}), 0).session,
+    {percent: 42, resetsAt: 10000}));
+
+test('soon', () => equal([soonText(600), soonText(30)], ['Starts in 10 min', 'Starts now']));
+test('initials', () => equal([initials('Lern Gruppe'), initials('Anna'), initials('')], ['LG', 'AN', '?']));
+test('plain text from markup', () => equal(plainText('<b>Erst</b> um 16:00 &amp; dann'), 'Erst um 16:00 & dann'));
+test('copied text', () => equal([copiedText('\n  hello world\nmore'), copiedText('x'.repeat(50), 10)], ['hello world', `${'x'.repeat(9)}…`]));
+test('decline actions', () => equal(['Decline', 'Answer', 'Ablehnen', 'Hang up'].map(isDecline), [true, false, true, true]));
+test('track time', () => equal([trackTime(72e6), trackTime(189e6)], ['1:12', '3:09']));
+
+test('timer counts down', () => {
+    const state = Timer.start(Timer.create('timer', 60000), 0);
+    equal([Timer.shown(state, 20000), Timer.isFinished(state, 60000)], [40000, true]);
+});
+test('pomodoro moves on', () => {
+    const config = {work: 1000, rest: 500, long: 800, rounds: 2};
+    const state = Pomodoro.start(Pomodoro.create(config), 0);
+    const settled = Pomodoro.settle(state, 1600, config);
+    equal([settled.state.phase, settled.state.round, settled.ended], ['work', 2, 2]);
+});
+
+test('timers file: broken parts are dropped', () => equal(
+    parseTimers(JSON.stringify({timer: {mode: 'timer', duration: 60000, elapsed: 0, startedAt: 5}, stopwatch: {mode: 'x'}})),
+    {timer: {mode: 'timer', duration: 60000, elapsed: 0, startedAt: 5}, stopwatch: null, pomodoro: null}));
+test('timers file: nothing readable', () => equal(parseTimers('{'), {timer: null, stopwatch: null, pomodoro: null}));
+test('the running pomodoro comes first', () => {
+    const config = {work: 60000, rest: 1000, long: 2000, rounds: 4};
+    const timers = {
+        timer: Timer.start(Timer.create('timer', 60000), 0),
+        stopwatch: null,
+        pomodoro: {state: Pomodoro.start(Pomodoro.create(config), 0), config},
+    };
+    const running = runningTimer(timers, 30000);
+    equal([running.kind, running.phase, running.shown, running.endsAt], ['pomodoro', 'work', 30000, 60000]);
+});
+test('a paused timer is not running', () => equal(
+    runningTimer({timer: Timer.create('timer', 1000), stopwatch: null, pomodoro: null}, 0), null));
+
+test('a paused timer is paused', () => {
+    const paused = Timer.pause(Timer.start(Timer.create('timer', 60000), 0), 10000);
+    const timers = {timer: paused, stopwatch: null, pomodoro: null};
+    equal([isPaused(timers, 'timer'), pausedNote(timers), pausedNote({timer: null, stopwatch: null, pomodoro: null})], [true, 'Paused', 'Off']);
+});
+
+done('island');

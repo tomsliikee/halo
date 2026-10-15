@@ -18,7 +18,9 @@ import {pressable} from '../shared/press.js';
 import {BADGE} from '../shared/shapes.js';
 import {HaloShape} from '../shared/shape.js';
 import {text} from '../shared/text.js';
-import {HaloSwitch} from './controls.js';
+import {clockText, POMODORO_PHASES} from '../island/words.js';
+import {isPaused, runningTimer} from '../shared/timers.js';
+import {HaloSwitch, roundButton} from './controls.js';
 import {Page, caption, column, row, settingsLink, trailingIcon, trailingText} from './page.js';
 import {SettingsPage} from './settingspage.js';
 import {
@@ -754,12 +756,101 @@ class HostedPage extends Page {
     }
 }
 
+// Timer
+
+const TIMER_PRESETS = [5, 15, 25, 45];
+const TIMER_KINDS = [
+    ['pomodoro', 'Pomodoro', 'Focus 25 min, then a break'],
+    ['stopwatch', 'Stopwatch', 'Counts up from zero'],
+];
+
+// The timer, the stopwatch and the pomodoro shared with Ledge: what runs,
+// a quick start for a timer, and the other two with start and reset.
+class TimerPage extends Page {
+    constructor(ctx, tile) {
+        super(ctx, 'Timer', {toggle: () => tile.activate()});
+        this._tile = tile;
+        this._store = tile.store;
+
+        const now = this.add(new St.BoxLayout({style_class: 'halo-qs-card halo-qs-timer-now', x_expand: true}));
+        const words = column();
+        words.x_expand = true;
+        words.y_align = Clutter.ActorAlign.CENTER;
+        this._nowLabel = text('qs-caption', {styleClass: 'halo-qs-small'});
+        this._nowTime = text('qs-big', {styleClass: 'halo-qs-timer-time'});
+        words.add_child(this._nowLabel);
+        words.add_child(this._nowTime);
+        now.add_child(words);
+
+        this.add(caption('Start a timer'));
+        const presets = this.add(new St.BoxLayout({style_class: 'halo-qs-segments', x_expand: true}));
+        presets.layout_manager.homogeneous = true;
+        for (const minutes of TIMER_PRESETS) {
+            const segment = new St.BoxLayout({style_class: 'halo-qs-segment', x_expand: true, accessible_name: `${minutes} minutes`});
+            const inner = new St.BoxLayout({x_expand: true, x_align: Clutter.ActorAlign.CENTER, style_class: 'halo-qs-segment-inner'});
+            inner.add_child(text('qs-row', {text: `${minutes} min`}));
+            segment.add_child(inner);
+            pressable(segment, () => this._store.startTimer(minutes), {scale: 0.94, focus: true});
+            presets.add_child(segment);
+        }
+
+        this._rows = new Map();
+        const list = this.add(column('halo-qs-list'));
+        for (const [kind, title, note] of [['timer', 'Timer', 'Started above'], ...TIMER_KINDS]) {
+            const line = row({iconName: kind === 'stopwatch' ? 'schedule' : 'timer', title, note, onClick: () => this._store.toggle(kind)});
+            const reset = roundButton('restart-alt', () => this._store.reset(kind), {accessibleName: `Reset ${title}`});
+            // The words take the room, the reset button sits at the end.
+            line.title.get_parent().x_expand = true;
+            line.actor.add_child(reset);
+            list.add_child(line.actor);
+            this._rows.set(kind, {actor: line.actor, label: line.note, rest: note, reset});
+        }
+        this.add(text('qs-row-note', {styleClass: 'halo-qs-small', text: 'Shared with Ledge: what runs here runs on its widgets too.', wrap: true}));
+
+        this._store.connectObject('changed', () => this._update(), this);
+        this._tick = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 1, () => {
+            this._update();
+            return GLib.SOURCE_CONTINUE;
+        });
+        this._update({animated: false});
+    }
+
+    _update({animated = true} = {}) {
+        const now = Date.now();
+        const timers = this._store.timers;
+        const running = runningTimer(timers, now);
+        this.switch.set(Boolean(running), {animated});
+        this._nowLabel.text = running
+            ? (running.kind === 'pomodoro' ? `Pomodoro · ${POMODORO_PHASES[running.phase]}` : running.kind === 'timer' ? 'Timer' : 'Stopwatch')
+            : 'Nothing running';
+        this._nowTime.text = running ? clockText(running.shown, {countdown: running.countdown}) : '00:00';
+        for (const [kind, line] of this._rows) {
+            const on = running?.kind === kind;
+            const paused = isPaused(timers, kind);
+            line.label.text = on ? 'Running · tap to pause' : paused ? 'Paused · tap to go on' : line.rest;
+            line.reset.visible = on || paused;
+            if (on)
+                line.actor.add_style_class_name('halo-chosen');
+            else
+                line.actor.remove_style_class_name('halo-chosen');
+        }
+    }
+
+    _destroy() {
+        if (this._tick)
+            GLib.source_remove(this._tick);
+        this._tick = 0;
+        this._store.disconnectObject(this);
+    }
+}
+
 export const PAGES = {
     wifi: (ctx, tile) => new WifiPage(ctx, tile),
     bluetooth: (ctx, tile) => new BluetoothPage(ctx, tile),
     energy: (ctx, tile) => new EnergyPage(ctx, tile),
     appearance: ctx => new AppearancePage(ctx),
     vpn: (ctx, tile) => new VpnPage(ctx, tile),
+    timer: (ctx, tile) => new TimerPage(ctx, tile ?? ctx.tiles.all.find(t => t.id === 'timer')),
     sound: ctx => new SoundPage(ctx),
     power: ctx => new PowerPage(ctx),
     hosted: (ctx, tile) => new HostedPage(ctx, tile),

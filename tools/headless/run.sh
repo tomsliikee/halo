@@ -40,7 +40,7 @@ export MONITORS
 export HALO_SCHEME="${HALO_SCHEME:-light}"
 export HALO_SCRIPT="$HERE/scripts/$1.js"
 export HALO_SECONDS="${2:-60}"
-export XDG_CONFIG_HOME="$ENV/config" XDG_CACHE_HOME="$ENV/cache" XDG_DATA_HOME="$ENV/data"
+export XDG_CONFIG_HOME="$ENV/config" XDG_CACHE_HOME="$ENV/cache" XDG_DATA_HOME="$ENV/data" XDG_STATE_HOME="$ENV/state"
 export G_MESSAGES_DEBUG=Gjs-Console
 unset WAYLAND_DISPLAY DISPLAY
 

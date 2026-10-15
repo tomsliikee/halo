@@ -425,6 +425,166 @@
     border-radius: 16px;
 }
 
+
+/* The timer page */
+
+.halo-qs-timer-now {
+    padding: 18px 20px;
+}
+
+/* The island. Its shape is drawn in Cairo; these place what it holds. */
+
+/* The bar's clock makes room for the island's resting pill over it. */
+.halo-plain.halo-island-clock {
+    padding: 0 16px;
+}
+
+.halo-island-rest {
+    height: 36px;
+    padding: 0 16px;
+    spacing: 8px;
+}
+
+.halo-island-level,
+.halo-island-info,
+.halo-island-timer,
+.halo-island-media,
+.halo-island-recording {
+    height: 56px;
+    padding: 0 20px 0 8px;
+    spacing: 14px;
+}
+
+.halo-island-info,
+.halo-island-timer {
+    min-width: 300px;
+}
+
+.halo-island-timer {
+    padding: 0 22px 0 8px;
+    spacing: 14px;
+}
+
+.halo-island-media {
+    padding: 0 6px 0 6px;
+}
+
+.halo-island-recording {
+    padding: 0 10px 0 22px;
+    spacing: 14px;
+}
+
+.halo-island-symbol {
+    width: 56px;
+    height: 56px;
+}
+
+.halo-island-symbol > * {
+    margin: 16px;
+}
+
+.halo-island-column {
+    spacing: 1px;
+}
+
+.halo-island-badge {
+    border-radius: 999px;
+}
+
+.halo-island-badge.halo-island-square {
+    border-radius: 14px;
+}
+
+.halo-island-picture-bin {
+    border-radius: 12px;
+}
+
+.halo-island-track {
+    height: 10px;
+    border-radius: 5px;
+}
+
+.halo-island-track.halo-island-thin {
+    height: 6px;
+    border-radius: 3px;
+}
+
+.halo-island-fill {
+    border-radius: 5px;
+}
+
+.halo-island-thin .halo-island-fill {
+    border-radius: 3px;
+}
+
+.halo-island-percent {
+    min-width: 64px;
+    text-align: right;
+}
+
+.halo-island-trailing {
+    padding-left: 18px;
+}
+
+.halo-island-timer-time {
+    padding-left: 28px;
+}
+
+.halo-island-rec-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 7px;
+}
+
+.halo-island-large {
+    padding: 22px 24px 20px 24px;
+    spacing: 14px;
+}
+
+.halo-island-media-head {
+    spacing: 18px;
+}
+
+.halo-island-progress {
+    spacing: 12px;
+}
+
+.halo-island-controls {
+    spacing: 28px;
+}
+
+.halo-island-note-top {
+    spacing: 16px;
+}
+
+.halo-island-body {
+    padding-top: 2px;
+}
+
+.halo-island-actions {
+    spacing: 8px;
+}
+
+.halo-island-action {
+    height: 40px;
+    padding: 0 18px;
+    border-radius: 20px;
+    border-width: 1px;
+}
+
+.halo-island-call {
+    padding: 18px 20px;
+    spacing: 16px;
+}
+
+.halo-island-avatar {
+    border-radius: 28px;
+}
+
+.halo-island-bubble {
+    border-radius: 28px;
+}
+
 /* themed */
 
 .halo-scheme .halo-frame {
@@ -828,4 +988,134 @@
 .halo-scheme .halo-qs-hosted .popup-menu-item:hover,
 .halo-scheme .halo-qs-hosted .popup-menu-item:focus {
     background-color: $dent;
+}
+
+
+/* The island: always on its dark surface, so these come from the dark scheme. */
+
+.halo-scheme .halo-island-text {
+    color: $on;
+}
+
+.halo-scheme .halo-island-dim {
+    color: $onVar;
+}
+
+.halo-scheme .halo-island-unread {
+    background-color: $primary;
+}
+
+.halo-scheme .halo-island-open {
+    background-color: $primary;
+    border-radius: 18px;
+}
+
+.halo-scheme .halo-island-open .halo-island-text,
+.halo-scheme .halo-island-open .halo-island-dim {
+    color: $onPrimary;
+}
+
+.halo-scheme .halo-island-primary {
+    background-color: $primary;
+    color: $onPrimary;
+}
+
+.halo-scheme .halo-island-soft {
+    background-color: $onPc;
+    color: $pc;
+}
+
+.halo-scheme .halo-island-tertiary {
+    background-color: $onTc;
+    color: $tc;
+}
+
+.halo-scheme .halo-island-good {
+    background-color: $go;
+    color: $onGo;
+}
+
+.halo-scheme .halo-island-go {
+    background-color: $go;
+    color: $onGo;
+}
+
+.halo-scheme .halo-island-alarm {
+    background-color: $alarm;
+    color: $onAlarm;
+}
+
+.halo-scheme .halo-island-dim-badge,
+.halo-scheme .halo-island-plain {
+    background-color: transparent;
+    color: $on;
+}
+
+.halo-scheme .halo-island-plain:hover {
+    background-color: $bright;
+}
+
+.halo-scheme .halo-island-track {
+    background-color: $bright;
+}
+
+.halo-scheme .halo-island-fill {
+    background-color: $primary;
+}
+
+.halo-scheme .halo-island-plain-text {
+    color: $on;
+}
+
+.halo-scheme .halo-island-good-text {
+    color: $good;
+}
+
+.halo-scheme .halo-island-alarm-text {
+    color: $error;
+}
+
+.halo-scheme .halo-island-accent-text {
+    color: $primary;
+}
+
+.halo-scheme .halo-island-wave {
+    color: $primary;
+}
+
+.halo-scheme .halo-island-ring {
+    color: $primary;
+    background-color: $bright;
+}
+
+.halo-scheme .halo-island-ring-icon {
+    color: $primary;
+}
+
+.halo-scheme .halo-island-rec-dot {
+    background-color: $alarm;
+}
+
+.halo-scheme .halo-island-action {
+    border-color: $outline;
+    color: $on;
+}
+
+.halo-scheme .halo-island-action:hover {
+    background-color: $bright;
+}
+
+.halo-scheme .halo-island-action.halo-island-action-main {
+    border-color: $primary;
+    background-color: $primary;
+    color: $onPrimary;
+}
+
+.halo-scheme .halo-island-avatar {
+    background-color: $onPc;
+    color: $pc;
+}
+
+.halo-scheme .halo-island-bubble {
+    background-color: $highest;
 }
