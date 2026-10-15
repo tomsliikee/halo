@@ -1,1 +1,1 @@
-{"uuid": "halo-driver@test", "name": "Halo driver", "description": "Drives Halo in the headless test shell.", "shell-version": ["50"]}
+{"uuid": "halo-driver@test", "name": "Halo driver", "description": "Drives Halo in the headless test shell. It stays on while locked, so a script can lock and unlock.", "shell-version": ["50"], "session-modes": ["user", "unlock-dialog"]}

@@ -16,9 +16,27 @@ export class Agenda extends EventEmitter {
     constructor() {
         super();
         this._month = null;
-        this._source = Main.panel.statusArea.dateMenu?._eventSource ?? null;
+        this._source = null;
+        // GNOME's date menu replaces its source when the screen locks and
+        // unlocks, and disposes the old one.
+        Main.sessionMode.connectObject('updated', () => this._follow(), this);
+        this._follow();
+    }
+
+    _follow() {
+        const source = Main.panel.statusArea.dateMenu?._eventSource ?? null;
+        if (source === this._source)
+            return;
+        this._source?.disconnectObject(this);
+        this._source = source;
         this._source?.connectObject('changed', () => this.emit('changed'), 'notify::has-calendars', () => this.emit('changed'), this);
-        this.showMonth(new Date().getFullYear(), new Date().getMonth());
+        const month = this._month;
+        this._month = null;
+        if (month)
+            this.showMonth(...month.split('-').map(Number));
+        else
+            this.showToday();
+        this.emit('changed');
     }
 
     get available() {
@@ -74,6 +92,7 @@ export class Agenda extends EventEmitter {
     }
 
     destroy() {
+        Main.sessionMode.disconnectObject(this);
         this._source?.disconnectObject(this);
         this._source = null;
         this.disconnectAll();

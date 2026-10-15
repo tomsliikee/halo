@@ -134,6 +134,8 @@ export class QuickSettingsPanel {
         this._onOpen(false);
         this._main?.closed();
         const done = () => {
+            if (this.isOpen)
+                return;
             this.actor.hide();
             this._clearStack();
         };
@@ -149,7 +151,9 @@ export class QuickSettingsPanel {
             translation_y: -8,
             duration: stretch(FADE_MS),
             mode: Clutter.AnimationMode.EASE_IN_CUBIC,
-            onComplete: done,
+            // Also when the fade is cut short: a stage-sized catcher left
+            // behind would take every click, on the lock screen too.
+            onStopped: done,
         });
     }
 
@@ -226,7 +230,7 @@ export class QuickSettingsPanel {
                     translation_x: -SLIDE * direction,
                     duration: stretch(FADE_MS),
                     mode: Clutter.AnimationMode.EASE_OUT_CUBIC,
-                    onComplete: finish,
+                    onStopped: finish,
                 });
             } else {
                 finish();
@@ -276,6 +280,10 @@ export class QuickSettingsPanel {
     }
 
     _pressOutside(event) {
+        if (!this.isOpen) {
+            this.actor.hide();
+            return Clutter.EVENT_PROPAGATE;
+        }
         const target = global.stage.get_event_actor(event);
         if (target && this._card.contains(target))
             return Clutter.EVENT_PROPAGATE;

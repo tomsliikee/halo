@@ -219,8 +219,10 @@ export default class HaloExtension extends Extension {
     _lockChanged() {
         const locked = Main.sessionMode.isLocked;
         this._island?.setLocked(locked);
-        if (locked)
+        if (locked) {
             this._center?.close({animated: false});
+            this._qs?.close({animated: false});
+        }
     }
 
     // The clock opens Halo's center, or GNOME's date menu while it is off.

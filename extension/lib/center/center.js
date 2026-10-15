@@ -174,10 +174,15 @@ export class CenterPanel {
             this.actor.hide();
             return;
         }
+        // Hidden even when the fade is cut short: a stage-sized catcher left
+        // behind would take every click, on the lock screen too.
         this._card.ease({
             opacity: 0, scale_x: 0.95, scale_y: 0.95, translation_y: -8,
             duration: stretch(FADE_MS), mode: Clutter.AnimationMode.EASE_IN_CUBIC,
-            onComplete: () => this.actor.hide(),
+            onStopped: () => {
+                if (!this.isOpen)
+                    this.actor.hide();
+            },
         });
     }
 
@@ -201,6 +206,10 @@ export class CenterPanel {
     }
 
     _pressOutside(event) {
+        if (!this.isOpen) {
+            this.actor.hide();
+            return Clutter.EVENT_PROPAGATE;
+        }
         const target = global.stage.get_event_actor(event);
         if (target && this._card.contains(target))
             return Clutter.EVENT_PROPAGATE;
