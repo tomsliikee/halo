@@ -7,6 +7,8 @@ import GLib from 'gi://GLib';
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
+import {mediaPeek} from '../words.js';
+
 const ID = 'media';
 // A paused player stays this long, so a quick pause does not jump around.
 const PAUSED_MS = 4000;
@@ -21,6 +23,20 @@ function coverIcon(url) {
     } catch {
         return null;
     }
+}
+
+// A scroll on the player: the volume a step up or down through GNOME's own
+// output slider, shown as the volume keys show it.
+const VOLUME_STEP = 0.05;
+function nudgeVolume(steps) {
+    const output = Main.panel.statusArea.quickSettings?._volumeOutput;
+    const slider = output?._output?.slider;
+    if (!slider)
+        return;
+    const max = slider.maximum_value ?? 1;
+    slider.value = Math.max(0, Math.min(max, slider.value + steps * VOLUME_STEP));
+    const icon = output._indicator?.gicon ?? new Gio.ThemedIcon({name: 'audio-volume-high-symbolic'});
+    Main.osdWindowManager.showAll(icon, null, slider.value, max);
 }
 
 export class MediaSource {
@@ -145,10 +161,12 @@ export class MediaSource {
                 length: this._length(),
                 canPrevious: player.canGoPrevious,
                 canNext: player.canGoNext,
+                peek: mediaPeek({app, position, length: this._length()}),
             },
             onPlay: () => player.playPause(),
             onPrevious: () => player.previous(),
             onNext: () => player.next(),
+            onScroll: steps => nudgeVolume(steps),
         });
     }
 

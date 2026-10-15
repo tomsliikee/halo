@@ -16,10 +16,12 @@ import {pressable} from '../shared/press.js';
 import {text} from '../shared/text.js';
 import {clockText, initials, isDecline, trackTime} from './words.js';
 
-const LEVEL_TRACK = 200;
+const LEVEL_TRACK = 240;
 // The large player's progress line, between its two times.
-const MEDIA_TRACK = 252;
-const WIDE = 400;
+const MEDIA_TRACK = 300;
+const WIDE = 460;
+// The bubble beside the island, for a second lasting thing.
+export const BUBBLE = 64;
 // The bars of a playing waveform, and how fast they move.
 const WAVE_BARS = 5;
 const WAVE_MS = 1100;
@@ -33,7 +35,7 @@ function box(styleClass, {vertical = false, expand = false, children = [], ...pa
 
 // A round (or rounded square) badge with an icon or an image in it.
 // tone: primary, soft, tertiary, good, alarm, dim.
-function badge(name, {tone = 'primary', square = false, size = 40, iconSize = 22, gicon = null, fill = true} = {}) {
+function badge(name, {tone = 'primary', square = false, size = 46, iconSize = 26, gicon = null, fill = true} = {}) {
     const child = gicon
         ? new St.Icon({gicon, icon_size: iconSize})
         : icon(name, {size: iconSize, fill});
@@ -44,7 +46,7 @@ function badge(name, {tone = 'primary', square = false, size = 40, iconSize = 22
     });
 }
 
-function round(name, onClick, {tone = 'primary', size = 44, iconSize = 22, square = false, accessibleName = ''} = {}) {
+function round(name, onClick, {tone = 'primary', size = 50, iconSize = 26, square = false, accessibleName = ''} = {}) {
     const button = badge(name, {tone, size, iconSize, square});
     button.accessible_name = accessibleName;
     pressable(button, () => onClick(), {focus: true});
@@ -170,11 +172,11 @@ function spinning(actor) {
 }
 
 // Rest: the date and the clock, where the bar's clock is.
-export function restView({date, time, unread, open}) {
+export function restView({date, time, unread}) {
     const dateLabel = text('bar-date', {styleClass: 'halo-island-dim', text: date});
     const timeLabel = text('bar-time', {styleClass: 'halo-island-text', text: time});
     const dot = new St.Widget({style_class: 'halo-island-unread', y_align: Clutter.ActorAlign.CENTER, visible: unread});
-    const actor = box(`halo-island-rest${open ? ' halo-island-open' : ''}`, {children: [dateLabel, timeLabel, dot]});
+    const actor = box('halo-island-rest', {children: [dateLabel, timeLabel, dot]});
     return {
         actor,
         update(state) {
@@ -185,10 +187,32 @@ export function restView({date, time, unread, open}) {
     };
 }
 
+// The hover preview: a small look with one more line below it, for what
+// the small island leaves out. view: a built view; the line is data.peek.
+export function withPeek(view, activity) {
+    const line = text('island-small', {styleClass: 'halo-island-dim halo-island-peek', text: activity.data.peek ?? ''});
+    const actor = box('halo-island-peeking', {vertical: true, children: [view.actor, line]});
+    return {
+        actor,
+        update(next) {
+            view.update?.(next);
+            line.text = next.data.peek ?? '';
+        },
+    };
+}
+
+// While the center is open the clock has become it: a small circle with a
+// pencil stays in its place and leads to the island's settings.
+export function editView() {
+    const glyph = icon('edit', {size: 18, styleClass: 'halo-island-text'});
+    glyph.set({x_align: Clutter.ActorAlign.CENTER, y_align: Clutter.ActorAlign.CENTER, x_expand: true, y_expand: true});
+    return {actor: new St.Bin({style_class: 'halo-island-edit', child: glyph, accessible_name: 'Island settings'})};
+}
+
 // Volume, brightness: an icon, the level as a bar and in percent.
 export function levelView(activity) {
     const {data} = activity;
-    const glyph = badge(data.icon, {tone: data.muted ? 'alarm' : 'primary', iconSize: 22});
+    const glyph = badge(data.icon, {tone: data.muted ? 'alarm' : 'primary', iconSize: 26});
     const track = new St.Widget({style_class: 'halo-island-track', width: LEVEL_TRACK, y_align: Clutter.ActorAlign.CENTER});
     const fill = new St.Widget({style_class: 'halo-island-fill'});
     track.add_child(fill);
@@ -216,7 +240,7 @@ export function levelView(activity) {
 
 // Muted: one red symbol on its own, as the design draws it.
 export function symbolView(activity) {
-    const actor = box('halo-island-symbol', {children: [icon(activity.data.icon, {size: 24, fill: true, styleClass: 'halo-island-alarm-text'})]});
+    const actor = box('halo-island-symbol', {children: [icon(activity.data.icon, {size: 28, fill: true, styleClass: 'halo-island-alarm-text'})]});
     return {
         actor,
         update(next) {
@@ -232,8 +256,8 @@ export function infoView(activity) {
     const {data} = activity;
     const leadFor = d => {
         const lead = d.picture
-            ? picture(d.picture, d.icon ?? 'screenshot-region', {size: 40, radius: 10})
-            : badge(d.icon, {tone: d.tone ?? 'primary', square: d.square, gicon: d.gicon ?? null, iconSize: d.gicon ? 24 : 22});
+            ? picture(d.picture, d.icon ?? 'screenshot-region', {size: 46, radius: 12})
+            : badge(d.icon, {tone: d.tone ?? 'primary', square: d.square, gicon: d.gicon ?? null, iconSize: d.gicon ? 28 : 26});
         if (d.spin)
             spinning(lead.child);
         return lead;
@@ -295,7 +319,7 @@ export function recordingView(activity) {
     const dot = new St.Widget({style_class: 'halo-island-rec-dot', y_align: Clutter.ActorAlign.CENTER});
     const label = text('island-title', {styleClass: 'halo-island-text', text: 'Recording', expand: true});
     const time = text('island-metric', {styleClass: 'halo-island-text', text: activity.data.text});
-    const stop = round('stop', () => activity.onStop(), {tone: 'alarm', size: 36, iconSize: 20, square: true, accessibleName: 'Stop recording'});
+    const stop = round('stop', () => activity.onStop(), {tone: 'alarm', size: 42, iconSize: 24, square: true, accessibleName: 'Stop recording'});
     const actor = box('halo-island-recording', {children: [dot, label, time, stop]});
     return {
         actor,
@@ -309,12 +333,12 @@ export function recordingView(activity) {
 // data: {title, note, cover, playing}; activity.onPlay()
 export function mediaCompactView(activity) {
     const {data} = activity;
-    const cover = picture(data.cover, 'album', {size: 44, radius: 12});
+    const cover = picture(data.cover, 'album', {size: 50, radius: 14});
     const {column, titleLabel, noteLabel} = titleAndNote(data.title, data.note);
     column.width = 180;
     const wave = waveform();
     wave.setPlaying(data.playing);
-    const play = round(data.playing ? 'pause' : 'play-arrow', () => activity.onPlay(), {square: true, size: 44, accessibleName: 'Play or pause'});
+    const play = round(data.playing ? 'pause' : 'play-arrow', () => activity.onPlay(), {square: true, size: 50, accessibleName: 'Play or pause'});
     const actor = box('halo-island-media', {children: [cover, column, wave.actor, play]});
     return {
         actor,
@@ -331,7 +355,7 @@ export function mediaCompactView(activity) {
 // data: {title, note, cover, playing, position, length, canPrevious, canNext}
 export function mediaLargeView(activity) {
     const {data} = activity;
-    const cover = picture(data.cover, 'album', {size: 80, radius: 20});
+    const cover = picture(data.cover, 'album', {size: 92, radius: 22});
     const {column, titleLabel, noteLabel} = titleAndNote(data.title, data.note, {titleRole: 'island-headline'});
     const head = box('halo-island-media-head', {children: [cover, column]});
 
@@ -342,10 +366,10 @@ export function mediaLargeView(activity) {
     track.add_child(fill);
     const progress = box('halo-island-progress', {children: [at, track, length]});
 
-    const previous = round('skip-previous', () => activity.onPrevious(), {tone: 'plain', size: 44, accessibleName: 'Previous'});
-    const play = round(data.playing ? 'pause' : 'play-arrow', () => activity.onPlay(), {square: true, size: 56, iconSize: 26, accessibleName: 'Play or pause'});
+    const previous = round('skip-previous', () => activity.onPrevious(), {tone: 'plain', size: 50, accessibleName: 'Previous'});
+    const play = round(data.playing ? 'pause' : 'play-arrow', () => activity.onPlay(), {square: true, size: 64, iconSize: 30, accessibleName: 'Play or pause'});
     play.width = 72;
-    const next = round('skip-next', () => activity.onNext(), {tone: 'plain', size: 44, accessibleName: 'Next'});
+    const next = round('skip-next', () => activity.onNext(), {tone: 'plain', size: 50, accessibleName: 'Next'});
     const controls = box('halo-island-controls', {children: [previous, play, next], x_align: Clutter.ActorAlign.CENTER});
 
     const actor = box('halo-island-large', {vertical: true, children: [head, progress, controls], width: WIDE});
@@ -376,8 +400,8 @@ export function mediaLargeView(activity) {
 export function notificationView(activity) {
     const {data} = activity;
     const lead = data.gicon
-        ? picture(data.gicon, 'notifications', {size: 44, radius: 14})
-        : badge('notifications', {tone: 'tertiary', square: true, size: 44, iconSize: 22, gicon: data.appIcon});
+        ? picture(data.gicon, 'notifications', {size: 50, radius: 16})
+        : badge('notifications', {tone: 'tertiary', square: true, size: 50, iconSize: 26, gicon: data.appIcon});
     lead.y_align = Clutter.ActorAlign.START;
     const header = text('island-small', {styleClass: 'halo-island-dim', ellipsize: true, text: [data.app, data.when].filter(Boolean).join(' · ')});
     const title = text('island-title', {styleClass: 'halo-island-text', ellipsize: true, text: data.title});
@@ -410,8 +434,8 @@ export function notificationView(activity) {
 export function callView(activity) {
     const {data} = activity;
     const avatar = data.gicon
-        ? picture(data.gicon, 'person', {size: 56, radius: 28})
-        : new St.Bin({style_class: 'halo-island-avatar', width: 56, height: 56, child: text('island-avatar', {text: initials(data.name)})});
+        ? picture(data.gicon, 'person', {size: 64, radius: 32})
+        : new St.Bin({style_class: 'halo-island-avatar', width: 64, height: 64, child: text('island-avatar', {text: initials(data.name)})});
     const {column} = titleAndNote(data.note, null, {titleRole: 'island-small'});
     const name = text('island-headline', {styleClass: 'halo-island-text', ellipsize: true, text: data.name});
     column.add_child(name);
@@ -420,7 +444,7 @@ export function callView(activity) {
     for (const action of data.actions.slice(0, 2)) {
         const decline = isDecline(action.label);
         buttons.push(round(decline ? 'call-end' : data.video ? 'videocam' : 'call', () => activity.onAction(action),
-            {tone: decline ? 'alarm' : 'go', size: 52, iconSize: 24, accessibleName: action.label}));
+            {tone: decline ? 'alarm' : 'go', size: 58, iconSize: 28, accessibleName: action.label}));
     }
     // Decline on the left of answer, as in the design.
     buttons.sort((a, b) => Number(!isDecline(a.accessible_name)) - Number(!isDecline(b.accessible_name)));
@@ -439,7 +463,7 @@ export function bubbleView(activity) {
         child = wave.actor;
         update = next => wave.setPlaying(next.data.playing);
     } else if (kind === 'timer') {
-        const dial = ring('timer', {size: 34});
+        const dial = ring('timer', {size: 40});
         dial.set(activity.data.progress);
         child = dial.actor;
         update = next => dial.set(next.data.progress);
@@ -447,13 +471,13 @@ export function bubbleView(activity) {
         child = new St.Widget({style_class: 'halo-island-rec-dot', y_align: Clutter.ActorAlign.CENTER, x_align: Clutter.ActorAlign.CENTER});
     } else {
         const name = {call: 'call', claude: 'progress-activity', progress: 'download', privacy: activity.data?.icon ?? 'mic'}[kind] ?? 'more-horiz';
-        child = icon(name, {size: 22, fill: true, styleClass: `halo-island-${kind === 'call' ? 'good' : 'accent'}-text`});
+        child = icon(name, {size: 26, fill: true, styleClass: `halo-island-${kind === 'call' ? 'good' : 'accent'}-text`});
         if (kind === 'claude')
             spinning(child);
     }
     child.x_align = Clutter.ActorAlign.CENTER;
     child.y_align = Clutter.ActorAlign.CENTER;
-    const actor = new St.Bin({style_class: 'halo-island-bubble', child, width: 56, height: 56});
+    const actor = new St.Bin({style_class: 'halo-island-bubble', child, width: BUBBLE, height: BUBBLE});
     return {actor, update};
 }
 

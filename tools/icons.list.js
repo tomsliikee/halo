@@ -17,7 +17,7 @@ export const ICONS = [
     // Places and actions
     'grid_view', 'apps', 'settings', 'power_settings_new', 'restart_alt', 'logout', 'screenshot_region',
     'screenshot_monitor', 'content_copy', 'download', 'upload', 'sync', 'close', 'add', 'check', 'check_circle',
-    'chevron_right', 'chevron_left', 'keyboard_arrow_down', 'keyboard_arrow_up', 'arrow_back', 'more_horiz', 'drag_indicator',
+    'edit', 'chevron_right', 'chevron_left', 'keyboard_arrow_down', 'keyboard_arrow_up', 'arrow_back', 'more_horiz', 'drag_indicator',
     'visibility', 'visibility_off', 'warning', 'info', 'tune', 'schedule', 'timer', 'pause', 'play_arrow',
     'skip_previous', 'skip_next', 'graphic_eq', 'music_note', 'album', 'call', 'call_end', 'chat', 'mail',
     'folder', 'install_desktop', 'speed', 'balance', 'energy_savings_leaf', 'eco', 'public', 'location_on',

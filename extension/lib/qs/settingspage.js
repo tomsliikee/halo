@@ -4,6 +4,7 @@
 // when another extension changes the same top bar.
 
 import Clutter from 'gi://Clutter';
+import GLib from 'gi://GLib';
 import St from 'gi://St';
 
 import {spring, SPRINGS} from '../shared/choreo.js';
@@ -48,6 +49,10 @@ function timeOf(minutes) {
     return `${String(Math.floor(total / 60)).padStart(2, '0')}:${String(total % 60).padStart(2, '0')}`;
 }
 
+// How long the page keeps scrolling to a section asked for while it is
+// being laid out.
+const JUMP_MS = 1500;
+
 function card(title) {
     const box = column('halo-qs-card halo-qs-settings-card');
     if (title)
@@ -56,7 +61,9 @@ function card(title) {
 }
 
 export class SettingsPage extends Page {
-    constructor(ctx) {
+    // section: 'island' scrolls to what opens the island, for the island's
+    // pencil circle.
+    constructor(ctx, section = null) {
         super(ctx, 'Halo');
         this._switches = [];
         this._segments = [];
@@ -91,6 +98,8 @@ export class SettingsPage extends Page {
             bar.add_child(this._switchRow(title, note, s => s[key], on => ctx.settings.set(key, on)));
 
         const island = this.add(card('What opens the island'));
+        this._jumpTo = section === 'island' ? island : null;
+        this._jumpEnd = 0;
         for (const name of ISLAND_EVENTS) {
             island.add_child(this._switchRow(EVENT_NAMES[name], '', s => s.islandEvents[name],
                 on => ctx.settings.set('islandEvents', {...ctx.settings.current.islandEvents, [name]: on}), {compact: true}));
@@ -122,6 +131,29 @@ export class SettingsPage extends Page {
         this._buildTiles();
         this._updateWarning();
         this.settingsChanged({animated: false});
+    }
+
+    // Shown in the panel: scrolls to the section asked for, once it has
+    // its place.
+    shown() {
+        const target = this._jumpTo;
+        this._jumpTo = null;
+        if (!target)
+            return;
+        // The page gets its length while the panel fits it, over a few
+        // frames; for a moment every new length scrolls it again.
+        const adjustment = this.actor.vadjustment;
+        const jump = () => {
+            const y = target.get_allocation_box().y1 - 8;
+            adjustment.value = Math.max(0, Math.min(y, adjustment.upper - adjustment.page_size));
+        };
+        const changed = adjustment.connect('changed', jump);
+        this._jumpEnd = GLib.timeout_add(GLib.PRIORITY_DEFAULT, JUMP_MS, () => {
+            adjustment.disconnect(changed);
+            this._jumpEnd = 0;
+            return GLib.SOURCE_REMOVE;
+        });
+        this._jumpStop = () => adjustment.disconnect(changed);
     }
 
     settingsChanged({animated = true} = {}) {
@@ -327,6 +359,10 @@ export class SettingsPage extends Page {
     }
 
     _destroy() {
+        if (this._jumpEnd) {
+            GLib.source_remove(this._jumpEnd);
+            this._jumpStop();
+        }
         this.ctx.appearance.disconnectObject(this);
         this.ctx.conflicts.disconnectObject(this);
         this.ctx.tiles.disconnectObject(this);

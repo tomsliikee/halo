@@ -6,7 +6,8 @@
 //
 // An activity: {id, kind, hint, duration (ms, hints only), view (a builder
 // of views.js), large (the builder of its opened look), data, and what a
-// click does: onClick, onStop, onPlay, onPrevious, onNext, onAction}.
+// click does: onClick, onStop, onPlay, onPrevious, onNext, onAction; and
+// onScroll(steps) for a scroll up (+) or down (-) on it}.
 
 import Clutter from 'gi://Clutter';
 import GLib from 'gi://GLib';
@@ -14,10 +15,10 @@ import GLib from 'gi://GLib';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
 import {expressive, spring, SPRINGS, stretch} from '../shared/choreo.js';
-import {palette} from '../shared/palettes.js';
+import {islandScheme, palette} from '../shared/palettes.js';
 import {setScheme} from '../shared/theme.js';
-import {pick, shownWhileLocked} from './rank.js';
-import {IslandShape} from './shape.js';
+import {accumulate, pick, scrollIntent, shownWhileLocked} from './rank.js';
+import {IslandShape, MAX_RADIUS} from './shape.js';
 import * as Views from './views.js';
 
 // A hint lasts this long unless it says otherwise.
@@ -25,7 +26,14 @@ export const HINT_MS = 2500;
 // A hint the pointer rests on stays; this often it looks again.
 const HOLD_MS = 600;
 const BUBBLE_GAP = 8;
-const BUBBLE = 56;
+// The height of a compact look, which the bubble centres on.
+const COMPACT = 64;
+// The pointer rests this long on a small look before it shows more.
+const PEEK_MS = 300;
+// After a swap, a swipe's remaining motion does not swap back.
+const SWAP_PAUSE_MS = 450;
+// The pencil circle while the center is open.
+const EDIT = 36;
 // Below the bar, where the island hangs when there is no clock to grow from.
 const FALLBACK_TOP = 8;
 
@@ -43,17 +51,20 @@ const BUILDERS = {
 
 export class Island {
     // anchor(): {x (centre), y (top), width, height, visible} of the clock
-    // the island rests on; onClock(): the resting island was clicked.
-    constructor({theme, settings, anchor, onClock}) {
+    // the island rests on; onClock(): the resting clock was clicked;
+    // onSettings(): the pencil circle was, while the center is open.
+    constructor({theme, settings, anchor, onClock, onSettings}) {
         this._theme = theme;
         this._settings = settings;
         this._anchor = anchor;
         this._onClock = onClock;
+        this._onSettings = onSettings;
         this._activities = new Map();
         this._dismissed = new Set();
         this._focus = null;
         this._expanded = null;
         this._shown = null;
+        this._fill = '#000000';
         this._bubbleShown = null;
         this._view = null;
         this._bubbleView = null;
@@ -81,7 +92,13 @@ export class Island {
                 return Clutter.EVENT_STOP;
             });
             shape.connect('notify::hover', () => this._holdChanged());
+            shape.connect('scroll-event', (_actor, event) => this._scrolled(event));
         }
+        this._scrollSum = {x: 0, y: 0};
+        this._swappedAt = 0;
+        this._peek = null;
+        this._peekWait = 0;
+        this._shape.connect('notify::hover', () => this._peekChanged());
         this._shape.set_pivot_point(0.5, 0);
         // At shutdown the stage may go before Halo is disabled.
         this._gone = false;
@@ -157,6 +174,47 @@ export class Island {
             this._render();
     }
 
+    // The resting clock as the center grows out of it and back:
+    // {x, y, width, height, radius, color} on the stage, or null where the
+    // island has no clock.
+    restShape() {
+        if (this._gone)
+            return null;
+        const place = this._place();
+        if (!place.visible || !place.width)
+            return null;
+        return {
+            x: place.x - place.width / 2, y: place.y, width: place.width, height: place.height,
+            radius: Math.min(place.height / 2, MAX_RADIUS), color: this._fill,
+        };
+    }
+
+    // A press that a panel's grab took, at the island's place: the island
+    // handles it as its own click (the pencil circle, an event shown while
+    // the center is open). Returns whether it was on the island.
+    pressAt(event) {
+        if (this._gone)
+            return false;
+        const [x, y] = event.get_coords();
+        for (const shape of [this._shape, this._bubble]) {
+            if (!shape.visible)
+                continue;
+            const [sx, sy] = shape.get_transformed_position();
+            const [w, h] = shape.get_transformed_size();
+            if (x >= sx && x < sx + w && y >= sy && y < sy + h) {
+                this._clicked(shape, event.get_button());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // The size of the resting island: the clock's, or the pencil circle's
+    // while the center is open.
+    _restSize(place) {
+        return this._rest.open ? {width: EDIT, height: EDIT} : {width: place.width, height: place.height};
+    }
+
     // The anchor moved: the bar relaid out, came or went. The island goes
     // with it at once; only a resting island changes its size.
     relayout() {
@@ -168,13 +226,17 @@ export class Island {
             return;
         this._shape.visible = place.visible;
         this._shape.reactive = place.visible;
-        if (place.width && (this._shape.boxWidth !== place.width || this._shape.boxHeight !== place.height)) {
-            this._view?.actor.set_size(place.width, place.height);
-            this._shape.resize(place.width, place.height, {animate: false});
+        const {width, height} = this._restSize(place);
+        if (width && (this._shape.boxWidth !== width || this._shape.boxHeight !== height)) {
+            this._view?.actor.set_size(width, height);
+            this._shape.resize(width, height, {animate: false});
         }
     }
 
     destroy() {
+        if (this._peekWait)
+            GLib.source_remove(this._peekWait);
+        this._peekWait = 0;
         if (this._expiry)
             GLib.source_remove(this._expiry);
         this._expiry = 0;
@@ -194,8 +256,10 @@ export class Island {
     _paint() {
         if (this._gone)
             return;
-        const key = `${this._theme.colour}-dark`;
-        const color = palette(this._theme.colour, 'dark').highest;
+        const scheme = islandScheme(this._theme.scheme);
+        const key = `${this._theme.colour}-${scheme}`;
+        const color = palette(this._theme.colour, scheme).islandFill;
+        this._fill = color;
         for (const shape of [this._shape, this._bubble]) {
             setScheme(shape, key);
             shape.setColor(color);
@@ -224,27 +288,29 @@ export class Island {
         this._shape.setAnchor(place.x, place.y);
 
         if (!main) {
-            // Resting: the clock, or nothing where there is no clock.
+            // Resting: the clock, the pencil circle while the clock has
+            // become the center, or nothing where there is no clock.
             this._expanded = null;
-            if (this._shown !== null || !this._view) {
+            const key = this._rest.open ? 'edit' : 'rest';
+            const {width, height} = this._restSize(place);
+            if (this._shown !== null || !this._view || this._viewKey !== key) {
                 this._shown = null;
-                this._viewKey = 'rest';
-                this._view = Views.restView(this._rest);
-                this._shape.setContent(this._view.actor, {width: place.width, height: place.height, animate});
+                this._viewKey = key;
+                this._view = key === 'edit' ? Views.editView() : Views.restView(this._rest);
+                this._shape.setContent(this._view.actor, {width, height, animate});
             } else {
                 this._view.update?.(this._rest);
-                this._view.actor.remove_style_class_name('halo-island-open');
-                if (this._rest.open)
-                    this._view.actor.add_style_class_name('halo-island-open');
-                if (place.width && (this._shape.boxWidth !== place.width || this._shape.boxHeight !== place.height)) {
-                    this._view.actor.set_size(place.width, place.height);
-                    this._shape.resize(place.width, place.height, {animate});
+                if (width && (this._shape.boxWidth !== width || this._shape.boxHeight !== height)) {
+                    this._view.actor.set_size(width, height);
+                    this._shape.resize(width, height, {animate});
                 }
             }
             this._shape.visible = place.visible;
             this._shape.reactive = place.visible;
         } else {
-            const key = this._expanded === main.id && main.large ? main.large : main.view;
+            const base = this._expanded === main.id && main.large ? main.large : main.view;
+            const peeking = this._peek === main.id && base === main.view && Boolean(main.data?.peek) && !this._locked;
+            const key = peeking ? `${base}+peek` : base;
             this._shape.visible = true;
             this._shape.reactive = true;
             if (this._shown === main.id && this._viewKey === key && this._view?.update) {
@@ -253,7 +319,7 @@ export class Island {
             } else {
                 this._shown = main.id;
                 this._viewKey = key;
-                this._view = BUILDERS[key](main);
+                this._view = peeking ? Views.withPeek(BUILDERS[base](main), main) : BUILDERS[base](main);
                 this._shape.setContent(this._view.actor, {animate});
             }
         }
@@ -289,7 +355,7 @@ export class Island {
         this._bubbleShown = bubble.id;
         this._bubbleView = Views.bubbleView(bubble);
         shape.show();
-        shape.setContent(this._bubbleView.actor, {width: BUBBLE, height: BUBBLE, animate: !first});
+        shape.setContent(this._bubbleView.actor, {width: Views.BUBBLE, height: Views.BUBBLE, animate: !first});
         this._placeBubble();
         if (first) {
             if (expressive()) {
@@ -308,8 +374,8 @@ export class Island {
         if (this._gone)
             return;
         const main = this._shape;
-        const top = main.y + Math.max(0, Math.min(main.boxHeight, 56) - BUBBLE) / 2;
-        this._bubble.setAnchor(main.x + main.boxWidth + BUBBLE_GAP + BUBBLE / 2, top);
+        const top = main.y + Math.max(0, Math.min(main.boxHeight, COMPACT) - Views.BUBBLE) / 2;
+        this._bubble.setAnchor(main.x + main.boxWidth + BUBBLE_GAP + Views.BUBBLE / 2, top);
     }
 
     _clicked(shape, button) {
@@ -329,7 +395,10 @@ export class Island {
         if (button !== Clutter.BUTTON_PRIMARY)
             return;
         if (!main) {
-            this._onClock?.();
+            if (this._rest.open)
+                this._onSettings?.();
+            else
+                this._onClock?.();
             return;
         }
         if (main.large && this._expanded !== main.id) {
@@ -349,6 +418,59 @@ export class Island {
         }
     }
 
+    // A scroll or a touchpad swipe: sideways swaps what shows with the
+    // bubble; up and down go to what shows (activity.onScroll(steps)).
+    _scrolled(event) {
+        const {main, bubble} = this._pick();
+        if (!main)
+            return Clutter.EVENT_PROPAGATE;
+        // A wheel click comes twice, once as a step and once as an
+        // emulated smooth scroll; the step counts.
+        if (event.is_pointer_emulated())
+            return Clutter.EVENT_STOP;
+        if (event.is_scroll_stop?.()) {
+            this._scrollSum = {x: 0, y: 0};
+            return Clutter.EVENT_STOP;
+        }
+        let dx = 0;
+        let dy = 0;
+        switch (event.get_scroll_direction()) {
+        case Clutter.ScrollDirection.SMOOTH:
+            [dx, dy] = event.get_scroll_delta();
+            break;
+        case Clutter.ScrollDirection.UP:
+            dy = -1;
+            break;
+        case Clutter.ScrollDirection.DOWN:
+            dy = 1;
+            break;
+        case Clutter.ScrollDirection.LEFT:
+            dx = -1;
+            break;
+        case Clutter.ScrollDirection.RIGHT:
+            dx = 1;
+            break;
+        }
+        const shift = (event.get_state() & Clutter.ModifierType.SHIFT_MASK) !== 0;
+        const {axis, amount} = scrollIntent(dx, dy, shift);
+        const {sum, steps} = accumulate(this._scrollSum[axis], amount);
+        this._scrollSum[axis] = sum;
+        if (steps === 0)
+            return Clutter.EVENT_STOP;
+        if (axis === 'x') {
+            const now = GLib.get_monotonic_time() / 1000;
+            if (bubble && now - this._swappedAt > SWAP_PAUSE_MS) {
+                this._swappedAt = now;
+                this._scrollSum.x = 0;
+                this._focus = bubble.id;
+                this._render();
+            }
+        } else {
+            main.onScroll?.(steps);
+        }
+        return Clutter.EVENT_STOP;
+    }
+
     // A right click: an open island closes to its small look, a small one
     // gives way to what comes next.
     _collapse(main) {
@@ -366,6 +488,32 @@ export class Island {
         }
         this._render();
         this._scheduleExpiry();
+    }
+
+    // The pointer came onto the island or left it: after a moment a small
+    // look shows its preview line; leaving takes it away.
+    _peekChanged() {
+        if (this._peekWait)
+            GLib.source_remove(this._peekWait);
+        this._peekWait = 0;
+        if (this._gone)
+            return;
+        if (!this._shape.hover) {
+            if (this._peek !== null) {
+                this._peek = null;
+                this._render();
+            }
+            return;
+        }
+        this._peekWait = GLib.timeout_add(GLib.PRIORITY_DEFAULT, PEEK_MS, () => {
+            this._peekWait = 0;
+            const {main} = this._pick();
+            if (main && this._shape.hover && !this._gone) {
+                this._peek = main.id;
+                this._render();
+            }
+            return GLib.SOURCE_REMOVE;
+        });
     }
 
     _holdChanged() {

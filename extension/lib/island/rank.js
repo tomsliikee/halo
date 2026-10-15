@@ -47,3 +47,24 @@ export function shownWhileLocked(activities, locked) {
         return activities;
     return activities.filter(activity => activity.lockSafe || !PRIVATE_KINDS.has(activity.kind));
 }
+
+// What a scroll on the island means: sideways (a touchpad swipe, a tilted
+// wheel, or the wheel with Shift) swaps what shows with the bubble; up and
+// down change what shows (louder, a minute more). dx, dy as Clutter gives
+// them: a wheel click is 1, a touchpad moves in fractions; down is +y.
+// Returns {axis: 'x' | 'y', amount}, amount positive for right and up.
+export function scrollIntent(dx, dy, shift = false) {
+    if (shift)
+        return {axis: 'x', amount: dx || dy};
+    if (Math.abs(dx) > Math.abs(dy))
+        return {axis: 'x', amount: dx};
+    return {axis: 'y', amount: -dy};
+}
+
+// A touchpad's fractions added up to whole steps: {sum, steps} after
+// adding `amount` to what was left over.
+export function accumulate(sum, amount) {
+    const total = sum + amount;
+    const steps = Math.trunc(total);
+    return {sum: total - steps, steps};
+}

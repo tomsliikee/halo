@@ -42,16 +42,16 @@ export const ROLES = {
     'qs-link': {size: 14, weight: 700, width: 100},
     'qs-big': {size: 30, weight: 800, width: 112, tabular: true},
     // The island
-    'island-headline': {size: 18, weight: 800, width: 106},
-    'island-title': {size: 15, weight: 800, width: 104},
-    'island-note': {size: 12, weight: 450, width: 100},
-    'island-body': {size: 14, weight: 450, width: 100},
-    'island-label': {size: 14, weight: 550, width: 100},
-    'island-small': {size: 12, weight: 500, width: 100},
-    'island-action': {size: 14, weight: 750, width: 104},
-    'island-metric': {size: 20, weight: 800, width: 112, tabular: true},
-    'island-big': {size: 26, weight: 800, width: 112, tabular: true},
-    'island-avatar': {size: 20, weight: 800, width: 106},
+    'island-headline': {size: 20, weight: 800, width: 106},
+    'island-title': {size: 17, weight: 800, width: 104},
+    'island-note': {size: 13, weight: 450, width: 100},
+    'island-body': {size: 15, weight: 450, width: 100},
+    'island-label': {size: 16, weight: 550, width: 100},
+    'island-small': {size: 13, weight: 500, width: 100},
+    'island-action': {size: 15, weight: 750, width: 104},
+    'island-metric': {size: 23, weight: 800, width: 112, tabular: true},
+    'island-big': {size: 30, weight: 800, width: 112, tabular: true},
+    'island-avatar': {size: 22, weight: 800, width: 106},
 };
 
 // The font description of a role; size is in pixels, scaled by the role

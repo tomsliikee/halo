@@ -5,7 +5,7 @@ import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 
 import {crossed, readLimits} from '../limits.js';
-import {claudeNote, limitNote, limitTitle} from '../words.js';
+import {claudeNote, claudePeek, limitNote, limitTitle} from '../words.js';
 
 const EMBER = 'io.github.tomsliikee.Ember';
 const EMBER_PATH = '/io/github/tomsliikee/Ember';
@@ -114,6 +114,7 @@ export class ClaudeSource {
                 icon: 'progress-activity', tone: 'soft', spin: true,
                 title: working.length > 1 ? `Claude · ${working.length} sessions` : 'Claude is working',
                 note: claudeNote(first, Date.now()),
+                peek: claudePeek(working),
             },
         });
         if (!this._tick) {

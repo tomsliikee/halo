@@ -199,6 +199,8 @@ export default class HaloExtension extends Extension {
                 const anchor = this._islandAnchor();
                 return {x: anchor?.x ?? Main.layoutManager.primaryMonitor.x + Main.layoutManager.primaryMonitor.width / 2, top: this._panelTop()};
             },
+            clock: () => this._island?.restShape() ?? null,
+            pressIsland: event => this._island?.pressAt(event) ?? false,
         }, open => this._bars?.setOpen('clock', open));
         this._centerTakeover = new CenterTakeover(this._center);
     }
@@ -249,6 +251,10 @@ export default class HaloExtension extends Extension {
             settings: this._settings,
             anchor: () => this._islandAnchor(),
             onClock: () => this._toggleCenter(this._bars?.primary?.clockPill ?? null),
+            onSettings: () => {
+                this._center?.close();
+                this._openQuickSettings('settings', 'island');
+            },
         });
         const island = this._island;
         island.setLocked(Main.sessionMode.isLocked);
@@ -330,11 +336,11 @@ export default class HaloExtension extends Extension {
     }
 
     // Opens Halo's quick settings on one of its pages.
-    _openQuickSettings(page) {
+    _openQuickSettings(page, payload) {
         if (!this._qs)
             return;
         this._qs.open(this._bars?.primary?.statusPill ?? null);
-        this._qs.navigate(page);
+        this._qs.navigate(page, payload);
     }
 
     // Where a panel below the bar starts on the main monitor.

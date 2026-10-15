@@ -436,6 +436,10 @@
     box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
 }
 
+.halo-center-morph {
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+}
+
 .halo-center-left {
     spacing: 10px;
 }
@@ -622,42 +626,51 @@
     spacing: 8px;
 }
 
+.halo-island-peek {
+    padding: 0 26px 14px 26px;
+}
+
+.halo-island-edit {
+    width: 36px;
+    height: 36px;
+}
+
 .halo-island-level,
 .halo-island-info,
 .halo-island-timer,
 .halo-island-media,
 .halo-island-recording {
-    height: 56px;
-    padding: 0 20px 0 8px;
-    spacing: 14px;
+    height: 64px;
+    padding: 0 24px 0 9px;
+    spacing: 16px;
 }
 
 .halo-island-info,
 .halo-island-timer {
-    min-width: 300px;
+    min-width: 360px;
 }
 
 .halo-island-timer {
-    padding: 0 22px 0 8px;
-    spacing: 14px;
+    padding: 0 26px 0 9px;
+    spacing: 16px;
 }
 
 .halo-island-media {
-    padding: 0 6px 0 6px;
+    padding: 0 7px 0 7px;
 }
 
 .halo-island-recording {
-    padding: 0 10px 0 22px;
-    spacing: 14px;
+    padding: 0 11px 0 26px;
+    spacing: 16px;
 }
 
 .halo-island-symbol {
-    width: 56px;
-    height: 56px;
+    width: 64px;
+    height: 64px;
 }
 
 .halo-island-symbol > * {
-    margin: 16px;
+    margin: 18px;
 }
 
 .halo-island-column {
@@ -714,8 +727,8 @@
 }
 
 .halo-island-large {
-    padding: 22px 24px 20px 24px;
-    spacing: 14px;
+    padding: 24px 26px 22px 26px;
+    spacing: 16px;
 }
 
 .halo-island-media-head {
@@ -743,9 +756,9 @@
 }
 
 .halo-island-action {
-    height: 40px;
-    padding: 0 18px;
-    border-radius: 20px;
+    height: 44px;
+    padding: 0 20px;
+    border-radius: 22px;
     border-width: 1px;
 }
 
@@ -755,7 +768,7 @@
 }
 
 .halo-island-avatar {
-    border-radius: 28px;
+    border-radius: 32px;
 }
 
 .halo-island-bubble {
@@ -1168,7 +1181,8 @@
 }
 
 
-/* The island: always on its dark surface, so these come from the dark scheme. */
+/* The island: on its own surface, the opposite of the desktop (white on a
+   dark desktop, black on a light one), so these come from the other scheme. */
 
 .halo-scheme .halo-island-text {
     color: $on;
@@ -1182,29 +1196,19 @@
     background-color: $primary;
 }
 
-.halo-scheme .halo-island-open {
-    background-color: $primary;
-    border-radius: 18px;
-}
-
-.halo-scheme .halo-island-open .halo-island-text,
-.halo-scheme .halo-island-open .halo-island-dim {
-    color: $onPrimary;
-}
-
 .halo-scheme .halo-island-primary {
     background-color: $primary;
     color: $onPrimary;
 }
 
 .halo-scheme .halo-island-soft {
-    background-color: $onPc;
-    color: $pc;
+    background-color: $islandSoft;
+    color: $onIslandSoft;
 }
 
 .halo-scheme .halo-island-tertiary {
-    background-color: $onTc;
-    color: $tc;
+    background-color: $islandTertiary;
+    color: $onIslandTertiary;
 }
 
 .halo-scheme .halo-island-good {
@@ -1229,11 +1233,11 @@
 }
 
 .halo-scheme .halo-island-plain:hover {
-    background-color: $bright;
+    background-color: $islandHover;
 }
 
 .halo-scheme .halo-island-track {
-    background-color: $bright;
+    background-color: $islandTrack;
 }
 
 .halo-scheme .halo-island-fill {
@@ -1262,7 +1266,7 @@
 
 .halo-scheme .halo-island-ring {
     color: $primary;
-    background-color: $bright;
+    background-color: $islandTrack;
 }
 
 .halo-scheme .halo-island-ring-icon {
@@ -1279,7 +1283,7 @@
 }
 
 .halo-scheme .halo-island-action:hover {
-    background-color: $bright;
+    background-color: $islandHover;
 }
 
 .halo-scheme .halo-island-action.halo-island-action-main {
@@ -1289,12 +1293,12 @@
 }
 
 .halo-scheme .halo-island-avatar {
-    background-color: $onPc;
-    color: $pc;
+    background-color: $islandSoft;
+    color: $onIslandSoft;
 }
 
 .halo-scheme .halo-island-bubble {
-    background-color: $highest;
+    background-color: $islandFill;
 }
 
 

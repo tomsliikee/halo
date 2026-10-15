@@ -1,12 +1,12 @@
 import {crossed, readLimits} from '../extension/lib/island/limits.js';
-import {pick, shownWhileLocked} from '../extension/lib/island/rank.js';
+import {accumulate, pick, scrollIntent, shownWhileLocked} from '../extension/lib/island/rank.js';
 import {
-    claudeNote, clockText, copiedText, initials, isDecline, levelShare, limitNote, limitTitle, lockedNote, lowMark, osdIcon,
-    osdKind, plainText, soonText, trackTime,
+    claudeNote, claudePeek, clockText, copiedText, initials, isDecline, levelShare, limitNote, limitTitle, lockedNote, lowMark, osdIcon,
+    mediaPeek, osdKind, plainText, soonText, timerPeek, trackTime,
 } from '../extension/lib/island/words.js';
 import * as Pomodoro from '../extension/lib/shared/pomodoro.js';
 import * as Timer from '../extension/lib/shared/timer.js';
-import {isPaused, parseTimers, pausedNote, runningTimer} from '../extension/lib/shared/timers.js';
+import {MINUTE, isPaused, parseTimers, pausedNote, runningTimer, stretchTimer} from '../extension/lib/shared/timers.js';
 import {test, equal, done} from './harness.js';
 
 const ids = ({main, bubble}) => [main?.id ?? null, bubble?.id ?? null];
@@ -113,4 +113,35 @@ test('a paused timer is paused', () => {
     equal([isPaused(timers, 'timer'), pausedNote(timers), pausedNote({timer: null, stopwatch: null, pomodoro: null})], [true, 'Paused', 'Off']);
 });
 
+test('a wheel up is a step up, down a step down', () => equal(
+    [scrollIntent(0, -1), scrollIntent(0, 1)], [{axis: 'y', amount: 1}, {axis: 'y', amount: -1}]));
+test('sideways, or the wheel with Shift, swaps', () => equal(
+    [scrollIntent(-0.4, 0.1).axis, scrollIntent(0, 1, true)], ['x', {axis: 'x', amount: 1}]));
+test('touchpad fractions add up to whole steps', () => {
+    let state = {sum: 0, steps: 0};
+    const steps = [];
+    for (const amount of [0.4, 0.4, 0.4, -0.3, 1.5]) {
+        state = accumulate(state.sum, amount);
+        steps.push(state.steps);
+    }
+    equal(steps, [0, 0, 1, 0, 1]);
+});
+test('a scroll gives a countdown a minute more or less, never under a minute left', () => {
+    const running = Timer.start(Timer.create('timer', 10 * MINUTE), 0);
+    const now = 9.5 * MINUTE;
+    equal([
+        stretchTimer(running, 1, now).duration,
+        stretchTimer(running, -1, now).duration,
+        stretchTimer(Timer.create('timer', 5 * MINUTE), -2, 0).duration,
+        stretchTimer(Timer.create('stopwatch'), 1, 0).duration,
+    ], [11 * MINUTE, 10 * MINUTE, 3 * MINUTE, 0]);
+});
+test('the hover preview says a little more', () => equal([
+    mediaPeek({app: 'Spotify', position: 73e6, length: 189e6}),
+    mediaPeek({app: '', position: 0, length: 0}),
+    timerPeek(new Date(2026, 9, 15, 13, 5).getTime()),
+    timerPeek(new Date(2026, 9, 15, 13, 5).getTime(), true),
+    claudePeek([{project: 'halo'}, {project: 'ledge'}, {project: 'halo'}]),
+], ['Spotify · 1:13 of 3:09 · scroll for volume', 'scroll for volume',
+    'Ends at 13:05 · scroll for a minute more or less', 'Ends at 1:05 PM · scroll for a minute more or less', 'halo, ledge']));
 done('island');

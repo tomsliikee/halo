@@ -55,9 +55,15 @@ Each of the four parts can be switched off in Halo's settings. GNOME's own part 
 
 ## The Dynamic Island
 
-![The island's looks: volume, brightness, mute, charging, Do not disturb, a timer, a device, music small and large, a recording beside music, a notification and a call](readmestuff/island.png)
+![The island's looks, white on a dark desktop (left) and black on a light one (right): volume, charging, a timer, music small and large, a recording beside music, a notification and a call](readmestuff/island.png)
 
-The island rests on the clock. When something happens it grows out of it with a spring that overshoots a little; its content fades in without one. A click opens the large look, a right click closes it or sends the thing away, and the pointer on a short message holds it. When two lasting things run at once, the more important one takes the island and the other waits beside it as a small bubble; a click on the bubble swaps them.
+The island rests on the clock. It is always the opposite of the desktop: white on a dark desktop, black on a light one. When something happens it grows out of the clock to about twice its size with a spring that overshoots a little; its content fades in without one.
+
+- **Click:** Opens the large look. A right click closes it or sends the thing away.
+- **Hover:** The pointer on a short message holds it. Resting on a small look for a moment shows one more line: the player and the track's time, when the timer ends, which projects Claude works on, the app behind a download.
+- **Two at Once:** The more important lasting thing takes the island; the other waits beside it as a small bubble. A click on the bubble, a sideways touchpad swipe or Shift with the wheel swaps them.
+- **Scroll:** On music the wheel or two fingers change the volume; on a timer they add or take a minute.
+- **While the Center Is Open:** The clock has become the center, so the island rests as a small circle with a pencil, which opens the island's settings. An event grows out of that circle.
 
 | Event | Where it comes from | Kind |
 | :--- | :--- | :--- |
@@ -84,7 +90,7 @@ Lasting things in order: **call**, then **recording** and **privacy**, **timer**
 
 ![The center with a conversation opened, the month and today's events](readmestuff/center.png)
 
-A click on the clock or the resting island opens it; so does **Super + V**, GNOME's own shortcut, which then opens Halo's center instead of the date menu.
+A click on the clock opens it, and it grows out of the clock as the island does: the clock's shape springs into the card's, and the card's content fades in over it. Closing runs back into the clock. **Super + V**, GNOME's own shortcut, opens it too, instead of the date menu.
 
 - **Groups:** One card per app and conversation. A card with more messages opens with **N more**.
 - **Actions:** One action sits beside the text as a pill; more get a row below.
@@ -241,7 +247,7 @@ Colours come from **`extension/lib/shared/palettes.js`**: each style is Material
 | **Unit tests** | `for t in tests/*.test.js; do gjs -m "$t"; done` |
 | **Stylesheet** | `gjs -m tools/build-stylesheet.js` |
 | **Icons and symbols** | `gjs -m tools/build-icons.js`, `gjs -m tools/build-symbols.js` |
-| **Headless shell** | `tools/headless/run.sh <script> [seconds]` with a script from **`tools/headless/scripts`** (`bar`, `qs`, `island`, `center`, `lock`, `states`, `lifecycle`); screenshots land in **`$TMPDIR/halo-headless`** |
+| **Headless shell** | `tools/headless/run.sh <script> [seconds]` with a script from **`tools/headless/scripts`** (`bar`, `qs`, `island`, `center`, `morph`, `gestures`, `lock`, `lock-input`, `states`, `lifecycle`); screenshots land in **`$TMPDIR/halo-headless`** |
 | **Dark desktop** | `HALO_SCHEME=dark tools/headless/run.sh center` |
 | **Two monitors** | `HALO_MONITORS=2 tools/headless/run.sh lifecycle` |
 | **Beside other extensions** | `HALO_WITH="<uuid>=<path to its extension folder>" tools/headless/run.sh lifecycle` |
@@ -252,12 +258,14 @@ Colours come from **`extension/lib/shared/palettes.js`**: each style is Material
 
 | Area | Evidence |
 | :--- | :--- |
-| **Settings, layouts, ranking, words, calendar grid, grouping, swipe rule, palettes, springs, lock rules** | ***Tested:*** 133 unit tests. |
+| **Settings, layouts, ranking, words, calendar grid, grouping, swipe rule, palettes, springs, lock rules, the center's growth, scroll steps** | ***Tested:*** 146 unit tests. |
 | **Top bar in five layouts, options, two monitors, overview, fullscreen** | ***Tested*** in the headless shell (`bar`, `states`), light and dark. |
 | **Quick settings, every page, tiles of other extensions, drag to reorder, colour style written to the family** | ***Tested*** in the headless shell (`qs`, `siblings`) beside Harbor, Tally, Ember, Torch and Ledge. |
-| **Every island look, each brought about the way the system would** (OSD calls, the tray, a D-Bus call with category, the timer file, the battery) | ***Tested*** in the headless shell (`island`). |
+| **Every island look, each brought about the way the system would** (OSD calls, the tray, a D-Bus call with category, the timer file, the battery) | ***Tested*** in the headless shell (`island`), light and dark. |
+| **The center growing out of the clock and back, the pencil circle, an event while the center is open** | ***Tested*** in the headless shell (`morph`); the motion itself checked on frames held at points of the spring, as the headless screenshots are too slow to catch it. |
+| **Hover preview, wheel on the timer, a touchpad swipe swapping, the wheel on music** | ***Tested*** in the headless shell (`gestures`) with a virtual pointer; a real touchpad not yet. |
 | **Notification center: grouping, opening, swipe and spring back, Do not disturb, Super + V, another day, Clear all** | ***Tested*** in the headless shell (`center`) with a virtual pointer. |
-| **Lock screen** | ***Tested*** in the headless shell (`lock`): GNOME's screen shield locks and unlocks. |
+| **Lock screen** | ***Tested*** in the headless shell (`lock`, `lock-input`): GNOME's screen shield locks and unlocks, and a click reaches its password prompt after five ways of locking. |
 | **Switching parts off and on, enable and disable** | ***Tested:*** 10 cycles (`lifecycle`) beside five other extensions; GNOME's top bar, OSD, banners, date menu and quick settings come back. |
 | **A real session: real calls, real calendars, the live weather request, Clocks' world clocks, real Bluetooth and VPN, a real login on the lock screen, a touchpad** | ***Built.*** Not yet run outside the headless shell. |
 
@@ -268,6 +276,8 @@ Colours come from **`extension/lib/shared/palettes.js`**: each style is Material
 - **GNOME's models, Halo's drawing:** Wi-Fi, Bluetooth, sound and power come from GNOME's own quick settings objects; Halo draws them anew. NetworkManager and BlueZ are not spoken to twice.
 - **GNOME's panel is hidden, not destroyed:** other extensions keep adding their indicators to it, and Halo turns each into a tile.
 - **The island is the clock:** the clock steps back behind the island's resting pill, so there is one thing in the middle of the bar, not two.
+- **The island is the opposite of the desktop:** white on dark, black on light, so it stands out from the bar it sits in.
+- **The center grows out of the clock:** a separate shape springs from the clock's rectangle to the card's and takes the card's colour in the first third of the way, so no grey lies between a white island and a dark card.
 - **Shape springs, content fades:** an overshooting spring on opacity looked like flicker; only size, position and scale spring.
 - **A fixed rank for lasting things:** call, recording and privacy, timer, Claude, music, progress. The second one waits as a bubble instead of taking turns.
 - **Calls by category:** GNOME keeps no category on a notification, so the D-Bus method that receives notifications is shadowed only to note it on the way.

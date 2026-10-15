@@ -139,7 +139,7 @@ export class SystemSource {
         }
         this._island.set({
             id: 'recording', kind: 'recording', view: 'recording',
-            data: {seconds, text: recordingText(seconds)},
+            data: {seconds, text: recordingText(seconds), peek: 'Saved to Videos when it stops'},
             onStop: () => this._system.stopRecording(),
         });
         if (!this._recordingTick) {

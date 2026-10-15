@@ -438,6 +438,10 @@
     box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
 }
 
+.halo-center-morph {
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+}
+
 .halo-center-left {
     spacing: 10px;
 }
@@ -624,42 +628,51 @@
     spacing: 8px;
 }
 
+.halo-island-peek {
+    padding: 0 26px 14px 26px;
+}
+
+.halo-island-edit {
+    width: 36px;
+    height: 36px;
+}
+
 .halo-island-level,
 .halo-island-info,
 .halo-island-timer,
 .halo-island-media,
 .halo-island-recording {
-    height: 56px;
-    padding: 0 20px 0 8px;
-    spacing: 14px;
+    height: 64px;
+    padding: 0 24px 0 9px;
+    spacing: 16px;
 }
 
 .halo-island-info,
 .halo-island-timer {
-    min-width: 300px;
+    min-width: 360px;
 }
 
 .halo-island-timer {
-    padding: 0 22px 0 8px;
-    spacing: 14px;
+    padding: 0 26px 0 9px;
+    spacing: 16px;
 }
 
 .halo-island-media {
-    padding: 0 6px 0 6px;
+    padding: 0 7px 0 7px;
 }
 
 .halo-island-recording {
-    padding: 0 10px 0 22px;
-    spacing: 14px;
+    padding: 0 11px 0 26px;
+    spacing: 16px;
 }
 
 .halo-island-symbol {
-    width: 56px;
-    height: 56px;
+    width: 64px;
+    height: 64px;
 }
 
 .halo-island-symbol > * {
-    margin: 16px;
+    margin: 18px;
 }
 
 .halo-island-column {
@@ -716,8 +729,8 @@
 }
 
 .halo-island-large {
-    padding: 22px 24px 20px 24px;
-    spacing: 14px;
+    padding: 24px 26px 22px 26px;
+    spacing: 16px;
 }
 
 .halo-island-media-head {
@@ -745,9 +758,9 @@
 }
 
 .halo-island-action {
-    height: 40px;
-    padding: 0 18px;
-    border-radius: 20px;
+    height: 44px;
+    padding: 0 20px;
+    border-radius: 22px;
     border-width: 1px;
 }
 
@@ -757,7 +770,7 @@
 }
 
 .halo-island-avatar {
-    border-radius: 28px;
+    border-radius: 32px;
 }
 
 .halo-island-bubble {
@@ -1168,7 +1181,8 @@
 }
 
 
-/* The island: always on its dark surface, so these come from the dark scheme. */
+/* The island: on its own surface, the opposite of the desktop (white on a
+   dark desktop, black on a light one), so these come from the other scheme. */
 
 .halo-scheme-blue-light .halo-island-text {
     color: #191b25;
@@ -1182,29 +1196,19 @@
     background-color: #0045fc;
 }
 
-.halo-scheme-blue-light .halo-island-open {
-    background-color: #0045fc;
-    border-radius: 18px;
-}
-
-.halo-scheme-blue-light .halo-island-open .halo-island-text,
-.halo-scheme-blue-light .halo-island-open .halo-island-dim {
-    color: #ffffff;
-}
-
 .halo-scheme-blue-light .halo-island-primary {
     background-color: #0045fc;
     color: #ffffff;
 }
 
 .halo-scheme-blue-light .halo-island-soft {
-    background-color: #0033c2;
-    color: #dee1ff;
+    background-color: #dee1ff;
+    color: #0033c2;
 }
 
 .halo-scheme-blue-light .halo-island-tertiary {
-    background-color: #523d6c;
-    color: #eedbff;
+    background-color: #eedbff;
+    color: #523d6c;
 }
 
 .halo-scheme-blue-light .halo-island-good {
@@ -1229,11 +1233,11 @@
 }
 
 .halo-scheme-blue-light .halo-island-plain:hover {
-    background-color: #fbf8ff;
+    background-color: #e7e7f5;
 }
 
 .halo-scheme-blue-light .halo-island-track {
-    background-color: #fbf8ff;
+    background-color: #e2e1ef;
 }
 
 .halo-scheme-blue-light .halo-island-fill {
@@ -1262,7 +1266,7 @@
 
 .halo-scheme-blue-light .halo-island-ring {
     color: #0045fc;
-    background-color: #fbf8ff;
+    background-color: #e2e1ef;
 }
 
 .halo-scheme-blue-light .halo-island-ring-icon {
@@ -1279,7 +1283,7 @@
 }
 
 .halo-scheme-blue-light .halo-island-action:hover {
-    background-color: #fbf8ff;
+    background-color: #e7e7f5;
 }
 
 .halo-scheme-blue-light .halo-island-action.halo-island-action-main {
@@ -1289,12 +1293,12 @@
 }
 
 .halo-scheme-blue-light .halo-island-avatar {
-    background-color: #0033c2;
-    color: #dee1ff;
+    background-color: #dee1ff;
+    color: #0033c2;
 }
 
 .halo-scheme-blue-light .halo-island-bubble {
-    background-color: #e2e1ef;
+    background-color: #ffffff;
 }
 
 
@@ -1887,7 +1891,8 @@
 }
 
 
-/* The island: always on its dark surface, so these come from the dark scheme. */
+/* The island: on its own surface, the opposite of the desktop (white on a
+   dark desktop, black on a light one), so these come from the other scheme. */
 
 .halo-scheme-blue-dark .halo-island-text {
     color: #e2e1ef;
@@ -1899,16 +1904,6 @@
 
 .halo-scheme-blue-dark .halo-island-unread {
     background-color: #b9c3ff;
-}
-
-.halo-scheme-blue-dark .halo-island-open {
-    background-color: #b9c3ff;
-    border-radius: 18px;
-}
-
-.halo-scheme-blue-dark .halo-island-open .halo-island-text,
-.halo-scheme-blue-dark .halo-island-open .halo-island-dim {
-    color: #00228b;
 }
 
 .halo-scheme-blue-dark .halo-island-primary {
@@ -2013,7 +2008,7 @@
 }
 
 .halo-scheme-blue-dark .halo-island-bubble {
-    background-color: #33343f;
+    background-color: #0e0f14;
 }
 
 
@@ -2606,7 +2601,8 @@
 }
 
 
-/* The island: always on its dark surface, so these come from the dark scheme. */
+/* The island: on its own surface, the opposite of the desktop (white on a
+   dark desktop, black on a light one), so these come from the other scheme. */
 
 .halo-scheme-violet-light .halo-island-text {
     color: #1d1a24;
@@ -2620,29 +2616,19 @@
     background-color: #7706ff;
 }
 
-.halo-scheme-violet-light .halo-island-open {
-    background-color: #7706ff;
-    border-radius: 18px;
-}
-
-.halo-scheme-violet-light .halo-island-open .halo-island-text,
-.halo-scheme-violet-light .halo-island-open .halo-island-dim {
-    color: #ffffff;
-}
-
 .halo-scheme-violet-light .halo-island-primary {
     background-color: #7706ff;
     color: #ffffff;
 }
 
 .halo-scheme-violet-light .halo-island-soft {
-    background-color: #5a00c6;
-    color: #eaddff;
+    background-color: #eaddff;
+    color: #5a00c6;
 }
 
 .halo-scheme-violet-light .halo-island-tertiary {
-    background-color: #5e3962;
-    color: #ffd5ff;
+    background-color: #ffd5ff;
+    color: #5e3962;
 }
 
 .halo-scheme-violet-light .halo-island-good {
@@ -2667,11 +2653,11 @@
 }
 
 .halo-scheme-violet-light .halo-island-plain:hover {
-    background-color: #fef7ff;
+    background-color: #ede5f4;
 }
 
 .halo-scheme-violet-light .halo-island-track {
-    background-color: #fef7ff;
+    background-color: #e8dfee;
 }
 
 .halo-scheme-violet-light .halo-island-fill {
@@ -2700,7 +2686,7 @@
 
 .halo-scheme-violet-light .halo-island-ring {
     color: #7706ff;
-    background-color: #fef7ff;
+    background-color: #e8dfee;
 }
 
 .halo-scheme-violet-light .halo-island-ring-icon {
@@ -2717,7 +2703,7 @@
 }
 
 .halo-scheme-violet-light .halo-island-action:hover {
-    background-color: #fef7ff;
+    background-color: #ede5f4;
 }
 
 .halo-scheme-violet-light .halo-island-action.halo-island-action-main {
@@ -2727,12 +2713,12 @@
 }
 
 .halo-scheme-violet-light .halo-island-avatar {
-    background-color: #5a00c6;
-    color: #eaddff;
+    background-color: #eaddff;
+    color: #5a00c6;
 }
 
 .halo-scheme-violet-light .halo-island-bubble {
-    background-color: #e8dfee;
+    background-color: #ffffff;
 }
 
 
@@ -3325,7 +3311,8 @@
 }
 
 
-/* The island: always on its dark surface, so these come from the dark scheme. */
+/* The island: on its own surface, the opposite of the desktop (white on a
+   dark desktop, black on a light one), so these come from the other scheme. */
 
 .halo-scheme-violet-dark .halo-island-text {
     color: #e8dfee;
@@ -3337,16 +3324,6 @@
 
 .halo-scheme-violet-dark .halo-island-unread {
     background-color: #d2bbff;
-}
-
-.halo-scheme-violet-dark .halo-island-open {
-    background-color: #d2bbff;
-    border-radius: 18px;
-}
-
-.halo-scheme-violet-dark .halo-island-open .halo-island-text,
-.halo-scheme-violet-dark .halo-island-open .halo-island-dim {
-    color: #3f008e;
 }
 
 .halo-scheme-violet-dark .halo-island-primary {
@@ -3451,7 +3428,7 @@
 }
 
 .halo-scheme-violet-dark .halo-island-bubble {
-    background-color: #37333e;
+    background-color: #100e14;
 }
 
 
@@ -4044,7 +4021,8 @@
 }
 
 
-/* The island: always on its dark surface, so these come from the dark scheme. */
+/* The island: on its own surface, the opposite of the desktop (white on a
+   dark desktop, black on a light one), so these come from the other scheme. */
 
 .halo-scheme-green-light .halo-island-text {
     color: #151e15;
@@ -4058,29 +4036,19 @@
     background-color: #006e2e;
 }
 
-.halo-scheme-green-light .halo-island-open {
-    background-color: #006e2e;
-    border-radius: 18px;
-}
-
-.halo-scheme-green-light .halo-island-open .halo-island-text,
-.halo-scheme-green-light .halo-island-open .halo-island-dim {
-    color: #ffffff;
-}
-
 .halo-scheme-green-light .halo-island-primary {
     background-color: #006e2e;
     color: #ffffff;
 }
 
 .halo-scheme-green-light .halo-island-soft {
-    background-color: #005321;
-    color: #67ff8d;
+    background-color: #67ff8d;
+    color: #005321;
 }
 
 .halo-scheme-green-light .halo-island-tertiary {
-    background-color: #005045;
-    color: #aaf0df;
+    background-color: #aaf0df;
+    color: #005045;
 }
 
 .halo-scheme-green-light .halo-island-good {
@@ -4105,11 +4073,11 @@
 }
 
 .halo-scheme-green-light .halo-island-plain:hover {
-    background-color: #f2fcee;
+    background-color: #e1ebdd;
 }
 
 .halo-scheme-green-light .halo-island-track {
-    background-color: #f2fcee;
+    background-color: #dbe5d7;
 }
 
 .halo-scheme-green-light .halo-island-fill {
@@ -4138,7 +4106,7 @@
 
 .halo-scheme-green-light .halo-island-ring {
     color: #006e2e;
-    background-color: #f2fcee;
+    background-color: #dbe5d7;
 }
 
 .halo-scheme-green-light .halo-island-ring-icon {
@@ -4155,7 +4123,7 @@
 }
 
 .halo-scheme-green-light .halo-island-action:hover {
-    background-color: #f2fcee;
+    background-color: #e1ebdd;
 }
 
 .halo-scheme-green-light .halo-island-action.halo-island-action-main {
@@ -4165,12 +4133,12 @@
 }
 
 .halo-scheme-green-light .halo-island-avatar {
-    background-color: #005321;
-    color: #67ff8d;
+    background-color: #67ff8d;
+    color: #005321;
 }
 
 .halo-scheme-green-light .halo-island-bubble {
-    background-color: #dbe5d7;
+    background-color: #ffffff;
 }
 
 
@@ -4763,7 +4731,8 @@
 }
 
 
-/* The island: always on its dark surface, so these come from the dark scheme. */
+/* The island: on its own surface, the opposite of the desktop (white on a
+   dark desktop, black on a light one), so these come from the other scheme. */
 
 .halo-scheme-green-dark .halo-island-text {
     color: #dbe5d7;
@@ -4775,16 +4744,6 @@
 
 .halo-scheme-green-dark .halo-island-unread {
     background-color: #00e468;
-}
-
-.halo-scheme-green-dark .halo-island-open {
-    background-color: #00e468;
-    border-radius: 18px;
-}
-
-.halo-scheme-green-dark .halo-island-open .halo-island-text,
-.halo-scheme-green-dark .halo-island-open .halo-island-dim {
-    color: #003915;
 }
 
 .halo-scheme-green-dark .halo-island-primary {
@@ -4889,7 +4848,7 @@
 }
 
 .halo-scheme-green-dark .halo-island-bubble {
-    background-color: #2e372e;
+    background-color: #0c100c;
 }
 
 
@@ -5482,7 +5441,8 @@
 }
 
 
-/* The island: always on its dark surface, so these come from the dark scheme. */
+/* The island: on its own surface, the opposite of the desktop (white on a
+   dark desktop, black on a light one), so these come from the other scheme. */
 
 .halo-scheme-teal-light .halo-island-text {
     color: #111e1b;
@@ -5496,29 +5456,19 @@
     background-color: #006b5f;
 }
 
-.halo-scheme-teal-light .halo-island-open {
-    background-color: #006b5f;
-    border-radius: 18px;
-}
-
-.halo-scheme-teal-light .halo-island-open .halo-island-text,
-.halo-scheme-teal-light .halo-island-open .halo-island-dim {
-    color: #ffffff;
-}
-
 .halo-scheme-teal-light .halo-island-primary {
     background-color: #006b5f;
     color: #ffffff;
 }
 
 .halo-scheme-teal-light .halo-island-soft {
-    background-color: #005047;
-    color: #00fee3;
+    background-color: #00fee3;
+    color: #005047;
 }
 
 .halo-scheme-teal-light .halo-island-tertiary {
-    background-color: #004e5d;
-    color: #afecff;
+    background-color: #afecff;
+    color: #004e5d;
 }
 
 .halo-scheme-teal-light .halo-island-good {
@@ -5543,11 +5493,11 @@
 }
 
 .halo-scheme-teal-light .halo-island-plain:hover {
-    background-color: #eefdf8;
+    background-color: #ddebe7;
 }
 
 .halo-scheme-teal-light .halo-island-track {
-    background-color: #eefdf8;
+    background-color: #d7e6e1;
 }
 
 .halo-scheme-teal-light .halo-island-fill {
@@ -5576,7 +5526,7 @@
 
 .halo-scheme-teal-light .halo-island-ring {
     color: #006b5f;
-    background-color: #eefdf8;
+    background-color: #d7e6e1;
 }
 
 .halo-scheme-teal-light .halo-island-ring-icon {
@@ -5593,7 +5543,7 @@
 }
 
 .halo-scheme-teal-light .halo-island-action:hover {
-    background-color: #eefdf8;
+    background-color: #ddebe7;
 }
 
 .halo-scheme-teal-light .halo-island-action.halo-island-action-main {
@@ -5603,12 +5553,12 @@
 }
 
 .halo-scheme-teal-light .halo-island-avatar {
-    background-color: #005047;
-    color: #00fee3;
+    background-color: #00fee3;
+    color: #005047;
 }
 
 .halo-scheme-teal-light .halo-island-bubble {
-    background-color: #d7e6e1;
+    background-color: #ffffff;
 }
 
 
@@ -6201,7 +6151,8 @@
 }
 
 
-/* The island: always on its dark surface, so these come from the dark scheme. */
+/* The island: on its own surface, the opposite of the desktop (white on a
+   dark desktop, black on a light one), so these come from the other scheme. */
 
 .halo-scheme-teal-dark .halo-island-text {
     color: #d7e6e1;
@@ -6213,16 +6164,6 @@
 
 .halo-scheme-teal-dark .halo-island-unread {
     background-color: #00dfc7;
-}
-
-.halo-scheme-teal-dark .halo-island-open {
-    background-color: #00dfc7;
-    border-radius: 18px;
-}
-
-.halo-scheme-teal-dark .halo-island-open .halo-island-text,
-.halo-scheme-teal-dark .halo-island-open .halo-island-dim {
-    color: #003731;
 }
 
 .halo-scheme-teal-dark .halo-island-primary {
@@ -6327,7 +6268,7 @@
 }
 
 .halo-scheme-teal-dark .halo-island-bubble {
-    background-color: #2a3734;
+    background-color: #09100f;
 }
 
 
@@ -6920,7 +6861,8 @@
 }
 
 
-/* The island: always on its dark surface, so these come from the dark scheme. */
+/* The island: on its own surface, the opposite of the desktop (white on a
+   dark desktop, black on a light one), so these come from the other scheme. */
 
 .halo-scheme-orange-light .halo-island-text {
     color: #271813;
@@ -6934,29 +6876,19 @@
     background-color: #ab3500;
 }
 
-.halo-scheme-orange-light .halo-island-open {
-    background-color: #ab3500;
-    border-radius: 18px;
-}
-
-.halo-scheme-orange-light .halo-island-open .halo-island-text,
-.halo-scheme-orange-light .halo-island-open .halo-island-dim {
-    color: #ffffff;
-}
-
 .halo-scheme-orange-light .halo-island-primary {
     background-color: #ab3500;
     color: #ffffff;
 }
 
 .halo-scheme-orange-light .halo-island-soft {
-    background-color: #832700;
-    color: #ffdbd0;
+    background-color: #ffdbd0;
+    color: #832700;
 }
 
 .halo-scheme-orange-light .halo-island-tertiary {
-    background-color: #633f06;
-    color: #ffddb6;
+    background-color: #ffddb6;
+    color: #633f06;
 }
 
 .halo-scheme-orange-light .halo-island-good {
@@ -6981,11 +6913,11 @@
 }
 
 .halo-scheme-orange-light .halo-island-plain:hover {
-    background-color: #fff8f6;
+    background-color: #ffe2da;
 }
 
 .halo-scheme-orange-light .halo-island-track {
-    background-color: #fff8f6;
+    background-color: #f9ddd4;
 }
 
 .halo-scheme-orange-light .halo-island-fill {
@@ -7014,7 +6946,7 @@
 
 .halo-scheme-orange-light .halo-island-ring {
     color: #ab3500;
-    background-color: #fff8f6;
+    background-color: #f9ddd4;
 }
 
 .halo-scheme-orange-light .halo-island-ring-icon {
@@ -7031,7 +6963,7 @@
 }
 
 .halo-scheme-orange-light .halo-island-action:hover {
-    background-color: #fff8f6;
+    background-color: #ffe2da;
 }
 
 .halo-scheme-orange-light .halo-island-action.halo-island-action-main {
@@ -7041,12 +6973,12 @@
 }
 
 .halo-scheme-orange-light .halo-island-avatar {
-    background-color: #832700;
-    color: #ffdbd0;
+    background-color: #ffdbd0;
+    color: #832700;
 }
 
 .halo-scheme-orange-light .halo-island-bubble {
-    background-color: #f9ddd4;
+    background-color: #ffffff;
 }
 
 
@@ -7639,7 +7571,8 @@
 }
 
 
-/* The island: always on its dark surface, so these come from the dark scheme. */
+/* The island: on its own surface, the opposite of the desktop (white on a
+   dark desktop, black on a light one), so these come from the other scheme. */
 
 .halo-scheme-orange-dark .halo-island-text {
     color: #f9ddd4;
@@ -7651,16 +7584,6 @@
 
 .halo-scheme-orange-dark .halo-island-unread {
     background-color: #ffb59c;
-}
-
-.halo-scheme-orange-dark .halo-island-open {
-    background-color: #ffb59c;
-    border-radius: 18px;
-}
-
-.halo-scheme-orange-dark .halo-island-open .halo-island-text,
-.halo-scheme-orange-dark .halo-island-open .halo-island-dim {
-    color: #5c1900;
 }
 
 .halo-scheme-orange-dark .halo-island-primary {
@@ -7765,7 +7688,7 @@
 }
 
 .halo-scheme-orange-dark .halo-island-bubble {
-    background-color: #42312b;
+    background-color: #150d0a;
 }
 
 
@@ -8358,7 +8281,8 @@
 }
 
 
-/* The island: always on its dark surface, so these come from the dark scheme. */
+/* The island: on its own surface, the opposite of the desktop (white on a
+   dark desktop, black on a light one), so these come from the other scheme. */
 
 .halo-scheme-salmon-light .halo-island-text {
     color: #271816;
@@ -8372,29 +8296,19 @@
     background-color: #c0000d;
 }
 
-.halo-scheme-salmon-light .halo-island-open {
-    background-color: #c0000d;
-    border-radius: 18px;
-}
-
-.halo-scheme-salmon-light .halo-island-open .halo-island-text,
-.halo-scheme-salmon-light .halo-island-open .halo-island-dim {
-    color: #ffffff;
-}
-
 .halo-scheme-salmon-light .halo-island-primary {
     background-color: #c0000d;
     color: #ffffff;
 }
 
 .halo-scheme-salmon-light .halo-island-soft {
-    background-color: #930007;
-    color: #ffdad5;
+    background-color: #ffdad5;
+    color: #930007;
 }
 
 .halo-scheme-salmon-light .halo-island-tertiary {
-    background-color: #683c0f;
-    color: #ffdcc1;
+    background-color: #ffdcc1;
+    color: #683c0f;
 }
 
 .halo-scheme-salmon-light .halo-island-good {
@@ -8419,11 +8333,11 @@
 }
 
 .halo-scheme-salmon-light .halo-island-plain:hover {
-    background-color: #fff8f7;
+    background-color: #ffe2de;
 }
 
 .halo-scheme-salmon-light .halo-island-track {
-    background-color: #fff8f7;
+    background-color: #f9dcd8;
 }
 
 .halo-scheme-salmon-light .halo-island-fill {
@@ -8452,7 +8366,7 @@
 
 .halo-scheme-salmon-light .halo-island-ring {
     color: #c0000d;
-    background-color: #fff8f7;
+    background-color: #f9dcd8;
 }
 
 .halo-scheme-salmon-light .halo-island-ring-icon {
@@ -8469,7 +8383,7 @@
 }
 
 .halo-scheme-salmon-light .halo-island-action:hover {
-    background-color: #fff8f7;
+    background-color: #ffe2de;
 }
 
 .halo-scheme-salmon-light .halo-island-action.halo-island-action-main {
@@ -8479,12 +8393,12 @@
 }
 
 .halo-scheme-salmon-light .halo-island-avatar {
-    background-color: #930007;
-    color: #ffdad5;
+    background-color: #ffdad5;
+    color: #930007;
 }
 
 .halo-scheme-salmon-light .halo-island-bubble {
-    background-color: #f9dcd8;
+    background-color: #ffffff;
 }
 
 
@@ -9077,7 +8991,8 @@
 }
 
 
-/* The island: always on its dark surface, so these come from the dark scheme. */
+/* The island: on its own surface, the opposite of the desktop (white on a
+   dark desktop, black on a light one), so these come from the other scheme. */
 
 .halo-scheme-salmon-dark .halo-island-text {
     color: #f9dcd8;
@@ -9089,16 +9004,6 @@
 
 .halo-scheme-salmon-dark .halo-island-unread {
     background-color: #ffb4aa;
-}
-
-.halo-scheme-salmon-dark .halo-island-open {
-    background-color: #ffb4aa;
-    border-radius: 18px;
-}
-
-.halo-scheme-salmon-dark .halo-island-open .halo-island-text,
-.halo-scheme-salmon-dark .halo-island-open .halo-island-dim {
-    color: #690003;
 }
 
 .halo-scheme-salmon-dark .halo-island-primary {
@@ -9203,7 +9108,7 @@
 }
 
 .halo-scheme-salmon-dark .halo-island-bubble {
-    background-color: #42302e;
+    background-color: #150d0c;
 }
 
 
@@ -9796,7 +9701,8 @@
 }
 
 
-/* The island: always on its dark surface, so these come from the dark scheme. */
+/* The island: on its own surface, the opposite of the desktop (white on a
+   dark desktop, black on a light one), so these come from the other scheme. */
 
 .halo-scheme-pink-light .halo-island-text {
     color: #26181b;
@@ -9810,29 +9716,19 @@
     background-color: #ba005b;
 }
 
-.halo-scheme-pink-light .halo-island-open {
-    background-color: #ba005b;
-    border-radius: 18px;
-}
-
-.halo-scheme-pink-light .halo-island-open .halo-island-text,
-.halo-scheme-pink-light .halo-island-open .halo-island-dim {
-    color: #ffffff;
-}
-
 .halo-scheme-pink-light .halo-island-primary {
     background-color: #ba005b;
     color: #ffffff;
 }
 
 .halo-scheme-pink-light .halo-island-soft {
-    background-color: #8f0044;
-    color: #ffd9e1;
+    background-color: #ffd9e1;
+    color: #8f0044;
 }
 
 .halo-scheme-pink-light .halo-island-tertiary {
-    background-color: #6e3824;
-    color: #ffdbcf;
+    background-color: #ffdbcf;
+    color: #6e3824;
 }
 
 .halo-scheme-pink-light .halo-island-good {
@@ -9857,11 +9753,11 @@
 }
 
 .halo-scheme-pink-light .halo-island-plain:hover {
-    background-color: #fff8f8;
+    background-color: #fce2e6;
 }
 
 .halo-scheme-pink-light .halo-island-track {
-    background-color: #fff8f8;
+    background-color: #f6dce1;
 }
 
 .halo-scheme-pink-light .halo-island-fill {
@@ -9890,7 +9786,7 @@
 
 .halo-scheme-pink-light .halo-island-ring {
     color: #ba005b;
-    background-color: #fff8f8;
+    background-color: #f6dce1;
 }
 
 .halo-scheme-pink-light .halo-island-ring-icon {
@@ -9907,7 +9803,7 @@
 }
 
 .halo-scheme-pink-light .halo-island-action:hover {
-    background-color: #fff8f8;
+    background-color: #fce2e6;
 }
 
 .halo-scheme-pink-light .halo-island-action.halo-island-action-main {
@@ -9917,12 +9813,12 @@
 }
 
 .halo-scheme-pink-light .halo-island-avatar {
-    background-color: #8f0044;
-    color: #ffd9e1;
+    background-color: #ffd9e1;
+    color: #8f0044;
 }
 
 .halo-scheme-pink-light .halo-island-bubble {
-    background-color: #f6dce1;
+    background-color: #ffffff;
 }
 
 
@@ -10515,7 +10411,8 @@
 }
 
 
-/* The island: always on its dark surface, so these come from the dark scheme. */
+/* The island: on its own surface, the opposite of the desktop (white on a
+   dark desktop, black on a light one), so these come from the other scheme. */
 
 .halo-scheme-pink-dark .halo-island-text {
     color: #f6dce1;
@@ -10527,16 +10424,6 @@
 
 .halo-scheme-pink-dark .halo-island-unread {
     background-color: #ffb1c4;
-}
-
-.halo-scheme-pink-dark .halo-island-open {
-    background-color: #ffb1c4;
-    border-radius: 18px;
-}
-
-.halo-scheme-pink-dark .halo-island-open .halo-island-text,
-.halo-scheme-pink-dark .halo-island-open .halo-island-dim {
-    color: #65002e;
 }
 
 .halo-scheme-pink-dark .halo-island-primary {
@@ -10641,7 +10528,7 @@
 }
 
 .halo-scheme-pink-dark .halo-island-bubble {
-    background-color: #413034;
+    background-color: #150d0f;
 }
 
 
@@ -11234,7 +11121,8 @@
 }
 
 
-/* The island: always on its dark surface, so these come from the dark scheme. */
+/* The island: on its own surface, the opposite of the desktop (white on a
+   dark desktop, black on a light one), so these come from the other scheme. */
 
 .halo-scheme-white-light .halo-island-text {
     color: #1b1b1b;
@@ -11248,29 +11136,19 @@
     background-color: #000000;
 }
 
-.halo-scheme-white-light .halo-island-open {
-    background-color: #000000;
-    border-radius: 18px;
-}
-
-.halo-scheme-white-light .halo-island-open .halo-island-text,
-.halo-scheme-white-light .halo-island-open .halo-island-dim {
-    color: #e2e2e2;
-}
-
 .halo-scheme-white-light .halo-island-primary {
     background-color: #000000;
     color: #e2e2e2;
 }
 
 .halo-scheme-white-light .halo-island-soft {
-    background-color: #ffffff;
-    color: #3b3b3b;
+    background-color: #3b3b3b;
+    color: #ffffff;
 }
 
 .halo-scheme-white-light .halo-island-tertiary {
-    background-color: #ffffff;
-    color: #747474;
+    background-color: #747474;
+    color: #ffffff;
 }
 
 .halo-scheme-white-light .halo-island-good {
@@ -11295,11 +11173,11 @@
 }
 
 .halo-scheme-white-light .halo-island-plain:hover {
-    background-color: #f9f9f9;
+    background-color: #e8e8e8;
 }
 
 .halo-scheme-white-light .halo-island-track {
-    background-color: #f9f9f9;
+    background-color: #e2e2e2;
 }
 
 .halo-scheme-white-light .halo-island-fill {
@@ -11328,7 +11206,7 @@
 
 .halo-scheme-white-light .halo-island-ring {
     color: #000000;
-    background-color: #f9f9f9;
+    background-color: #e2e2e2;
 }
 
 .halo-scheme-white-light .halo-island-ring-icon {
@@ -11345,7 +11223,7 @@
 }
 
 .halo-scheme-white-light .halo-island-action:hover {
-    background-color: #f9f9f9;
+    background-color: #e8e8e8;
 }
 
 .halo-scheme-white-light .halo-island-action.halo-island-action-main {
@@ -11355,12 +11233,12 @@
 }
 
 .halo-scheme-white-light .halo-island-avatar {
-    background-color: #ffffff;
-    color: #3b3b3b;
+    background-color: #3b3b3b;
+    color: #ffffff;
 }
 
 .halo-scheme-white-light .halo-island-bubble {
-    background-color: #e2e2e2;
+    background-color: #ffffff;
 }
 
 
@@ -11953,7 +11831,8 @@
 }
 
 
-/* The island: always on its dark surface, so these come from the dark scheme. */
+/* The island: on its own surface, the opposite of the desktop (white on a
+   dark desktop, black on a light one), so these come from the other scheme. */
 
 .halo-scheme-white-dark .halo-island-text {
     color: #e2e2e2;
@@ -11965,16 +11844,6 @@
 
 .halo-scheme-white-dark .halo-island-unread {
     background-color: #ffffff;
-}
-
-.halo-scheme-white-dark .halo-island-open {
-    background-color: #ffffff;
-    border-radius: 18px;
-}
-
-.halo-scheme-white-dark .halo-island-open .halo-island-text,
-.halo-scheme-white-dark .halo-island-open .halo-island-dim {
-    color: #1b1b1b;
 }
 
 .halo-scheme-white-dark .halo-island-primary {
@@ -12079,7 +11948,7 @@
 }
 
 .halo-scheme-white-dark .halo-island-bubble {
-    background-color: #353535;
+    background-color: #0f0f0f;
 }
 
 

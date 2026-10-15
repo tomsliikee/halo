@@ -854,5 +854,5 @@ export const PAGES = {
     sound: ctx => new SoundPage(ctx),
     power: ctx => new PowerPage(ctx),
     hosted: (ctx, tile) => new HostedPage(ctx, tile),
-    settings: ctx => new SettingsPage(ctx),
+    settings: (ctx, section) => new SettingsPage(ctx, section),
 };

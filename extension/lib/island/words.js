@@ -145,3 +145,23 @@ export function lockedNote(count, title = '') {
         return title;
     return count === 1 ? 'New notification' : `${count} new notifications`;
 }
+
+// The hover preview's line: a little more than the small island says, and
+// what a scroll does there.
+export function mediaPeek({app, position, length}) {
+    const time = length > 0 ? `${trackTime(position)} of ${trackTime(length)}` : '';
+    return [app, time, 'scroll for volume'].filter(Boolean).join(' · ');
+}
+
+// endsAt: ms since 1970; twelveHour as GNOME's clock format says.
+export function timerPeek(endsAt, twelveHour = false) {
+    const end = new Date(endsAt);
+    const minutes = String(end.getMinutes()).padStart(2, '0');
+    const hours = twelveHour ? `${end.getHours() % 12 || 12}:${minutes} ${end.getHours() < 12 ? 'AM' : 'PM'}` : `${end.getHours()}:${minutes}`;
+    return `Ends at ${hours} · scroll for a minute more or less`;
+}
+
+export function claudePeek(sessions) {
+    const projects = [...new Set(sessions.map(session => session.project).filter(Boolean))];
+    return projects.length > 0 ? projects.join(', ') : '';
+}

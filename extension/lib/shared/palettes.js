@@ -77,11 +77,26 @@ export function palette(colour, scheme) {
         dent: scheme === 'light' ? roles.high : roles.bright,
         // Strong red and green on the island's dark surface (hang up,
         // answer, stop): the light scheme's, which hold white text.
+        // The island's own surface in this scheme: near white in light, near
+        // black in dark (see islandScheme), with what sits sunk into it.
+        islandFill: scheme === 'light' ? '#ffffff' : mix(roles.low, '#000000', 0.45),
+        islandTrack: scheme === 'light' ? roles.highest : roles.bright,
+        islandHover: scheme === 'light' ? roles.high : roles.bright,
+        islandSoft: scheme === 'light' ? roles.pc : roles.onPc,
+        onIslandSoft: scheme === 'light' ? roles.onPc : roles.pc,
+        islandTertiary: scheme === 'light' ? roles.tc : roles.onTc,
+        onIslandTertiary: scheme === 'light' ? roles.onTc : roles.tc,
         alarm: fixed.light.error,
         onAlarm: fixed.light.onError,
         go: fixed.light.good,
         onGo: fixed.light.onGood,
     };
+}
+
+// The scheme the island is drawn in: the opposite of the desktop's, so it
+// stands out as a white island on a dark desktop and a black one on a light.
+export function islandScheme(desktopScheme) {
+    return desktopScheme === 'dark' ? 'light' : 'dark';
 }
 
 // "#rrggbb" to [r, g, b] in 0–1, for Cairo.

@@ -2,10 +2,11 @@
 // that runs stays in the island with its time, and its end is told with a
 // sound. Started and paused from the quick settings or from Ledge.
 
+import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 
 import {runningTimer} from '../../shared/timers.js';
-import {POMODORO_PHASES} from '../words.js';
+import {POMODORO_PHASES, timerPeek} from '../words.js';
 
 const ID = 'timer';
 const LABELS = {timer: 'Timer', stopwatch: 'Stopwatch'};
@@ -13,6 +14,7 @@ const LABELS = {timer: 'Timer', stopwatch: 'Stopwatch'};
 export class TimerSource {
     // onOpen(): the island was clicked, the timer page should open.
     constructor(island, store, onOpen) {
+        this._interface = new Gio.Settings({schema_id: 'org.gnome.desktop.interface'});
         this._island = island;
         this._store = store;
         this._onOpen = onOpen;
@@ -44,8 +46,12 @@ export class TimerSource {
             data: {
                 label: running.kind === 'pomodoro' ? POMODORO_PHASES[running.phase] : LABELS[running.kind],
                 shown: running.shown, progress: running.progress, countdown: running.countdown,
+                peek: running.kind === 'timer'
+                    ? timerPeek(running.endsAt, this._interface.get_string('clock-format') === '12h') : null,
             },
             onClick: () => this._onOpen?.(),
+            // A scroll gives a countdown a minute more or less.
+            onScroll: running.kind === 'timer' ? steps => this._store.stretchTimer(steps) : null,
         });
         this._syncTick(true);
     }

@@ -1,10 +1,12 @@
 // Halo's notification center (PDF page 6): a wide card under the clock,
 // the notifications on the left with "Clear all" and Do not disturb, the
 // month, today's events, the weather and a world clock on the right. It
-// springs open from the clock; a click outside or Escape closes it.
+// grows out of the island's clock as the island grows (morph.js) and goes
+// back into it; a click outside or Escape closes it.
 
 import Clutter from 'gi://Clutter';
 import Gio from 'gi://Gio';
+import GObject from 'gi://GObject';
 import GLib from 'gi://GLib';
 import Shell from 'gi://Shell';
 import St from 'gi://St';
@@ -13,11 +15,13 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
 import {expressive, spring, SPRINGS, stopSprings, stretch} from '../shared/choreo.js';
 import {icon} from '../shared/icons.js';
+import {mix} from '../shared/palettes.js';
 import {pressable} from '../shared/press.js';
 import {text} from '../shared/text.js';
 import {setScheme} from '../shared/theme.js';
 import {HaloSwitch} from '../qs/controls.js';
 import {NotificationList} from './list.js';
+import {morphAt} from './morph.js';
 import {SidePanel} from './side.js';
 
 export const WIDTH = 840;
@@ -25,10 +29,50 @@ const MAX_HEIGHT = 760;
 const MARGIN = 8;
 const FADE_MS = 140;
 const STAGGER_MS = 40;
+// The card's corners (stylesheet: .halo-center).
+const CARD_RADIUS = 32;
+// The card comes over the growing shape once it is most of the way.
+const REVEAL_MS = 150;
+const CLOSE_FADE_MS = 90;
+
+// The shape between the clock and the card: a rounded box that a spring
+// moves through morphAt from one rectangle and colour to another.
+const Morph = GObject.registerClass({GTypeName: 'HaloCenterMorph'},
+class Morph extends St.Widget {
+    _init() {
+        super._init({style_class: 'halo-center-morph', reactive: false, visible: false});
+        this._from = null;
+        this._to = null;
+        this._progress = 0;
+    }
+
+    // from, to: {x, y, width, height, radius, color}.
+    between(from, to) {
+        this._from = from;
+        this._to = to;
+        this.progress = 0;
+    }
+
+    get progress() {
+        return this._progress;
+    }
+
+    set progress(t) {
+        this._progress = t;
+        if (!this._from)
+            return;
+        const at = morphAt(this._from, this._to, t);
+        this.set_position(Math.round(at.x), Math.round(at.y));
+        this.set_size(Math.round(at.width), Math.round(at.height));
+        this.set_style(`background-color: ${mix(this._from.color, this._to.color, at.colour)}; border-radius: ${Math.round(at.radius)}px;`);
+    }
+});
 
 export class CenterPanel {
-    // ctx: {theme, model, agenda, weather, anchor() → {x, top}}; onOpen(open)
-    // tells the bar.
+    // ctx: {theme, model, agenda, weather, anchor() → {x, top}, clock() →
+    // the island's resting clock as {x, y, width, height, radius, color} or
+    // null, pressIsland(event) → whether the island took a press};
+    // onOpen(open) tells the bar and the island.
     constructor(ctx, onOpen) {
         this._ctx = ctx;
         this._onOpen = onOpen;
@@ -53,6 +97,8 @@ export class CenterPanel {
             return Clutter.EVENT_STOP;
         });
 
+        this._morph = new Morph();
+        this.actor.add_child(this._morph);
         this._card = new St.BoxLayout({style_class: 'halo-center', reactive: true, width: WIDTH});
         this._card.set_pivot_point(0.5, 0);
         this.actor.add_child(this._card);
@@ -117,6 +163,7 @@ export class CenterPanel {
         const monitor = Main.layoutManager.primaryMonitor;
         if (!monitor)
             return;
+        const clock = this._ctx.clock?.() ?? null;
         this._grab = Main.pushModal(this.actor, {actionMode: Shell.ActionMode.POPUP});
         this.isOpen = true;
         this._onOpen(true);
@@ -141,8 +188,12 @@ export class CenterPanel {
         this.actor.show();
         this.actor.grab_key_focus();
         stopSprings(this._card);
+        stopSprings(this._morph);
         this._card.remove_all_transitions();
-        if (expressive()) {
+        this._morph.hide();
+        if (expressive() && clock) {
+            this._growFrom(clock);
+        } else if (expressive()) {
             this._card.set({scale_x: 0.9, scale_y: 0.9, translation_y: -14, opacity: 0});
             spring(this._card, {scale_x: 1, scale_y: 1, translation_y: 0}, {spring: SPRINGS.rise});
             this._card.ease({opacity: 255, duration: stretch(FADE_MS), mode: Clutter.AnimationMode.EASE_OUT_CUBIC});
@@ -170,8 +221,15 @@ export class CenterPanel {
         this._onOpen(false);
         this._ctx.agenda.showToday();
         stopSprings(this._card);
+        stopSprings(this._morph);
         if (!animated || !expressive()) {
+            this._morph.hide();
             this.actor.hide();
+            return;
+        }
+        const clock = this._ctx.clock?.() ?? null;
+        if (clock) {
+            this._shrinkInto(clock);
             return;
         }
         // Hidden even when the fade is cut short: a stage-sized catcher left
@@ -184,6 +242,52 @@ export class CenterPanel {
                     this.actor.hide();
             },
         });
+    }
+
+    // The card's place and the panel's colour, as the morph's other end.
+    _cardShape() {
+        const {x, y, width, height} = this._card;
+        return {x, y, width, height, radius: CARD_RADIUS, color: this._ctx.theme.roles.panel};
+    }
+
+    // Opening: the clock's shape springs into the card's, as the island
+    // grows; the card and its sections fade in over it once it is most of
+    // the way, and the shape goes.
+    _growFrom(clock) {
+        this._card.set({scale_x: 1, scale_y: 1, translation_y: 0, opacity: 0});
+        this._morph.between(clock, this._cardShape());
+        this._morph.show();
+        spring(this._morph, {progress: 1}, {spring: SPRINGS.grow});
+        this._card.ease({
+            opacity: 255, delay: stretch(REVEAL_MS), duration: stretch(FADE_MS), mode: Clutter.AnimationMode.EASE_OUT_CUBIC,
+            onStopped: () => {
+                if (this.isOpen)
+                    this._morph.hide();
+            },
+        });
+        this.sections.forEach((section, i) => {
+            section.set({opacity: 0, translation_y: 16});
+            spring(section, {translation_y: 0}, {spring: SPRINGS.pop, delay: REVEAL_MS + i * STAGGER_MS});
+            section.ease({opacity: 255, delay: stretch(REVEAL_MS + i * STAGGER_MS), duration: stretch(FADE_MS), mode: Clutter.AnimationMode.EASE_OUT_CUBIC});
+        });
+    }
+
+    // Closing: the card fades off its shape, which springs back into the
+    // clock the island grows back to.
+    _shrinkInto(clock) {
+        this._card.remove_all_transitions();
+        this._card.ease({opacity: 0, duration: stretch(CLOSE_FADE_MS), mode: Clutter.AnimationMode.EASE_IN_CUBIC});
+        this._morph.between(this._cardShape(), clock);
+        this._morph.show();
+        // Hidden however the spring ends: a stage-sized catcher left behind
+        // would take every click, on the lock screen too.
+        const done = () => {
+            if (this.isOpen)
+                return;
+            this._morph.hide();
+            this.actor.hide();
+        };
+        spring(this._morph, {progress: 1}, {spring: SPRINGS.shrink, onDone: done});
     }
 
     destroy() {
@@ -213,6 +317,9 @@ export class CenterPanel {
         const target = global.stage.get_event_actor(event);
         if (target && this._card.contains(target))
             return Clutter.EVENT_PROPAGATE;
+        // The island stays usable over the open center.
+        if (event.type() === Clutter.EventType.BUTTON_PRESS && this._ctx.pressIsland?.(event))
+            return Clutter.EVENT_STOP;
         this.close();
         return Clutter.EVENT_STOP;
     }

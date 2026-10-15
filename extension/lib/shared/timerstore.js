@@ -10,7 +10,7 @@ import {EventEmitter} from 'resource:///org/gnome/shell/misc/signals.js';
 
 import * as Pomodoro from './pomodoro.js';
 import * as Timer from './timer.js';
-import {MINUTE, POMODORO, parseTimers} from './timers.js';
+import {MINUTE, POMODORO, parseTimers, stretchTimer} from './timers.js';
 
 export const TIMERS_FILE = GLib.build_filenamev([GLib.get_user_state_dir(), 'ledge', 'timers.json']);
 
@@ -62,6 +62,12 @@ export class TimerStore extends EventEmitter {
 
     startTimer(minutes, now = Date.now()) {
         this._set({timer: Timer.start(Timer.create('timer', minutes * MINUTE), now)});
+    }
+
+    // The countdown a few minutes longer or shorter (a scroll on the island).
+    stretchTimer(minutes, now = Date.now()) {
+        if (this._timers.timer)
+            this._set({timer: stretchTimer(this._timers.timer, minutes, now)});
     }
 
     // Pauses a running timer of a kind, or goes on with a paused one.

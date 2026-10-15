@@ -22,6 +22,16 @@ function isConfig(value) {
         ['work', 'rest', 'long', 'rounds'].every(key => typeof value[key] === 'number' && value[key] > 0);
 }
 
+// A countdown made `minutes` longer (or shorter, with a negative number),
+// but never to less than a minute left. Other timers stay as they are.
+export function stretchTimer(state, minutes, now) {
+    if (!state || state.mode !== 'timer')
+        return state;
+    const left = state.duration - Timer.elapsed(state, now);
+    const change = Math.max(minutes * MINUTE, Math.min(0, MINUTE - left));
+    return {...state, duration: state.duration + change};
+}
+
 // Whatever was read, as states that can be trusted.
 export function parseTimers(text) {
     let raw = null;

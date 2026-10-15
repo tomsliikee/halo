@@ -58,6 +58,7 @@ export class ProgressSource {
                 icon: 'download', gicon: app?.get_icon() ?? null, tone: 'soft',
                 title: app?.get_name() ?? 'In progress', note: 'Working on it',
                 trailing: percentText(progress * 100),
+                peek: app ? `Click to open ${app.get_name()}` : null,
             },
             onClick: app ? () => app.activate() : null,
         });
