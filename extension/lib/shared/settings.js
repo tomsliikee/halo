@@ -9,6 +9,8 @@ import {COLOURS} from './palettes.js';
 export const BAR_LAYOUTS = ['full', 'left', 'centre', 'right', 'islands'];
 export const DARK_STYLES = ['light', 'dark', 'auto'];
 export const MOTION_SPEEDS = ['quick', 'normal', 'slow'];
+// What a click on a small island does: open its app, or its large look.
+export const ISLAND_CLICKS = ['app', 'large'];
 
 // What can open the island, each with its own switch.
 export const ISLAND_EVENTS = [
@@ -25,6 +27,7 @@ const CHOICES = {
     darkStyle: DARK_STYLES,
     barLayout: BAR_LAYOUTS,
     motionSpeed: MOTION_SPEEDS,
+    islandClick: ISLAND_CLICKS,
 };
 
 // Keys that hold one switch per name.
@@ -67,6 +70,8 @@ export const DEFAULTS = Object.freeze({
     lightBar: false,
     hideInFullscreen: true,
     islandEvents: Object.freeze(switches(null, ISLAND_EVENTS)),
+    // Where it has no app (a timer, volume), a click opens the large look.
+    islandClick: 'app',
     tileOrder: Object.freeze([]),
     hiddenTiles: Object.freeze([]),
     expressiveMotion: true,

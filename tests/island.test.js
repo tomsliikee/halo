@@ -2,7 +2,7 @@ import {crossed, readLimits} from '../extension/lib/island/limits.js';
 import {accumulate, pick, scrollIntent, shownWhileLocked} from '../extension/lib/island/rank.js';
 import {
     claudeNote, claudePeek, clockText, copiedText, initials, isDecline, levelShare, limitNote, limitTitle, lockedNote, lowMark, osdIcon,
-    mediaPeek, osdKind, plainText, soonText, timerPeek, trackTime,
+    mediaPeek, osdKind, plainText, soonText, timerPeek, trackTime, unitAppId,
 } from '../extension/lib/island/words.js';
 import * as Pomodoro from '../extension/lib/shared/pomodoro.js';
 import * as Timer from '../extension/lib/shared/timer.js';
@@ -40,6 +40,10 @@ test('a clicked bubble comes first', () => equal(ids(pick([media, timer], new Se
 test('the newer of the same rank', () => equal(
     ids(pick([{id: 'a', kind: 'privacy', at: 1}, {id: 'b', kind: 'recording', at: 5}])), ['b', 'a']));
 
+test('the app a Claude session runs in', () => equal(
+    ['app-gnome-org.gnome.Ptyxis-4242.scope', 'app-com.anthropic.Claude-33622.scope', 'app-flatpak-com.mitchellh.ghostty-77.scope',
+        'app-org.gnome.Terminal@abc.service', 'session-2.scope', null].map(unitAppId),
+    ['org.gnome.Ptyxis.desktop', 'com.anthropic.Claude.desktop', 'com.mitchellh.ghostty.desktop', 'org.gnome.Terminal.desktop', null, null]));
 test('osd kinds', () => equal(
     ['audio-volume-high-symbolic', 'display-brightness-symbolic', 'keyboard-brightness-symbolic',
         'microphone-sensitivity-muted-symbolic', 'input-touchpad-symbolic'].map(osdKind),

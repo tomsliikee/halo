@@ -8,6 +8,8 @@ test('each key falls back on its own', () => {
     const settings = parse('{"colour": "teal", "barLayout": "top", "floating": "yes", "seeThrough": true}');
     equal([settings.colour, settings.barLayout, settings.floating, settings.seeThrough], ['teal', 'full', true, true]);
 });
+test('the island click falls back to opening the app', () => equal(
+    [parse('{"islandClick": "large"}').islandClick, parse('{"islandClick": "zoom"}').islandClick], ['large', 'app']));
 test('unknown keys are dropped', () => equal('extra' in parse('{"extra": 1}'), false));
 test('all eight colours are valid', () => equal(
     ['blue', 'violet', 'green', 'teal', 'orange', 'salmon', 'pink', 'white', 'red'].map(c => isValid('colour', c)),

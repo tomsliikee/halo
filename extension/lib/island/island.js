@@ -6,7 +6,7 @@
 //
 // An activity: {id, kind, hint, duration (ms, hints only), view (a builder
 // of views.js), large (the builder of its opened look), data, and what a
-// click does: onClick, onStop, onPlay, onPrevious, onNext, onAction; and
+// click does: onOpen (its app's window), onClick, onStop, onPlay, onPrevious, onNext, onAction; and
 // onScroll(steps) for a scroll up (+) or down (-) on it}.
 
 import Clutter from 'gi://Clutter';
@@ -413,22 +413,40 @@ export class Island {
             this._collapse(main);
             return;
         }
-        if (button !== Clutter.BUTTON_PRIMARY)
+        if (button !== Clutter.BUTTON_PRIMARY && button !== Clutter.BUTTON_MIDDLE)
             return;
         if (!main) {
+            if (button !== Clutter.BUTTON_PRIMARY)
+                return;
             if (this._rest.open)
                 this._onSettings?.();
             else
                 this._onClock?.();
             return;
         }
-        if (main.large && this._expanded !== main.id) {
-            this._expanded = main.id;
-            this._render();
+        // Clicking opens the thing's app, or first its large look, as
+        // chosen in Halo's settings; the middle button always opens the
+        // large look.
+        const opensApp = this._settings.current.islandClick === 'app' && main.onOpen;
+        if (button === Clutter.BUTTON_MIDDLE || !opensApp) {
+            if (main.large && this._expanded !== main.id) {
+                this._expanded = main.id;
+                this._render();
+                return;
+            }
+        }
+        if (button === Clutter.BUTTON_MIDDLE) {
+            if (main.large && this._expanded === main.id) {
+                this._expanded = null;
+                this._render();
+            }
             return;
         }
-        if (main.onClick) {
-            main.onClick();
+        // Its app, else what the thing does on a click; an opened look
+        // without either closes.
+        const open = main.onOpen ?? main.onClick;
+        if (open) {
+            open();
             if (main.hint)
                 this.remove(main.id);
             return;

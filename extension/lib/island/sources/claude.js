@@ -3,14 +3,16 @@
 
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
+import Shell from 'gi://Shell';
 
 import {crossed, readLimits} from '../limits.js';
-import {claudeNote, claudePeek, limitNote, limitTitle} from '../words.js';
+import {claudeNote, claudePeek, limitNote, limitTitle, unitAppId} from '../words.js';
 
 const EMBER = 'io.github.tomsliikee.Ember';
 const EMBER_PATH = '/io/github/tomsliikee/Ember';
 const PROPERTIES = 'org.freedesktop.DBus.Properties';
 const TALLY = GLib.build_filenamev([GLib.get_user_cache_dir(), 'tally']);
+const DESKTOP_APP = 'com.anthropic.Claude.desktop';
 const ID = 'claude';
 // The note counts minutes; a minute is enough.
 const TICK_S = 30;
@@ -20,10 +22,23 @@ function sessionsOf(json) {
         const state = JSON.parse(json);
         return (Array.isArray(state?.sessions) ? state.sessions : [])
             .filter(s => s && typeof s.project === 'string' && ['working', 'waiting'].includes(s.state))
-            .map(s => ({project: s.project, state: s.state, since: typeof s.since === 'number' ? s.since : null}));
+            .map(s => ({
+                project: s.project, state: s.state, since: typeof s.since === 'number' ? s.since : null,
+                unit: typeof s.unit === 'string' ? s.unit : null, desktop: s.desktop === true,
+            }));
     } catch {
         return [];
     }
+}
+
+// The window a session runs in: Claude's desktop app, or the terminal
+// whose unit Ember saw. Null where it is not known.
+function appOf(session) {
+    const apps = Shell.AppSystem.get_default();
+    if (session?.desktop)
+        return apps.lookup_app(DESKTOP_APP);
+    const id = unitAppId(session?.unit);
+    return id ? apps.lookup_app(id) : null;
 }
 
 function readText(path) {
@@ -90,6 +105,7 @@ export class ClaudeSource {
                 this._island.set({
                     id: `hint:claude-wait:${session.project}`, kind: 'claude', hint: true, duration: 5000, view: 'info',
                     data: {icon: 'smart-toy', tone: 'tertiary', title: 'Claude needs you', note: claudeNote(session, Date.now())},
+                    onOpen: this._opener(session),
                 });
             }
         }
@@ -116,6 +132,7 @@ export class ClaudeSource {
                 note: claudeNote(first, Date.now()),
                 peek: claudePeek(working),
             },
+            onOpen: this._opener(first),
         });
         if (!this._tick) {
             this._tick = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, TICK_S, () => {
@@ -123,6 +140,11 @@ export class ClaudeSource {
                 return this._tick ? GLib.SOURCE_CONTINUE : GLib.SOURCE_REMOVE;
             });
         }
+    }
+
+    _opener(session) {
+        const app = appOf(session);
+        return app ? () => app.activate() : null;
     }
 
     _readLimits() {

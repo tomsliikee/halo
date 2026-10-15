@@ -61,6 +61,7 @@ export class ProgressSource {
                 peek: app ? `Click to open ${app.get_name()}` : null,
             },
             onClick: app ? () => app.activate() : null,
+            onOpen: app ? () => app.activate() : null,
         });
     }
 }

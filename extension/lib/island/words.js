@@ -165,3 +165,13 @@ export function claudePeek(sessions) {
     const projects = [...new Set(sessions.map(session => session.project).filter(Boolean))];
     return projects.length > 0 ? projects.join(', ') : '';
 }
+
+// The app a Claude Code session runs in, from the systemd unit Ember
+// reports ("app-gnome-org.gnome.Ptyxis-4242.scope", "app-com.anthropic.Claude-33622.scope"),
+// as a desktop file id, or null.
+export function unitAppId(unit) {
+    const match = /^app-(?:gnome-|flatpak-)?(.+?)(?:-\d+)?(?:@[^.]*)?\.(?:scope|service)$/.exec(unit ?? '');
+    if (!match)
+        return null;
+    return `${match[1].replace(/\\x2d/g, '-')}.desktop`;
+}

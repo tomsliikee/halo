@@ -41,6 +41,7 @@ const EVENT_NAMES = {
 };
 
 const SPEEDS = [['quick', 'Quick'], ['normal', 'Normal'], ['slow', 'Slow']];
+const CLICKS = [['app', 'Opens the app'], ['large', 'Opens it larger']];
 const STYLES = [['light', 'Light'], ['dark', 'Dark'], ['auto', 'Auto']];
 const STEP_MINUTES = 30;
 
@@ -97,8 +98,14 @@ export class SettingsPage extends Page {
         for (const [key, title, note] of BAR_SWITCHES)
             bar.add_child(this._switchRow(title, note, s => s[key], on => ctx.settings.set(key, on)));
 
+        const click = this.add(card('A click on the island'));
+        click.add_child(text('qs-row-note', {styleClass: 'halo-qs-small', wrap: true,
+            text: 'Music, Claude or a download: open its window, or first its larger look. The middle button always opens it larger.'}));
+        click.add_child(this._segmented(CLICKS, () => ctx.settings.current.islandClick,
+            value => ctx.settings.set('islandClick', value)));
+
         const island = this.add(card('What opens the island'));
-        this._jumpTo = section === 'island' ? island : null;
+        this._jumpTo = section === 'island' ? click : null;
         this._jumpEnd = 0;
         for (const name of ISLAND_EVENTS) {
             island.add_child(this._switchRow(EVENT_NAMES[name], '', s => s.islandEvents[name],

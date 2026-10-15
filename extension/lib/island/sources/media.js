@@ -163,6 +163,8 @@ export class MediaSource {
                 canNext: player.canGoNext,
                 peek: mediaPeek({app, position, length: this._length()}),
             },
+            // The player's own window, by its desktop file or MPRIS Raise.
+            onOpen: player.app || player._mprisProxy?.CanRaise ? () => player.raise() : null,
             onPlay: () => player.playPause(),
             onPrevious: () => player.previous(),
             onNext: () => player.next(),
