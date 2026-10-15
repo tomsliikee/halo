@@ -31,14 +31,12 @@ function sessionsOf(json) {
     }
 }
 
-// The window a session runs in: Claude's desktop app, or the terminal
-// whose unit Ember saw. Null where it is not known.
+// The window a session runs in: the terminal whose unit Ember reports,
+// else Claude's desktop app where it is installed, else null.
 function appOf(session) {
     const apps = Shell.AppSystem.get_default();
-    if (session?.desktop)
-        return apps.lookup_app(DESKTOP_APP);
-    const id = unitAppId(session?.unit);
-    return id ? apps.lookup_app(id) : null;
+    const id = session?.desktop ? null : unitAppId(session?.unit);
+    return (id ? apps.lookup_app(id) : null) ?? apps.lookup_app(DESKTOP_APP);
 }
 
 function readText(path) {
