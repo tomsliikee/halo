@@ -27,13 +27,14 @@ import {SidePanel} from './side.js';
 export const WIDTH = 840;
 const MAX_HEIGHT = 760;
 const MARGIN = 8;
-const FADE_MS = 140;
-const STAGGER_MS = 40;
+// The center moves slower than the island, so it can be followed.
+const FADE_MS = 260;
+const STAGGER_MS = 70;
 // The card's corners (stylesheet: .halo-center).
 const CARD_RADIUS = 32;
 // The card comes over the growing shape once it is most of the way.
-const REVEAL_MS = 150;
-const CLOSE_FADE_MS = 90;
+const REVEAL_MS = 320;
+const CLOSE_FADE_MS = 180;
 
 // The shape between the clock and the card: a rounded box that a spring
 // moves through morphAt from one rectangle and colour to another.
@@ -195,7 +196,7 @@ export class CenterPanel {
             this._growFrom(clock);
         } else if (expressive()) {
             this._card.set({scale_x: 0.9, scale_y: 0.9, translation_y: -14, opacity: 0});
-            spring(this._card, {scale_x: 1, scale_y: 1, translation_y: 0}, {spring: SPRINGS.rise});
+            spring(this._card, {scale_x: 1, scale_y: 1, translation_y: 0}, {spring: SPRINGS.unfoldRise});
             this._card.ease({opacity: 255, duration: stretch(FADE_MS), mode: Clutter.AnimationMode.EASE_OUT_CUBIC});
             this.sections.forEach((section, i) => {
                 section.set({opacity: 0, translation_y: 16});
@@ -257,7 +258,7 @@ export class CenterPanel {
         this._card.set({scale_x: 1, scale_y: 1, translation_y: 0, opacity: 0});
         this._morph.between(clock, this._cardShape());
         this._morph.show();
-        spring(this._morph, {progress: 1}, {spring: SPRINGS.grow});
+        spring(this._morph, {progress: 1}, {spring: SPRINGS.unfold});
         this._card.ease({
             opacity: 255, delay: stretch(REVEAL_MS), duration: stretch(FADE_MS), mode: Clutter.AnimationMode.EASE_OUT_CUBIC,
             onStopped: () => {
@@ -287,7 +288,7 @@ export class CenterPanel {
             this._morph.hide();
             this.actor.hide();
         };
-        spring(this._morph, {progress: 1}, {spring: SPRINGS.shrink, onDone: done});
+        spring(this._morph, {progress: 1}, {spring: SPRINGS.fold, onDone: done});
     }
 
     destroy() {

@@ -17,7 +17,10 @@ import {agoText, swipeDismisses} from './words.js';
 
 // A press that moves less than this is a click, not a swipe.
 const CLICK_PX = 6;
-const STAGGER_MS = 30;
+const STAGGER_MS = 50;
+// The cards come once the center's card shows (center.js REVEAL_MS).
+const INTRO_MS = 320;
+const INTRO_FADE_MS = 240;
 
 function box(styleClass, {vertical = false, children = [], ...params} = {}) {
     const actor = new St.BoxLayout({style_class: styleClass, vertical, ...params});
@@ -115,8 +118,8 @@ export class NotificationList {
             this.actor.add_child(card);
             if (intro && expressive()) {
                 card.set({opacity: 0, translation_y: 12});
-                spring(card, {translation_y: 0}, {spring: SPRINGS.pop, delay: 60 + i * STAGGER_MS});
-                card.ease({opacity: 255, delay: stretch(60 + i * STAGGER_MS), duration: stretch(140), mode: Clutter.AnimationMode.EASE_OUT_CUBIC});
+                spring(card, {translation_y: 0}, {spring: SPRINGS.pop, delay: INTRO_MS + i * STAGGER_MS});
+                card.ease({opacity: 255, delay: stretch(INTRO_MS + i * STAGGER_MS), duration: stretch(INTRO_FADE_MS), mode: Clutter.AnimationMode.EASE_OUT_CUBIC});
             }
         });
     }

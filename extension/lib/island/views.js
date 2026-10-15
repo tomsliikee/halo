@@ -18,8 +18,8 @@ import {clockText, initials, isDecline, trackTime} from './words.js';
 
 const LEVEL_TRACK = 240;
 // The large player's progress line, between its two times.
-const MEDIA_TRACK = 300;
-const WIDE = 460;
+const MEDIA_TRACK = 350;
+const WIDE = 520;
 // The bubble beside the island, for a second lasting thing.
 export const BUBBLE = 64;
 // The bars of a playing waveform, and how fast they move.
@@ -210,13 +210,33 @@ export function restView({date, time, unread}) {
 // The hover preview: a small look with one more line below it, for what
 // the small island leaves out. view: a built view; the line is data.peek.
 export function withPeek(view, activity) {
-    const line = text('island-small', {styleClass: 'halo-island-dim halo-island-peek', text: activity.data.peek ?? ''});
-    const actor = box('halo-island-peeking', {vertical: true, children: [view.actor, line]});
+    const line = text('island-small', {styleClass: 'halo-island-dim', text: activity.data.peek ?? ''});
+    // Music and timers also show how far they are, as a thin bar.
+    const track = new St.Widget({style_class: 'halo-island-track halo-island-thin', x_expand: true});
+    const fill = new St.Widget({style_class: 'halo-island-fill', height: 6});
+    track.add_child(fill);
+    let share = null;
+    const showShare = () => {
+        track.visible = share !== null;
+        if (share !== null)
+            fill.width = Math.round(share * track.width);
+    };
+    track.connect('notify::width', showShare);
+    const shareOf = data => data.length > 0 ? Math.max(0, Math.min(1, data.position / data.length))
+        : typeof data.progress === 'number' ? Math.max(0, Math.min(1, data.progress)) : null;
+    const peek = box('halo-island-peek', {vertical: true, children: [line, track]});
+    const actor = box('halo-island-peeking', {vertical: true, children: [view.actor, peek]});
+    const update = next => {
+        line.text = next.data.peek ?? '';
+        share = shareOf(next.data);
+        showShare();
+    };
+    update(activity);
     return {
         actor,
         update(next) {
             view.update?.(next);
-            line.text = next.data.peek ?? '';
+            update(next);
         },
     };
 }
@@ -376,7 +396,7 @@ export function mediaCompactView(activity) {
 // data: {title, note, cover, playing, position, length, canPrevious, canNext}
 export function mediaLargeView(activity) {
     const {data} = activity;
-    const cover = coverSlot(data.cover, {size: 92, radius: 22});
+    const cover = coverSlot(data.cover, {size: 112, radius: 26});
     const {column, titleLabel, noteLabel} = titleAndNote(data.title, data.note, {titleRole: 'island-headline'});
     const head = box('halo-island-media-head', {children: [cover.actor, column]});
 
@@ -387,10 +407,10 @@ export function mediaLargeView(activity) {
     track.add_child(fill);
     const progress = box('halo-island-progress', {children: [at, track, length]});
 
-    const previous = round('skip-previous', () => activity.onPrevious(), {tone: 'plain', size: 50, accessibleName: 'Previous'});
-    const play = round(data.playing ? 'pause' : 'play-arrow', () => activity.onPlay(), {square: true, size: 64, iconSize: 30, accessibleName: 'Play or pause'});
-    play.width = 72;
-    const next = round('skip-next', () => activity.onNext(), {tone: 'plain', size: 50, accessibleName: 'Next'});
+    const previous = round('skip-previous', () => activity.onPrevious(), {tone: 'plain', size: 58, accessibleName: 'Previous'});
+    const play = round(data.playing ? 'pause' : 'play-arrow', () => activity.onPlay(), {square: true, size: 72, iconSize: 34, accessibleName: 'Play or pause'});
+    play.width = 84;
+    const next = round('skip-next', () => activity.onNext(), {tone: 'plain', size: 58, accessibleName: 'Next'});
     const controls = box('halo-island-controls', {children: [previous, play, next], x_align: Clutter.ActorAlign.CENTER});
 
     const actor = box('halo-island-large', {vertical: true, children: [head, progress, controls], width: WIDE});

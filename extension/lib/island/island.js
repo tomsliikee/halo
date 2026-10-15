@@ -32,6 +32,10 @@ const COMPACT = 64;
 const PEEK_MS = 300;
 // After a swap, a swipe's remaining motion does not swap back.
 const SWAP_PAUSE_MS = 450;
+// Room the island grows by on each side while the pointer is on a small
+// look: wider and longer, the content keeps its size.
+const HOVER_X = 14;
+const HOVER_Y = 8;
 // The pencil circle while the center is open.
 const EDIT = 36;
 // Below the bar, where the island hangs when there is no clock to grow from.
@@ -292,6 +296,7 @@ export class Island {
         const {main, bubble} = this._pick();
         const place = this._place();
         this._shape.setAnchor(place.x, place.y);
+        this._syncPad(main, animate);
 
         if (!main) {
             // Resting: the clock, the pencil circle while the clock has
@@ -386,7 +391,9 @@ export class Island {
             return;
         const main = this._shape;
         const size = this._bubbleSize || Views.BUBBLE;
-        const top = main.y + Math.max(0, Math.min(main.boxHeight, COMPACT) - size) / 2;
+        // Centred on the compact part, which grows with the hover room.
+        const extra = Math.max(0, main.boxHeight - main.innerHeight);
+        const top = main.y + Math.max(0, Math.min(main.boxHeight, COMPACT + extra) - size) / 2;
         this._bubble.setAnchor(main.x + main.boxWidth + BUBBLE_GAP + size / 2, top);
     }
 
@@ -510,9 +517,19 @@ export class Island {
         this._scheduleExpiry();
     }
 
-    // The pointer came onto the island or left it: after a moment a small
-    // look shows its preview line; leaving takes it away.
+    // A small look under the pointer grows around itself; the clock, an
+    // opened look and the lock screen stay as they are.
+    _syncPad(main, animate = true) {
+        const on = Boolean(main) && this._shape.hover && !this._locked && !(this._expanded === main.id && main.large);
+        this._shape.setPad(on ? HOVER_X : 0, on ? HOVER_Y : 0, {animate});
+    }
+
+    // The pointer came onto the island or left it: at once it grows a
+    // little; after a moment a small look shows its preview line; leaving
+    // takes both away.
     _peekChanged() {
+        if (!this._gone)
+            this._syncPad(this._pick().main);
         if (this._peekWait)
             GLib.source_remove(this._peekWait);
         this._peekWait = 0;

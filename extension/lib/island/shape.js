@@ -32,6 +32,9 @@ class IslandShape extends St.Widget {
         // Where the shape hangs from: its centre on x, its top on y.
         this._anchorX = 0;
         this._anchorY = 0;
+        // The size of what it holds, and room added around it (on hover).
+        this._inner = {w: 0, h: 0};
+        this._pad = {x: 0, y: 0};
 
         this._bg = new St.DrawingArea({reactive: false});
         this._bg.connect('repaint', () => this._draw());
@@ -57,6 +60,16 @@ class IslandShape extends St.Widget {
     set boxHeight(value) {
         this._h = Math.max(1, value);
         this._layout();
+    }
+
+    // The height of what it holds, without the room around it.
+    get innerHeight() {
+        return this._inner.h || this._h;
+    }
+
+    // The room around what it holds: {x, y} on each side.
+    get pad() {
+        return this._pad;
     }
 
     get content() {
@@ -104,9 +117,23 @@ class IslandShape extends St.Widget {
         this.resize(w, h, {animate: moving});
     }
 
-    // Springs the shape to a size: past it on the way out, a small swing
-    // on the way back.
-    resize(w, h, {animate = true} = {}) {
+    // Room around what it holds, on each side: the shape grows past its
+    // content, wider and downwards, while the content keeps its size and
+    // stays sharp.
+    setPad(x, y, {animate = true} = {}) {
+        if (x === this._pad.x && y === this._pad.y)
+            return;
+        this._pad = {x, y};
+        if (this._inner.w)
+            this.resize(this._inner.w, this._inner.h, {animate, spring: SPRINGS.hover});
+    }
+
+    // Springs the shape to a size (of what it holds; the pad comes on top):
+    // past it on the way out, a small swing on the way back.
+    resize(innerW, innerH, {animate = true, spring: chosen = null} = {}) {
+        this._inner = {w: innerW, h: innerH};
+        const w = innerW + 2 * this._pad.x;
+        const h = innerH + 2 * this._pad.y;
         if (!animate || !expressive()) {
             stopSprings(this, ['boxWidth', 'boxHeight']);
             this._w = w;
@@ -115,7 +142,7 @@ class IslandShape extends St.Widget {
             return;
         }
         const growing = w * h >= this._w * this._h;
-        spring(this, {boxWidth: w, boxHeight: h}, {spring: growing ? SPRINGS.grow : SPRINGS.shrink});
+        spring(this, {boxWidth: w, boxHeight: h}, {spring: chosen ?? (growing ? SPRINGS.grow : SPRINGS.shrink)});
     }
 
     _layout() {

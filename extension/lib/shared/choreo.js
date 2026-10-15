@@ -17,6 +17,13 @@ export const SPRINGS = {
     grow: {damping: 0.58, stiffness: 340},
     // The island shrinking back to the clock: a small swing only.
     shrink: {damping: 0.75, stiffness: 420},
+    // The notification center unfolding out of the clock: slow enough to
+    // follow, visibly past, then back.
+    unfold: {damping: 0.68, stiffness: 110},
+    // The center folding back into the clock: calm, a small swing only.
+    fold: {damping: 0.82, stiffness: 150},
+    // The center's card rising where there is no clock to grow from.
+    unfoldRise: {damping: 0.8, stiffness: 220},
     // The bar spreading to both sides: visibly past, then back.
     spread: {damping: 0.62, stiffness: 380},
     // An icon popping in, a count popping up.
