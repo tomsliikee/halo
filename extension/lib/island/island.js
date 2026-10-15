@@ -123,6 +123,11 @@ export class Island {
         return this._expanded;
     }
 
+    // The id of the activity showing its preview line, or null.
+    get peeking() {
+        return this._peek;
+    }
+
     has(id) {
         return this._activities.has(id);
     }

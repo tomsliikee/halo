@@ -120,11 +120,26 @@ function waveform({width = 28, height = 24} = {}) {
     };
 }
 
+// A cover that follows the track: picture() again only when it changed.
+function coverSlot(gicon, options) {
+    const slot = new St.Bin({child: picture(gicon, 'album', options), y_align: Clutter.ActorAlign.CENTER});
+    let shown = gicon;
+    return {
+        actor: slot,
+        set(next) {
+            if (next === shown || (next && shown && next.equal(shown)))
+                return;
+            shown = next;
+            slot.child = picture(next, 'album', options);
+        },
+    };
+}
+
 // A ring that fills as a timer runs, with an icon inside.
 function ring(name, {size = 40} = {}) {
     const holder = new St.Widget({width: size, height: size, y_align: Clutter.ActorAlign.CENTER, layout_manager: new Clutter.BinLayout()});
     const area = new St.DrawingArea({width: size, height: size, style_class: 'halo-island-ring'});
-    let share = 0;
+    let share = -1;
     area.connect('repaint', () => {
         const cr = area.get_context();
         const color = area.get_theme_node().get_foreground_color();
@@ -143,14 +158,18 @@ function ring(name, {size = 40} = {}) {
         cr.$dispose();
     });
     holder.add_child(area);
-    const glyph = icon(name, {size: 20, fill: true, styleClass: 'halo-island-ring-icon'});
+    const glyph = icon(name, {size: Math.round(size / 2), fill: true, styleClass: 'halo-island-ring-icon'});
     glyph.x_align = Clutter.ActorAlign.CENTER;
     glyph.y_align = Clutter.ActorAlign.CENTER;
     holder.add_child(glyph);
     return {
         actor: holder,
         set(value) {
-            share = Math.max(0, Math.min(1, value));
+            const next = Math.max(0, Math.min(1, value));
+            // A second's tick that does not move the arc a pixel draws nothing.
+            if (Math.abs(next - share) * Math.PI * size < 0.25)
+                return;
+            share = next;
             area.queue_repaint();
         },
     };
@@ -168,6 +187,7 @@ function spinning(actor) {
         else
             timeline.stop();
     });
+    actor.connect('destroy', () => timeline.stop());
     actor.connect('destroy', () => timeline.stop());
 }
 
@@ -333,16 +353,17 @@ export function recordingView(activity) {
 // data: {title, note, cover, playing}; activity.onPlay()
 export function mediaCompactView(activity) {
     const {data} = activity;
-    const cover = picture(data.cover, 'album', {size: 50, radius: 14});
+    const cover = coverSlot(data.cover, {size: 50, radius: 14});
     const {column, titleLabel, noteLabel} = titleAndNote(data.title, data.note);
     column.width = 180;
     const wave = waveform();
     wave.setPlaying(data.playing);
     const play = round(data.playing ? 'pause' : 'play-arrow', () => activity.onPlay(), {square: true, size: 50, accessibleName: 'Play or pause'});
-    const actor = box('halo-island-media', {children: [cover, column, wave.actor, play]});
+    const actor = box('halo-island-media', {children: [cover.actor, column, wave.actor, play]});
     return {
         actor,
         update(next) {
+            cover.set(next.data.cover);
             titleLabel.text = next.data.title;
             noteLabel.text = next.data.note;
             wave.setPlaying(next.data.playing);
@@ -355,9 +376,9 @@ export function mediaCompactView(activity) {
 // data: {title, note, cover, playing, position, length, canPrevious, canNext}
 export function mediaLargeView(activity) {
     const {data} = activity;
-    const cover = picture(data.cover, 'album', {size: 92, radius: 22});
+    const cover = coverSlot(data.cover, {size: 92, radius: 22});
     const {column, titleLabel, noteLabel} = titleAndNote(data.title, data.note, {titleRole: 'island-headline'});
-    const head = box('halo-island-media-head', {children: [cover, column]});
+    const head = box('halo-island-media-head', {children: [cover.actor, column]});
 
     const at = text('island-small', {styleClass: 'halo-island-dim', text: ''});
     const length = text('island-small', {styleClass: 'halo-island-dim', text: ''});
@@ -384,6 +405,7 @@ export function mediaLargeView(activity) {
     };
     const update = upcoming => {
         activity = upcoming;
+        cover.set(upcoming.data.cover);
         titleLabel.text = upcoming.data.title;
         noteLabel.text = upcoming.data.note;
         play.child.gicon = iconGicon(upcoming.data.playing ? 'pause' : 'play-arrow', true);

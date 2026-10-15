@@ -275,7 +275,9 @@ export class Bar {
         const app = full && !state.overview ? state.apps[this.monitorIndex] : null;
         this._app.visible = Boolean(app);
         if (app) {
-            this._appIcon.gicon = app.gicon;
+            // A new icon object for the same icon would load it again.
+            if (!app.gicon || !app.gicon.equal(this._appIcon.gicon))
+                this._appIcon.gicon = app.gicon;
             this._appName.text = app.name;
         }
 
@@ -468,7 +470,9 @@ export class Bar {
 
         this._frame.visible = Boolean(frame);
         if (frame) {
-            this._frame.set_style(`border-radius: ${cornerRadius(frame.corners, 22)};`);
+            const style = `border-radius: ${cornerRadius(frame.corners, 22)};`;
+            if (this._frame.get_style() !== style)
+                this._frame.set_style(style);
             this._frame.set({y: frame.y, height: frame.height});
             this._move(this._frame, {x: frame.x, width: frame.width}, animated && this._placed);
         }

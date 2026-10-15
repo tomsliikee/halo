@@ -121,21 +121,24 @@ class IslandShape extends St.Widget {
     _layout() {
         const w = Math.round(this._w);
         const h = Math.round(this._h);
-        this.set_position(this._anchorX - Math.round(w / 2), this._anchorY);
-        this.set_size(w, h);
-        this._clip.set_size(w, h);
-        this._bg.set_position(-SHADOW, -SHADOW);
-        this._bg.set_size(w + SHADOW * 2, h + SHADOW * 2);
-        // What it holds stays centred while the shape swings around it.
-        const content = this._content;
-        if (content)
-            content.set_position(Math.round((w - content.width) / 2), Math.round((h - content.height) / 2));
-        for (const child of this._clip.get_children()) {
-            if (child !== content)
-                child.set_position(Math.round((w - child.width) / 2), Math.round((h - child.height) / 2));
+        const x = this._anchorX - Math.round(w / 2);
+        // A spring sets width and height one after the other, and its tail
+        // moves less than a pixel: the shape is redrawn only when it moved.
+        const moved = x !== this.x || this._anchorY !== this.y || w !== this.width || h !== this.height;
+        if (moved) {
+            this.set_position(x, this._anchorY);
+            this.set_size(w, h);
+            this._clip.set_size(w, h);
+            this._bg.set_position(-SHADOW, -SHADOW);
+            this._bg.set_size(w + SHADOW * 2, h + SHADOW * 2);
         }
-        this._bg.queue_repaint();
-        this.emit('moved');
+        // What it holds stays centred while the shape swings around it.
+        for (const child of this._clip.get_children())
+            child.set_position(Math.round((w - child.width) / 2), Math.round((h - child.height) / 2));
+        if (moved) {
+            this._bg.queue_repaint();
+            this.emit('moved');
+        }
     }
 
     _draw() {

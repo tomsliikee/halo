@@ -170,11 +170,12 @@ export class MediaSource {
         });
     }
 
-    // While the large player is open its time moves every second.
+    // While the large player or the preview line is open its time moves
+    // every second.
     _syncTick(playing) {
         if (playing && !this._tick) {
             this._tick = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 1, () => {
-                if (this._island.expanded === ID)
+                if (this._island.expanded === ID || this._island.peeking === ID)
                     this._update();
                 return GLib.SOURCE_CONTINUE;
             });

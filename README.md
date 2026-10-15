@@ -248,7 +248,7 @@ Colours come from **`extension/lib/shared/palettes.js`**: each style is Material
 | **Unit tests** | `for t in tests/*.test.js; do gjs -m "$t"; done` |
 | **Stylesheet** | `gjs -m tools/build-stylesheet.js` |
 | **Icons and symbols** | `gjs -m tools/build-icons.js`, `gjs -m tools/build-symbols.js` |
-| **Headless shell** | `tools/headless/run.sh <script> [seconds]` with a script from **`tools/headless/scripts`** (`bar`, `qs`, `island`, `center`, `morph`, `gestures`, `dismiss`, `lock`, `lock-input`, `states`, `lifecycle`); screenshots land in **`$TMPDIR/halo-headless`** |
+| **Headless shell** | `tools/headless/run.sh <script> [seconds]` with a script from **`tools/headless/scripts`** (`bar`, `qs`, `island`, `center`, `morph`, `gestures`, `dismiss`, `perf`, `lock`, `lock-input`, `states`, `lifecycle`); screenshots land in **`$TMPDIR/halo-headless`** |
 | **Dark desktop** | `HALO_SCHEME=dark tools/headless/run.sh center` |
 | **Two monitors** | `HALO_MONITORS=2 tools/headless/run.sh lifecycle` |
 | **Beside other extensions** | `HALO_WITH="<uuid>=<path to its extension folder>" tools/headless/run.sh lifecycle` |
@@ -265,6 +265,7 @@ Colours come from **`extension/lib/shared/palettes.js`**: each style is Material
 | **Every island look, each brought about the way the system would** (OSD calls, the tray, a D-Bus call with category, the timer file, the battery) | ***Tested*** in the headless shell (`island`), light and dark. |
 | **The center growing out of the clock and back, the pencil circle, an event while the center is open** | ***Tested*** in the headless shell (`morph`); the motion itself checked on frames held at points of the spring, as the headless screenshots are too slow to catch it. |
 | **Hover preview, wheel on the timer, a touchpad swipe swapping, the wheel on music** | ***Tested*** in the headless shell (`gestures`) with a virtual pointer; a real touchpad not yet. |
+| **Cost while nothing changes; the music's cover following the track** | ***Tested*** in the headless shell (`perf`): no frames painted while idle or while the bar gets the same state 20 times in 2 s (21 before), three frames in three seconds for a running timer. |
 | **A right click sending a thing to the circle and a click bringing it back; GNOME's lock screen list hidden** | ***Tested*** in the headless shell (`dismiss`) with a virtual pointer and a test notification while locked. |
 | **Notification center: grouping, opening, swipe and spring back, Do not disturb, Super + V, another day, Clear all** | ***Tested*** in the headless shell (`center`) with a virtual pointer. |
 | **Lock screen** | ***Tested*** in the headless shell (`lock`, `lock-input`): GNOME's screen shield locks and unlocks, and a click reaches its password prompt after five ways of locking. |

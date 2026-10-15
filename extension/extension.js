@@ -263,7 +263,6 @@ export default class HaloExtension extends Extension {
         this._lockBox = new LockBox(() => island.allows('notifications'));
         this._lockBox.update();
         this._islandSources = [
-            this._lockBox,
             new OsdSource(island),
             new BannerSource(island),
             new MediaSource(island),
@@ -297,6 +296,7 @@ export default class HaloExtension extends Extension {
         for (const source of this._islandSources.reverse())
             source.destroy();
         this._islandSources = [];
+        this._lockBox?.destroy();
         this._lockBox = null;
         this._island?.destroy();
         this._island = null;

@@ -180,7 +180,7 @@ export class CenterPanel {
         this._ctx.model.acknowledgeAll();
         this._side.opened();
         this._tick = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 60, () => {
-            this._list.rebuild();
+            this._list.refreshTimes();
             this._side.refresh();
             return GLib.SOURCE_CONTINUE;
         });

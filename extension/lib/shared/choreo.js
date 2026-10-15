@@ -112,6 +112,13 @@ export function spring(actor, to, {spring = SPRINGS.pop, delay = 0, onDone = nul
         return;
     }
     const from = Object.fromEntries(names.map(name => [name, actor[name]]));
+    // Already there: no timeline, so a bar or an island that is asked to
+    // stay where it is draws no frames for it.
+    if (!delay && names.every(name => Math.abs(from[name] - to[name]) < 0.01)) {
+        Object.assign(actor, to);
+        onDone?.();
+        return;
+    }
     const length = delay + settleMs(spring);
     const key = names.sort().join(',');
     const springs = springsOf(actor);

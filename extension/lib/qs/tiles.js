@@ -447,7 +447,10 @@ export class ButtonTile extends Tile {
     update() {
         const shown = firstOf(this.button, St.Icon);
         const label = firstOf(this.button, St.Label);
-        const gicon = shown?.gicon ?? (shown?.icon_name ? Gio.ThemedIcon.new(shown.icon_name) : null);
+        let gicon = shown?.gicon ?? (shown?.icon_name ? Gio.ThemedIcon.new(shown.icon_name) : null);
+        // The same icon as a new object is no change.
+        if (gicon && this.gicon && gicon.equal(this.gicon))
+            gicon = this.gicon;
         this._set({
             gicon,
             // A drawn mark instead of an icon is shown as a live copy.

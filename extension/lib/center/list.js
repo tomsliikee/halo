@@ -65,7 +65,19 @@ export class NotificationList {
             children: [icon('notifications', {size: 32, styleClass: 'halo-center-empty-icon'}), text('qs-row', {text: 'No notifications', styleClass: 'halo-center-dim'})],
         });
         this._model = ctx.model;
-        this._model.connectObject('changed', () => this.rebuild(), this);
+        this._times = [];
+        this._later = 0;
+        // Closed, nothing is built: opening builds it fresh.
+        this._model.connectObject('changed', () => {
+            if (this.actor.mapped)
+                this.rebuild();
+        }, this);
+    }
+
+    // A minute passed: the times say so; the cards stay as they are.
+    refreshTimes() {
+        for (const {label, time} of this._times)
+            label.text = ago(time);
     }
 
     // The center opened: what came since it was last open is marked.
@@ -91,6 +103,7 @@ export class NotificationList {
         for (const child of this._built ?? [])
             child.destroy();
         this._built = [];
+        this._times = [];
         const groups = this._model.groups;
         if (groups.length === 0) {
             this.actor.add_child(this._empty);
@@ -109,6 +122,9 @@ export class NotificationList {
     }
 
     destroy() {
+        if (this._later)
+            GLib.source_remove(this._later);
+        this._later = 0;
         this._model.disconnectObject(this);
         this._empty.destroy();
         this.actor.destroy();
@@ -132,6 +148,7 @@ export class NotificationList {
         const app = text('qs-caption', {styleClass: 'halo-center-app', ellipsize: true, text: older.length > 0 ? `${newest.app} · ${group.items.length}` : newest.app});
         app.x_expand = true;
         const when = text('qs-caption', {styleClass: 'halo-center-dim', text: ago(newest.time)});
+        this._times.push({label: when, time: newest.time});
         const close = new St.Bin({style_class: 'halo-center-close', child: icon('close', {size: 16}), visible: false, accessible_name: 'Dismiss'});
         pressable(close, () => this._dismiss(card, group), {focus: true});
         const header = box('halo-center-header', {children: [app, when, close]});
@@ -150,6 +167,7 @@ export class NotificationList {
                 const line = text('body', {styleClass: 'halo-center-body', text: item.body || item.title});
                 wrapping(line, 3);
                 const time = text('qs-caption', {styleClass: 'halo-center-dim', text: ago(item.time)});
+                this._times.push({label: time, time: item.time});
                 const sub = box('halo-center-sub', {vertical: true, children: [line, time], reactive: true});
                 pressable(sub, () => this._activate(item.notification), {scale: 0.98});
                 card.add_child(sub);
@@ -266,7 +284,8 @@ export class NotificationList {
             // Changes that came while it was held show now.
             if (this._pending) {
                 this._pending = false;
-                GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
+                this._later ||= GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
+                    this._later = 0;
                     if (!this._swiping)
                         this.rebuild();
                     return GLib.SOURCE_REMOVE;
