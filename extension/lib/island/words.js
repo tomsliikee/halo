@@ -137,3 +137,11 @@ export function trackTime(microseconds) {
 export function recordingText(seconds) {
     return elapsedText(seconds);
 }
+
+// The lock screen's line for an app's notifications: the title only where
+// the user lets the details show there, else how many came.
+export function lockedNote(count, title = '') {
+    if (title)
+        return title;
+    return count === 1 ? 'New notification' : `${count} new notifications`;
+}

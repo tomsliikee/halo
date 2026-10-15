@@ -1,0 +1,12 @@
+<!-- @dsCard group="Data" height=300 subtitle="Four moods, five steps each" -->
+<div id="root" class="ted-preview" style="flex-direction: column; align-items: stretch"></div>
+<script>
+var T = window.Toms, h = React.createElement;
+var moods = [['soft', 'var(--tertiary)', 'var(--on-tertiary)'], ['radiant', 'var(--status-warn)', 'var(--on-status-warn)'], ['angular', 'var(--secondary)', 'var(--on-secondary)'], ['warm', 'var(--error)', 'var(--on-error)']];
+var levels = [0.1, 0.3, 0.5, 0.7, 0.92];
+ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { display: 'flex', flexDirection: 'column', gap: 10 } }, moods.map(function (m) {
+  return h('div', { key: m[0], style: { display: 'flex', alignItems: 'center', gap: 14 } },
+    h('div', { style: { width: 70, fontSize: 13, fontWeight: 700 } }, m[0]),
+    levels.map(function (l) { return h(T.ShapeBadge, { key: l, mood: m[0], level: l, size: 52, fill: m[1], color: m[2], label: String(Math.round(l * 100)) }); }));
+})));
+</script>

@@ -1,0 +1,11 @@
+<!-- @dsCard group="Text" height=210 -->
+<div id="root" class="ted-preview" style="flex-direction: column; align-items: stretch; max-width: 400px; gap: 8px"></div>
+<script>
+var T = window.Toms, h = React.createElement;
+ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null,
+  h(T.TopBar, { title: 'Overview', subtitle: 'Sunday, 11 October', actions: h('div', { style: { display: 'flex', gap: 8 } },
+    h(T.IconButton, { icon: 'edit', label: 'Edit layout' }),
+    h(T.ShapeBadge, { shape: 'cookie9', size: 48, fill: 'var(--tertiary)', color: 'var(--on-tertiary)' }, h(T.Icon, { name: 'person', size: 22 }))) }),
+  h('div', { style: { padding: '8px 12px 0', borderRadius: 24, background: 'var(--illustration-night)' } },
+    h(T.TopBar, { title: 'Tonight', subtitle: 'Wind down from 22:00', ink: '#ffffff' }))));
+</script>

@@ -55,4 +55,4 @@ gsettings set org.gnome.desktop.wm.preferences num-workspaces 4
 gsettings set org.gnome.desktop.background picture-options none
 gsettings set org.gnome.desktop.background color-shading-type solid
 gsettings set org.gnome.desktop.background primary-color "#101a38"
-timeout "$HALO_SECONDS" gnome-shell --headless $MONITORS --wayland-display halo-test --no-x11 2>&1'
+timeout -k 10 "$HALO_SECONDS" gnome-shell --headless $MONITORS --wayland-display halo-test --no-x11 2>&1'

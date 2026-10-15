@@ -7,6 +7,8 @@ import Gio from 'gi://Gio';
 import Shell from 'gi://Shell';
 import St from 'gi://St';
 
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+
 import {icon, iconGicon} from '../shared/icons.js';
 import {pressable} from '../shared/press.js';
 import {text} from '../shared/text.js';
@@ -69,6 +71,8 @@ export function settingsLink(ctx, words, desktopId) {
         ctx.close();
         openSettings(desktopId);
     }, {scale: 0.96, focus: true});
+    // Settings do not open on the lock screen.
+    label.visible = !Main.sessionMode.isLocked;
     return label;
 }
 

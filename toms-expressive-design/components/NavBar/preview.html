@@ -1,0 +1,10 @@
+<!-- @dsCard group="Navigation" height=120 -->
+<div id="root" class="ted-preview"></div>
+<script>
+var T = window.Toms, h = React.createElement;
+function Demo() {
+  var s = React.useState(0);
+  return h('div', { style: { display: 'flex', alignItems: 'center', gap: 14 } }, h(T.NavBar, { selected: s[0], onSelect: s[1] }), h(T.Fab, { label: 'Create' }));
+}
+ReactDOM.createRoot(document.getElementById('root')).render(h(Demo));
+</script>

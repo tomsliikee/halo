@@ -1,0 +1,8 @@
+/* Toms Expressive Design base: screen ground, flex font and its roundness (mood). */
+body { margin: 0; background: var(--surface-container); color: var(--on-surface); font-family: var(--font-sans); font-variation-settings: 'ROND' 100; -webkit-font-smoothing: antialiased; }
+.ted-screen { background: var(--surface-container); color: var(--on-surface); font-family: var(--font-sans); font-variation-settings: 'ROND' 100; }
+.ted-screen[data-mood="neutral"] { font-variation-settings: 'ROND' 50; }
+.ted-screen[data-mood="technical"] { font-variation-settings: 'ROND' 0; }
+.ted-preview { box-sizing: border-box; padding: 20px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; font-family: var(--font-sans); font-variation-settings: 'ROND' 100; color: var(--on-surface); }
+.ted-preview button:focus-visible, .ted-preview a:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .ted-preview * { transition: none !important; } }

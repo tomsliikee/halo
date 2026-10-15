@@ -1,0 +1,11 @@
+<!-- @dsCard group="Surfaces" height=420 -->
+<div id="root" class="ted-preview"></div>
+<script>
+var T = window.Toms, h = React.createElement;
+ReactDOM.createRoot(document.getElementById('root')).render(
+  h('div', { style: { width: 380, display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 12 } },
+    h(T.Tile, { tone: 'primary', icon: 'check', title: 'Tasks done', value: '42', trailing: h(T.Ring, { value: 0.7, size: 36, stroke: 5, label: '70 %' }) }),
+    h(T.Tile, { tone: 'tertiary', icon: 'star', shape: 'flower', title: 'Streak', value: '12', unit: 'days' }),
+    h(T.Tile, { icon: 'folder', shape: 'circle', title: 'Projects', value: '7', unit: 'active' }),
+    h(T.Tile, { icon: 'bolt', shape: 'softBurst', title: 'Focus', value: '3 h 20', unit: 'min' })));
+</script>

@@ -1,0 +1,12 @@
+<!-- @dsCard group="Surfaces" height=340 -->
+<div id="root" class="ted-preview" style="max-width: 380px"></div>
+<script>
+var T = window.Toms, h = React.createElement;
+ReactDOM.createRoot(document.getElementById('root')).render(h('div', { style: { width: 340 } },
+  h(T.ListGroup, { items: [
+    { label: 'Design', value: '6 of 8', progress: 0.75 },
+    { label: 'Build', value: '3 of 10', progress: 0.3, highlight: true },
+    { label: 'Test', value: '0 of 5', progress: 0 },
+    { label: 'Launch', value: 'Not started', note: 'Starts when Test is done.' }
+  ] })));
+</script>

@@ -1,7 +1,7 @@
 import {crossed, readLimits} from '../extension/lib/island/limits.js';
-import {pick} from '../extension/lib/island/rank.js';
+import {pick, shownWhileLocked} from '../extension/lib/island/rank.js';
 import {
-    claudeNote, clockText, copiedText, initials, isDecline, levelShare, limitNote, limitTitle, lowMark, osdIcon,
+    claudeNote, clockText, copiedText, initials, isDecline, levelShare, limitNote, limitTitle, lockedNote, lowMark, osdIcon,
     osdKind, plainText, soonText, trackTime,
 } from '../extension/lib/island/words.js';
 import * as Pomodoro from '../extension/lib/shared/pomodoro.js';
@@ -17,6 +17,13 @@ const call = {id: 'call', kind: 'call', at: 0};
 const volume = {id: 'volume', kind: 'volume', hint: true, at: 10};
 const note = {id: 'note', kind: 'notification', hint: true, at: 11};
 
+const locked = list => shownWhileLocked(list, true).map(activity => activity.id);
+test('unlocked, everything shows', () => equal(shownWhileLocked([note, call, media], false).length, 3));
+test('locked, what someone says stays out', () => equal(locked([note, call, media, volume]), ['media', 'volume']));
+test('locked, a version made for the lock screen shows', () => equal(
+    locked([{...note, id: 'safe', lockSafe: true}, {id: 'claude', kind: 'claude', at: 4}]), ['safe']));
+test('lock screen note counts', () => equal([lockedNote(1), lockedNote(3)], ['New notification', '3 new notifications']));
+test('lock screen note with details allowed', () => equal(lockedNote(2, 'Meeting moved'), 'Meeting moved'));
 test('nothing going on', () => equal(ids(pick([])), [null, null]));
 test('one lasting thing', () => equal(ids(pick([media])), ['media', null]));
 test('the higher rank wins, the next waits beside it', () => equal(ids(pick([media, timer, recording])), ['rec', 'timer']));

@@ -16,7 +16,7 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import {expressive, spring, SPRINGS, stretch} from '../shared/choreo.js';
 import {palette} from '../shared/palettes.js';
 import {setScheme} from '../shared/theme.js';
-import {pick} from './rank.js';
+import {pick, shownWhileLocked} from './rank.js';
 import {IslandShape} from './shape.js';
 import * as Views from './views.js';
 
@@ -60,6 +60,7 @@ export class Island {
         this._rest = {date: '', time: '', unread: false, open: false};
         this._expiry = 0;
         this._pressed = 0;
+        this._locked = false;
 
         this._shape = new IslandShape({name: 'haloIsland'});
         this._bubble = new IslandShape({name: 'haloIslandBubble'});
@@ -134,6 +135,17 @@ export class Island {
         this._scheduleExpiry();
     }
 
+    // On the lock screen what someone says or works on stays out; see
+    // shownWhileLocked.
+    setLocked(locked) {
+        if (locked === this._locked)
+            return;
+        this._locked = locked;
+        this._expanded = null;
+        this._focus = null;
+        this._render();
+    }
+
     // What the resting island shows: {date, time, unread, open}.
     setRest(rest) {
         this._rest = rest;
@@ -175,6 +187,10 @@ export class Island {
         this._activities.clear();
     }
 
+    _pick() {
+        return pick(shownWhileLocked([...this._activities.values()], this._locked), this._dismissed, this._focus);
+    }
+
     _paint() {
         if (this._gone)
             return;
@@ -203,7 +219,7 @@ export class Island {
     _render({animate = true} = {}) {
         if (this._gone)
             return;
-        const {main, bubble} = pick([...this._activities.values()], this._dismissed, this._focus);
+        const {main, bubble} = this._pick();
         const place = this._place();
         this._shape.setAnchor(place.x, place.y);
 
@@ -297,7 +313,7 @@ export class Island {
     }
 
     _clicked(shape, button) {
-        const {main, bubble} = pick([...this._activities.values()], this._dismissed, this._focus);
+        const {main, bubble} = this._pick();
         if (shape === this._bubble) {
             // The bubble's thing takes the island; what was there moves aside.
             if (bubble) {
@@ -378,7 +394,7 @@ export class Island {
         if (this._gone)
             return;
         const now = Date.now();
-        const {main} = pick([...this._activities.values()], this._dismissed, this._focus);
+        const {main} = this._pick();
         let changed = false;
         for (const activity of [...this._activities.values()]) {
             if (!activity.hint || activity.until > now)

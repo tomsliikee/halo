@@ -77,9 +77,11 @@ export default class HaloExtension extends Extension {
         this._islandSources = [];
         this._unfollow = null;
         this._applyParts(this._settings.current);
+        Main.sessionMode.connectObject('updated', () => this._lockChanged(), this);
     }
 
     disable() {
+        Main.sessionMode.disconnectObject(this);
         this._stopIsland();
         this._stopCenter();
         GLib.source_remove(this._eventTick);
@@ -212,8 +214,19 @@ export default class HaloExtension extends Extension {
         this._notificationModel = null;
     }
 
+    // On the lock screen the center stays shut, as GNOME's date menu is
+    // not there; the island keeps what someone says or works on to itself.
+    _lockChanged() {
+        const locked = Main.sessionMode.isLocked;
+        this._island?.setLocked(locked);
+        if (locked)
+            this._center?.close({animated: false});
+    }
+
     // The clock opens Halo's center, or GNOME's date menu while it is off.
     _toggleCenter(actor) {
+        if (Main.sessionMode.isLocked)
+            return;
         if (this._center)
             this._center.toggle();
         else if (actor)
@@ -236,6 +249,7 @@ export default class HaloExtension extends Extension {
             onClock: () => this._toggleCenter(this._bars?.primary?.clockPill ?? null),
         });
         const island = this._island;
+        island.setLocked(Main.sessionMode.isLocked);
         this._islandSources = [
             new OsdSource(island),
             new BannerSource(island),

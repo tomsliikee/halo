@@ -7,11 +7,16 @@
 // GNOME does not keep a notification's category. Calls are known by it
 // ("call", "call.incoming"), so the D-Bus method that receives
 // notifications is shadowed too, only to note the category on the way.
+//
+// On the lock screen GNOME shows no banners; the tray keeps them queued
+// for after. The island then tells only that something came, from which
+// app, as GNOME's lock screen does, and shows the title only where the
+// user lets details show there.
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as MessageTray from 'resource:///org/gnome/shell/ui/messageTray.js';
 
-import {plainText} from '../words.js';
+import {lockedNote, plainText} from '../words.js';
 import {whenText} from '../views.js';
 
 const NOTIFICATION_MS = 5000;
@@ -24,8 +29,12 @@ export class BannerSource {
         this._shown = new Map();
         this._nextCategory = null;
         this._count = 0;
+        this._lockTold = new WeakSet();
+        this._lockIds = new Set();
 
         const tray = this._tray;
+        tray.connectObject('queue-changed', () => this._queueChanged(), this);
+        Main.sessionMode.connectObject('updated', () => this._sessionChanged(), this);
         const showNotification = tray._showNotification;
         tray._showNotification = () => {
             const notification = tray._notificationQueue[0];
@@ -55,6 +64,11 @@ export class BannerSource {
     }
 
     destroy() {
+        this._tray.disconnectObject(this);
+        Main.sessionMode.disconnectObject(this);
+        for (const id of this._lockIds)
+            this._island.remove(id);
+        this._lockIds.clear();
         delete this._tray._showNotification;
         if (this._daemon)
             delete this._daemon.NotifyAsync;
@@ -139,6 +153,56 @@ export class BannerSource {
             onClick: () => notification.activate(),
             onExpire: acknowledge,
             onDismiss: acknowledge,
+        });
+    }
+
+    // Unlocked again: the lock screen's notes go; the tray now shows what
+    // it kept, and the island takes it as usual.
+    _sessionChanged() {
+        if (Main.sessionMode.isLocked)
+            return;
+        for (const id of this._lockIds)
+            this._island.remove(id);
+        this._lockIds.clear();
+    }
+
+    _queueChanged() {
+        if (!Main.sessionMode.isLocked)
+            return;
+        for (const notification of this._tray._notificationQueue) {
+            if (this._lockTold.has(notification))
+                continue;
+            this._lockTold.add(notification);
+            this._showLocked(notification);
+        }
+    }
+
+    _showLocked(notification) {
+        const source = notification.source;
+        const policy = source?.policy;
+        if (!policy?.showInLockScreen)
+            return;
+        const call = this._isCall(notification);
+        if (!this._island.allows(call ? 'calls' : 'notifications'))
+            return;
+        const id = `locked:${source.title ?? ''}`;
+        const unseen = source.notifications.filter(n => !n.acknowledged).length || 1;
+        this._lockIds.add(id);
+        this._island.set({
+            id, kind: 'notification', hint: true, lockSafe: true,
+            duration: NOTIFICATION_MS,
+            view: 'notification',
+            data: {
+                app: source.title ?? '',
+                appIcon: source.icon ?? null,
+                gicon: null,
+                title: call ? 'Incoming call' : lockedNote(unseen, policy.detailsInLockScreen ? notification.title ?? '' : ''),
+                body: '',
+                when: whenText(notification.datetime),
+                actions: [],
+            },
+            onExpire: () => this._lockIds.delete(id),
+            onDismiss: () => this._lockIds.delete(id),
         });
     }
 }

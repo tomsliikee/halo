@@ -1,0 +1,8 @@
+<!-- @dsCard group="Text" height=150 -->
+<div id="root" class="ted-preview" style="flex-direction: column; align-items: stretch; max-width: 380px; gap: 0"></div>
+<script>
+var T = window.Toms, h = React.createElement;
+ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null,
+  h(T.SectionHeader, { flush: true, action: 'See all' }, 'Coming up this week'),
+  h(T.SectionHeader, null, 'What your score is made of')));
+</script>

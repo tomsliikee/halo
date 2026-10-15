@@ -73,6 +73,7 @@ export class Bars {
                 this._update();
             }, this);
         Main.layoutManager.connectObject('monitors-changed', () => this._rebuild(), this);
+        Main.sessionMode.connectObject('updated', () => this._update(), this);
 
         this._edge = new St.Widget({name: 'haloEdge', reactive: true, height: 1});
         Main.layoutManager.addTopChrome(this._edge);
@@ -140,6 +141,7 @@ export class Bars {
         Shell.WindowTracker.get_default().disconnectObject(this);
         global.display.disconnectObject(this);
         Main.overview.disconnectObject(this);
+        Main.sessionMode.disconnectObject(this);
         Main.layoutManager.disconnectObject(this);
         this._edge.destroy();
         for (const bar of this._bars)
@@ -221,6 +223,7 @@ export class Bars {
             event: this._nextEvent,
             clockOpen: this._open.clock,
             statusOpen: this._open.status,
+            locked: Main.sessionMode.isLocked,
         };
     }
 

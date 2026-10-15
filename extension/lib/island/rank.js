@@ -36,3 +36,14 @@ export function pick(activities, dismissed = new Set(), focus = null) {
         return {main: hints[0], bubble: lasting[0] ?? null};
     return {main: lasting[0] ?? null, bubble: lasting[1] ?? null};
 }
+
+// Kinds that tell what someone says, plans or works on. On the lock screen
+// they stay out, unless a source made a version without the content for it
+// (lockSafe), as GNOME's lock screen shows only how many came from an app.
+export const PRIVATE_KINDS = new Set(['notification', 'call', 'claude', 'clipboard', 'events']);
+
+export function shownWhileLocked(activities, locked) {
+    if (!locked)
+        return activities;
+    return activities.filter(activity => activity.lockSafe || !PRIVATE_KINDS.has(activity.kind));
+}

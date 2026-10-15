@@ -87,6 +87,7 @@ export class MainPage {
 
     opened() {
         this._updateHeader();
+        this._updateBackground();
         this._setExpanded(false, {animated: false});
     }
 
@@ -427,7 +428,8 @@ export class MainPage {
 
     _updateBackground() {
         const list = this._backgroundApps();
-        const show = Boolean(this._backgroundToggle?.visible) && list.length > 0;
+        // Which apps run is nobody's business on the lock screen.
+        const show = Boolean(this._backgroundToggle?.visible) && list.length > 0 && !Main.sessionMode.isLocked;
         this._background.visible = show;
         this._background.destroy_all_children();
         if (!show)

@@ -101,11 +101,22 @@ export class Bar {
     }
 
     update(state) {
+        const lockChanged = Boolean(this._state?.locked) !== Boolean(state.locked);
         this._state = state;
         if (!this._settings)
             return;
         this._fill(state);
+        if (lockChanged) {
+            this._paint();
+            this._place({animated: true});
+        }
         this._queueRelayout();
+    }
+
+    // The layout in use. On the lock screen only the status pill stays, as
+    // in GNOME's panel there, standing on its own over the wallpaper.
+    get _layout() {
+        return this._state?.locked ? 'islands' : this._settings.barLayout;
     }
 
     // Hides the bar over a fullscreen window, or brings it back.
@@ -251,7 +262,9 @@ export class Bar {
 
     _fill(state) {
         const settings = this._settings;
-        const full = settings.barLayout === 'full';
+        const full = this._layout === 'full';
+        this._left.visible = !state.locked;
+        this._centre.visible = !state.locked;
 
         // Workspaces, or "Overview" while the overview is open.
         this._setDots(state.workspaces.count, state.workspaces.active);
@@ -266,7 +279,7 @@ export class Bar {
             this._appName.text = app.name;
         }
 
-        this._date.text = full || settings.barLayout === 'islands' ? state.date : state.dateShort;
+        this._date.text = full || this._layout === 'islands' ? state.date : state.dateShort;
         this._time.text = state.time;
         this._unread.visible = state.unread;
         this._event.visible = Boolean(state.event);
@@ -399,7 +412,7 @@ export class Bar {
         const settings = this._settings;
         if (!settings)
             return;
-        const islands = settings.barLayout === 'islands';
+        const islands = this._layout === 'islands';
         for (const group of [this._left, this._centre, this._right]) {
             if (islands)
                 group.add_style_class_name('halo-island-group');
@@ -436,7 +449,8 @@ export class Bar {
         const settings = this._settings;
         if (!monitor || !settings || !this.actor)
             return;
-        const {floating, barLayout} = settings;
+        const {floating} = settings;
+        const barLayout = this._layout;
         const strut = strutHeight(floating);
         this._strut.set({x: monitor.x, y: monitor.y, width: monitor.width, height: strut});
         this.actor.set({x: monitor.x, y: monitor.y, width: monitor.width, height: strut});
