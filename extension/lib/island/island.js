@@ -56,13 +56,16 @@ const BUILDERS = {
 export class Island {
     // anchor(): {x (centre), y (top), width, height, visible} of the clock
     // the island rests on; onClock(): the resting clock was clicked;
-    // onSettings(): the pencil circle was, while the center is open.
-    constructor({theme, settings, anchor, onClock, onSettings}) {
+    // onSettings(): the pencil circle was, while the center is open;
+    // onActive(active): the island began or stopped showing something.
+    constructor({theme, settings, anchor, onClock, onSettings, onActive}) {
         this._theme = theme;
         this._settings = settings;
         this._anchor = anchor;
         this._onClock = onClock;
         this._onSettings = onSettings;
+        this._onActive = onActive;
+        this._active = false;
         this._activities = new Map();
         this._dismissed = new Set();
         this._focus = null;
@@ -77,6 +80,7 @@ export class Island {
         this._expiry = 0;
         this._pressed = 0;
         this._locked = false;
+        this._outside = 0;
 
         this._shape = new IslandShape({name: 'haloIsland'});
         this._bubble = new IslandShape({name: 'haloIslandBubble'});
@@ -120,6 +124,11 @@ export class Island {
     // Whether an event of a kind may open the island (Halo's settings).
     allows(event) {
         return this._settings.current.islandEvents[event] !== false;
+    }
+
+    // Whether the island shows something rather than resting.
+    get active() {
+        return this._active;
     }
 
     // The id of the activity shown in its large look, or null.
@@ -205,18 +214,43 @@ export class Island {
     pressAt(event) {
         if (this._gone)
             return false;
+        const shape = this._shapeAt(event);
+        if (!shape)
+            return false;
+        this._clicked(shape, event.get_button());
+        return true;
+    }
+
+    // The island's shape or bubble under an event, or null.
+    _shapeAt(event) {
         const [x, y] = event.get_coords();
         for (const shape of [this._shape, this._bubble]) {
             if (!shape.visible)
                 continue;
             const [sx, sy] = shape.get_transformed_position();
             const [w, h] = shape.get_transformed_size();
-            if (x >= sx && x < sx + w && y >= sy && y < sy + h) {
-                this._clicked(shape, event.get_button());
-                return true;
-            }
+            if (x >= sx && x < sx + w && y >= sy && y < sy + h)
+                return shape;
         }
-        return false;
+        return null;
+    }
+
+    // While a large look is open, a press anywhere else closes it to its
+    // small look; the press still goes where it was meant to.
+    _syncOutside() {
+        const open = !this._gone && this._expanded !== null;
+        if (open && !this._outside) {
+            this._outside = global.stage.connect('captured-event', (_stage, event) => {
+                if (event.type() === Clutter.EventType.BUTTON_PRESS && this._expanded !== null && !this._shapeAt(event)) {
+                    this._expanded = null;
+                    this._render();
+                }
+                return Clutter.EVENT_PROPAGATE;
+            });
+        } else if (!open && this._outside) {
+            global.stage.disconnect(this._outside);
+            this._outside = 0;
+        }
     }
 
     // The size of the resting island: the clock's, or the pencil circle's
@@ -244,6 +278,9 @@ export class Island {
     }
 
     destroy() {
+        if (this._outside)
+            global.stage.disconnect(this._outside);
+        this._outside = 0;
         if (this._peekWait)
             GLib.source_remove(this._peekWait);
         this._peekWait = 0;
@@ -338,6 +375,11 @@ export class Island {
         // clock is the center the pencil circle is alone.
         const resting = !main && (this._rest.open || !place.visible);
         this._renderBubble(resting ? null : bubble, main ? Views.BUBBLE : place.height || Views.BUBBLE);
+        this._syncOutside();
+        if (Boolean(main) !== this._active) {
+            this._active = Boolean(main);
+            this._onActive?.(this._active);
+        }
     }
 
     // A view that changed what it holds may want another size.

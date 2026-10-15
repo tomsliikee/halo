@@ -69,6 +69,8 @@ export const DEFAULTS = Object.freeze({
     // The bar stays light when the desktop is dark.
     lightBar: false,
     hideInFullscreen: true,
+    // While the island shows something, the bar steps back to its pills.
+    islandFocusBar: false,
     islandEvents: Object.freeze(switches(null, ISLAND_EVENTS)),
     // Where it has no app (a timer, volume), a click opens the large look.
     islandClick: 'app',

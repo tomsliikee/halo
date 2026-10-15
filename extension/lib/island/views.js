@@ -18,8 +18,8 @@ import {clockText, initials, isDecline, trackTime} from './words.js';
 
 const LEVEL_TRACK = 240;
 // The large player's progress line, between its two times.
-const MEDIA_TRACK = 350;
-const WIDE = 520;
+const MEDIA_TRACK = 410;
+const WIDE = 600;
 // The bubble beside the island, for a second lasting thing.
 export const BUBBLE = 64;
 // The bars of a playing waveform, and how fast they move.

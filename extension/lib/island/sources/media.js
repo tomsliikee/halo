@@ -10,8 +10,6 @@ import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import {mediaPeek} from '../words.js';
 
 const ID = 'media';
-// A paused player stays this long, so a quick pause does not jump around.
-const PAUSED_MS = 4000;
 const MPRIS_PATH = '/org/mpris/MediaPlayer2';
 const MPRIS_PLAYER = 'org.mpris.MediaPlayer2.Player';
 
@@ -44,7 +42,6 @@ export class MediaSource {
         this._island = island;
         this._player = null;
         this._position = {at: 0, value: 0};
-        this._pausedId = 0;
         this._tick = 0;
         this._cancellable = new Gio.Cancellable();
         this._source = Main.panel.statusArea.dateMenu?._messageList?._messageView?._mediaSource ?? null;
@@ -59,11 +56,8 @@ export class MediaSource {
         this._source?.disconnectObject(this);
         this._player?.disconnectObject(this);
         this._player = null;
-        for (const id of [this._pausedId, this._tick]) {
-            if (id)
-                GLib.source_remove(id);
-        }
-        this._pausedId = 0;
+        if (this._tick)
+            GLib.source_remove(this._tick);
         this._tick = 0;
         this._island.remove(ID);
     }
@@ -130,21 +124,10 @@ export class MediaSource {
             this._syncTick(false);
             return;
         }
-        if (!playing) {
-            if (!this._island.has(ID))
-                return;
-            if (!this._pausedId) {
-                this._pausedId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, PAUSED_MS, () => {
-                    this._pausedId = 0;
-                    if (this._player?.status !== 'Playing')
-                        this._island.remove(ID);
-                    return GLib.SOURCE_REMOVE;
-                });
-            }
-        } else if (this._pausedId) {
-            GLib.source_remove(this._pausedId);
-            this._pausedId = 0;
-        }
+        // A paused player stays, with its play button, until the player goes
+        // or a right click sends it aside; it only comes up while playing.
+        if (!playing && !this._island.has(ID))
+            return;
         this._syncTick(playing);
 
         const position = this._position.value + (playing ? (GLib.get_monotonic_time() - this._position.at) : 0);

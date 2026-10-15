@@ -7,7 +7,7 @@ import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import St from 'gi://St';
 
-export default async function ({extension, shot, sleep, note, click, move, moveTo, Main}) {
+export default async function ({extension, shot, sleep, note, click, move, moveTo, hold, set, Main}) {
     const MessageTray = await import('resource:///org/gnome/shell/ui/messageTray.js');
     const {EventEmitter} = await import('resource:///org/gnome/shell/misc/signals.js');
     const island = extension._island;
@@ -91,9 +91,29 @@ export default async function ({extension, shot, sleep, note, click, move, moveT
     await sleep(900);
     await shot('island-media-large');
     note(`media large ${size()} expanded=${island.expanded}`);
+    // A press elsewhere closes it to its small look.
+    moveTo(200, 600);
+    await sleep(100);
+    hold(true);
+    await sleep(60);
+    hold(false);
+    await sleep(900);
+    note(`press outside: expanded=${island.expanded} ${size()}`);
+    await click(shape);
+    await sleep(900);
     await click(shape, 3);
     await sleep(800);
     note(`right click: expanded=${island.expanded} ${size()}`);
+
+    // The bar steps back to its pills while the island shows something.
+    set('islandFocusBar', true);
+    await sleep(1200);
+    await shot('island-focus-bar');
+    const bar = extension._bars.primary;
+    note(`focus bar: layout=${bar._layout} frame=${bar._frame.visible}`);
+    set('islandFocusBar', false);
+    await sleep(800);
+    note(`focus bar off: layout=${bar._layout} frame=${bar._frame.visible}`);
 
     // A recording beside the music: the island splits.
     island.set({id: 'recording', kind: 'recording', view: 'recording', data: {seconds: 42, text: '00:42'}, onStop: () => note('stop')});
@@ -107,8 +127,9 @@ export default async function ({extension, shot, sleep, note, click, move, moveT
     island.remove('recording');
     island._focus = null;
     player.playPause();
-    await sleep(5000);
-    note(`paused music left: shown=${island._shown}`);
+    await sleep(1500);
+    await shot('island-media-paused');
+    note(`paused music stays: shown=${island._shown}`);
 
     // The shared timer, as the quick settings start it.
     extension._timers.toggle('pomodoro');

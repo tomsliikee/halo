@@ -165,6 +165,7 @@ export default class HaloExtension extends Extension {
             });
             this._bars.setSettings(settings);
             this._bars.setIslandClock(Boolean(this._island));
+            this._bars.setIslandFocus(Boolean(this._island?.active));
             this._showNextEvent();
         } else if (!settings.parts.bar && this._bars) {
             this._bars.destroy();
@@ -257,6 +258,7 @@ export default class HaloExtension extends Extension {
                 this._center?.close();
                 this._openQuickSettings('settings', 'island');
             },
+            onActive: active => this._bars?.setIslandFocus(active),
         });
         const island = this._island;
         island.setLocked(Main.sessionMode.isLocked);
@@ -301,6 +303,7 @@ export default class HaloExtension extends Extension {
         this._island?.destroy();
         this._island = null;
         this._bars?.setIslandClock(false);
+        this._bars?.setIslandFocus(false);
     }
 
     // The island goes where the main bar's clock goes.

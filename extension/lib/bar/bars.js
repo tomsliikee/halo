@@ -112,6 +112,13 @@ export class Bars {
             bar.setIslandClock(on && bar === this.primary);
     }
 
+    // The island shows something: the main bar may step back around it.
+    setIslandFocus(on) {
+        this._islandFocus = on;
+        for (const bar of this._bars)
+            bar.setIslandFocus(on && bar === this.primary);
+    }
+
     // {summary, text} of the next event shown as a chip beside the clock, or null.
     setNextEvent(event) {
         if (JSON.stringify(event) === JSON.stringify(this._nextEvent))
@@ -164,6 +171,7 @@ export class Bars {
         for (const bar of this._bars)
             bar.setSettings(this._settings);
         this.setIslandClock(this._islandClock);
+        this.setIslandFocus(Boolean(this._islandFocus));
         this._syncFullscreen();
         this._update();
         this._menus.onRebuilt?.();

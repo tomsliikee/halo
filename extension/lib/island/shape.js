@@ -12,8 +12,8 @@ import {roundedRect, setSource} from '../shared/paint.js';
 import {ease, FADE} from '../shared/motion.js';
 
 // Corners are round to half the height, but no rounder than this: a large
-// island is a card, not a pill.
-export const MAX_RADIUS = 32;
+// island stays a soft pill, not a card.
+export const MAX_RADIUS = 48;
 // Room around the shape for its shadow.
 const SHADOW = 12;
 const FADE_OUT_MS = 90;
