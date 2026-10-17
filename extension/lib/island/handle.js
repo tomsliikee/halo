@@ -13,7 +13,7 @@ import {HANDLE, handleRect} from '../bar/modes.js';
 const REST_MS = 150;
 // Room around the thin bar that still counts as on it.
 const REACH = 6;
-const DOT = 5;
+const DOT = 7;
 
 export class Handle {
     // onHover(on): the pointer came to rest on the grip, or left it.
@@ -74,7 +74,7 @@ export class Handle {
         const style = `background-color: ${this._color}; border-radius: 3px; border: 1px solid rgba(255, 255, 255, 0.35); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);`;
         if (this._bar.get_style() !== style)
             this._bar.set_style(style);
-        const dot = `background-color: ${this._color}; border-radius: ${DOT / 2}px;`;
+        const dot = `background-color: ${this._color}; border-radius: ${DOT / 2 + 1}px; border: 1px solid rgba(255, 255, 255, 0.6);`;
         if (this._dot.get_style() !== dot)
             this._dot.set_style(dot);
     }
