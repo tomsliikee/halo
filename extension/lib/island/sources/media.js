@@ -43,7 +43,20 @@ export class MediaSource {
         this._player = null;
         this._position = {at: 0, value: 0};
         this._tick = 0;
+        this._playing = false;
+        this._fresh = 0;
         this._cancellable = new Gio.Cancellable();
+        // Opened large or peeking: its time shows, freshly, and moves.
+        this._unlook = island.onLook(() => {
+            this._syncTick(this._playing);
+            if (this._seen && !this._fresh) {
+                this._fresh = GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
+                    this._fresh = 0;
+                    this._update();
+                    return GLib.SOURCE_REMOVE;
+                });
+            }
+        });
         this._source = Main.panel.statusArea.dateMenu?._messageList?._messageView?._mediaSource ?? null;
         this._source?.connectObject(
             'player-added', () => this._choose(),
@@ -52,6 +65,10 @@ export class MediaSource {
     }
 
     destroy() {
+        this._unlook();
+        if (this._fresh)
+            GLib.source_remove(this._fresh);
+        this._fresh = 0;
         this._cancellable.cancel();
         this._source?.disconnectObject(this);
         this._player?.disconnectObject(this);
@@ -155,16 +172,21 @@ export class MediaSource {
         });
     }
 
+    get _seen() {
+        return this._island.expanded === ID || this._island.peeking === ID;
+    }
+
     // While the large player or the preview line is open its time moves
-    // every second.
+    // every second; otherwise nothing shows the time, and nothing ticks.
     _syncTick(playing) {
-        if (playing && !this._tick) {
+        this._playing = playing;
+        const on = playing && this._seen;
+        if (on && !this._tick) {
             this._tick = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 1, () => {
-                if (this._island.expanded === ID || this._island.peeking === ID)
-                    this._update();
+                this._update();
                 return GLib.SOURCE_CONTINUE;
             });
-        } else if (!playing && this._tick) {
+        } else if (!on && this._tick) {
             GLib.source_remove(this._tick);
             this._tick = 0;
         }

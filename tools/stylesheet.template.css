@@ -59,6 +59,24 @@
     spacing: 10px;
 }
 
+/* Other extensions' buttons kept in the bar (lib/bar/tray.js). GNOME
+   styles them only inside its own #panel. */
+.halo-tray {
+    padding: 0 6px;
+    spacing: 2px;
+}
+
+.halo-tray .panel-button {
+    padding: 0 6px;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.halo-tray .system-status-icon {
+    icon-size: 18px;
+}
+
 .halo-small-pill {
     height: 36px;
     border-radius: 18px;
@@ -956,6 +974,10 @@
 .halo-scheme .halo-qs-handle,
 .halo-scheme .halo-tile-note {
     color: $onVar;
+}
+
+.halo-scheme .halo-qs-eye.halo-chosen {
+    color: $primary;
 }
 
 .halo-scheme .halo-qs-card,

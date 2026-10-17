@@ -8,7 +8,7 @@
 
 // Lasting things in their fixed order: the higher one takes the island,
 // the next one sits beside it as a small bubble.
-export const RANKS = {call: 6, recording: 5, privacy: 5, timer: 4, claude: 3, media: 2, progress: 1};
+export const RANKS = {call: 6, alarm: 6, recording: 5, privacy: 5, timer: 4, claude: 3, media: 2, progress: 1};
 
 const rankOf = activity => RANKS[activity.kind] ?? 0;
 
@@ -18,7 +18,7 @@ export function byRank(a, b) {
 }
 
 // {main, bubble, hidden}: what the island shows and what waits beside it;
-// any may be null. A call always wins. A hint comes next and shows over
+// any may be null. A call (or a ringing alarm) always wins. A hint comes next and shows over
 // what lasts, which moves into the bubble meanwhile. A focused id (the
 // bubble that was clicked) goes before the rest of what lasts.
 //
@@ -33,7 +33,8 @@ export function pick(activities, dismissed = new Set(), focus = null) {
         lasting.unshift(...lasting.splice(focused, 1));
     const hidden = activities.filter(activity => !activity.hint && dismissed.has(activity.id)).sort(byRank)[0] ?? null;
     const hints = live.filter(activity => activity.hint).sort((a, b) => b.at - a.at);
-    const call = lasting.find(activity => activity.kind === 'call');
+    // A call, or an alarm that rings, comes before anything short.
+    const call = lasting.find(activity => activity.kind === 'call' || activity.kind === 'alarm');
     if (call)
         return {main: call, bubble: lasting.find(activity => activity !== call) ?? hidden, hidden};
     if (hints.length > 0)

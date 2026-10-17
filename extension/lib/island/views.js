@@ -18,8 +18,16 @@ import {clockText, initials, isDecline, trackTime} from './words.js';
 
 const LEVEL_TRACK = 300;
 // The large player's progress line, between its two times.
-const MEDIA_TRACK = 500;
-const WIDE = 700;
+// The opened looks' width, and twice that with the "Wide island" setting
+// (island.js sets it, kept within the screen).
+export const WIDE = 700;
+let wide = WIDE;
+// The large player's progress line is this much shorter than its look.
+const MEDIA_TRACK_INSET = WIDE - 500;
+
+export function setWide(px) {
+    wide = px;
+}
 // The bubble beside the island, for a second lasting thing.
 export const BUBBLE = 64;
 // The bars of a playing waveform, and how fast they move.
@@ -177,6 +185,18 @@ function spinning(actor) {
     }).setRunning(true);
 }
 
+// While nobody is at the computer, what moves on its own stands still.
+let still = false;
+const ambients = new Set();
+
+export function setStill(on) {
+    if (still === on)
+        return;
+    still = on;
+    for (const sync of ambients)
+        sync();
+}
+
 // Something that moves on its own for as long as it shows: onStep(elapsed
 // ms) every `step` ms while the actor is on the stage and running.
 function ambient(actor, step, onStep) {
@@ -184,7 +204,7 @@ function ambient(actor, step, onStep) {
     let source = 0;
     const start = GLib.get_monotonic_time();
     const sync = () => {
-        const on = running && actor.mapped;
+        const on = running && actor.mapped && !still;
         if (on && !source) {
             source = GLib.timeout_add(GLib.PRIORITY_DEFAULT, step, () => {
                 onStep((GLib.get_monotonic_time() - start) / 1000);
@@ -196,9 +216,11 @@ function ambient(actor, step, onStep) {
         }
     };
     actor.connect('notify::mapped', sync);
+    ambients.add(sync);
     actor.connect('destroy', () => {
         running = false;
         sync();
+        ambients.delete(sync);
     });
     return {
         setRunning(on) {
@@ -511,7 +533,8 @@ export function mediaLargeView(activity) {
 
     const at = text('island-small', {styleClass: 'halo-island-dim', text: ''});
     const length = text('island-small', {styleClass: 'halo-island-dim', text: ''});
-    const track = new St.Widget({style_class: 'halo-island-track halo-island-thin', width: MEDIA_TRACK, y_align: Clutter.ActorAlign.CENTER});
+    const trackWidth = wide - MEDIA_TRACK_INSET;
+    const track = new St.Widget({style_class: 'halo-island-track halo-island-thin', width: trackWidth, y_align: Clutter.ActorAlign.CENTER});
     const fill = new St.Widget({style_class: 'halo-island-fill'});
     track.add_child(fill);
     const progress = box('halo-island-progress', {children: [at, track, length]});
@@ -522,7 +545,7 @@ export function mediaLargeView(activity) {
     const next = round('skip-next', () => activity.onNext(), {tone: 'plain', size: 58, accessibleName: 'Next'});
     const controls = box('halo-island-controls', {children: [previous, play, next], x_align: Clutter.ActorAlign.CENTER});
 
-    const actor = box('halo-island-large', {vertical: true, children: [head, progress, controls], width: WIDE});
+    const actor = box('halo-island-large', {vertical: true, children: [head, progress, controls], width: wide});
     const showProgress = d => {
         progress.visible = d.length > 0;
         if (!progress.visible)
@@ -530,7 +553,7 @@ export function mediaLargeView(activity) {
         at.text = trackTime(d.position);
         length.text = trackTime(d.length);
         fill.height = 6;
-        fill.width = Math.round(Math.max(0, Math.min(1, d.position / d.length)) * MEDIA_TRACK);
+        fill.width = Math.round(Math.max(0, Math.min(1, d.position / d.length)) * trackWidth);
     };
     const update = upcoming => {
         activity = upcoming;
@@ -576,7 +599,7 @@ export function notificationView(activity) {
         actions.add_child(pill);
     });
     actions.visible = data.actions.length > 0;
-    const actor = box('halo-island-large halo-island-notification', {vertical: true, children: [top, actions], width: WIDE});
+    const actor = box('halo-island-large halo-island-notification', {vertical: true, children: [top, actions], width: wide});
     return {actor};
 }
 
@@ -599,7 +622,7 @@ export function callView(activity) {
     }
     // Decline on the left of answer, as in the design.
     buttons.sort((a, b) => Number(!isDecline(a.accessible_name)) - Number(!isDecline(b.accessible_name)));
-    const actor = box('halo-island-large halo-island-call', {children: [avatar, column, ...buttons], width: WIDE});
+    const actor = box('halo-island-large halo-island-call', {children: [avatar, column, ...buttons], width: wide});
     return {actor};
 }
 

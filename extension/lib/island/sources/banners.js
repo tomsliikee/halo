@@ -21,6 +21,18 @@ import {whenText} from '../views.js';
 
 const NOTIFICATION_MS = 5000;
 const CRITICAL_MS = 9000;
+const ATTENTION_MS = 6000;
+// GNOME Clocks rings its alarms and timers with a notification.
+const CLOCKS = 'org.gnome.clocks';
+
+function appIdOf(source) {
+    return source?._appId ?? source?.app?.get_id?.()?.replace(/\.desktop$/, '') ?? null;
+}
+
+// GNOME's own word that a window wants attention ("… is ready").
+function isAttention(source) {
+    return Boolean(source?.constructor?.$gtype?.name?.endsWith('WindowAttentionSource'));
+}
 
 export class BannerSource {
     constructor(island) {
@@ -84,14 +96,25 @@ export class BannerSource {
         return typeof category === 'string' && category.startsWith('call');
     }
 
+    // 'call', 'alarm', 'attention' or 'notification'.
+    _kindOf(notification) {
+        if (this._isCall(notification))
+            return 'call';
+        if (appIdOf(notification.source) === CLOCKS)
+            return 'alarm';
+        return isAttention(notification.source) ? 'attention' : 'notification';
+    }
+
     _takes(notification) {
-        return this._island.allows(this._isCall(notification) ? 'calls' : 'notifications');
+        const kind = this._kindOf(notification);
+        return this._island.allows({call: 'calls', alarm: 'alarms', attention: 'attention'}[kind] ?? 'notifications');
     }
 
     _show(notification) {
         if (this._nextCategory)
             notification._haloCategory = this._nextCategory;
-        const call = this._isCall(notification);
+        const kind = this._kindOf(notification);
+        const call = kind === 'call';
         // An updated notification keeps its place in the island.
         const id = this._shown.get(notification) ?? `notification:${++this._count}`;
         this._shown.set(notification, id);
@@ -131,6 +154,39 @@ export class BannerSource {
                 },
                 onAction,
                 onClick: () => notification.activate(),
+            });
+            return;
+        }
+
+        if (kind === 'alarm') {
+            // Rings until stopped or snoozed: it lasts, with its buttons.
+            this._island.set({
+                id, kind: 'alarm', view: 'notification',
+                data: {
+                    app: source?.title ?? 'Clocks', appIcon: source?.icon ?? null, gicon: null,
+                    title: notification.title ?? 'Alarm', body: plainText(notification.body),
+                    when: whenText(notification.datetime), actions,
+                },
+                onAction,
+                onClick: () => notification.activate(),
+                onDismiss: acknowledge,
+            });
+            return;
+        }
+
+        if (kind === 'attention') {
+            this._island.set({
+                id, kind: 'attention', hint: true, duration: ATTENTION_MS, view: 'info',
+                data: {
+                    gicon: source?.icon ?? null, icon: 'notifications', tone: 'primary', square: true,
+                    title: notification.title || source?.title || '', note: plainText(notification.body),
+                },
+                onClick: () => {
+                    notification.activate();
+                    this._island.remove(id);
+                },
+                onExpire: acknowledge,
+                onDismiss: acknowledge,
             });
             return;
         }

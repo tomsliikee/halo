@@ -10,7 +10,7 @@ import Soup from 'gi://Soup';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import {EventEmitter} from 'resource:///org/gnome/shell/misc/signals.js';
 
-import {parsePlace, parseToday} from './forecast.js';
+import {parsePlace, parseSoon, parseToday} from './forecast.js';
 
 const FORECAST = 'https://api.open-meteo.com/v1/forecast';
 const FRESH_MS = 30 * 60 * 1000;
@@ -48,6 +48,8 @@ export class WeatherModel extends EventEmitter {
         super();
         this.place = null;
         this.today = null;
+        // The next hour: {rainIn, rain, warning} (forecast.js), or null.
+        this.soon = null;
         this._at = 0;
         this._session = null;
         this._cancellable = null;
@@ -85,6 +87,8 @@ export class WeatherModel extends EventEmitter {
             `latitude=${place.latitude.toFixed(3)}`, `longitude=${place.longitude.toFixed(3)}`,
             'current=temperature_2m,weather_code,is_day', 'daily=temperature_2m_max,temperature_2m_min',
             'forecast_days=1', 'timezone=auto',
+            // The next hour in quarters, for the island's rain hint.
+            'minutely_15=precipitation', 'forecast_minutely_15=5',
         ].join('&');
         const message = Soup.Message.new('GET', `${FORECAST}?${query}`);
         this._session.send_and_read_async(message, GLib.PRIORITY_LOW, this._cancellable, (session, result) => {
@@ -92,9 +96,11 @@ export class WeatherModel extends EventEmitter {
                 const bytes = session.send_and_read_finish(result);
                 if (message.get_status() !== Soup.Status.OK)
                     throw new Error(`HTTP ${message.get_status()}`);
-                const today = parseToday(JSON.parse(new TextDecoder().decode(bytes.get_data())));
+                const json = JSON.parse(new TextDecoder().decode(bytes.get_data()));
+                const today = parseToday(json);
                 if (today) {
                     this.today = today;
+                    this.soon = parseSoon(json, Date.now());
                     this._at = Date.now();
                     this.emit('changed');
                 }

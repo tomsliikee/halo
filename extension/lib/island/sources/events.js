@@ -2,32 +2,23 @@
 // as it starts. The events come from GNOME's calendar server, through the
 // source the date menu already keeps for its month.
 
-import GLib from 'gi://GLib';
-
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
 import {soonText} from '../words.js';
 
 const AHEAD_MS = 10 * 60 * 1000;
-const CHECK_S = 30;
 
 export class EventsSource {
     constructor(island) {
         this._island = island;
         this._told = new Set();
-        this._check = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, CHECK_S, () => {
-            this._look();
-            return GLib.SOURCE_CONTINUE;
-        });
-        this._look();
+        this.look();
     }
 
-    destroy() {
-        GLib.source_remove(this._check);
-        this._check = 0;
-    }
+    destroy() {}
 
-    _look() {
+    // Asked once a minute, by the same tick as the bar's next event.
+    look() {
         const source = Main.panel.statusArea.dateMenu?._eventSource;
         if (!source?.hasCalendars || source.isLoading || !this._island.allows('events'))
             return;

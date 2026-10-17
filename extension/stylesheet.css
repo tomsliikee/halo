@@ -61,6 +61,24 @@
     spacing: 10px;
 }
 
+/* Other extensions' buttons kept in the bar (lib/bar/tray.js). GNOME
+   styles them only inside its own #panel. */
+.halo-tray {
+    padding: 0 6px;
+    spacing: 2px;
+}
+
+.halo-tray .panel-button {
+    padding: 0 6px;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.halo-tray .system-status-icon {
+    icon-size: 18px;
+}
+
 .halo-small-pill {
     height: 36px;
     border-radius: 18px;
@@ -958,6 +976,10 @@
     color: #444654;
 }
 
+.halo-scheme-blue-light .halo-qs-eye.halo-chosen {
+    color: #0045fc;
+}
+
 .halo-scheme-blue-light .halo-qs-card,
 .halo-scheme-blue-light .halo-qs-card-row {
     background-color: #fbf8ff;
@@ -1670,6 +1692,10 @@
 .halo-scheme-blue-dark .halo-qs-handle,
 .halo-scheme-blue-dark .halo-tile-note {
     color: #c5c5d6;
+}
+
+.halo-scheme-blue-dark .halo-qs-eye.halo-chosen {
+    color: #b9c3ff;
 }
 
 .halo-scheme-blue-dark .halo-qs-card,
@@ -2386,6 +2412,10 @@
     color: #4a4453;
 }
 
+.halo-scheme-violet-light .halo-qs-eye.halo-chosen {
+    color: #7706ff;
+}
+
 .halo-scheme-violet-light .halo-qs-card,
 .halo-scheme-violet-light .halo-qs-card-row {
     background-color: #fef7ff;
@@ -3098,6 +3128,10 @@
 .halo-scheme-violet-dark .halo-qs-handle,
 .halo-scheme-violet-dark .halo-tile-note {
     color: #ccc3d5;
+}
+
+.halo-scheme-violet-dark .halo-qs-eye.halo-chosen {
+    color: #d2bbff;
 }
 
 .halo-scheme-violet-dark .halo-qs-card,
@@ -3814,6 +3848,10 @@
     color: #3e4a3d;
 }
 
+.halo-scheme-green-light .halo-qs-eye.halo-chosen {
+    color: #006e2e;
+}
+
 .halo-scheme-green-light .halo-qs-card,
 .halo-scheme-green-light .halo-qs-card-row {
     background-color: #f2fcee;
@@ -4526,6 +4564,10 @@
 .halo-scheme-green-dark .halo-qs-handle,
 .halo-scheme-green-dark .halo-tile-note {
     color: #bdcaba;
+}
+
+.halo-scheme-green-dark .halo-qs-eye.halo-chosen {
+    color: #00e468;
 }
 
 .halo-scheme-green-dark .halo-qs-card,
@@ -5242,6 +5284,10 @@
     color: #394a46;
 }
 
+.halo-scheme-teal-light .halo-qs-eye.halo-chosen {
+    color: #006b5f;
+}
+
 .halo-scheme-teal-light .halo-qs-card,
 .halo-scheme-teal-light .halo-qs-card-row {
     background-color: #eefdf8;
@@ -5954,6 +6000,10 @@
 .halo-scheme-teal-dark .halo-qs-handle,
 .halo-scheme-teal-dark .halo-tile-note {
     color: #b8cac5;
+}
+
+.halo-scheme-teal-dark .halo-qs-eye.halo-chosen {
+    color: #00dfc7;
 }
 
 .halo-scheme-teal-dark .halo-qs-card,
@@ -6670,6 +6720,10 @@
     color: #58423a;
 }
 
+.halo-scheme-orange-light .halo-qs-eye.halo-chosen {
+    color: #ab3500;
+}
+
 .halo-scheme-orange-light .halo-qs-card,
 .halo-scheme-orange-light .halo-qs-card-row {
     background-color: #fff8f6;
@@ -7382,6 +7436,10 @@
 .halo-scheme-orange-dark .halo-qs-handle,
 .halo-scheme-orange-dark .halo-tile-note {
     color: #dfc0b6;
+}
+
+.halo-scheme-orange-dark .halo-qs-eye.halo-chosen {
+    color: #ffb59c;
 }
 
 .halo-scheme-orange-dark .halo-qs-card,
@@ -8098,6 +8156,10 @@
     color: #58413e;
 }
 
+.halo-scheme-salmon-light .halo-qs-eye.halo-chosen {
+    color: #c0000d;
+}
+
 .halo-scheme-salmon-light .halo-qs-card,
 .halo-scheme-salmon-light .halo-qs-card-row {
     background-color: #fff8f7;
@@ -8810,6 +8872,10 @@
 .halo-scheme-salmon-dark .halo-qs-handle,
 .halo-scheme-salmon-dark .halo-tile-note {
     color: #dfbfbb;
+}
+
+.halo-scheme-salmon-dark .halo-qs-eye.halo-chosen {
+    color: #ffb4aa;
 }
 
 .halo-scheme-salmon-dark .halo-qs-card,
@@ -9526,6 +9592,10 @@
     color: #564146;
 }
 
+.halo-scheme-pink-light .halo-qs-eye.halo-chosen {
+    color: #ba005b;
+}
+
 .halo-scheme-pink-light .halo-qs-card,
 .halo-scheme-pink-light .halo-qs-card-row {
     background-color: #fff8f8;
@@ -10238,6 +10308,10 @@
 .halo-scheme-pink-dark .halo-qs-handle,
 .halo-scheme-pink-dark .halo-tile-note {
     color: #ddbfc5;
+}
+
+.halo-scheme-pink-dark .halo-qs-eye.halo-chosen {
+    color: #ffb1c4;
 }
 
 .halo-scheme-pink-dark .halo-qs-card,
@@ -10954,6 +11028,10 @@
     color: #474747;
 }
 
+.halo-scheme-white-light .halo-qs-eye.halo-chosen {
+    color: #000000;
+}
+
 .halo-scheme-white-light .halo-qs-card,
 .halo-scheme-white-light .halo-qs-card-row {
     background-color: #f9f9f9;
@@ -11666,6 +11744,10 @@
 .halo-scheme-white-dark .halo-qs-handle,
 .halo-scheme-white-dark .halo-tile-note {
     color: #c6c6c6;
+}
+
+.halo-scheme-white-dark .halo-qs-eye.halo-chosen {
+    color: #ffffff;
 }
 
 .halo-scheme-white-dark .halo-qs-card,

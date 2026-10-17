@@ -14,6 +14,7 @@ import {Bar} from './bar.js';
 import {TopEdge} from './edge.js';
 import {strutHeight} from './layout.js';
 import {barAway} from './modes.js';
+import {Tray} from './tray.js';
 
 const HARBOR_SETTINGS = GLib.build_filenamev([GLib.get_user_config_dir(), 'harbor', 'settings.json']);
 // While the bar is down for a while, this often it looks whether the
@@ -47,6 +48,8 @@ export class Bars {
         this._peekId = 0;
         this._islandClock = false;
         this._nextEvent = null;
+        this._tray = new Tray();
+        this._trayIds = [];
 
         this._clock = new GnomeDesktop.WallClock();
         this._interface = new Gio.Settings({schema_id: 'org.gnome.desktop.interface'});
@@ -167,12 +170,21 @@ export class Bars {
         Main.sessionMode.disconnectObject(this);
         Main.layoutManager.disconnectObject(this);
         this._edge.destroy();
+        this._tray.destroy();
         for (const bar of this._bars)
             bar.destroy();
         this._bars = [];
     }
 
+    // Other extensions' buttons that stay in the main bar, by tile id.
+    setTray(ids) {
+        this._trayIds = ids;
+        this._tray.sync(this.primary?.trayBox ?? null, ids);
+    }
+
     _rebuild() {
+        // The buttons go home first, or they would go with the old bar.
+        this._tray.restore();
         for (const bar of this._bars)
             bar.destroy();
         this._bars = Main.layoutManager.monitors.map((_monitor, index) => new Bar(index, this._theme, {
@@ -189,6 +201,7 @@ export class Bars {
         this.setIslandClock(this._islandClock);
         this.setIslandDock(this._islandDock ?? 0);
         this.setIslandDropped(Boolean(this._islandDropped));
+        this._tray.sync(this.primary?.trayBox ?? null, this._trayIds);
         this._syncFullscreen();
         this._update();
         this._menus.onRebuilt?.();

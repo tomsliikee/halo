@@ -23,12 +23,17 @@ import {LockBox} from './lib/island/lockbox.js';
 import {ClaudeSource} from './lib/island/sources/claude.js';
 import {DevicesSource} from './lib/island/sources/devices.js';
 import {EventsSource} from './lib/island/sources/events.js';
+import {HealthSource} from './lib/island/sources/health.js';
 import {LaunchSource} from './lib/island/sources/launch.js';
 import {MediaSource} from './lib/island/sources/media.js';
 import {OsdSource} from './lib/island/sources/osd.js';
+import {PhoneSource} from './lib/island/sources/phone.js';
 import {ProgressSource} from './lib/island/sources/progress.js';
 import {SystemSource} from './lib/island/sources/system.js';
 import {TimerSource} from './lib/island/sources/timer.js';
+import {UpdatesSource} from './lib/island/sources/updates.js';
+import {WeatherSource} from './lib/island/sources/weather.js';
+import {WindowsSource} from './lib/island/sources/windows.js';
 import {WorkspaceSource} from './lib/island/sources/workspace.js';
 import {GnomeQuickSettings} from './lib/qs/gnome.js';
 import {QuickSettingsPanel} from './lib/qs/panel.js';
@@ -67,6 +72,9 @@ export default class HaloExtension extends Extension {
         this._gnomeQs = new GnomeQuickSettings();
         this._timers = new TimerStore();
         this._tiles = new TileSet(this._gnomeQs, this._appearance, this._settings, this._timers);
+        // A button that comes later goes into the bar too, if it is meant to.
+        this._gnomeQs.connectObject('ready', () => this._bars?.setTray(this._settings.current.barIcons),
+            'changed', () => this._bars?.setTray(this._settings.current.barIcons), this);
         this._gnomeMenus = this._newGnomeMenus();
         this._bars = null;
         this._qs = null;
@@ -75,8 +83,10 @@ export default class HaloExtension extends Extension {
         // The weather, for the center and the island's glance.
         this._weather = new WeatherModel();
         this._agenda.connectObject('changed', () => this._showNextEvent(), this);
-        this._eventTick = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 30, () => {
+        // One look a minute serves the bar's next event and the island's.
+        this._eventTick = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 60, () => {
             this._showNextEvent();
+            this._eventsSource?.look();
             return GLib.SOURCE_CONTINUE;
         });
         this._center = null;
@@ -84,6 +94,7 @@ export default class HaloExtension extends Extension {
         this._island = null;
         this._islandLater = 0;
         this._islandSources = [];
+        this._eventsSource = null;
         this._unfollow = null;
         this._applyParts(this._settings.current);
         Main.sessionMode.connectObject('updated', () => this._lockChanged(), this);
@@ -150,7 +161,10 @@ export default class HaloExtension extends Extension {
                 conflicts: this._conflicts,
                 tiles: this._tiles,
                 top: () => this._panelTop(),
-            }, open => this._bars?.setOpen('status', open));
+            }, open => {
+                this._bars?.setOpen('status', open);
+                this._tiles.watch(open);
+            });
             this._takeover = new QuickSettingsTakeover(this._qs);
         } else if (!settings.parts.quickSettings && this._qs) {
             this._takeover.destroy();
@@ -188,6 +202,7 @@ export default class HaloExtension extends Extension {
         } else if (this._bars) {
             this._bars.setSettings(settings);
         }
+        this._bars?.setTray(settings.barIcons);
 
         if (settings.parts.center && !this._center)
             this._startCenter();
@@ -295,8 +310,13 @@ export default class HaloExtension extends Extension {
             new TimerSource(island, this._timers, () => this._openQuickSettings('timer')),
             new ClaudeSource(island),
             new ProgressSource(island),
-            new EventsSource(island),
+            this._eventsSource = new EventsSource(island),
             new WorkspaceSource(island),
+            new UpdatesSource(island),
+            new HealthSource(island),
+            new PhoneSource(island),
+            new WeatherSource(island, this._weather),
+            new WindowsSource(island),
             new LaunchSource(island),
             new DevicesSource(island),
         ];
@@ -324,6 +344,7 @@ export default class HaloExtension extends Extension {
         for (const source of this._islandSources.reverse())
             source.destroy();
         this._islandSources = [];
+        this._eventsSource = null;
         this._lockBox?.destroy();
         this._lockBox = null;
         this._island?.destroy();
@@ -376,8 +397,13 @@ export default class HaloExtension extends Extension {
                 // The island grows out of the grip.
                 y = grip.y;
             }
+            // Without a bar to sit in, the resting island hangs further
+            // into the screen, as far as the setting says.
+            const hung = mode === 'island' && !barDown;
+            if (hung)
+                y += this._settings.current.islandDrop;
             return {
-                mode, barDown,
+                mode, barDown, hung,
                 x: x + w / 2, y, width: Math.round(w), height: Math.round(h),
                 visible: mode !== 'bar' || (clock.is_mapped() && !bar.hidden),
                 fallbackY: monitor.y + PANEL_GAP,

@@ -12,13 +12,18 @@ export const DARK_STYLES = ['light', 'dark', 'auto'];
 export const MOTION_SPEEDS = ['quick', 'normal', 'slow'];
 // What a click on a small island does: open its app, or its large look.
 export const ISLAND_CLICKS = ['app', 'large'];
+// How far the island hangs further into the screen, in px.
+export const ISLAND_DROPS = [0, 6, 12, 18, 24];
 
 // What can open the island, each with its own switch.
 export const ISLAND_EVENTS = [
     'volume', 'brightness', 'notifications', 'calls', 'media', 'recording', 'timer', 'charging',
     'settings', 'devices', 'privacy', 'progress', 'events', 'screenshot', 'clipboard', 'battery',
     'network', 'keyboard', 'powerMode', 'claude', 'workspace', 'launch', 'glance', 'locks', 'drives',
+    'attention', 'updates', 'alarms', 'health', 'phone', 'weather', 'windows',
 ];
+// Events that speak up so often they start switched off.
+const QUIET_EVENTS = ['windows'];
 
 // The four parts; each can be switched off and GNOME's own comes back.
 export const PARTS = ['bar', 'island', 'center', 'quickSettings'];
@@ -31,6 +36,7 @@ const CHOICES = {
     islandClick: ISLAND_CLICKS,
     barMode: BAR_MODES,
     islandHideSeconds: HIDE_SECONDS,
+    islandDrop: ISLAND_DROPS,
 };
 
 // Keys that hold one switch per name.
@@ -40,12 +46,15 @@ const SWITCHES = {parts: PARTS, islandEvents: ISLAND_EVENTS};
 const TIMES = ['darkFrom', 'darkTo'];
 
 // Keys that hold a list of words: tile ids in their order, hidden tile ids.
-const WORD_LISTS = ['tileOrder', 'hiddenTiles'];
+// and the tile ids of other extensions' icons that stay in the bar.
+const WORD_LISTS = ['tileOrder', 'hiddenTiles', 'barIcons'];
 
-function switches(value, names) {
+function switches(value, names, off = []) {
     const source = value !== null && typeof value === 'object' && !Array.isArray(value) ? value : {};
-    return Object.fromEntries(names.map(name => [name, typeof source[name] === 'boolean' ? source[name] : true]));
+    return Object.fromEntries(names.map(name => [name, typeof source[name] === 'boolean' ? source[name] : !off.includes(name)]));
 }
+
+const OFF = {islandEvents: QUIET_EVENTS};
 
 function words(value) {
     if (!Array.isArray(value))
@@ -80,11 +89,17 @@ export const DEFAULTS = Object.freeze({
     // A running thing (music, a timer…) rises into the bar's clock after a
     // moment below it; off, it stays floating below the bar.
     islandDock: true,
-    islandEvents: Object.freeze(switches(null, ISLAND_EVENTS)),
+    // How far the resting island (without a bar to sit in) and what it
+    // shows hang further into the screen.
+    islandDrop: 0,
+    // Its opened looks twice as wide.
+    islandWide: false,
+    islandEvents: Object.freeze(switches(null, ISLAND_EVENTS, QUIET_EVENTS)),
     // Where it has no app (a timer, volume), a click opens the large look.
     islandClick: 'app',
     tileOrder: Object.freeze([]),
     hiddenTiles: Object.freeze([]),
+    barIcons: Object.freeze([]),
     expressiveMotion: true,
     motionSpeed: 'normal',
     // Writes what Halo decides to the journal; not in the settings page.
@@ -98,7 +113,7 @@ export function normalize(raw) {
     for (const [key, fallback] of Object.entries(DEFAULTS)) {
         const value = source[key];
         if (key in SWITCHES)
-            settings[key] = switches(value, SWITCHES[key]);
+            settings[key] = switches(value, SWITCHES[key], OFF[key]);
         else if (WORD_LISTS.includes(key))
             settings[key] = words(value);
         else if (TIMES.includes(key))

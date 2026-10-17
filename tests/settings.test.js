@@ -41,4 +41,18 @@ test('a hide time is one of the choices', () => equal([isValid('islandHideSecond
 test('the new island events are on by default', () => equal(
     ['workspace', 'launch', 'glance', 'locks', 'drives'].map(name => normalize(null).islandEvents[name]), [true, true, true, true, true]));
 
+test('the new keys and their defaults', () => equal(
+    [DEFAULTS.islandDrop, DEFAULTS.islandWide, DEFAULTS.barIcons], [0, false, []]));
+test('the drop takes only its steps', () => equal(
+    [parse('{"islandDrop": 12}').islandDrop, parse('{"islandDrop": 13}').islandDrop, isValid('islandDrop', 24), isValid('islandDrop', 30)],
+    [12, 0, true, false]));
+test('the wide island is a switch', () => equal(
+    [parse('{"islandWide": true}').islandWide, parse('{"islandWide": "yes"}').islandWide], [true, false]));
+test('icons kept in the bar are a list of words', () => equal(
+    parse('{"barIcons": ["panel:a", "panel:a", 3, ""]}').barIcons, ['panel:a']));
+test('the new events, the window switch off at first', () => equal(
+    ['attention', 'updates', 'alarms', 'health', 'phone', 'weather', 'windows'].map(name => normalize(null).islandEvents[name]),
+    [true, true, true, true, true, true, false]));
+test('a window switch turned on stays on', () => equal(parse('{"islandEvents": {"windows": true}}').islandEvents.windows, true));
+
 done('settings');

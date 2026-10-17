@@ -208,3 +208,30 @@ export function glanceItems(weather, event, weatherIconFor, temperatureFor) {
         items.push({icon: 'event', text: `${event.summary} ${event.text}`.trim()});
     return items;
 }
+
+export function updatesText(count) {
+    return {title: count === 1 ? '1 update' : `${count} updates`, note: 'Ready to install · click to see them'};
+}
+
+export function healthText(problem, readings) {
+    if (problem === 'hot')
+        return {title: 'Running hot', note: `${Math.round(readings.temperature)} °C`};
+    const left = Math.round(100 * (problem === 'memory' ? readings.memory : readings.disk));
+    return problem === 'memory'
+        ? {title: 'Memory nearly full', note: `${left} % left`}
+        : {title: 'Disk nearly full', note: `${left} % left`};
+}
+
+export function rainText({rainIn, warning}) {
+    if (warning)
+        return {title: warning, note: rainIn === null ? 'In the next hour' : rainNote(rainIn)};
+    return {title: rainIn === 0 ? 'Rain now' : `Rain in ${rainIn} min`, note: 'Take an umbrella'};
+}
+
+function rainNote(minutes) {
+    return minutes === 0 ? 'Rain now' : `Rain in ${minutes} min`;
+}
+
+export function phoneBatteryText(name, level) {
+    return {title: `${name || 'Phone'} battery low`, note: `${Math.round(level)} %`};
+}

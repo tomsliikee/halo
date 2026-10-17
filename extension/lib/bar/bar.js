@@ -83,6 +83,10 @@ export class Bar {
         return this._status;
     }
 
+    get trayBox() {
+        return this._tray;
+    }
+
     get clockPill() {
         return this._clock;
     }
@@ -283,6 +287,10 @@ export class Bar {
         this._camera = this._privacyPill('videocam');
         this._sharing = this._privacyPill('screen-share');
 
+        // Other extensions' buttons that stay in the bar (tray.js).
+        this._tray = new St.BoxLayout({style_class: 'halo-pill halo-tray', y_align: Clutter.ActorAlign.CENTER, visible: false});
+        this._right.add_child(this._tray);
+
         this._status = new St.BoxLayout({style_class: 'halo-pill halo-status', y_align: Clutter.ActorAlign.CENTER});
         this._networkIcon = icon('wifi', {size: 20});
         this._vpnIcon = icon('vpn-key', {size: 20});
@@ -313,6 +321,7 @@ export class Bar {
         const full = this._layout === 'full';
         this._left.visible = !state.locked;
         this._centre.visible = !state.locked;
+        this._tray.visible = !state.locked && this._tray.get_n_children() > 0;
 
         // Workspaces, or "Overview" while the overview is open.
         this._setDots(state.workspaces.count, state.workspaces.active);

@@ -10,7 +10,7 @@ import St from 'gi://St';
 import {spring, SPRINGS} from '../shared/choreo.js';
 import {icon, setIcon} from '../shared/icons.js';
 import {pressable} from '../shared/press.js';
-import {ISLAND_EVENTS} from '../shared/settings.js';
+import {ISLAND_DROPS, ISLAND_EVENTS} from '../shared/settings.js';
 import {text} from '../shared/text.js';
 import {HaloSwitch} from './controls.js';
 import {Page, caption, column, openSettings, row, trailingIcon} from './page.js';
@@ -41,6 +41,9 @@ const EVENT_NAMES = {
     powerMode: 'Power mode', claude: 'Claude, from Ember and Tally',
     workspace: 'Changing workspace', launch: 'Apps starting', glance: 'Weather and next event on hover',
     locks: 'Caps Lock and Num Lock', drives: 'USB drives',
+    attention: 'An app asking for you', updates: 'Updates available', alarms: 'Alarms from Clocks',
+    health: 'Hot CPU, low memory or disk', phone: 'Phone, from GSConnect or KDE Connect',
+    weather: 'Rain soon and weather warnings', windows: 'Switching windows',
 };
 
 const BAR_MODES = [['bar', 'Bar'], ['island', 'Only the island'], ['handle', 'Only a handle']];
@@ -50,6 +53,7 @@ const BAR_MODE_NOTES = {
     handle: 'Only a thin handle; rest on it for the island, push on to the top edge for the bar',
 };
 const HIDE_TIMES = [5, 10, 20, 30, 60].map(seconds => [seconds, `${seconds} s`]);
+const DROPS = ISLAND_DROPS.map(px => [px, px ? `${px} px` : 'None']);
 
 const SPEEDS = [['quick', 'Quick'], ['normal', 'Normal'], ['slow', 'Slow']];
 const CLICKS = [['app', 'Opens the app'], ['large', 'Opens it larger']];
@@ -132,6 +136,14 @@ export class SettingsPage extends Page {
         click.add_child(this._segmented(CLICKS, () => ctx.settings.current.islandClick,
             value => ctx.settings.set('islandClick', value)));
 
+        const shape = this.add(card('The island'));
+        shape.add_child(text('qs-row-note', {styleClass: 'halo-qs-small', wrap: true,
+            text: 'How far it hangs further into the screen: what it shows, and without a bar the resting clock too.'}));
+        shape.add_child(this._segmented(DROPS, () => ctx.settings.current.islandDrop,
+            value => ctx.settings.set('islandDrop', value)));
+        shape.add_child(this._switchRow('Wide island', 'Opened looks twice as wide',
+            s => s.islandWide, on => ctx.settings.set('islandWide', on)));
+
         const island = this.add(card('What opens the island'));
         this._jumpTo = section === 'island' ? click : null;
         this._jumpEnd = 0;
@@ -142,7 +154,7 @@ export class SettingsPage extends Page {
 
         const tiles = this.add(card('Tiles'));
         tiles.add_child(text('qs-row-note', {styleClass: 'halo-qs-small', wrap: true,
-            text: 'Drag a tile by its handle to move it. The eye hides it from the quick settings.'}));
+            text: 'Drag a tile by its handle to move it. The eye hides it from the quick settings; the arrow keeps another extension\'s icon in the top bar instead.'}));
         this._tileList = column('halo-qs-tile-list');
         tiles.add_child(this._tileList);
 
@@ -298,10 +310,28 @@ export class SettingsPage extends Page {
             const eye = new St.Bin({style_class: 'halo-qs-eye', child: icon(isHidden ? 'visibility-off' : 'visibility', {size: 18}),
                 accessible_name: isHidden ? `Show ${tile.title}` : `Hide ${tile.title}`});
             pressable(eye, () => this._toggleHidden(tile.id), {scale: 0.85, focus: true});
+            // Another extension's icon may stay in the bar instead.
+            if (tile.id.startsWith('panel:')) {
+                const inBar = this.ctx.settings.current.barIcons.includes(tile.id);
+                const up = new St.Bin({style_class: `halo-qs-eye${inBar ? ' halo-chosen' : ''}`,
+                    child: icon('keyboard-arrow-up', {size: 18, fill: inBar}),
+                    accessible_name: inBar ? `Put ${tile.title} in the quick settings` : `Keep ${tile.title} in the top bar`});
+                pressable(up, () => this._toggleBar(tile.id), {scale: 0.85, focus: true});
+                line.add_child(up);
+                if (inBar)
+                    line.add_child(text('qs-row-note', {styleClass: 'halo-qs-row-note', text: 'In the bar'}));
+            }
             line.add_child(eye);
             this._dragHandle(handle, line);
             this._tileList.add_child(line);
         }
+    }
+
+    _toggleBar(id) {
+        const settings = this.ctx.settings;
+        const inBar = settings.current.barIcons;
+        settings.set('barIcons', inBar.includes(id) ? inBar.filter(other => other !== id) : [...inBar, id]);
+        this._buildTiles();
     }
 
     _toggleHidden(id) {

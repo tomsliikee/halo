@@ -4,7 +4,10 @@ import {
     claudeNote, claudePeek, clockText, copiedText, initials, isDecline, levelShare, limitNote, limitTitle, lockedNote, lowMark, osdIcon,
     mediaPeek, osdKind, plainText, soonText, timerPeek, trackTime, unitAppId,
     driveText, glanceItems, lockTitle, workspaceNote, workspaceTitle,
+    healthText, phoneBatteryText, rainText, updatesText,
 } from '../extension/lib/island/words.js';
+import {hottest, memoryLeft, newProblems, problems} from '../extension/lib/island/health.js';
+import {newlyLow} from '../extension/lib/island/sources/phone.js';
 import * as Pomodoro from '../extension/lib/shared/pomodoro.js';
 import * as Timer from '../extension/lib/shared/timer.js';
 import {MINUTE, isPaused, parseTimers, pausedNote, runningTimer, stretchTimer} from '../extension/lib/shared/timers.js';
@@ -178,5 +181,29 @@ test('the glance: weather, then the next event', () => equal(
     glanceItems({temperature: 12.4, code: 0, isDay: true}, {summary: 'Standup', text: 'in 20 min'}, () => 'sunny', t => `${Math.round(t)} °C`),
     [{icon: 'sunny', text: '12 °C'}, {icon: 'event', text: 'Standup in 20 min'}]));
 test('the glance without weather or events is empty', () => equal(glanceItems(null, null, () => '', () => ''), []));
+
+test('the hottest sensor, odd readings left out', () => equal(hottest(['45000\n', '91500', 'x', '-1', '999000']), 91.5));
+test('no sensors', () => equal(hottest([]), null));
+test('memory left', () => equal(memoryLeft('MemTotal:       1000 kB\nMemFree: 10 kB\nMemAvailable:    40 kB\n'), 0.04));
+test('a problem starts at its line and ends well below it', () => {
+    const hot = problems({temperature: 90, memory: 0.5, disk: 0.5});
+    const still = problems({temperature: 85, memory: 0.5, disk: 0.5}, hot);
+    const over = problems({temperature: 79, memory: 0.5, disk: 0.5}, still);
+    equal([hot.hot, still.hot, over.hot], [true, true, false]);
+});
+test('memory and disk nearly full', () => equal(problems({temperature: null, memory: 0.04, disk: 0.08}, {disk: true}),
+    {hot: false, memory: true, disk: true}));
+test('only new problems are told', () => equal(newProblems({hot: true, memory: true, disk: false}, {hot: true}), ['memory']));
+test('health words', () => equal([healthText('hot', {temperature: 92.4}), healthText('disk', {disk: 0.031})],
+    [{title: 'Running hot', note: '92 °C'}, {title: 'Disk nearly full', note: '3 % left'}]));
+test('updates', () => equal([updatesText(1).title, updatesText(7).title], ['1 update', '7 updates']));
+test('rain words', () => equal([rainText({rainIn: 20, warning: null}).title, rainText({rainIn: 0, warning: null}).title,
+    rainText({rainIn: 15, warning: 'Thunderstorm'})], ['Rain in 20 min', 'Rain now', {title: 'Thunderstorm', note: 'Rain in 15 min'}]));
+test('phone battery: low once, not while charging', () => equal(
+    [newlyLow(18, false, false), newlyLow(15, false, true), newlyLow(10, true, false), newlyLow(0, false, false)],
+    [{low: true, tell: true}, {low: true, tell: false}, {low: false, tell: false}, {low: false, tell: false}]));
+test('phone battery words', () => equal(phoneBatteryText('', 14.6), {title: 'Phone battery low', note: '15 %'}));
+test('a ringing alarm comes before a hint', () => equal(
+    ids(pick([{id: 'alarm', kind: 'alarm', at: 0}, volume, media])), ['alarm', 'media']));
 
 done('island');

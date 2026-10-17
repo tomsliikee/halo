@@ -38,9 +38,16 @@ class Tile extends EventEmitter {
         // Whether a click on the tile itself switches it; when not, the
         // whole tile opens its page.
         this.switches = true;
+        this.watched = false;
     }
 
     activate() {}
+
+    // Whether the quick settings are open, so the tile is seen; what only
+    // moves while seen ticks only then.
+    setWatched(on) {
+        this.watched = on;
+    }
 
     _set(values) {
         let changed = false;
@@ -264,12 +271,13 @@ class TimerTile extends WatchingTile {
             active: Boolean(running),
             note: running ? clockText(running.shown, {countdown: running.countdown}) : pausedNote(this.store.timers),
         });
-        if (running && !this._tick) {
+        // Its seconds move only while the quick settings show it.
+        if (running && this.watched && !this._tick) {
             this._tick = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 1, () => {
                 this.update();
                 return this._tick ? GLib.SOURCE_CONTINUE : GLib.SOURCE_REMOVE;
             });
-        } else if (!running && this._tick) {
+        } else if ((!running || !this.watched) && this._tick) {
             GLib.source_remove(this._tick);
             this._tick = 0;
         }
@@ -284,6 +292,11 @@ class TimerTile extends WatchingTile {
         }
         const paused = ['pomodoro', 'timer', 'stopwatch'].find(kind => isPaused(timers, kind));
         this.store.toggle(paused ?? 'pomodoro');
+    }
+
+    setWatched(on) {
+        super.setWatched(on);
+        this.update();
     }
 
     destroy() {
@@ -428,12 +441,24 @@ export class ButtonTile extends Tile {
         this.page = this.menu ? 'hosted' : null;
         this.title = Main.extensionManager.lookup(key)?.metadata.name ??
             (button.accessible_name || key.replace(/@.*$/, '').replace(/^appindicator-/, ''));
-        // The icon and text change while it runs; a look now and then is enough.
-        this._poll = GLib.timeout_add_seconds(GLib.PRIORITY_LOW, 2, () => {
-            this.update();
-            return GLib.SOURCE_CONTINUE;
-        });
+        this._poll = 0;
         this.update();
+    }
+
+    // The icon and text change while it runs; a look now and then is
+    // enough, and only while the quick settings show it.
+    setWatched(on) {
+        super.setWatched(on);
+        if (on && !this._poll) {
+            this.update();
+            this._poll = GLib.timeout_add_seconds(GLib.PRIORITY_LOW, 2, () => {
+                this.update();
+                return GLib.SOURCE_CONTINUE;
+            });
+        } else if (!on && this._poll) {
+            GLib.source_remove(this._poll);
+            this._poll = 0;
+        }
     }
 
     // The button's menu; a button without one (it acts on a click) may
@@ -515,6 +540,7 @@ export class TileSet extends EventEmitter {
         this._settings = settings;
         this._timers = timers;
         this.all = [];
+        this._watched = false;
         if (gnome.ready)
             this._rebuild();
         gnome.connectObject('ready', () => this._rebuild(), 'changed', () => this._rebuild(), this);
@@ -522,9 +548,10 @@ export class TileSet extends EventEmitter {
 
     // Tiles to show, in their order.
     get shown() {
-        const {tileOrder, hiddenTiles} = this._settings.current;
+        const {tileOrder, hiddenTiles, barIcons} = this._settings.current;
         const byId = new Map(this.all.map(tile => [tile.id, tile]));
-        return orderTiles(this.all.map(tile => tile.id), tileOrder, hiddenTiles).map(id => byId.get(id));
+        // An icon that stays in the bar is not a tile as well.
+        return orderTiles(this.all.map(tile => tile.id), tileOrder, [...hiddenTiles, ...barIcons]).map(id => byId.get(id));
     }
 
     // Every tile in its order, hidden ones too, for the settings page.
@@ -533,10 +560,17 @@ export class TileSet extends EventEmitter {
         return orderTiles(this.all.map(tile => tile.id), this._settings.current.tileOrder).map(id => byId.get(id));
     }
 
+    // The quick settings opened or closed.
+    watch(on) {
+        this._watched = on;
+        for (const tile of this.all)
+            tile.setWatched(on);
+    }
+
     // The settings changed: the order or the hidden ones may have.
     settingsChanged() {
-        const {tileOrder, hiddenTiles} = this._settings.current;
-        const key = JSON.stringify([tileOrder, hiddenTiles]);
+        const {tileOrder, hiddenTiles, barIcons} = this._settings.current;
+        const key = JSON.stringify([tileOrder, hiddenTiles, barIcons]);
         if (key === this._key)
             return;
         this._key = key;
@@ -556,6 +590,8 @@ export class TileSet extends EventEmitter {
     _rebuild() {
         const old = this.all;
         this.all = buildTiles(this._gnome, this._appearance, this._timers);
+        for (const tile of this.all)
+            tile.setWatched(this._watched);
         this.emit('changed');
         for (const tile of old)
             tile.destroy();

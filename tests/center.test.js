@@ -2,7 +2,7 @@ import {monthGrid, monthRange, shiftMonth, weekdays} from '../extension/lib/cent
 import {
     agoText, eventSoonText, eventTimeText, groupNotifications, offsetText, swipeDismisses, temperatureText, weatherIcon,
 } from '../extension/lib/center/words.js';
-import {parsePlace, parseToday} from '../extension/lib/center/forecast.js';
+import {parsePlace, parseSoon, parseToday} from '../extension/lib/center/forecast.js';
 import {test, equal, done} from './harness.js';
 
 test('October 2026 starts on a Thursday', () => equal(monthGrid(2026, 9, 1)[0], [null, null, null, 1, 2, 3, 4]));
@@ -42,5 +42,17 @@ test('today from Open-Meteo', () => equal(
     {temperature: 12.3, code: 2, isDay: true, max: 15.1, min: 7}));
 test('a broken answer is none', () => equal(parseToday({current: {}}), null));
 test('Ledge places', () => equal([parsePlace('{"name":"Vienna","latitude":48.2,"longitude":16.4}')?.name, parsePlace('')], ['Vienna', null]));
+
+// 12:00 UTC is 14:00 at a place two hours ahead.
+const noon = Date.parse('2026-10-18T12:00:00Z');
+const quarters = precipitation => ({
+    utc_offset_seconds: 7200, current: {weather_code: 61},
+    minutely_15: {time: ['2026-10-18T14:00', '2026-10-18T14:15', '2026-10-18T14:30', '2026-10-18T14:45'], precipitation},
+});
+test('rain soon: the first quarter with enough of it', () => equal(parseSoon(quarters([0, 0.1, 0.8, 2]), noon), {rainIn: 30, rain: 0.8, warning: null}));
+test('no rain in the hour', () => equal(parseSoon(quarters([0, 0, 0.2, 0]), noon), {rainIn: null, rain: 0, warning: null}));
+test('a thunderstorm is a warning', () => equal(
+    parseSoon({...quarters([0, 0, 0, 0]), current: {weather_code: 95}}, noon).warning, 'Thunderstorm'));
+test('an answer without quarters tells nothing', () => equal(parseSoon({current: {}}, noon), null));
 
 done('center');

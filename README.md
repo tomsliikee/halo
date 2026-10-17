@@ -27,7 +27,7 @@ Each of the four parts can be switched off in Halo's settings. GNOME's own part 
 - **Floating Top Bar:** **44 px** high, **8 px** from the edges, in five layouts (see [The Top Bar](#the-top-bar)). Workspace dots on the left, the focused app beside them, date and time in the middle, privacy and status on the right.
 - **Dynamic Island:** The clock is the island. Volume, a notification, a call, music, a timer or a recording grow out of it and shrink back into it (see [The Dynamic Island](#the-dynamic-island)).
 - **Notification Center:** A click on the clock opens a wide card under it: notifications grouped by app and conversation, the month with event dots, today's events, the weather and a world clock (see [The Notification Center](#the-notification-center)).
-- **Quick Settings:** Sliders, tiles and pages for Wi-Fi, Bluetooth, energy, appearance, VPN, sound, power and a timer. Every other extension's top bar icon becomes a tile here, and Halo's own settings live behind the gear (see [Quick Settings](#quick-settings)).
+- **Quick Settings:** Sliders, tiles and pages for Wi-Fi, Bluetooth, energy, appearance, VPN, sound, power and a timer. Every other extension's top bar icon becomes a tile here unless it is kept in the bar, and Halo's own settings live behind the gear (see [Quick Settings](#quick-settings)).
 - **Colour Style for the Family:** Eight colour styles. Choosing one also sets it in **Harbor**, **Tally**, **Ember**, **Torch** and **Ledge** if they are installed.
 - **Dark Style on a Schedule:** **Light**, **Dark** or **Auto** between two times you set; Halo sets GNOME's colour scheme.
 - **Lock Screen:** Halo stays on the lock screen with only what belongs there (see [The Lock Screen](#the-lock-screen)).
@@ -57,7 +57,7 @@ Each of the four parts can be switched off in Halo's settings. GNOME's own part 
 | **Only a handle** | A thin grip at the top edge, as Harbor's, in the island's colour; it grows thicker under the pointer. Resting on it or a click makes the clock island grow out of it; it sinks back into the grip a moment after the pointer leaves. Everything the island shows grows out of the grip; something running goes back into it after its intro and leaves a dot beside it. |
 
 In both hidden modes, pushing the pointer up against the top edge brings the bar down until the pointer leaves it. On the lock screen the bar is always there.
-- **No Foreign Icons:** Indicators of other extensions and tray icons do not go into the bar. Each becomes a tile in the quick settings whose page shows its menu.
+- **Foreign Icons:** Indicators of other extensions and tray icons become tiles in the quick settings whose page shows their menu. One by one, Halo's settings can keep an icon in the bar instead (the arrow beside it in the tile list): the real button moves into a pill left of the status pill, with its own menu and right-click, and goes back when switched off.
 
 ---
 
@@ -65,7 +65,7 @@ In both hidden modes, pushing the pointer up against the top edge brings the bar
 
 ![The island's looks, white on a dark desktop (left) and black on a light one (right): volume, charging, a timer, music small and large, a recording beside music, a notification and a call](readmestuff/island.png)
 
-The island rests on the clock, a few pixels lower, so it reaches into the window below. It is always the opposite of the desktop: white on a dark desktop, black on a light one. When something happens it grows out of the clock to about twice its size with a spring that overshoots a little; its content fades in without one.
+The island rests on the clock, a few pixels lower, so it reaches into the window below. **Hangs in** in Halo's settings moves it further in, by **0, 6, 12, 18 or 24 px** (default **0**): what it shows, and in **Only the island** the resting clock too; in the bar the resting clock stays centred. **Wide island** makes its opened looks (music, a notification, a call) twice as wide, **1400 px**, within the screen less **48 px** on each side. It is always the opposite of the desktop: white on a dark desktop, black on a light one. When something happens it grows out of the clock to about twice its size with a spring that overshoots a little; its content fades in without one.
 
 - **Click:** Opens the thing's app: Claude's window or the terminal its session runs in, the music player, the app behind a download. Halo's settings can make a click open the large look first instead; the middle button always opens it. A right click closes it or sends the thing away. Something still going (music, a timer, a recording) then waits as a small circle beside the island, or beside the clock when nothing else shows; a click on the circle brings it back, and a right click on the clock brings back everything sent away.
 - **Hover:** The pointer on a short message holds it. Under the pointer a small look grows a little wider and longer, its text kept at its size. On the resting clock it shows the weather and the next event of today below the time. Resting on it for a moment shows one more line, with a bar for music and timers: the player and the track's time, when the timer ends, which projects Claude works on, the app behind a download.
@@ -93,8 +93,15 @@ The island rests on the clock, a few pixels lower, so it reaches into the window
 | **App starting** | An app that starts, until its first window shows (at most **10 s**) | Short |
 | **Caps Lock, Num Lock** | The keyboard's lock state | Short |
 | **USB drives** | A drive plugged in (a click opens it in Files) or removed | Short |
+| **An app asking for you** | GNOME's "… is ready" for a window that demands attention; a click brings the window | Short |
+| **Updates** | PackageKit's **UpdatesChanged** signal, counted once; a click opens Software's updates. Nothing starts PackageKit | Short |
+| **Alarms** | **GNOME Clocks**' notification of an alarm or timer that rang, with **Stop** and **Snooze** | Lasting, with calls first |
+| **Hot, low memory or disk** | Once a minute, not while locked: the hottest thermal zone at **90 °C**, memory or disk with less than **5 %** left; told once per crossing | Short |
+| **Phone** | **GSConnect** or **KDE Connect**: the phone's battery at **20 %**; its calls and messages come as notifications | Short |
+| **Rain soon, weather warnings** | Open-Meteo's next hour in quarters: rain within the hour, thunderstorms, heavy rain or snow | Short |
+| **Switching windows** | Focus moving to another app's window: its app and title, for **0.9 s**. Off at first | Short |
 
-Lasting things in order: **call**, then **recording** and **privacy**, **timer**, **Claude**, **music**, **progress**. A short message shows over whatever lasts. Every event has its own switch in Halo's settings.
+Lasting things in order: **call** and **alarm**, then **recording** and **privacy**, **timer**, **Claude**, **music**, **progress**. A short message shows over whatever lasts. Every event has its own switch in Halo's settings.
 
 ---
 
@@ -168,11 +175,12 @@ Halo moves like **Harbor**: springs for size and position, short eases for fadin
 
 | What | Where | Why |
 | :--- | :--- | :--- |
+| **System state** | **`/sys/class/thermal`**, **`/proc/meminfo`**, the free space of **`/`** and home | Read once a minute for the island's warnings, not while locked. |
 | **Settings** | **`~/.config/halo/settings.json`** | Every choice from the settings page. Watched, so an edit by hand takes effect at once. |
 | **Timers** | **`~/.local/state/ledge/timers.json`** | Timer, stopwatch and Pomodoro, shared with **Ledge**. |
 | **Colour style of the family** | **`~/.config/harbor/settings.json`**, **`~/.config/tally/settings.json`**, Ember's and Torch's session bus services, Ledge's GSettings | Written only when you choose a colour, and only for extensions that are installed and know the colour. |
 | **GNOME settings** | **`org.gnome.desktop.interface color-scheme`**, **`org.gnome.desktop.notifications show-banners`** | Dark style and Do not disturb. |
-| **Weather** | **`api.open-meteo.com`** | The only network request: the coordinates of Ledge's place, or GNOME Weather's, when the center opens, at most every **30 minutes**. No account and no key. |
+| **Weather** | **`api.open-meteo.com`** | The only network request: the coordinates of Ledge's place, or GNOME Weather's, when the center opens, at most every **30 minutes**; while the island's **Rain soon** event is on, also every **30 minutes** without it. No account and no key. |
 | **Usage limits** | **`~/.cache/tally/limits.json`** | Read only, for the island's 80 % and 95 % marks. |
 | **Font** | **`~/.local/share/fonts/GoogleSansFlex.woff2`** | Copied by `install.sh` only if no **Google Sans Flex** is installed. |
 

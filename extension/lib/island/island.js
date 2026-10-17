@@ -53,6 +53,10 @@ const OPEN_DROP = 6;
 // In "handle" mode the island goes back into the grip this long after the
 // pointer left both.
 const HANDLE_LEAVE_MS = 400;
+// Nobody at the computer this long: what moves on its own stands still.
+const STILL_MS = 60 * 1000;
+// A wide island keeps this far from the screen's sides.
+const WIDE_MARGIN = 48;
 const HANDLE_POLL_MS = 100;
 // How far two fingers go up, in scroll steps, to send the island away.
 const SWIPE_STEPS = 1.5;
@@ -158,6 +162,19 @@ export class Island {
         this._swappedAt = 0;
         this._peek = null;
         this._peekWait = 0;
+        this._lookers = new Set();
+        this._looked = 'null|null';
+        // A minute without input: the waveform and spinners stand still
+        // until someone is back.
+        this._idle = global.backend.get_core_idle_monitor();
+        this._activeWatch = 0;
+        this._idleWatch = this._idle.add_idle_watch(STILL_MS, () => {
+            Views.setStill(true);
+            this._activeWatch = this._idle.add_user_active_watch(() => {
+                this._activeWatch = 0;
+                Views.setStill(false);
+            });
+        });
         this._shape.connect('notify::hover', () => {
             this._peekChanged();
             this._handleHoverChanged();
@@ -173,6 +190,13 @@ export class Island {
         this._theme.connectObject('changed', () => this._paint(), this);
         this._paint();
         this._render({animate: false});
+    }
+
+    // fn() runs after what is opened large or peeking changed, for sources
+    // that tick only while their time shows.
+    onLook(fn) {
+        this._lookers.add(fn);
+        return () => this._lookers.delete(fn);
     }
 
     // Whether an event of a kind may open the island (Halo's settings).
@@ -456,7 +480,8 @@ export class Island {
         this._placeKey = key;
         // What hangs from the clock follows it at once; a mode or the bar
         // pushed down changes what shows.
-        if (this._docked || place.mode !== this._placedMode || Boolean(place.barDown) !== this._placedDown) {
+        if (this._docked || place.mode !== this._placedMode || Boolean(place.barDown) !== this._placedDown ||
+            this._wide() !== this._placedWide) {
             this._render();
             return;
         }
@@ -494,6 +519,10 @@ export class Island {
     }
 
     destroy() {
+        this._idle.remove_watch(this._idleWatch);
+        if (this._activeWatch)
+            this._idle.remove_watch(this._activeWatch);
+        Views.setStill(false);
         for (const source of [this._swipeWait, this._handleLeave]) {
             if (source)
                 GLib.source_remove(source);
@@ -593,7 +622,19 @@ export class Island {
             return (monitor?.y ?? 0) - Math.max(this._shape.boxHeight, place.height || 36) - AWAY_GAP;
         }
         const top = where.drop ? place.dropY ?? place.y : place.y;
-        return main && !where.docked ? top + OPEN_DROP : top;
+        if (!main || where.docked)
+            return top;
+        // Without a bar the anchor already hangs lower by the setting.
+        return top + OPEN_DROP + (place.hung ? 0 : this._settings.current.islandDrop);
+    }
+
+    // The opened looks' width: twice as wide with the setting, within the
+    // screen.
+    _wide() {
+        if (!this._settings.current.islandWide)
+            return Views.WIDE;
+        const monitor = Main.layoutManager.primaryMonitor;
+        return Math.min(2 * Views.WIDE, (monitor?.width ?? 2 * Views.WIDE) - 2 * WIDE_MARGIN);
     }
 
     // A running thing rises into the clock once its intro is over.
@@ -616,6 +657,16 @@ export class Island {
     _render({animate = true} = {}) {
         if (this._gone)
             return;
+        this._renderLook(animate);
+        const looked = `${this._expanded}|${this._peek}`;
+        if (looked !== this._looked) {
+            this._looked = looked;
+            for (const fn of this._lookers)
+                fn();
+        }
+    }
+
+    _renderLook(animate) {
         const {main, bubble} = this._pick();
         const place = this._place();
         const where = this._placement(main);
@@ -623,6 +674,7 @@ export class Island {
         this._docked = where.docked;
         this._placedMode = place.mode;
         this._placedDown = Boolean(place.barDown);
+        this._placedWide = this._wide();
         this._shape.setAnchor(place.x, this._top(place, where, away, main), {animate});
         this._scheduleDock(main);
         this._syncPad(main, animate);
@@ -680,7 +732,9 @@ export class Island {
         } else {
             const base = this._expanded === main.id && main.large ? main.large : main.view;
             const peeking = this._peek === main.id && base === main.view && Boolean(main.data?.peek) && !this._locked;
-            const key = peeking ? `${base}+peek` : base;
+            const wide = this._wide();
+            Views.setWide(wide);
+            const key = `${peeking ? `${base}+peek` : base}@${wide}`;
             this._shape.visible = true;
             this._shape.reactive = true;
             if (this._shown === main.id && this._viewKey === key && this._view?.update) {
