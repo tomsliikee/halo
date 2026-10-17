@@ -16,7 +16,7 @@ import {CenterPanel} from './lib/center/center.js';
 import {NotificationModel} from './lib/center/notifications.js';
 import {CenterTakeover} from './lib/center/takeover.js';
 import {WeatherModel} from './lib/center/weather.js';
-import {Island, REST_DROP} from './lib/island/island.js';
+import {Island} from './lib/island/island.js';
 import {glanceItems} from './lib/island/words.js';
 import {BannerSource} from './lib/island/sources/banners.js';
 import {LockBox} from './lib/island/lockbox.js';
@@ -373,8 +373,8 @@ export default class HaloExtension extends Extension {
             if (mode === 'handle' && !barDown) {
                 const grip = handleRect(monitor);
                 x = grip.x + grip.width / 2 - w / 2;
-                // Just below the grip, once the island adds its drop.
-                y = grip.y + HANDLE.height + 2 - REST_DROP;
+                // Just below the grip.
+                y = grip.y + HANDLE.height + 2;
             }
             return {
                 mode, barDown,

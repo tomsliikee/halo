@@ -46,9 +46,10 @@ const FALLBACK_TOP = 8;
 // Something running drops below the bar this long before it rises into the
 // clock.
 const INTRO_MS = HINT_MS;
-// The resting island hangs this far below the bar's clock, so it reaches a
-// little into the window below.
-export const REST_DROP = 6;
+// What the island shows hangs this far lower than the resting clock, so it
+// reaches a little further into the window below. The resting clock and
+// what is docked in it stay centred in the bar.
+const OPEN_DROP = 6;
 // In "handle" mode the island goes back into the grip this long after the
 // pointer left both.
 const HANDLE_LEAVE_MS = 400;
@@ -364,7 +365,7 @@ export class Island {
         if (!place.visible || !place.width)
             return null;
         return {
-            x: place.x - place.width / 2, y: place.y + REST_DROP, width: place.width, height: place.height,
+            x: place.x - place.width / 2, y: place.y, width: place.width, height: place.height,
             radius: Math.min(place.height / 2, MAX_RADIUS), color: this._fill,
         };
     }
@@ -441,7 +442,7 @@ export class Island {
         const main = this._pick().main;
         const where = this._placement(main);
         const away = this._away(main, where, place);
-        this._shape.setAnchor(place.x, this._top(place, where, away));
+        this._shape.setAnchor(place.x, this._top(place, where, away, main));
         this._syncShown(place, main, away);
         if (this._shown !== null)
             return;
@@ -557,16 +558,16 @@ export class Island {
         return (!main || where.docked) && !this._restShown(place);
     }
 
-    // The top the island hangs from: the clock's, a little lower when it
-    // rests, below the bar when dropped, or above the screen while away.
-    _top(place, where = this._placement(this._pick().main), away = false) {
+    // The top the island hangs from: the clock's while it rests or docks,
+    // a little lower while it shows something, below the bar when dropped,
+    // or above the screen while away.
+    _top(place, where = this._placement(this._pick().main), away = false, main = this._pick().main) {
         if (away) {
             const monitor = Main.layoutManager.primaryMonitor;
             return (monitor?.y ?? 0) - Math.max(this._shape.boxHeight, place.height || 36) - AWAY_GAP;
         }
-        if (where.drop)
-            return place.dropY ?? place.y;
-        return place.y + (place.visible ? REST_DROP : 0);
+        const top = where.drop ? place.dropY ?? place.y : place.y;
+        return main && !where.docked ? top + OPEN_DROP : top;
     }
 
     // A running thing rises into the clock once its intro is over.
@@ -596,7 +597,7 @@ export class Island {
         this._docked = where.docked;
         this._placedMode = place.mode;
         this._placedDown = Boolean(place.barDown);
-        this._shape.setAnchor(place.x, this._top(place, where, away), {animate});
+        this._shape.setAnchor(place.x, this._top(place, where, away, main), {animate});
         this._syncHandle(place, away && Boolean(main));
         this._scheduleDock(main);
         this._syncPad(main, animate);
