@@ -3,19 +3,20 @@
 // never wobbles (design: "Form federt mit Überschwingen, Inhalt blendet
 // ohne").
 
-import Clutter from 'gi://Clutter';
+import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
+import Meta from 'gi://Meta';
 import St from 'gi://St';
 
 import {expressive, spring, SPRINGS, stopSprings, stretch} from '../shared/choreo.js';
-import {roundedRect, setSource} from '../shared/paint.js';
 import {ease, FADE} from '../shared/motion.js';
 
 // Corners are round to half the height, but no rounder than this: a large
 // island stays a soft pill, not a card.
 export const MAX_RADIUS = 48;
-// Room around the shape for its shadow.
-const SHADOW = 12;
+// A soft shadow below. St draws it with the rounded box, so a frame of a
+// spring only sets a size; nothing is rasterised by hand per frame.
+const SHADOW = '0 3px 12px rgba(0, 0, 0, 0.22)';
 const FADE_OUT_MS = 90;
 const FADE_IN_MS = 170;
 // The new content comes once the shape is most of the way.
@@ -37,12 +38,30 @@ class IslandShape extends St.Widget {
         this._inner = {w: 0, h: 0};
         this._pad = {x: 0, y: 0};
 
-        this._bg = new St.DrawingArea({reactive: false});
-        this._bg.connect('repaint', () => this._draw());
+        this._bg = new St.Widget({reactive: false});
+        this._bgStyle = '';
         this.add_child(this._bg);
+        // A spring sets width, height and top one after the other; the shape
+        // is laid out once per frame, just before it is drawn.
+        this._later = 0;
         this._clip = new St.Widget({clip_to_allocation: true, reactive: false});
         this.add_child(this._clip);
-        this.connect('destroy', () => stopSprings(this));
+        this.connect('destroy', () => {
+            stopSprings(this);
+            if (this._later)
+                global.compositor.get_laters().remove(this._later);
+            this._later = 0;
+        });
+    }
+
+    _queueLayout() {
+        if (this._later)
+            return;
+        this._later = global.compositor.get_laters().add(Meta.LaterType.BEFORE_REDRAW, () => {
+            this._later = 0;
+            this._layout();
+            return GLib.SOURCE_REMOVE;
+        });
     }
 
     get boxWidth() {
@@ -51,7 +70,7 @@ class IslandShape extends St.Widget {
 
     set boxWidth(value) {
         this._w = Math.max(1, value);
-        this._layout();
+        this._queueLayout();
     }
 
     get boxHeight() {
@@ -60,7 +79,7 @@ class IslandShape extends St.Widget {
 
     set boxHeight(value) {
         this._h = Math.max(1, value);
-        this._layout();
+        this._queueLayout();
     }
 
     // The height of what it holds, without the room around it.
@@ -79,7 +98,7 @@ class IslandShape extends St.Widget {
 
     setColor(color) {
         this._color = color;
-        this._bg.queue_repaint();
+        this._paintBody();
     }
 
     get boxTop() {
@@ -88,7 +107,7 @@ class IslandShape extends St.Widget {
 
     set boxTop(value) {
         this._anchorY = value;
-        this._layout();
+        this._queueLayout();
     }
 
     // centreX, top: stage coordinates the shape grows from. With animate a
@@ -180,32 +199,24 @@ class IslandShape extends St.Widget {
             this.set_position(x, y);
             this.set_size(w, h);
             this._clip.set_size(w, h);
-            this._bg.set_position(-SHADOW, -SHADOW);
-            this._bg.set_size(w + SHADOW * 2, h + SHADOW * 2);
+            this._bg.set_size(w, h);
         }
         // What it holds stays centred while the shape swings around it.
         for (const child of this._clip.get_children())
             child.set_position(Math.round((w - child.width) / 2), Math.round((h - child.height) / 2));
         if (moved) {
-            this._bg.queue_repaint();
+            this._paintBody();
             this.emit('moved');
         }
     }
 
-    _draw() {
-        const cr = this._bg.get_context();
-        const w = this._w;
-        const h = this._h;
-        const radius = Math.min(h / 2, w / 2, MAX_RADIUS);
-        // A soft shadow below: a few wider rounded shapes, fainter outwards.
-        for (let i = SHADOW; i > 0; i -= 3) {
-            roundedRect(cr, SHADOW - i / 2, SHADOW - i / 4 + 2, w + i, h + i / 2, radius + i / 2);
-            cr.setSourceRGBA(0, 0, 0, 0.035);
-            cr.fill();
+    // The style changes only when the colour or the rounded radius does.
+    _paintBody() {
+        const radius = Math.round(Math.min(this._h / 2, this._w / 2, MAX_RADIUS));
+        const style = `background-color: ${this._color}; border-radius: ${radius}px; box-shadow: ${SHADOW};`;
+        if (style !== this._bgStyle) {
+            this._bgStyle = style;
+            this._bg.set_style(style);
         }
-        roundedRect(cr, SHADOW, SHADOW, w, h, radius);
-        setSource(cr, this._color);
-        cr.fill();
-        cr.$dispose();
     }
 });

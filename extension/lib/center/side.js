@@ -79,7 +79,7 @@ export class SidePanel {
         cards.layout_manager.homogeneous = true;
         this.actor.add_child(cards);
 
-        ctx.agenda.connectObject('changed', () => this._fillMonth(), this);
+        ctx.agenda.connectObject('changed', () => this._fillMonth({force: true}), this);
         ctx.weather.connectObject('changed', () => this._fillWeather(), this);
     }
 
@@ -117,10 +117,16 @@ export class SidePanel {
         this._grid.ease({opacity: 255, duration: 160, mode: Clutter.AnimationMode.EASE_OUT_CUBIC});
     }
 
-    _fillMonth() {
+    // The grid is built anew only when what it shows changed: opening the
+    // center on the same day costs no rebuild of some forty cells.
+    _fillMonth({force = false} = {}) {
         const {year, month} = this._shown;
         const today = new Date();
         const chosen = this._chosen;
+        const key = [year, month, chosen.toDateString(), today.toDateString(), this._weekStart].join('|');
+        if (!force && key === this._filled)
+            return;
+        this._filled = key;
         this._weekday.text = format(chosen, '%A');
         this._date.text = sameDay(chosen, today) || chosen.getMonth() === month
             ? format(chosen, '%-d %B %Y')

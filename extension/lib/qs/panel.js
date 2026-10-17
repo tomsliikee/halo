@@ -58,6 +58,8 @@ export class QuickSettingsPanel {
             width: WIDTH,
         });
         this._card.set_pivot_point(1, 0);
+        // Fades as one drawn texture, not label by label every frame.
+        this._card.offscreen_redirect = Clutter.OffscreenRedirect.AUTOMATIC_FOR_OPACITY;
         this.actor.add_child(this._card);
         this._body = new St.Widget({layout_manager: new Clutter.BinLayout(), clip_to_allocation: true, x_expand: true});
         this._card.add_child(this._body);

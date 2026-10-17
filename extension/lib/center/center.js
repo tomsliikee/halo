@@ -102,6 +102,9 @@ export class CenterPanel {
         this.actor.add_child(this._morph);
         this._card = new St.BoxLayout({style_class: 'halo-center', reactive: true, width: WIDTH});
         this._card.set_pivot_point(0.5, 0);
+        // While it fades, the card is drawn once into a texture that fades,
+        // not every label of it every frame.
+        this._card.offscreen_redirect = Clutter.OffscreenRedirect.AUTOMATIC_FOR_OPACITY;
         this.actor.add_child(this._card);
 
         // Left: the notifications
