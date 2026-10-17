@@ -33,4 +33,12 @@ test('tile lists keep each word once', () => equal(parse('{"tileOrder": ["wifi",
     ['wifi', 'bluetooth']));
 test('tile lists must be clean to be set', () => equal(
     [isValid('hiddenTiles', ['vpn']), isValid('hiddenTiles', ['vpn', 'vpn']), isValid('hiddenTiles', 'vpn')], [true, false, false]));
+test('bar mode and hide time fall back on their own', () => equal(
+    [normalize({barMode: 'handle', islandHideSeconds: 30}).barMode, normalize({barMode: 'gone'}).barMode,
+        normalize({islandHideSeconds: 7}).islandHideSeconds, normalize({islandHideSeconds: '10'}).islandHideSeconds],
+    ['handle', 'bar', 10, 10]));
+test('a hide time is one of the choices', () => equal([isValid('islandHideSeconds', 20), isValid('islandHideSeconds', 25)], [true, false]));
+test('the new island events are on by default', () => equal(
+    ['workspace', 'launch', 'glance', 'locks', 'drives'].map(name => normalize(null).islandEvents[name]), [true, true, true, true, true]));
+
 done('settings');

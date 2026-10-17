@@ -48,7 +48,15 @@ Each of the four parts can be switched off in Halo's settings. GNOME's own part 
 - **Workspace Pill:** One dot per workspace; the current one is long and glides when you switch. Click a dot to switch, scroll on the pill to step through, click the rest of the pill for the overview. In the overview the pill says **Overview**.
 - **Clock:** Date and time, an unread dot, and a chip **in 10 min** when an event of today starts within the hour.
 - **Status Pill:** Network, sound and battery with its percentage, red under **20 %**. A recording shows its time, and camera, microphone and screen sharing each get a pill while they are in use.
-- **Options:** **See-through**, **Light bar** (stays light on a dark desktop), **Hide in fullscreen** (back when the pointer rests at the top edge), **Floating** off (the bar sits on the edge like GNOME's).
+- **Options:** **See-through**, **Light bar** (stays light on a dark desktop), **Hide in fullscreen** (back when you push the pointer against the top edge), **Floating** off (the bar sits on the edge like GNOME's).
+
+| Mode | What stays on screen |
+| :--- | :--- |
+| **Bar** | The top bar with the island in its clock; the default. |
+| **Only the island** | No bar: windows get the whole screen, and the clock island alone reaches into them. A drag or a two-finger swipe up on it hides it for **5, 10, 20, 30 or 60 s** (default **10 s**); hints still come meanwhile. |
+| **Only a handle** | A thin grip at the top edge. Resting on it brings the clock island out; it goes back a moment after the pointer leaves. Everything the island shows grows out of the grip; something running goes back into it after its intro and leaves a dot beside it. |
+
+In both hidden modes, pushing the pointer up against the top edge brings the bar down until the pointer leaves it. On the lock screen the bar is always there.
 - **No Foreign Icons:** Indicators of other extensions and tray icons do not go into the bar. Each becomes a tile in the quick settings whose page shows its menu.
 
 ---
@@ -57,10 +65,10 @@ Each of the four parts can be switched off in Halo's settings. GNOME's own part 
 
 ![The island's looks, white on a dark desktop (left) and black on a light one (right): volume, charging, a timer, music small and large, a recording beside music, a notification and a call](readmestuff/island.png)
 
-The island rests on the clock. It is always the opposite of the desktop: white on a dark desktop, black on a light one. When something happens it grows out of the clock to about twice its size with a spring that overshoots a little; its content fades in without one.
+The island rests on the clock, a few pixels lower, so it reaches into the window below. It is always the opposite of the desktop: white on a dark desktop, black on a light one. When something happens it grows out of the clock to about twice its size with a spring that overshoots a little; its content fades in without one.
 
 - **Click:** Opens the thing's app: Claude's window or the terminal its session runs in, the music player, the app behind a download. Halo's settings can make a click open the large look first instead; the middle button always opens it. A right click closes it or sends the thing away. Something still going (music, a timer, a recording) then waits as a small circle beside the island, or beside the clock when nothing else shows; a click on the circle brings it back, and a right click on the clock brings back everything sent away.
-- **Hover:** The pointer on a short message holds it. Under the pointer a small look grows a little wider and longer, its text kept at its size. Resting on it for a moment shows one more line, with a bar for music and timers: the player and the track's time, when the timer ends, which projects Claude works on, the app behind a download.
+- **Hover:** The pointer on a short message holds it. Under the pointer a small look grows a little longer and wider, its text kept at its size. On the resting clock it shows the weather and the next event of today below the time. Resting on it for a moment shows one more line, with a bar for music and timers: the player and the track's time, when the timer ends, which projects Claude works on, the app behind a download.
 - **Two at Once:** The more important lasting thing takes the island; the other waits beside it as a small bubble. A click on the bubble, a sideways touchpad swipe or Shift with the wheel swaps them.
 - **Scroll:** On music the wheel or two fingers change the volume; on a timer they add or take a minute.
 - **While the Center Is Open:** The clock has become the center, so the island rests as a small circle with a pencil, which opens the island's settings. An event grows out of that circle.
@@ -81,6 +89,10 @@ The island rests on the clock. It is always the opposite of the desktop: white o
 | **Network and devices** | Wi-Fi and VPN connected or lost, a Bluetooth device with its battery | Short |
 | **Event soon** | GNOME's calendar: an event of today about to start | Short |
 | **Screenshot, copied text** | The screenshot tool, with a thumbnail; the clipboard, never what password managers mark | Short |
+| **Workspace** | A move to another workspace: its name or number and the apps on it | Short |
+| **App starting** | An app that starts, until its first window shows (at most **10 s**) | Short |
+| **Caps Lock, Num Lock** | The keyboard's lock state | Short |
+| **USB drives** | A drive plugged in (a click opens it in Files) or removed | Short |
 
 Lasting things in order: **call**, then **recording** and **privacy**, **timer**, **Claude**, **music**, **progress**. A short message shows over whatever lasts. Every event has its own switch in Halo's settings.
 
@@ -248,7 +260,7 @@ Colours come from **`extension/lib/shared/palettes.js`**: each style is Material
 | **Unit tests** | `for t in tests/*.test.js; do gjs -m "$t"; done` |
 | **Stylesheet** | `gjs -m tools/build-stylesheet.js` |
 | **Icons and symbols** | `gjs -m tools/build-icons.js`, `gjs -m tools/build-symbols.js` |
-| **Headless shell** | `tools/headless/run.sh <script> [seconds]` with a script from **`tools/headless/scripts`** (`bar`, `qs`, `island`, `center`, `morph`, `gestures`, `dismiss`, `perf`, `click`, `lock`, `lock-input`, `states`, `lifecycle`); screenshots land in **`$TMPDIR/halo-headless`** |
+| **Headless shell** | `tools/headless/run.sh <script> [seconds]` with a script from **`tools/headless/scripts`** (`bar`, `qs`, `island`, `center`, `morph`, `gestures`, `dismiss`, `perf`, `frames`, `click`, `lock`, `lock-input`, `states`, `modes`, `lifecycle`); screenshots land in **`$TMPDIR/halo-headless`** |
 | **Dark desktop** | `HALO_SCHEME=dark tools/headless/run.sh center` |
 | **Two monitors** | `HALO_MONITORS=2 tools/headless/run.sh lifecycle` |
 | **Beside other extensions** | `HALO_WITH="<uuid>=<path to its extension folder>" tools/headless/run.sh lifecycle` |
@@ -259,8 +271,10 @@ Colours come from **`extension/lib/shared/palettes.js`**: each style is Material
 
 | Area | Evidence |
 | :--- | :--- |
-| **Settings, layouts, ranking, words, calendar grid, grouping, swipe rule, palettes, springs, lock rules, the center's growth, scroll steps, the circle for what was sent away, the app of a Claude session** | ***Tested:*** 151 unit tests. |
-| **Top bar in five layouts, options, two monitors, overview, fullscreen** | ***Tested*** in the headless shell (`bar`, `states`), light and dark. |
+| **Settings, layouts, bar modes, ranking, words, calendar grid, grouping, swipe rule, palettes, springs, lock rules, the center's growth, scroll steps, the circle for what was sent away, the app of a Claude session** | ***Tested:*** 177 unit tests. |
+| **Bar modes: no room taken from windows, the island where the clock would be, the handle opening and closing, music back in the handle with its dot, the push against the top edge, a drag up hiding the island for the set time, a hint while it is away, the glance, workspace and app-start hints** | ***Tested*** in the headless shell (`modes`) with a virtual pointer; the headless pointer sends no touchpad scrolls, so the two-finger swipe was fed to its rule by hand, and the glance had stood-in weather and events. Caps Lock and USB drives are ***built*** only. |
+| **Smoothness** | ***Tested*** in the headless shell (`frames`, `perf`): while music plays the shell paints about 20 frames a second instead of 60; docked and paused, none instead of 13 to 30 (a sub-pixel loop between bar and island); an opened look takes 2.9 ms a frame instead of 8.4 ms; the center's month is built once a day instead of on every open (about 50 ms less). Not yet felt on the laptop. |
+| **Top bar in five layouts, options, two monitors, overview, fullscreen; a click in the top pixel row of a fullscreen window reaches it** | ***Tested*** in the headless shell (`bar`, `states`), light and dark. |
 | **Quick settings, every page, tiles of other extensions, drag to reorder, colour style written to the family** | ***Tested*** in the headless shell (`qs`, `siblings`) beside Harbor, Tally, Ember, Torch and Ledge. |
 | **Every island look, each brought about the way the system would** (OSD calls, the tray, a D-Bus call with category, the timer file, the battery) | ***Tested*** in the headless shell (`island`), light and dark. |
 | **The center growing out of the clock and back, the pencil circle, an event while the center is open** | ***Tested*** in the headless shell (`morph`); the motion itself checked on frames held at points of the spring, as the headless screenshots are too slow to catch it. |
@@ -289,6 +303,8 @@ Colours come from **`extension/lib/shared/palettes.js`**: each style is Material
 - **Seen in the island is seen:** a notification shown in the island counts as seen for GNOME, as a banner does. The center marks new cards by time since it was last open instead.
 - **The lock screen tells only that something came:** as GNOME's own lock screen does; the title shows only where GNOME's notification settings allow details there.
 - **Weather from Open-Meteo:** no account and no key, and only the coordinates leave the machine.
+- **A push, not a strip, at the top edge:** a pressure barrier as GNOME's hot corner uses, so nothing of Halo lies over a fullscreen window's top row.
+- **The island's body is an St box, not Cairo:** St draws a rounded box with its shadow without rasterising it by hand on every frame of a spring.
 
 ---
 

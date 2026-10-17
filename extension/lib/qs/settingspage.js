@@ -27,7 +27,7 @@ const BAR_SWITCHES = [
     ['floating', 'Floating', 'Keeps a gap to the screen\'s edges'],
     ['seeThrough', 'See-through', 'Lets the wallpaper show through the bar'],
     ['lightBar', 'Light bar', 'Stays light when the desktop is dark'],
-    ['hideInFullscreen', 'Hide in fullscreen', 'Rest the pointer on the top edge to bring it back'],
+    ['hideInFullscreen', 'Hide in fullscreen', 'Push against the top edge to bring it back'],
     ['islandDock', 'Active events hide in the top bar', 'Music, timers and more rise into the clock; off, they float below the bar'],
 ];
 
@@ -39,7 +39,17 @@ const EVENT_NAMES = {
     events: 'Upcoming events', screenshot: 'Screenshots', clipboard: 'Copied to the clipboard',
     battery: 'Low battery', network: 'Wi‑Fi and VPN', keyboard: 'Keyboard layout',
     powerMode: 'Power mode', claude: 'Claude, from Ember and Tally',
+    workspace: 'Changing workspace', launch: 'Apps starting', glance: 'Weather and next event on hover',
+    locks: 'Caps Lock and Num Lock', drives: 'USB drives',
 };
+
+const BAR_MODES = [['bar', 'Bar'], ['island', 'Only the island'], ['handle', 'Only a handle']];
+const BAR_MODE_NOTES = {
+    bar: 'The top bar with the island in its clock',
+    island: 'No bar; the clock island alone reaches into the window. Push against the top edge for the bar',
+    handle: 'Only a thin handle; rest on it for the island, push on to the top edge for the bar',
+};
+const HIDE_TIMES = [5, 10, 20, 30, 60].map(seconds => [seconds, `${seconds} s`]);
 
 const SPEEDS = [['quick', 'Quick'], ['normal', 'Normal'], ['slow', 'Slow']];
 const CLICKS = [['app', 'Opens the app'], ['large', 'Opens it larger']];
@@ -94,6 +104,23 @@ export class SettingsPage extends Page {
         look.add_child(this._times);
 
         const bar = this.add(card('Top bar'));
+        const modeNote = text('qs-row-note', {styleClass: 'halo-qs-small', wrap: true});
+        bar.add_child(this._segmented(BAR_MODES, () => ctx.settings.current.barMode,
+            value => ctx.settings.set('barMode', value)));
+        bar.add_child(modeNote);
+        const hide = column('halo-qs-hide');
+        hide.add_child(text('qs-row-note', {styleClass: 'halo-qs-small', wrap: true,
+            text: 'A swipe up on the island hides it for'}));
+        hide.add_child(this._segmented(HIDE_TIMES, () => ctx.settings.current.islandHideSeconds,
+            value => ctx.settings.set('islandHideSeconds', value)));
+        bar.add_child(hide);
+        this._segments.push({
+            update: () => {
+                const mode = ctx.settings.current.barMode;
+                modeNote.text = BAR_MODE_NOTES[mode];
+                hide.visible = mode === 'island';
+            },
+        });
         bar.add_child(row({iconName: 'grid-view', title: 'Layout', note: 'Full, compact or islands',
             trailing: trailingIcon('chevron-right'), onClick: () => ctx.navigate('appearance')}).actor);
         for (const [key, title, note] of BAR_SWITCHES)

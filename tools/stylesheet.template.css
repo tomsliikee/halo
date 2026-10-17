@@ -613,7 +613,7 @@
     padding: 18px 20px;
 }
 
-/* The island. Its shape is drawn in Cairo; these place what it holds. */
+/* The island. Its shape is an St box (shape.js); these place what it holds. */
 
 /* The bar's clock makes room for the island's resting pill over it. */
 .halo-plain.halo-island-clock {
@@ -642,6 +642,15 @@
     spacing: 6px;
 }
 
+.halo-island-glance {
+    padding: 0 22px 14px 22px;
+    spacing: 6px;
+}
+
+.halo-island-glance-text {
+    padding-right: 10px;
+}
+
 .halo-island-peek {
     padding: 2px 26px 18px 26px;
     spacing: 10px;
@@ -657,14 +666,14 @@
 .halo-island-timer,
 .halo-island-media,
 .halo-island-recording {
-    height: 64px;
+    height: 72px;
     padding: 0 24px 0 9px;
     spacing: 16px;
 }
 
 .halo-island-info,
 .halo-island-timer {
-    min-width: 360px;
+    min-width: 320px;
 }
 
 .halo-island-timer {
@@ -683,11 +692,11 @@
 
 .halo-island-symbol {
     width: 64px;
-    height: 64px;
+    height: 72px;
 }
 
 .halo-island-symbol > * {
-    margin: 18px;
+    margin: 22px 18px;
 }
 
 .halo-island-column {
@@ -744,7 +753,7 @@
 }
 
 .halo-island-large {
-    padding: 32px 40px 30px 40px;
+    padding: 36px 34px 34px 34px;
     spacing: 20px;
 }
 

@@ -3,6 +3,7 @@ import {accumulate, pick, placement, scrollIntent, shownWhileLocked} from '../ex
 import {
     claudeNote, claudePeek, clockText, copiedText, initials, isDecline, levelShare, limitNote, limitTitle, lockedNote, lowMark, osdIcon,
     mediaPeek, osdKind, plainText, soonText, timerPeek, trackTime, unitAppId,
+    driveText, glanceItems, lockTitle, workspaceNote, workspaceTitle,
 } from '../extension/lib/island/words.js';
 import * as Pomodoro from '../extension/lib/shared/pomodoro.js';
 import * as Timer from '../extension/lib/shared/timer.js';
@@ -166,5 +167,16 @@ test('an opened look drops even when docked', () => equal(
     placement({main: {...playing, large: 'mediaLarge'}, expanded: 'media', now: 9000, introMs: 2500}), {drop: true, docked: false}));
 test('a call never docks', () => equal(
     placement({main: {id: 'c', kind: 'call', at: 0}, now: 9000, introMs: 2500}), {drop: true, docked: false}));
+
+test('a workspace by its name, else its number', () => equal(
+    [workspaceTitle(0, ['Mail']), workspaceTitle(1, ['Mail']), workspaceTitle(2, ['', '', '  '])], ['Mail', 'Workspace 2', 'Workspace 3']));
+test('how full a workspace is', () => equal([0, 1, 4].map(workspaceNote), ['Empty', '1 window', '4 windows']));
+test('locks', () => equal([lockTitle('caps', true), lockTitle('num', false)], ['Caps Lock on', 'Num Lock off']));
+test('drives', () => equal([driveText('USB', true), driveText('', false)],
+    [{title: 'USB', note: 'Connected · click to open'}, {title: 'Drive', note: 'Removed'}]));
+test('the glance: weather, then the next event', () => equal(
+    glanceItems({temperature: 12.4, code: 0, isDay: true}, {summary: 'Standup', text: 'in 20 min'}, () => 'sunny', t => `${Math.round(t)} °C`),
+    [{icon: 'sunny', text: '12 °C'}, {icon: 'event', text: 'Standup in 20 min'}]));
+test('the glance without weather or events is empty', () => equal(glanceItems(null, null, () => '', () => ''), []));
 
 done('island');

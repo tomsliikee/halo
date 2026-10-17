@@ -4,6 +4,7 @@
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 
+import {BAR_MODES, HIDE_SECONDS} from '../bar/modes.js';
 import {COLOURS} from './palettes.js';
 
 export const BAR_LAYOUTS = ['full', 'left', 'centre', 'right', 'islands'];
@@ -16,7 +17,7 @@ export const ISLAND_CLICKS = ['app', 'large'];
 export const ISLAND_EVENTS = [
     'volume', 'brightness', 'notifications', 'calls', 'media', 'recording', 'timer', 'charging',
     'settings', 'devices', 'privacy', 'progress', 'events', 'screenshot', 'clipboard', 'battery',
-    'network', 'keyboard', 'powerMode', 'claude',
+    'network', 'keyboard', 'powerMode', 'claude', 'workspace', 'launch', 'glance', 'locks', 'drives',
 ];
 
 // The four parts; each can be switched off and GNOME's own comes back.
@@ -28,6 +29,8 @@ const CHOICES = {
     barLayout: BAR_LAYOUTS,
     motionSpeed: MOTION_SPEEDS,
     islandClick: ISLAND_CLICKS,
+    barMode: BAR_MODES,
+    islandHideSeconds: HIDE_SECONDS,
 };
 
 // Keys that hold one switch per name.
@@ -69,6 +72,11 @@ export const DEFAULTS = Object.freeze({
     // The bar stays light when the desktop is dark.
     lightBar: false,
     hideInFullscreen: true,
+    // "bar"; "island": no bar, the clock island alone reaches into the
+    // window; "handle": only a grip at the top edge.
+    barMode: 'bar',
+    // How long a swipe up sends the clock island away in "island" mode.
+    islandHideSeconds: 10,
     // A running thing (music, a timer…) rises into the bar's clock after a
     // moment below it; off, it stays floating below the bar.
     islandDock: true,

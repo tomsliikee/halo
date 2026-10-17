@@ -6,17 +6,19 @@ import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GnomeDesktop from 'gi://GnomeDesktop';
 import Shell from 'gi://Shell';
-import St from 'gi://St';
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
 import {symbolFor} from '../shared/symbols.js';
 import {Bar} from './bar.js';
+import {TopEdge} from './edge.js';
 import {strutHeight} from './layout.js';
+import {barAway} from './modes.js';
 
 const HARBOR_SETTINGS = GLib.build_filenamev([GLib.get_user_config_dir(), 'harbor', 'settings.json']);
-// The pointer rests this long at the top edge before a hidden bar comes.
-const PEEK_MS = 300;
+// While the bar is down for a while, this often it looks whether the
+// pointer left it.
+const LEAVE_POLL_MS = 200;
 
 // The symbols chosen in Harbor's dock, so an app looks the same there and here.
 function harborSymbols() {
@@ -73,12 +75,13 @@ export class Bars {
                 this._update();
             }, this);
         Main.layoutManager.connectObject('monitors-changed', () => this._rebuild(), this);
-        Main.sessionMode.connectObject('updated', () => this._update(), this);
+        Main.sessionMode.connectObject('updated', () => {
+            this._syncFullscreen();
+            this._update();
+        }, this);
 
-        this._edge = new St.Widget({name: 'haloEdge', reactive: true, height: 1});
-        Main.layoutManager.addTopChrome(this._edge);
-        this._edge.connect('enter-event', () => this._edgeEntered());
-        this._edge.hide();
+        // A push against the top edge brings a bar that is away down.
+        this._edge = new TopEdge(() => this._peek());
     }
 
     get all() {
@@ -103,6 +106,12 @@ export class Bars {
             bar.setSettings(settings);
         this._syncFullscreen();
         this._update();
+    }
+
+    // The main bar is away (a hidden mode, or over a fullscreen window) but
+    // was pushed down for a while.
+    get peeking() {
+        return Boolean(this.primary?.peeking);
     }
 
     // The island rests over the main bar's clock.
@@ -256,41 +265,31 @@ export class Bars {
         let any = false;
         for (const bar of this._bars) {
             const fullscreen = Boolean(Main.layoutManager.monitors[bar.monitorIndex]?.inFullscreen);
-            bar.setFullscreen(fullscreen);
-            any ||= fullscreen && this._settings?.hideInFullscreen;
+            // On the lock screen the status pill stays, whatever the mode.
+            const mode = Main.sessionMode.isLocked ? 'bar' : this._settings?.barMode ?? 'bar';
+            const away = barAway({mode, fullscreen, hideInFullscreen: this._settings?.hideInFullscreen});
+            bar.setAway(away);
+            any ||= away && bar === this.primary;
         }
-        const primary = Main.layoutManager.primaryMonitor;
-        this._edge.visible = any;
-        if (primary)
-            this._edge.set({x: primary.x, y: primary.y, width: primary.width});
+        this._edge.sync(any);
     }
 
-    // The pointer at the top edge over a fullscreen window: after a rest,
-    // the bar comes down and goes again when the pointer leaves it.
-    _edgeEntered() {
-        if (this._peekId)
-            GLib.source_remove(this._peekId);
-        this._peekId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, PEEK_MS, () => {
-            this._peekId = 0;
-            const [, y] = global.get_pointer();
-            const primary = Main.layoutManager.primaryMonitor;
-            if (primary && y <= primary.y + 2)
-                this._peek();
-            return GLib.SOURCE_REMOVE;
-        });
-    }
-
+    // Pushed against the top edge: the bar comes down and goes again once
+    // the pointer is below it.
     _peek() {
         const bar = this.primary;
-        bar?.peek(true);
+        if (!bar?.away || this._peekId)
+            return;
+        bar.peek(true);
+        this._menus.onPeek?.(true);
         const height = strutHeight(this._settings.floating);
-        // Leaves again once the pointer is below the bar.
-        this._peekId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 200, () => {
+        this._peekId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, LEAVE_POLL_MS, () => {
             const [, y] = global.get_pointer();
             const primary = Main.layoutManager.primaryMonitor;
             if (primary && y > primary.y + height) {
                 this._peekId = 0;
-                bar?.peek(false);
+                bar.peek(false);
+                this._menus.onPeek?.(false);
                 return GLib.SOURCE_REMOVE;
             }
             return GLib.SOURCE_CONTINUE;

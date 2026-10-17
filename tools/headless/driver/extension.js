@@ -72,6 +72,10 @@ export default class Driver extends Extension {
             shot, sleep, note, Main,
             desktop: new Gio.Settings({schema_id: 'org.gnome.desktop.interface'}),
             moveTo: (x, y) => pointer.notify_absolute_motion(time(), x, y),
+            // Moves the pointer by dx, dy as a mouse does, so a barrier feels it.
+            nudge: (dx, dy) => pointer.notify_relative_motion(time(), dx, dy),
+            // A two-finger touchpad scroll by dx, dy.
+            swipe: (dx, dy) => pointer.notify_scroll_continuous(time(), dx, dy, Clutter.ScrollSource.FINGER, Clutter.ScrollFinishFlags.NONE),
             // Holds the primary button down or lets it go, for drags.
             hold: down => pointer.notify_button(time(), Clutter.BUTTON_PRIMARY,
                 down ? Clutter.ButtonState.PRESSED : Clutter.ButtonState.RELEASED),

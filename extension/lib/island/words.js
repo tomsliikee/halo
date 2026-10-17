@@ -175,3 +175,36 @@ export function unitAppId(unit) {
         return null;
     return `${match[1].replace(/\\x2d/g, '-')}.desktop`;
 }
+
+// A workspace by its name in GNOME's settings, else by its number.
+export function workspaceTitle(index, names = []) {
+    return names[index]?.trim() || `Workspace ${index + 1}`;
+}
+
+// Below a workspace's name: how many windows it holds.
+export function workspaceNote(windows) {
+    if (windows === 0)
+        return 'Empty';
+    return windows === 1 ? '1 window' : `${windows} windows`;
+}
+
+export function lockTitle(kind, on) {
+    return `${kind === 'caps' ? 'Caps Lock' : 'Num Lock'} ${on ? 'on' : 'off'}`;
+}
+
+// A drive that came or went: {title, note}.
+export function driveText(name, added) {
+    return {title: name || 'Drive', note: added ? 'Connected · click to open' : 'Removed'};
+}
+
+// The resting clock's glance: what the weather and the day hold, as
+// [{icon, text}], the weather first. weather: {temperature, code, isDay}
+// or null; event: {summary, text} or null.
+export function glanceItems(weather, event, weatherIconFor, temperatureFor) {
+    const items = [];
+    if (weather && Number.isFinite(weather.temperature))
+        items.push({icon: weatherIconFor(weather.code, weather.isDay), text: temperatureFor(weather.temperature)});
+    if (event?.summary)
+        items.push({icon: 'event', text: `${event.summary} ${event.text}`.trim()});
+    return items;
+}

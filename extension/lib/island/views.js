@@ -16,15 +16,18 @@ import {pressable} from '../shared/press.js';
 import {text} from '../shared/text.js';
 import {clockText, initials, isDecline, trackTime} from './words.js';
 
-const LEVEL_TRACK = 240;
+const LEVEL_TRACK = 200;
 // The large player's progress line, between its two times.
-const MEDIA_TRACK = 410;
-const WIDE = 600;
+const MEDIA_TRACK = 310;
+const WIDE = 500;
 // The bubble beside the island, for a second lasting thing.
 export const BUBBLE = 64;
 // The bars of a playing waveform, and how fast they move.
 const WAVE_BARS = 5;
 const WAVE_MS = 1100;
+const WAVE_STEP_MS = 50;
+const SPIN_MS = 1200;
+const SPIN_STEP_MS = 33;
 
 function box(styleClass, {vertical = false, expand = false, children = [], ...params} = {}) {
     const actor = new St.BoxLayout({style_class: styleClass, vertical, x_expand: expand, ...params});
@@ -75,9 +78,10 @@ function waveform({width = 28, height = 24} = {}) {
     const area = new St.DrawingArea({width, height, style_class: 'halo-island-wave', y_align: Clutter.ActorAlign.CENTER});
     let playing = false;
     let phase = 0;
-    const timeline = new Clutter.Timeline({actor: area, duration: WAVE_MS, repeat_count: -1});
-    timeline.connect('new-frame', () => {
-        phase = timeline.get_progress() * Math.PI * 2;
+    // A step every WAVE_STEP_MS, not every frame: the bars still bounce, and
+    // the shell is not made to paint 60 times a second while music plays.
+    const loop = ambient(area, WAVE_STEP_MS, elapsed => {
+        phase = (elapsed % WAVE_MS) / WAVE_MS * Math.PI * 2;
         area.queue_repaint();
     });
     area.connect('repaint', () => {
@@ -101,20 +105,11 @@ function waveform({width = 28, height = 24} = {}) {
         }
         cr.$dispose();
     });
-    // A timeline runs only for an actor on the stage.
-    const sync = () => {
-        if (playing && area.mapped && !timeline.is_playing())
-            timeline.start();
-        else if ((!playing || !area.mapped) && timeline.is_playing())
-            timeline.stop();
-    };
-    area.connect('notify::mapped', sync);
-    area.connect('destroy', () => timeline.stop());
     return {
         actor: area,
         setPlaying(on) {
             playing = on;
-            sync();
+            loop.setRunning(on);
             area.queue_repaint();
         },
     };
@@ -177,18 +172,40 @@ function ring(name, {size = 40} = {}) {
 
 function spinning(actor) {
     actor.set_pivot_point(0.5, 0.5);
-    const timeline = new Clutter.Timeline({actor, duration: 1200, repeat_count: -1});
-    timeline.connect('new-frame', () => {
-        actor.rotation_angle_z = timeline.get_progress() * 360;
+    ambient(actor, SPIN_STEP_MS, elapsed => {
+        actor.rotation_angle_z = (elapsed % SPIN_MS) / SPIN_MS * 360;
+    }).setRunning(true);
+}
+
+// Something that moves on its own for as long as it shows: onStep(elapsed
+// ms) every `step` ms while the actor is on the stage and running.
+function ambient(actor, step, onStep) {
+    let running = false;
+    let source = 0;
+    const start = GLib.get_monotonic_time();
+    const sync = () => {
+        const on = running && actor.mapped;
+        if (on && !source) {
+            source = GLib.timeout_add(GLib.PRIORITY_DEFAULT, step, () => {
+                onStep((GLib.get_monotonic_time() - start) / 1000);
+                return GLib.SOURCE_CONTINUE;
+            });
+        } else if (!on && source) {
+            GLib.source_remove(source);
+            source = 0;
+        }
+    };
+    actor.connect('notify::mapped', sync);
+    actor.connect('destroy', () => {
+        running = false;
+        sync();
     });
-    actor.connect('notify::mapped', () => {
-        if (actor.mapped)
-            timeline.start();
-        else
-            timeline.stop();
-    });
-    actor.connect('destroy', () => timeline.stop());
-    actor.connect('destroy', () => timeline.stop());
+    return {
+        setRunning(on) {
+            running = on;
+            sync();
+        },
+    };
 }
 
 // Rest: the date and the clock, where the bar's clock is.
@@ -205,6 +222,20 @@ export function restView({date, time, unread}) {
             dot.visible = state.unread;
         },
     };
+}
+
+// The resting clock under the pointer: the clock, and below it what the
+// weather and the day hold. items: [{icon, text}] (glanceItems).
+export function glanceView(rest, items) {
+    const clock = restView(rest);
+    clock.actor.x_align = Clutter.ActorAlign.CENTER;
+    const line = box('halo-island-glance', {x_align: Clutter.ActorAlign.CENTER});
+    for (const item of items) {
+        line.add_child(icon(item.icon, {size: 18, fill: true, styleClass: 'halo-island-accent-text'}));
+        line.add_child(text('island-small', {styleClass: 'halo-island-text halo-island-glance-text', text: item.text}));
+    }
+    const actor = box('halo-island-glancing', {vertical: true, children: [clock.actor, line]});
+    return {actor, update: next => clock.update(next)};
 }
 
 // Docked: the clock's pill with a running thing beside the time, as small

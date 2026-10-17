@@ -13,7 +13,7 @@ export const ICONS = [
     'battery_1_bar', 'battery_0_bar', 'battery_alert', 'battery_charging_full', 'bolt', 'power',
     'brightness_6', 'brightness_auto', 'light_mode', 'dark_mode', 'contrast', 'nightlight', 'bedtime',
     'palette', 'do_not_disturb_on', 'notifications', 'notifications_off', 'event', 'calendar_today',
-    'keyboard', 'mouse', 'mobile', 'computer', 'sports_esports', 'watch',
+    'keyboard', 'mouse', 'mobile', 'computer', 'sports_esports', 'watch', 'keyboard_capslock', 'dialpad', 'usb',
     // Places and actions
     'grid_view', 'apps', 'settings', 'power_settings_new', 'restart_alt', 'logout', 'screenshot_region',
     'screenshot_monitor', 'content_copy', 'download', 'upload', 'sync', 'close', 'add', 'check', 'check_circle',

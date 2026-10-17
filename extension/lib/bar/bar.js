@@ -17,6 +17,7 @@ import {pressable} from '../shared/press.js';
 import {text} from '../shared/text.js';
 import {setScheme} from '../shared/theme.js';
 import {cornerRadius, frameRect, groupHeight, groupPositions, groupY, strutHeight} from './layout.js';
+import {takesRoom} from './modes.js';
 import {batteryIcon, batteryLow, elapsedText, layoutText, networkIcon, percentText, volumeIcon} from './words.js';
 
 const DOT = 10;
@@ -33,7 +34,9 @@ export class Bar {
         this._state = null;
         this._relayoutId = 0;
         this._placed = false;
-        this._hiddenForFullscreen = false;
+        // Out of sight: a hidden mode, or over a fullscreen window.
+        this._away = false;
+        this._peeking = false;
 
         // Takes the work area off the top; the bar itself floats in it.
         this._strut = new St.Widget({name: 'haloStrut', reactive: false});
@@ -53,8 +56,17 @@ export class Bar {
         this._right = new St.BoxLayout({style_class: 'halo-group', y_align: Clutter.ActorAlign.CENTER});
         for (const group of [this._left, this._centre, this._right]) {
             group.set_pivot_point(0.5, 0.5);
-            // A group that grows or shrinks moves the others.
-            group.connect('notify::width', () => this._queueRelayout());
+            // A group that grows or shrinks moves the others. Its width
+            // wobbles by a float's last digits as it is laid out; only a
+            // whole pixel counts, or bar and island lay out in a loop.
+            group._haloWidth = 0;
+            group.connect('notify::width', () => {
+                const width = Math.round(group.width);
+                if (width === group._haloWidth)
+                    return;
+                group._haloWidth = width;
+                this._queueRelayout();
+            });
             this.actor.add_child(group);
         }
 
@@ -103,7 +115,24 @@ export class Bar {
         this._clock.width = width > 0 ? width : -1;
     }
 
-    // Whether the bar is out of sight over a fullscreen window.
+    // The clock's place as the layout has it, also while the bar is slid
+    // out of sight: {x, y, width, height} on the stage.
+    clockRect() {
+        const [x, y] = this._clock.get_transformed_position();
+        const [width, height] = this._clock.get_transformed_size();
+        return {x, y: y - (this.actor?.translation_y ?? 0), width, height};
+    }
+
+    get away() {
+        return this._away;
+    }
+
+    // Away, but pushed down for a while.
+    get peeking() {
+        return this._away && this._peeking;
+    }
+
+    // Whether the bar is out of sight.
     get hidden() {
         return !this.actor?.visible || (this.actor?.translation_y ?? 0) < -1;
     }
@@ -137,20 +166,21 @@ export class Bar {
         return this._state?.locked ? 'islands' : this._settings.barLayout;
     }
 
-    // Hides the bar over a fullscreen window, or brings it back.
-    setFullscreen(fullscreen) {
-        const hide = fullscreen && this._settings?.hideInFullscreen;
-        if (hide === this._hiddenForFullscreen)
+    // Sends the bar out of sight, or brings it back.
+    setAway(away) {
+        if (away === this._away)
             return;
-        this._hiddenForFullscreen = hide;
-        this._reveal(!hide);
+        this._away = away;
+        this._peeking = false;
+        this._reveal(!away);
     }
 
-    // Shows the bar for a while over a fullscreen window: the pointer rests
-    // at the top edge.
+    // Shows a bar that is away for a while: it was pushed down from the top
+    // edge.
     peek(show) {
-        if (!this._hiddenForFullscreen)
+        if (!this._away || show === this._peeking)
             return;
+        this._peeking = show;
         this._reveal(show);
     }
 
@@ -472,7 +502,10 @@ export class Bar {
         const {floating} = settings;
         const barLayout = this._layout;
         const strut = strutHeight(floating);
-        this._strut.set({x: monitor.x, y: monitor.y, width: monitor.width, height: strut});
+        // In the hidden modes the windows get the whole screen. GNOME counts
+        // hidden chrome in the struts too, so the strut is made flat.
+        const room = this._state?.locked || takesRoom(settings.barMode);
+        this._strut.set({x: monitor.x, y: monitor.y, width: monitor.width, height: room ? strut : 0});
         this.actor.set({x: monitor.x, y: monitor.y, width: monitor.width, height: strut});
 
         const frame = frameRect(monitor.width, barLayout, floating);
@@ -480,7 +513,7 @@ export class Bar {
         const sizes = {};
         for (const [name, group] of [['left', this._left], ['centre', this._centre], ['right', this._right]]) {
             group.height = height;
-            sizes[name] = group.get_preferred_width(height)[1];
+            sizes[name] = Math.round(group.get_preferred_width(height)[1]);
         }
         const positions = groupPositions(monitor.width, frame, sizes, floating);
         const y = groupY(floating, barLayout);
@@ -496,7 +529,7 @@ export class Bar {
         }
         for (const [name, group] of [['left', this._left], ['centre', this._centre], ['right', this._right]]) {
             group.y = y;
-            this._move(group, {x: positions[name]}, animated && this._placed);
+            this._move(group, {x: Math.round(positions[name])}, animated && this._placed);
         }
         this._placed = true;
     }
@@ -519,7 +552,10 @@ export class Bar {
         spring(this.actor, {translation_y: show ? 0 : -height}, {
             spring: show ? SPRINGS.rise : SPRINGS.leave,
             onDone: () => {
-                if (!show && this._hiddenForFullscreen)
+                // Over a fullscreen window it goes; in a hidden mode it
+                // stays laid out above the screen, where the island finds
+                // its clock.
+                if (!show && this._away && !this._peeking && (this._state?.locked || takesRoom(this._settings?.barMode)))
                     this.actor?.hide();
             },
         });

@@ -8,22 +8,28 @@ import {Bars} from './lib/bar/bars.js';
 import {GnomeMenus} from './lib/bar/gnomemenus.js';
 import {GnomePanel} from './lib/bar/gnomepanel.js';
 import {strutHeight} from './lib/bar/layout.js';
+import {HANDLE, handleRect} from './lib/bar/modes.js';
 import {untilText} from './lib/bar/words.js';
+import {temperatureText, weatherIcon} from './lib/center/words.js';
 import {Agenda} from './lib/center/agenda.js';
 import {CenterPanel} from './lib/center/center.js';
 import {NotificationModel} from './lib/center/notifications.js';
 import {CenterTakeover} from './lib/center/takeover.js';
 import {WeatherModel} from './lib/center/weather.js';
-import {Island} from './lib/island/island.js';
+import {Island, REST_DROP} from './lib/island/island.js';
+import {glanceItems} from './lib/island/words.js';
 import {BannerSource} from './lib/island/sources/banners.js';
 import {LockBox} from './lib/island/lockbox.js';
 import {ClaudeSource} from './lib/island/sources/claude.js';
+import {DevicesSource} from './lib/island/sources/devices.js';
 import {EventsSource} from './lib/island/sources/events.js';
+import {LaunchSource} from './lib/island/sources/launch.js';
 import {MediaSource} from './lib/island/sources/media.js';
 import {OsdSource} from './lib/island/sources/osd.js';
 import {ProgressSource} from './lib/island/sources/progress.js';
 import {SystemSource} from './lib/island/sources/system.js';
 import {TimerSource} from './lib/island/sources/timer.js';
+import {WorkspaceSource} from './lib/island/sources/workspace.js';
 import {GnomeQuickSettings} from './lib/qs/gnome.js';
 import {QuickSettingsPanel} from './lib/qs/panel.js';
 import {QuickSettingsTakeover} from './lib/qs/takeover.js';
@@ -66,6 +72,8 @@ export default class HaloExtension extends Extension {
         this._qs = null;
         this._takeover = null;
         this._agenda = new Agenda();
+        // The weather, for the center and the island's glance.
+        this._weather = new WeatherModel();
         this._agenda.connectObject('changed', () => this._showNextEvent(), this);
         this._eventTick = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 30, () => {
             this._showNextEvent();
@@ -90,6 +98,8 @@ export default class HaloExtension extends Extension {
         this._agenda.disconnectObject(this);
         this._agenda.destroy();
         this._agenda = null;
+        this._weather.destroy();
+        this._weather = null;
         this._takeover?.destroy();
         this._takeover = null;
         this._qs?.destroy();
@@ -157,6 +167,8 @@ export default class HaloExtension extends Extension {
                 onClock: actor => this._toggleCenter(actor),
                 onStatus: actor => (this._qs ? this._qs.toggle(actor) : this._gnomeMenus.toggle('quickSettings', actor)),
                 onRebuilt: () => this._followClock(),
+                // Pushed down from the top edge, or gone again.
+                onPeek: () => this._island?.relayout({force: true}),
                 // The island shows the date the bar has room for.
                 onState: state => this._island?.setRest({
                     date: ['full', 'islands'].includes(this._settings.current.barLayout) ? state.date : state.dateShort,
@@ -192,7 +204,6 @@ export default class HaloExtension extends Extension {
 
     _startCenter() {
         this._notificationModel = new NotificationModel();
-        this._weather = new WeatherModel();
         this._center = new CenterPanel({
             theme: this._barTheme,
             model: this._notificationModel,
@@ -213,8 +224,6 @@ export default class HaloExtension extends Extension {
         this._centerTakeover = null;
         this._center?.destroy();
         this._center = null;
-        this._weather?.destroy();
-        this._weather = null;
         this._notificationModel?.destroy();
         this._notificationModel = null;
     }
@@ -241,6 +250,17 @@ export default class HaloExtension extends Extension {
             this._gnomeMenus.toggle('dateMenu', actor);
     }
 
+    // What the resting clock shows under the pointer: the weather (asked
+    // for again when old) and the next event of today.
+    _glance() {
+        this._weather.refresh();
+        const today = this._weather.today;
+        const event = this._agenda?.nextToday(6 * 60 * 60 * 1000);
+        return glanceItems(today ? {temperature: today.temperature, code: today.code, isDay: today.isDay} : null,
+            event ? {summary: event.summary, text: untilText((event.start.getTime() - Date.now()) / 1000)} : null,
+            weatherIcon, temperatureText);
+    }
+
     // The bar's chip: the next event of today, from an hour before.
     _showNextEvent() {
         const event = this._agenda?.nextToday(60 * 60 * 1000);
@@ -261,6 +281,7 @@ export default class HaloExtension extends Extension {
             },
             onDock: width => this._bars?.setIslandDock(width),
             onDrop: dropped => this._bars?.setIslandDropped(dropped),
+            glance: () => this._glance(),
         });
         const island = this._island;
         island.setLocked(Main.sessionMode.isLocked);
@@ -275,6 +296,9 @@ export default class HaloExtension extends Extension {
             new ClaudeSource(island),
             new ProgressSource(island),
             new EventsSource(island),
+            new WorkspaceSource(island),
+            new LaunchSource(island),
+            new DevicesSource(island),
         ];
         this._bars?.setIslandClock(true);
         this._bars?.setSettings(this._settings.current);
@@ -320,24 +344,42 @@ export default class HaloExtension extends Extension {
         // moved; the island follows just before the next frame is drawn.
         if (clock)
             this._unfollow = follow(clock, () => this._queueIslandRelayout());
-        this._island.relayout();
+        this._island.relayout({force: true});
+    }
+
+    // The bar's mode in use: without Halo's bar, and on the lock screen,
+    // there is only "bar".
+    _barMode() {
+        return this._bars && !Main.sessionMode.isLocked ? this._settings.current.barMode : 'bar';
     }
 
     // {x (centre), y (top), width, height, visible} of the clock the island
-    // rests on; without Halo's bar it hangs below GNOME's panel.
+    // rests on; without Halo's bar it hangs below GNOME's panel. In the
+    // hidden modes it rests where the clock would be, or below the grip;
+    // mode and barDown (pushed down from the top edge) come with it.
     _islandAnchor() {
         const bar = this._bars?.primary;
         const clock = bar?.clockPill;
         const monitor = Main.layoutManager.primaryMonitor;
         if (clock?.get_stage()) {
-            const [x, y] = clock.get_transformed_position();
+            const mode = this._barMode();
+            const barDown = mode !== 'bar' && bar.peeking;
+            const rect = mode === 'bar' ? null : bar.clockRect();
+            let [x, y] = rect ? [rect.x, rect.y] : clock.get_transformed_position();
             const [w, h] = clock.get_transformed_size();
             // Before its first allocation the clock has no size yet.
             if (![x, y, w, h].every(Number.isFinite))
                 return null;
+            if (mode === 'handle' && !barDown) {
+                const grip = handleRect(monitor);
+                x = grip.x + grip.width / 2 - w / 2;
+                // Just below the grip, once the island adds its drop.
+                y = grip.y + HANDLE.height + 2 - REST_DROP;
+            }
             return {
+                mode, barDown,
                 x: x + w / 2, y, width: Math.round(w), height: Math.round(h),
-                visible: clock.is_mapped() && !bar.hidden,
+                visible: mode !== 'bar' || (clock.is_mapped() && !bar.hidden),
                 fallbackY: monitor.y + PANEL_GAP,
                 // Below the bar, where something new drops to.
                 dropY: monitor.y + strutHeight(this._settings.current.floating) + (this._settings.current.floating ? 0 : PANEL_GAP),
@@ -372,7 +414,7 @@ export default class HaloExtension extends Extension {
         this._appearance.apply(settings);
         this._tiles.settingsChanged();
         this._applyParts(settings);
-        this._island?.relayout();
+        this._island?.relayout({force: true});
         this._qs?.settingsChanged();
     }
 }

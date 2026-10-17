@@ -1,7 +1,9 @@
 // Sample states the headless shell cannot produce: a recording with the
 // microphone on, a low battery, two keyboard layouts and unread
 // notifications; then a fullscreen window hiding the bar.
-export default async function ({extension, shot, sleep, note, set, launch, desktop, Main, moveTo}) {
+import Clutter from 'gi://Clutter';
+
+export default async function ({extension, shot, sleep, note, set, launch, desktop, Main, moveTo, nudge}) {
     const system = extension._system;
     const fake = values => {
         for (const [key, value] of Object.entries(values))
@@ -25,9 +27,18 @@ export default async function ({extension, shot, sleep, note, set, launch, deskt
     window?.make_fullscreen();
     await sleep(1500);
     const bar = extension._bars.primary;
-    note(`fullscreen: bar visible=${bar.actor.visible} edge visible=${extension._bars._edge.visible}`);
+    note(`fullscreen: bar visible=${bar.actor.visible} edge barrier=${Boolean(extension._bars._edge._barrier)}`);
     await shot('fullscreen');
-    moveTo(640, 0);
+    // Nothing of Halo lies over the top pixel row: a click there reaches
+    // the fullscreen window.
+    const top = global.stage.get_actor_at_pos(Clutter.PickMode.REACTIVE, 640, 0);
+    note(`top row belongs to ${top?.constructor.name}${top?.name ? ` ${top.name}` : ''}`);
+    // Pushing up against the edge brings the bar.
+    moveTo(640, 2);
+    for (let i = 0; i < 12; i++) {
+        nudge(0, -10);
+        await sleep(30);
+    }
     await sleep(1200);
     note(`peek: bar visible=${bar.actor.visible} translation=${bar.actor.translation_y}`);
     await shot('fullscreen-peek');
