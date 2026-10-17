@@ -666,14 +666,14 @@
 .halo-island-timer,
 .halo-island-media,
 .halo-island-recording {
-    height: 72px;
+    height: 60px;
     padding: 0 24px 0 9px;
     spacing: 16px;
 }
 
 .halo-island-info,
 .halo-island-timer {
-    min-width: 320px;
+    min-width: 440px;
 }
 
 .halo-island-timer {
@@ -682,6 +682,7 @@
 }
 
 .halo-island-media {
+    min-width: 440px;
     padding: 0 14px 0 14px;
 }
 
@@ -691,12 +692,12 @@
 }
 
 .halo-island-symbol {
-    width: 64px;
-    height: 72px;
+    width: 72px;
+    height: 60px;
 }
 
 .halo-island-symbol > * {
-    margin: 22px 18px;
+    margin: 16px 22px;
 }
 
 .halo-island-column {
@@ -753,7 +754,7 @@
 }
 
 .halo-island-large {
-    padding: 36px 34px 34px 34px;
+    padding: 24px 48px 22px 48px;
     spacing: 20px;
 }
 

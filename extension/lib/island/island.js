@@ -30,15 +30,15 @@ export const HINT_MS = 2500;
 const HOLD_MS = 600;
 const BUBBLE_GAP = 8;
 // The height of a compact look, which the bubble centres on.
-const COMPACT = 72;
+const COMPACT = 60;
 // The pointer rests this long on a small look before it shows more.
 const PEEK_MS = 300;
 // After a swap, a swipe's remaining motion does not swap back.
 const SWAP_PAUSE_MS = 450;
 // Room the island grows by on each side while the pointer is on a small
-// look: longer more than wider, the content keeps its size.
-const HOVER_X = 10;
-const HOVER_Y = 10;
+// look: wider more than longer, the content keeps its size.
+const HOVER_X = 18;
+const HOVER_Y = 6;
 // The pencil circle while the center is open.
 const EDIT = 36;
 // Below the bar, where the island hangs when there is no clock to grow from.

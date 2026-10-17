@@ -16,10 +16,10 @@ import {pressable} from '../shared/press.js';
 import {text} from '../shared/text.js';
 import {clockText, initials, isDecline, trackTime} from './words.js';
 
-const LEVEL_TRACK = 200;
+const LEVEL_TRACK = 300;
 // The large player's progress line, between its two times.
-const MEDIA_TRACK = 310;
-const WIDE = 500;
+const MEDIA_TRACK = 500;
+const WIDE = 700;
 // The bubble beside the island, for a second lasting thing.
 export const BUBBLE = 64;
 // The bars of a playing waveform, and how fast they move.
@@ -482,12 +482,12 @@ export function recordingView(activity) {
 // data: {title, note, cover, playing}; activity.onPlay()
 export function mediaCompactView(activity) {
     const {data} = activity;
-    const cover = coverSlot(data.cover, {size: 50, radius: 14});
+    const cover = coverSlot(data.cover, {size: 46, radius: 13});
     const {column, titleLabel, noteLabel} = titleAndNote(data.title, data.note);
     column.width = 180;
     const wave = waveform();
     wave.setPlaying(data.playing);
-    const play = round(data.playing ? 'pause' : 'play-arrow', () => activity.onPlay(), {square: true, size: 50, accessibleName: 'Play or pause'});
+    const play = round(data.playing ? 'pause' : 'play-arrow', () => activity.onPlay(), {square: true, size: 46, accessibleName: 'Play or pause'});
     const actor = box('halo-island-media', {children: [cover.actor, column, wave.actor, play]});
     return {
         actor,
@@ -505,7 +505,7 @@ export function mediaCompactView(activity) {
 // data: {title, note, cover, playing, position, length, canPrevious, canNext}
 export function mediaLargeView(activity) {
     const {data} = activity;
-    const cover = coverSlot(data.cover, {size: 112, radius: 26});
+    const cover = coverSlot(data.cover, {size: 88, radius: 22});
     const {column, titleLabel, noteLabel} = titleAndNote(data.title, data.note, {titleRole: 'island-headline'});
     const head = box('halo-island-media-head', {children: [cover.actor, column]});
 
