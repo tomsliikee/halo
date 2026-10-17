@@ -9,8 +9,9 @@ export const BAR_MODES = ['bar', 'island', 'handle'];
 // How long a swipe up sends the island away in "island" mode, in seconds.
 export const HIDE_SECONDS = [5, 10, 20, 30, 60];
 
-// The grip of "handle" mode: its size and how far from the top it stands.
-export const HANDLE = {width: 96, height: 5, top: 4};
+// The grip of "handle" mode: its size and how far from the top it stands,
+// as Harbor's handle.
+export const HANDLE = {width: 96, height: 6, top: 8};
 
 // Whether the bar is out of sight: always in the hidden modes, over a
 // fullscreen window when it should hide there.

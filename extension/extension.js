@@ -8,7 +8,7 @@ import {Bars} from './lib/bar/bars.js';
 import {GnomeMenus} from './lib/bar/gnomemenus.js';
 import {GnomePanel} from './lib/bar/gnomepanel.js';
 import {strutHeight} from './lib/bar/layout.js';
-import {HANDLE, handleRect} from './lib/bar/modes.js';
+import {handleRect} from './lib/bar/modes.js';
 import {untilText} from './lib/bar/words.js';
 import {temperatureText, weatherIcon} from './lib/center/words.js';
 import {Agenda} from './lib/center/agenda.js';
@@ -373,8 +373,8 @@ export default class HaloExtension extends Extension {
             if (mode === 'handle' && !barDown) {
                 const grip = handleRect(monitor);
                 x = grip.x + grip.width / 2 - w / 2;
-                // Just below the grip.
-                y = grip.y + HANDLE.height + 2;
+                // The island grows out of the grip.
+                y = grip.y;
             }
             return {
                 mode, barDown,

@@ -8,7 +8,7 @@ test('the bar hides over fullscreen only when it should', () => equal(
 test('only the bar takes room from the windows', () => equal(
     ['bar', 'island', 'handle'].map(takesRoom), [true, false, false]));
 test('the grip stands centred at the top', () => equal(
-    handleRect({x: 0, y: 0, width: 1280}), {x: 592, y: 4, width: 96, height: 5}));
+    handleRect({x: 0, y: 0, width: 1280}), {x: 592, y: 8, width: 96, height: 6}));
 test('the grip follows a second monitor', () => equal(
     handleRect({x: 1280, y: 0, width: 1024}).x, 1744));
 

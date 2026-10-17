@@ -15,7 +15,7 @@ import GLib from 'gi://GLib';
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
-import {isSwipeUp, restShown} from '../bar/modes.js';
+import {handleRect, isSwipeUp, restShown} from '../bar/modes.js';
 import {expressive, spring, SPRINGS, stretch} from '../shared/choreo.js';
 import {islandScheme, palette} from '../shared/palettes.js';
 import {setScheme} from '../shared/theme.js';
@@ -115,6 +115,7 @@ export class Island {
         this._handleOpen = false;
         this._handleLeave = 0;
         this._handle = null;
+        this._handleRunning = false;
         this._press = null;
         this._grab = null;
 
@@ -333,9 +334,28 @@ export class Island {
         this._handleHoverChanged();
     }
 
+    // Where the grip of "handle" mode stands, or null in the other modes.
+    get _grip() {
+        const monitor = Main.layoutManager.primaryMonitor;
+        return this._mode === 'handle' && !this._locked && monitor ? handleRect(monitor) : null;
+    }
+
+    // In "handle" mode, while away, the island sinks into the grip and
+    // grows back out of it, as Harbor's dock does. Elsewhere it is never
+    // in a grip.
+    _syncTuck(away, animate = true) {
+        const grip = away ? this._grip : null;
+        if (grip)
+            this._shape.tuck(grip.width, grip.height, {animate, onDone: () => this._syncHandle()});
+        else
+            this._shape.untuck({animate});
+    }
+
     // The grip shows in "handle" mode while the bar is away, with a dot
-    // when something running waits in it.
-    _syncHandle(place, running) {
+    // when something running waits in it; while the island is out of it
+    // only its room stays.
+    _syncHandle(place = this._place(), running = this._handleRunning) {
+        this._handleRunning = running;
         const wanted = this._mode === 'handle' && !this._locked;
         if (wanted && !this._handle) {
             this._handle = new Handle({onHover: on => this._handleRested(on)});
@@ -345,7 +365,8 @@ export class Island {
             this._handle = null;
             this._handleOpen = false;
         }
-        this._handle?.sync({shown: !place.barDown, running});
+        const out = !(this._shape.tucked && !this._shape.visible);
+        this._handle?.sync({shown: !place.barDown, out, running});
     }
 
     // The resting clock as the center grows out of it and back:
@@ -444,6 +465,8 @@ export class Island {
         const away = this._away(main, where, place);
         this._shape.setAnchor(place.x, this._top(place, where, away, main));
         this._syncShown(place, main, away);
+        this._syncTuck(away);
+        this._syncHandle(place, away && Boolean(main));
         if (this._shown !== null)
             return;
         const {width, height} = this._restSize(place);
@@ -563,6 +586,9 @@ export class Island {
     // or above the screen while away.
     _top(place, where = this._placement(this._pick().main), away = false, main = this._pick().main) {
         if (away) {
+            const grip = this._grip;
+            if (grip)
+                return grip.y;
             const monitor = Main.layoutManager.primaryMonitor;
             return (monitor?.y ?? 0) - Math.max(this._shape.boxHeight, place.height || 36) - AWAY_GAP;
         }
@@ -598,7 +624,6 @@ export class Island {
         this._placedMode = place.mode;
         this._placedDown = Boolean(place.barDown);
         this._shape.setAnchor(place.x, this._top(place, where, away, main), {animate});
-        this._syncHandle(place, away && Boolean(main));
         this._scheduleDock(main);
         this._syncPad(main, animate);
         let dockWidth = 0;
@@ -673,6 +698,8 @@ export class Island {
         const resting = away || (!main && (this._rest.open || !place.visible));
         const small = !main || where.docked;
         this._renderBubble(resting ? null : bubble, small ? place.height || Views.BUBBLE : Views.BUBBLE);
+        this._syncTuck(away, animate);
+        this._syncHandle(place, away && Boolean(main));
         this._syncDockWidth(dockWidth);
         this._syncOutside();
         if (where.drop !== this._dropped) {

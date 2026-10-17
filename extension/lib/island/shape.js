@@ -37,6 +37,9 @@ class IslandShape extends St.Widget {
         // The size of what it holds, and room added around it (on hover).
         this._inner = {w: 0, h: 0};
         this._pad = {x: 0, y: 0};
+        // Gone into the handle's grip: drawn as the grip, what it holds
+        // faded out, hidden once there.
+        this._tucked = null;
 
         this._bg = new St.Widget({reactive: false});
         this._bgStyle = '';
@@ -170,10 +173,67 @@ class IslandShape extends St.Widget {
             this.resize(this._inner.w, this._inner.h, {animate, spring: SPRINGS.hover});
     }
 
+    get tucked() {
+        return Boolean(this._tucked);
+    }
+
+    // Sinks into the grip of "handle" mode: the shape springs to the grip's
+    // size while what it holds fades, and hides once there, so the grip
+    // seems to have swallowed it. onDone: it is there and hidden.
+    tuck(width, height, {animate = true, onDone = null} = {}) {
+        const key = `${width}x${height}`;
+        if (this._tucked?.key === key) {
+            // Asked again: on its way, or already there and hidden.
+            if (this._tucked.there)
+                this.visible = false;
+            return;
+        }
+        const tucked = {key, there: false};
+        this._tucked = tucked;
+        const moving = animate && expressive() && this._w > 1 && this.visible;
+        this._clip.remove_all_transitions();
+        ease(this._clip, {opacity: 0}, {duration: moving ? stretch(FADE_OUT_MS) : 0, mode: FADE});
+        const there = () => {
+            if (this._tucked !== tucked)
+                return;
+            tucked.there = true;
+            this.visible = false;
+            onDone?.();
+        };
+        if (!moving) {
+            stopSprings(this, ['boxWidth', 'boxHeight']);
+            this._w = width;
+            this._h = height;
+            this._layout();
+            there();
+            return;
+        }
+        spring(this, {boxWidth: width, boxHeight: height}, {spring: SPRINGS.shrink, onDone: there});
+    }
+
+    // Grows back out of the grip to what it holds.
+    untuck({animate = true} = {}) {
+        if (!this._tucked)
+            return;
+        this._tucked = null;
+        this.visible = true;
+        const moving = animate && expressive();
+        this._clip.remove_all_transitions();
+        if (moving)
+            this._clip.ease({opacity: 255, duration: stretch(FADE_IN_MS), delay: stretch(FADE_IN_DELAY_MS), mode: FADE});
+        else
+            this._clip.opacity = 255;
+        if (this._inner.w)
+            this.resize(this._inner.w, this._inner.h, {animate: moving});
+    }
+
     // Springs the shape to a size (of what it holds; the pad comes on top):
-    // past it on the way out, a small swing on the way back.
+    // past it on the way out, a small swing on the way back. In the grip it
+    // only remembers the size for when it comes out.
     resize(innerW, innerH, {animate = true, spring: chosen = null} = {}) {
         this._inner = {w: innerW, h: innerH};
+        if (this._tucked)
+            return;
         const w = innerW + 2 * this._pad.x;
         const h = innerH + 2 * this._pad.y;
         if (!animate || !expressive()) {

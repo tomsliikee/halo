@@ -92,15 +92,41 @@ export default async function ({extension, shot, sleep, note, set, moveTo, nudge
     moveTo(640, 600);
     await sleep(1500);
     const grip = island._handle;
+    const bar = () => `bar=${grip?._layer.visible} ${grip?._bar.x + grip?.actor.x},${grip?._bar.y + grip?.actor.y} ${grip?._bar.width}x${grip?._bar.height} scale=${grip?._bar.scale_y.toFixed(2)}`;
+    const tuck = () => `shape visible=${shape.visible} tucked=${shape.tucked} at ${shape.x},${shape.y} ${shape.width}x${shape.height}`;
     note(`handle: work area=${work()} grip=${grip?.actor.visible} at ${grip?.actor.x},${grip?.actor.y} ${grip?.actor.width}x${grip?.actor.height} ${where()}`);
+    note(`handle, grip: ${bar()}; ${tuck()}`);
     await shot('modes-handle');
-    moveTo(640, 6);
-    await sleep(900);
-    note(`handle, rest on it: ${where()}`);
+    // Over the grip it grows thicker before the island comes.
+    moveTo(640, 10);
+    await sleep(100);
+    note(`handle, pointer on grip: ${bar()}`);
+    await shot('modes-handle-hover');
+    await sleep(110);
+    await shot('modes-handle-grow-1');
+    await sleep(60);
+    await shot('modes-handle-grow-2');
+    await sleep(700);
+    note(`handle, rest on it: ${where()} ${bar()}; ${tuck()}`);
     await shot('modes-handle-open');
     moveTo(640, 600);
-    await sleep(1200);
-    note(`handle, left: ${where()}`);
+    await sleep(500);
+    note(`handle, going back: ${tuck()}`);
+    await shot('modes-handle-shrink');
+    await sleep(900);
+    note(`handle, left: ${where()} ${bar()}; ${tuck()}`);
+    // A click opens it at once.
+    // Pressed and let go well before the hover's 150 ms.
+    moveTo(640, 10);
+    await sleep(20);
+    hold(true);
+    await sleep(20);
+    hold(false);
+    await sleep(30);
+    note(`handle, clicked: open=${island._handleOpen}`);
+    moveTo(640, 600);
+    await sleep(1500);
+    note(`handle, after click, left: open=${island._handleOpen} ${tuck()} ${bar()}`);
 
     volume();
     await sleep(700);
