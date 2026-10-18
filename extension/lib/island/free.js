@@ -29,7 +29,10 @@ export class FreeWatch {
         global.display.connectObject(
             'window-created', (_display, window) => this._watch(window),
             'restacked', () => this.queue(), this);
-        global.workspace_manager.connectObject('active-workspace-changed', () => this.queue(), this);
+        // Super+D hides the windows without minimising them.
+        global.workspace_manager.connectObject(
+            'active-workspace-changed', () => this.queue(),
+            'showing-desktop-changed', () => this.queue(), this);
         for (const actor of global.get_window_actors())
             this._watch(actor.meta_window);
         // Only once every window is known: a look before would find the
@@ -95,7 +98,8 @@ export class FreeWatch {
                 const frame = window.get_frame_rect();
                 return {
                     rect: {x: frame.x, y: frame.y, width: frame.width, height: frame.height},
-                    minimized: window.minimized,
+                    // Minimised, or hidden while the desktop shows.
+                    minimized: window.minimized || !window.showing_on_its_workspace(),
                     skipped: skipped(window),
                 };
             });

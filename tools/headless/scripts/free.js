@@ -2,6 +2,8 @@
 // is docked in it) grows wider; a window below it shrinks it back. Both
 // sizes, a window moved in and out, the bar pushed down, music docked,
 // and the row on the settings page.
+import Clutter from 'gi://Clutter';
+import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import Meta from 'gi://Meta';
 
@@ -94,6 +96,32 @@ export default async function ({extension, shot, sleep, note, set, launch, moveT
     window.minimize();
     await sleep(1200);
     note(`minimised: ${where()}`);
+
+    // Super+D: the windows are hidden, not minimised; it grows all the same,
+    // and shrinks again when they come back.
+    window.unminimize();
+    window.activate(global.get_current_time());
+    await sleep(1200);
+    note(`back below: ${where()}`);
+    // GNOME leaves it unbound; bound as on Thomas' laptop.
+    new Gio.Settings({schema_id: 'org.gnome.desktop.wm.keybindings'}).set_strv('show-desktop', ['<Super>d']);
+    await sleep(500);
+    const keyboard = Clutter.get_default_backend().get_default_seat().create_virtual_device(Clutter.InputDeviceType.KEYBOARD_DEVICE);
+    const superD = async () => {
+        const t = () => GLib.get_monotonic_time();
+        keyboard.notify_keyval(t(), Clutter.KEY_Super_L, Clutter.KeyState.PRESSED);
+        keyboard.notify_keyval(t(), Clutter.KEY_d, Clutter.KeyState.PRESSED);
+        keyboard.notify_keyval(t(), Clutter.KEY_d, Clutter.KeyState.RELEASED);
+        keyboard.notify_keyval(t(), Clutter.KEY_Super_L, Clutter.KeyState.RELEASED);
+        await sleep(1200);
+    };
+    await superD();
+    note(`super+d: showing=${window.showing_on_its_workspace()} minimized=${window.minimized} ${where()}`);
+    await shot('free-show-desktop');
+    await superD();
+    note(`super+d again: showing=${window.showing_on_its_workspace()} ${where()}`);
+    window.minimize();
+    await sleep(1200);
 
     // Music docked in the clock, free and not.
     const media = extension._islandSources.find(s => s.constructor.name === 'MediaSource');
