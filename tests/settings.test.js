@@ -58,4 +58,7 @@ test('the new events, the window switch off at first', () => equal(
     [true, true, true, true, true, true, false]));
 test('a window switch turned on stays on', () => equal(parse('{"islandEvents": {"windows": true}}').islandEvents.windows, true));
 
+test('Claude on hover starts on and keeps a choice', () => equal(
+    [DEFAULTS.glanceClaude, parse('{"glanceClaude": false}').glanceClaude, parse('{"glanceClaude": 3}').glanceClaude], [true, false, true]));
+
 done('settings');

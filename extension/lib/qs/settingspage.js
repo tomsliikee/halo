@@ -7,6 +7,8 @@ import Clutter from 'gi://Clutter';
 import GLib from 'gi://GLib';
 import St from 'gi://St';
 
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+
 import {spring, SPRINGS} from '../shared/choreo.js';
 import {icon, setIcon} from '../shared/icons.js';
 import {pressable} from '../shared/press.js';
@@ -152,6 +154,11 @@ export class SettingsPage extends Page {
             value => ctx.settings.set('islandFreeGrow', value)));
         shape.add_child(grow);
         this._segments.push({update: () => (grow.visible = ctx.settings.current.barMode === 'island')});
+        // Only where Tally keeps the limits.
+        if (Main.extensionManager.lookup('tally@thomashaiden')) {
+            shape.add_child(this._switchRow('Claude on hover', 'Limits from Tally below the clock',
+                s => s.glanceClaude, on => ctx.settings.set('glanceClaude', on)));
+        }
 
         const island = this.add(card('What opens the island'));
         this._jumpTo = section === 'island' ? click : null;

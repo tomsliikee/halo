@@ -209,6 +209,23 @@ export function glanceItems(weather, event, weatherIconFor, temperatureFor) {
     return items;
 }
 
+// The glance's third line, from Tally's plan limits (limits.js): the
+// five-hour window, the week, and when the five hours start again, as
+// [{icon, text}]; empty without limits.
+export function claudeItems(limits, now) {
+    if (!limits?.session && !limits?.week)
+        return [];
+    const parts = [];
+    if (limits.session)
+        parts.push(`Claude ${Math.round(limits.session.percent)} %`);
+    if (limits.week)
+        parts.push(`week ${Math.round(limits.week.percent)} %`);
+    const resetsAt = limits.session?.resetsAt;
+    if (resetsAt && resetsAt > now)
+        parts.push(`new in ${uptimeText((resetsAt - now) / 1000)}`);
+    return [{icon: 'smart-toy', text: parts.join(' · ')}];
+}
+
 // The glance's second line: how the computer is doing, as [{icon, text}].
 // readings: {battery: {percent, charging} | null, memoryUsed (share),
 // temperature (°C), diskFree (bytes), uptime (s)}, each null when unknown.

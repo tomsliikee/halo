@@ -3,7 +3,7 @@ import {accumulate, pick, placement, scrollIntent, shownWhileLocked} from '../ex
 import {
     claudeNote, claudePeek, clockText, copiedText, initials, isDecline, levelShare, limitNote, limitTitle, lockedNote, lowMark, osdIcon,
     mediaPeek, osdKind, plainText, soonText, timerPeek, trackTime, unitAppId,
-    driveText, glanceItems, sizeText, statsItems, uptimeText, lockTitle, workspaceNote, workspaceTitle,
+    claudeItems, driveText, glanceItems, sizeText, statsItems, uptimeText, lockTitle, workspaceNote, workspaceTitle,
     healthText, phoneBatteryText, rainText, updatesText,
 } from '../extension/lib/island/words.js';
 import {hottest, memoryLeft, newProblems, problems} from '../extension/lib/island/health.js';
@@ -186,6 +186,11 @@ test('the stats: battery, memory, heat, disk, uptime', () => equal(
         (p, c) => `bat-${p}-${c}`).map(item => `${item.icon}:${item.text}`),
     ['bat-82.4-false:82 %', 'speed:RAM 41 %', 'computer:53 °C', 'folder:120 GB free', 'schedule:up 3 h 5 min']));
 test('the stats leave out what is unknown', () => equal(statsItems({uptime: 59}, () => '').map(item => item.text), ['up 0 min']));
+test('Claude on hover: five hours, week, when the five hours start again', () => equal(
+    claudeItems({session: {percent: 13.4, resetsAt: 1000 + 2 * 3600e3 + 5 * 60e3}, week: {percent: 37, resetsAt: null}}, 1000),
+    [{icon: 'smart-toy', text: 'Claude 13 % · week 37 % · new in 2 h 5 min'}]));
+test('Claude on hover leaves out what Tally has not written', () => equal(
+    [claudeItems(null, 0), claudeItems({session: null, week: {percent: 5, resetsAt: null}}, 0)[0].text], [[], 'week 5 %']));
 test('sizes and uptimes in words', () => equal(
     [sizeText(4.25e9), sizeText(1.5e12), uptimeText(2 * 86400 + 4 * 3600 + 30), uptimeText(12 * 60)],
     ['4.3 GB', '1.5 TB', '2 d 4 h', '12 min']));

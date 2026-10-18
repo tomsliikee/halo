@@ -145,6 +145,11 @@ export class ClaudeSource {
         return app ? () => app.activate() : null;
     }
 
+    // The plan limits as Tally last wrote them, or null (the glance).
+    get limits() {
+        return this._limits;
+    }
+
     _readLimits() {
         return readLimits(readText(`${TALLY}/limits.json`), readText(`${TALLY}/statusline.json`), Date.now());
     }

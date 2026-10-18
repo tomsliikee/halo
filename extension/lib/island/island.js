@@ -718,7 +718,7 @@ export class Island {
             this._expanded = null;
             const items = this._peek === 'rest' && !this._rest.open && !away ? this._glance() : [];
             // The same icons keep their view; only the texts change in it.
-            const key = this._rest.open ? 'edit' : items.length > 0 ? `glance:${items.map(item => `${item.icon}${item.stat ? '+' : ''}`).join(',')}` : 'rest';
+            const key = this._rest.open ? 'edit' : items.length > 0 ? `glance:${items.map(item => `${item.icon}+${item.line ?? 0}`).join(',')}` : 'rest';
             const {width, height} = this._restSize(place);
             if (this._shown !== null || !this._view || this._viewKey !== key) {
                 this._shown = null;

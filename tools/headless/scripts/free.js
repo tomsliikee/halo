@@ -36,6 +36,27 @@ export default async function ({extension, shot, sleep, note, set, launch, moveT
     await sleep(1200);
     note(`hover gone: ${where()}`);
 
+    // With Tally (HALO_WITH) and its limits written: Claude's line below,
+    // and gone again with the switch off.
+    const tally = GLib.build_filenamev([GLib.get_user_cache_dir(), 'tally']);
+    GLib.mkdir_with_parents(tally, 0o700);
+    const now = Date.now();
+    GLib.file_set_contents(`${tally}/limits.json`, JSON.stringify({at: now,
+        limits: {session: {percent: 13, resetsAt: now + 2 * 3600e3 + 40 * 60e3}, week: {percent: 37, resetsAt: now + 3 * 86400e3}}}));
+    await sleep(1500);
+    note(`tally installed=${Boolean(Main.extensionManager.lookup('tally@thomashaiden'))}`);
+    moveTo(hx + shape.width / 2, hy + shape.height / 2);
+    island._peekChanged();
+    await sleep(1200);
+    note(`hover claude: ${where()} glance=${JSON.stringify(island._glance().filter(item => item.line === 2))}`);
+    await shot('free-hover-claude');
+    set('glanceClaude', false);
+    await sleep(600);
+    note(`claude off: glance lines=${JSON.stringify(island._glance().map(item => item.line))}`);
+    set('glanceClaude', true);
+    moveTo(640, 600);
+    await sleep(1200);
+
     // A window below the island, then moved away again.
     await launch('org.gnome.Calculator.desktop', 3000);
     let window = null;
@@ -113,7 +134,9 @@ export default async function ({extension, shot, sleep, note, set, launch, moveT
     const page = extension._qs._stack.at(-1);
     const find = actor => actor.style_class?.includes?.('halo-qs-grow') ? actor : actor.get_children().map(find).find(Boolean);
     const row = find(page.actor);
-    note(`row visible=${row?.visible}`);
+    const byText = actor => actor.text === 'Claude on hover' ? actor : actor.get_children().map(byText).find(Boolean);
+    const claudeRow = byText(page.actor);
+    note(`row visible=${row?.visible} claude row=${Boolean(claudeRow)}`);
     if (row) {
         const [, y] = row.get_transformed_position();
         page.actor.vadjustment.value = Math.max(0, y - 260);

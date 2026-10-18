@@ -17,7 +17,7 @@ import {NotificationModel} from './lib/center/notifications.js';
 import {CenterTakeover} from './lib/center/takeover.js';
 import {WeatherModel} from './lib/center/weather.js';
 import {Island} from './lib/island/island.js';
-import {glanceItems, statsItems} from './lib/island/words.js';
+import {claudeItems, glanceItems, statsItems} from './lib/island/words.js';
 import {BannerSource} from './lib/island/sources/banners.js';
 import {LockBox} from './lib/island/lockbox.js';
 import {ClaudeSource} from './lib/island/sources/claude.js';
@@ -51,6 +51,7 @@ import {TimerStore} from './lib/shared/timerstore.js';
 import {SchemeView, ThemeController} from './lib/shared/theme.js';
 
 // The gap between the bar and a panel that opens below it.
+const TALLY = 'tally@thomashaiden';
 const PANEL_GAP = 8;
 
 // Halo replaces GNOME's top bar, its OSD and banners, its date menu and its
@@ -265,9 +266,9 @@ export default class HaloExtension extends Extension {
             this._gnomeMenus.toggle('dateMenu', actor);
     }
 
-    // What the resting clock shows under the pointer: the weather (asked
-    // for again when old) and the next event of today, and below them how
-    // the computer is doing (marked stat).
+    // What the resting clock shows under the pointer, each on its own line:
+    // the weather (asked for again when old) and the next event of today;
+    // how the computer is doing; with Tally installed, Claude's limits.
     _glance() {
         this._weather.refresh();
         const today = this._weather.today;
@@ -277,7 +278,10 @@ export default class HaloExtension extends Extension {
             weatherIcon, temperatureText);
         const health = this._islandSources.find(source => source instanceof HealthSource);
         const stats = statsItems({battery: this._system?.battery ?? null, ...health?.stats()}, batteryIcon);
-        return [...items, ...stats.map(item => ({...item, stat: true}))];
+        const claude = this._settings.current.glanceClaude && Main.extensionManager.lookup(TALLY)
+            ? claudeItems(this._islandSources.find(source => source instanceof ClaudeSource)?.limits, Date.now())
+            : [];
+        return [...items, ...stats.map(item => ({...item, line: 1})), ...claude.map(item => ({...item, line: 2}))];
     }
 
     // The bar's chip: the next event of today, from an hour before.

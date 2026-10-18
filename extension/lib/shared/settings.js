@@ -96,6 +96,8 @@ export const DEFAULTS = Object.freeze({
     // Its opened looks twice as wide.
     islandWide: false,
     islandFreeGrow: 25,
+    // With Tally installed, the clock's glance shows Claude's limits too.
+    glanceClaude: true,
     islandEvents: Object.freeze(switches(null, ISLAND_EVENTS, QUIET_EVENTS)),
     // Where it has no app (a timer, volume), a click opens the large look.
     islandClick: 'app',
