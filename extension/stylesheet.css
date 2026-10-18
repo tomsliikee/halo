@@ -671,6 +671,11 @@
     padding-right: 10px;
 }
 
+/* Above the stats line: closer to it. */
+.halo-island-glance-first {
+    padding-bottom: 6px;
+}
+
 .halo-island-peek {
     padding: 2px 26px 18px 26px;
     spacing: 10px;

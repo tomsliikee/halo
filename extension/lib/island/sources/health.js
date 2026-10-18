@@ -1,6 +1,7 @@
 // The computer running hot, or memory or a disk nearly full: a word when
 // it crosses the line, once, and again only after it was fine for a while
-// (../health.js). A look once a minute, not while the screen is locked.
+// (../health.js). A look once a minute, not while the screen is locked;
+// the glance asks for the readings themselves (stats()).
 
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
@@ -67,6 +68,28 @@ export class HealthSource {
             }
         }).filter(share => share !== null);
         return shares.length > 0 ? Math.min(...shares) : null;
+    }
+
+    // How it is doing right now, for the glance: {memoryUsed, temperature,
+    // diskFree, uptime}, each null when it cannot be read.
+    stats() {
+        const left = memoryLeft(read('/proc/meminfo'));
+        const uptime = Number.parseFloat(read('/proc/uptime') ?? '');
+        return {
+            memoryUsed: left === null ? null : 1 - left,
+            temperature: hottest(this._zones.map(read).filter(Boolean)),
+            diskFree: this._homeFree(),
+            uptime: Number.isFinite(uptime) ? uptime : null,
+        };
+    }
+
+    _homeFree() {
+        try {
+            const info = Gio.File.new_for_path(GLib.get_home_dir()).query_filesystem_info('filesystem::free', null);
+            return info.get_attribute_uint64('filesystem::free');
+        } catch {
+            return null;
+        }
     }
 
     _look() {

@@ -9,7 +9,7 @@ import {GnomeMenus} from './lib/bar/gnomemenus.js';
 import {GnomePanel} from './lib/bar/gnomepanel.js';
 import {strutHeight} from './lib/bar/layout.js';
 import {handleRect} from './lib/bar/modes.js';
-import {untilText} from './lib/bar/words.js';
+import {batteryIcon, untilText} from './lib/bar/words.js';
 import {temperatureText, weatherIcon} from './lib/center/words.js';
 import {Agenda} from './lib/center/agenda.js';
 import {CenterPanel} from './lib/center/center.js';
@@ -17,7 +17,7 @@ import {NotificationModel} from './lib/center/notifications.js';
 import {CenterTakeover} from './lib/center/takeover.js';
 import {WeatherModel} from './lib/center/weather.js';
 import {Island} from './lib/island/island.js';
-import {glanceItems} from './lib/island/words.js';
+import {glanceItems, statsItems} from './lib/island/words.js';
 import {BannerSource} from './lib/island/sources/banners.js';
 import {LockBox} from './lib/island/lockbox.js';
 import {ClaudeSource} from './lib/island/sources/claude.js';
@@ -266,14 +266,18 @@ export default class HaloExtension extends Extension {
     }
 
     // What the resting clock shows under the pointer: the weather (asked
-    // for again when old) and the next event of today.
+    // for again when old) and the next event of today, and below them how
+    // the computer is doing (marked stat).
     _glance() {
         this._weather.refresh();
         const today = this._weather.today;
         const event = this._agenda?.nextToday(6 * 60 * 60 * 1000);
-        return glanceItems(today ? {temperature: today.temperature, code: today.code, isDay: today.isDay} : null,
+        const items = glanceItems(today ? {temperature: today.temperature, code: today.code, isDay: today.isDay} : null,
             event ? {summary: event.summary, text: untilText((event.start.getTime() - Date.now()) / 1000)} : null,
             weatherIcon, temperatureText);
+        const health = this._islandSources.find(source => source instanceof HealthSource);
+        const stats = statsItems({battery: this._system?.battery ?? null, ...health?.stats()}, batteryIcon);
+        return [...items, ...stats.map(item => ({...item, stat: true}))];
     }
 
     // The bar's chip: the next event of today, from an hour before.

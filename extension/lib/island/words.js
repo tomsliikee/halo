@@ -209,6 +209,44 @@ export function glanceItems(weather, event, weatherIconFor, temperatureFor) {
     return items;
 }
 
+// The glance's second line: how the computer is doing, as [{icon, text}].
+// readings: {battery: {percent, charging} | null, memoryUsed (share),
+// temperature (°C), diskFree (bytes), uptime (s)}, each null when unknown.
+export function statsItems({battery = null, memoryUsed = null, temperature = null, diskFree = null, uptime = null}, batteryIconFor) {
+    const items = [];
+    if (battery && Number.isFinite(battery.percent))
+        items.push({icon: batteryIconFor(battery.percent, battery.charging), text: `${Math.round(battery.percent)} %`});
+    if (Number.isFinite(memoryUsed))
+        items.push({icon: 'speed', text: `RAM ${Math.round(100 * memoryUsed)} %`});
+    if (Number.isFinite(temperature))
+        items.push({icon: 'computer', text: `${Math.round(temperature)} °C`});
+    if (Number.isFinite(diskFree))
+        items.push({icon: 'folder', text: `${sizeText(diskFree)} free`});
+    if (Number.isFinite(uptime) && uptime >= 0)
+        items.push({icon: 'schedule', text: `up ${uptimeText(uptime)}`});
+    return items;
+}
+
+// Bytes as GB, or TB from a thousand GB on.
+export function sizeText(bytes) {
+    const gb = bytes / 1e9;
+    if (gb >= 1000)
+        return `${(gb / 1000).toFixed(1)} TB`;
+    return gb >= 10 ? `${Math.round(gb)} GB` : `${gb.toFixed(1)} GB`;
+}
+
+// Seconds as "12 min", "3 h 5 min" or "2 d 4 h".
+export function uptimeText(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    if (days > 0)
+        return `${days} d ${hours % 24} h`;
+    if (hours > 0)
+        return `${hours} h ${minutes % 60} min`;
+    return `${minutes} min`;
+}
+
 export function updatesText(count) {
     return {title: count === 1 ? '1 update' : `${count} updates`, note: 'Ready to install · click to see them'};
 }

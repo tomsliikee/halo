@@ -1,12 +1,21 @@
-// Whether the island floats free in "island" mode: no window on the main
-// monitor's active workspace lies below it. Window moves and resizes are
+// Whether the island floats free in "island" mode: no window of the active
+// workspace lies below it, dialogs included. Window moves and resizes are
 // gathered into one look per frame; onChange(free) hears only a change.
 
 import Meta from 'gi://Meta';
 
-import * as Main from 'resource:///org/gnome/shell/ui/main.js';
-
 import {anyOverlaps, FREE_MARGIN} from '../bar/modes.js';
+
+const BACKGROUND = [Meta.WindowType.DESKTOP, Meta.WindowType.DOCK];
+
+// Desktops, docks, menus and tooltips never count; nor a window kept out
+// of the task list (a desktop icons window), unless it is a dialog of
+// another window.
+function skipped(window) {
+    if (window.is_override_redirect() || BACKGROUND.includes(window.get_window_type()))
+        return true;
+    return window.skip_taskbar && !window.get_transient_for();
+}
 
 export class FreeWatch {
     // rect(): {x, y, width, height} of the island at its grown width, or
@@ -16,13 +25,16 @@ export class FreeWatch {
         this._onChange = onChange;
         this._windows = new Set();
         this._later = 0;
-        this.free = this._look();
+        this.free = false;
         global.display.connectObject(
             'window-created', (_display, window) => this._watch(window),
             'restacked', () => this.queue(), this);
         global.workspace_manager.connectObject('active-workspace-changed', () => this.queue(), this);
         for (const actor of global.get_window_actors())
             this._watch(actor.meta_window);
+        // Only once every window is known: a look before would find the
+        // island free for a frame.
+        this.free = this._look();
     }
 
     destroy() {
@@ -72,7 +84,6 @@ export class FreeWatch {
         const rect = this._rect();
         if (!rect)
             return false;
-        const monitor = Main.layoutManager.primaryIndex;
         const workspace = global.workspace_manager.get_active_workspace();
         const around = {
             x: rect.x - FREE_MARGIN, y: rect.y - FREE_MARGIN,
@@ -85,8 +96,7 @@ export class FreeWatch {
                 return {
                     rect: {x: frame.x, y: frame.y, width: frame.width, height: frame.height},
                     minimized: window.minimized,
-                    skipTaskbar: window.skip_taskbar || window.get_window_type() !== Meta.WindowType.NORMAL,
-                    onMonitor: window.get_monitor() === monitor,
+                    skipped: skipped(window),
                 };
             });
         return !anyOverlaps(around, windows);

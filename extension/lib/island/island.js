@@ -15,7 +15,7 @@ import GLib from 'gi://GLib';
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
-import {grownWidth, growsFree, handleRect, isSwipeUp, restShown} from '../bar/modes.js';
+import {grownHeight, grownPad, grownWidth, growsFree, handleRect, isSwipeUp, restShown} from '../bar/modes.js';
 import {expressive, spring, SPRINGS, stretch} from '../shared/choreo.js';
 import {islandScheme, palette} from '../shared/palettes.js';
 import {setScheme} from '../shared/theme.js';
@@ -414,10 +414,12 @@ export class Island {
         }
         if (!place.visible || !place.width)
             return null;
-        const width = place.width + 2 * this._freePad(place);
+        const pad = this._freePad(place);
+        const width = place.width + 2 * pad.x;
+        const height = place.height + 2 * pad.y;
         return {
-            x: place.x - width / 2, y: place.y, width, height: place.height,
-            radius: Math.min(place.height / 2, MAX_RADIUS), color: this._fill,
+            x: place.x - width / 2, y: place.y, width, height,
+            radius: Math.min(height / 2, MAX_RADIUS), color: this._fill,
         };
     }
 
@@ -715,7 +717,8 @@ export class Island {
             // become the center, or nothing where there is no clock.
             this._expanded = null;
             const items = this._peek === 'rest' && !this._rest.open && !away ? this._glance() : [];
-            const key = this._rest.open ? 'edit' : items.length > 0 ? `glance:${JSON.stringify(items)}` : 'rest';
+            // The same icons keep their view; only the texts change in it.
+            const key = this._rest.open ? 'edit' : items.length > 0 ? `glance:${items.map(item => `${item.icon}${item.stat ? '+' : ''}`).join(',')}` : 'rest';
             const {width, height} = this._restSize(place);
             if (this._shown !== null || !this._view || this._viewKey !== key) {
                 this._shown = null;
@@ -730,7 +733,8 @@ export class Island {
                     this._shape.setContent(this._view.actor, {width, height, animate});
                 }
             } else if (items.length > 0) {
-                this._view.update?.(this._rest);
+                this._view.update?.(this._rest, items);
+                this._fit(animate);
             } else {
                 this._view.update?.(this._rest);
                 if (width && (this._shape.boxWidth !== width || this._shape.boxHeight !== height)) {
@@ -779,6 +783,8 @@ export class Island {
             return;
         this._dockWidth = width;
         this._onDock?.(width);
+        // The grown island is wider now or again narrower.
+        this._freeWatch?.queue();
     }
 
     // A view that changed what it holds may want another size.
@@ -1017,8 +1023,9 @@ export class Island {
             return;
         }
         // Free of windows, the clock (and what is docked in it) grows wider
-        // on both sides; what it holds keeps its size.
-        this._shape.setPad(!main || this._docked ? this._freePad() : 0, 0, {animate});
+        // on both sides and longer downwards; what it holds keeps its size.
+        const pad = !main || this._docked ? this._freePad() : {x: 0, y: 0};
+        this._shape.setPad(pad.x, pad.y, {animate});
     }
 
     // The resting island's own width: the clock's, or the clock's pill
@@ -1027,13 +1034,12 @@ export class Island {
         return this._docked && this._dockWidth ? this._dockWidth : place.width;
     }
 
-    // The room added on each side while the island floats free.
+    // The room added on each side while the island floats free: {x, y}.
     _freePad(place = this._place()) {
         const percent = this._settings.current.islandFreeGrow;
         if (this._locked || this._rest.open || !growsFree({mode: place.mode, barDown: place.barDown, percent, free: this._free}))
-            return 0;
-        const base = this._baseWidth(place);
-        return Math.round((grownWidth(base, percent) - base) / 2);
+            return {x: 0, y: 0};
+        return grownPad(this._baseWidth(place), place.height, percent);
     }
 
     // Watches the windows only while growing is possible at all.
@@ -1065,8 +1071,9 @@ export class Island {
         const place = this._place();
         if (!place.visible || !place.width)
             return null;
-        const width = grownWidth(Math.max(place.width, this._dockWidth), this._settings.current.islandFreeGrow);
-        return {x: Math.round(place.x - width / 2), y: Math.round(place.y), width, height: place.height};
+        const percent = this._settings.current.islandFreeGrow;
+        const width = grownWidth(Math.max(place.width, this._dockWidth), percent);
+        return {x: Math.round(place.x - width / 2), y: Math.round(place.y), width, height: grownHeight(place.height, percent)};
     }
 
     // The pointer came onto the island or left it: at once it grows a

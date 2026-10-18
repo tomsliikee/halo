@@ -40,7 +40,7 @@ const EVENT_NAMES = {
     events: 'Upcoming events', screenshot: 'Screenshots', clipboard: 'Copied to the clipboard',
     battery: 'Low battery', network: 'Wi‑Fi and VPN', keyboard: 'Keyboard layout',
     powerMode: 'Power mode', claude: 'Claude, from Ember and Tally',
-    workspace: 'Changing workspace', launch: 'Apps starting', glance: 'Weather and next event on hover',
+    workspace: 'Changing workspace', launch: 'Apps starting', glance: 'Weather, next event and stats on hover',
     locks: 'Caps Lock and Num Lock', drives: 'USB drives',
     attention: 'An app asking for you', updates: 'Updates available', alarms: 'Alarms from Clocks',
     health: 'Hot CPU, low memory or disk', phone: 'Phone, from GSConnect or KDE Connect',

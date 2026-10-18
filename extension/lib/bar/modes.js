@@ -59,13 +59,30 @@ export function intersects(a, b) {
         a.y < b.y + b.height && b.y < a.y + a.height;
 }
 
-// windows: [{rect, minimized, skipTaskbar, onMonitor}]
+// windows: [{rect, minimized, skipped}] in stage coordinates, so a
+// window on another monitor never meets it.
 export function anyOverlaps(rect, windows) {
-    return windows.some(w => !w.minimized && !w.skipTaskbar && w.onMonitor && intersects(rect, w.rect));
+    return windows.some(w => !w.minimized && !w.skipped && intersects(rect, w.rect));
 }
 
 export function grownWidth(width, percent) {
     return Math.round(width * (1 + percent / 100));
+}
+
+// It grows longer too, downwards, by a bit less: percent of width to
+// percent of height.
+const TALLER = {25: 20, 50: 35};
+
+export function grownHeight(height, percent) {
+    return Math.round(height * (1 + (TALLER[percent] ?? 0) / 100));
+}
+
+// The room added on each side while it grows: {x, y}.
+export function grownPad(width, height, percent) {
+    return {
+        x: Math.round((grownWidth(width, percent) - width) / 2),
+        y: Math.round((grownHeight(height, percent) - height) / 2),
+    };
 }
 
 // Whether the resting island grows: only in "island" mode, not while the

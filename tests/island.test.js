@@ -3,7 +3,7 @@ import {accumulate, pick, placement, scrollIntent, shownWhileLocked} from '../ex
 import {
     claudeNote, claudePeek, clockText, copiedText, initials, isDecline, levelShare, limitNote, limitTitle, lockedNote, lowMark, osdIcon,
     mediaPeek, osdKind, plainText, soonText, timerPeek, trackTime, unitAppId,
-    driveText, glanceItems, lockTitle, workspaceNote, workspaceTitle,
+    driveText, glanceItems, sizeText, statsItems, uptimeText, lockTitle, workspaceNote, workspaceTitle,
     healthText, phoneBatteryText, rainText, updatesText,
 } from '../extension/lib/island/words.js';
 import {hottest, memoryLeft, newProblems, problems} from '../extension/lib/island/health.js';
@@ -181,6 +181,14 @@ test('the glance: weather, then the next event', () => equal(
     glanceItems({temperature: 12.4, code: 0, isDay: true}, {summary: 'Standup', text: 'in 20 min'}, () => 'sunny', t => `${Math.round(t)} °C`),
     [{icon: 'sunny', text: '12 °C'}, {icon: 'event', text: 'Standup in 20 min'}]));
 test('the glance without weather or events is empty', () => equal(glanceItems(null, null, () => '', () => ''), []));
+test('the stats: battery, memory, heat, disk, uptime', () => equal(
+    statsItems({battery: {percent: 82.4, charging: false}, memoryUsed: 0.412, temperature: 52.6, diskFree: 120.4e9, uptime: 3 * 3600 + 5 * 60},
+        (p, c) => `bat-${p}-${c}`).map(item => `${item.icon}:${item.text}`),
+    ['bat-82.4-false:82 %', 'speed:RAM 41 %', 'computer:53 °C', 'folder:120 GB free', 'schedule:up 3 h 5 min']));
+test('the stats leave out what is unknown', () => equal(statsItems({uptime: 59}, () => '').map(item => item.text), ['up 0 min']));
+test('sizes and uptimes in words', () => equal(
+    [sizeText(4.25e9), sizeText(1.5e12), uptimeText(2 * 86400 + 4 * 3600 + 30), uptimeText(12 * 60)],
+    ['4.3 GB', '1.5 TB', '2 d 4 h', '12 min']));
 
 test('the hottest sensor, odd readings left out', () => equal(hottest(['45000\n', '91500', 'x', '-1', '999000']), 91.5));
 test('no sensors', () => equal(hottest([]), null));

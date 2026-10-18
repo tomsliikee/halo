@@ -5,11 +5,11 @@
 import GLib from 'gi://GLib';
 import Meta from 'gi://Meta';
 
-export default async function ({extension, shot, sleep, note, set, launch, Main}) {
+export default async function ({extension, shot, sleep, note, set, launch, moveTo, Main}) {
     const {EventEmitter} = await import('resource:///org/gnome/shell/misc/signals.js');
     const island = extension._island;
     const shape = island._shape;
-    const where = () => `${Math.round(shape.boxWidth)}x${Math.round(shape.boxHeight)} free=${island._free} pad=${island._freePad()} view=${island._viewKey}`;
+    const where = () => `${Math.round(shape.boxWidth)}x${Math.round(shape.boxHeight)} free=${island._free} pad=${JSON.stringify(island._freePad())} view=${island._viewKey}`;
     await sleep(3000);
     set('barMode', 'island');
     set('islandFreeGrow', 0);
@@ -23,6 +23,18 @@ export default async function ({extension, shot, sleep, note, set, launch, Main}
         note(`${percent} % free: ${where()}`);
         await shot(`free-${percent}`);
     }
+
+    // Hover while free: it stays grown, the glance shows the stats line
+    // (real readings; no weather or events in the headless shell).
+    const [hx, hy] = shape.get_transformed_position();
+    moveTo(hx + shape.width / 2, hy + shape.height / 2);
+    island._peekChanged();
+    await sleep(1200);
+    note(`hover free: ${where()} glance=${JSON.stringify(island._glance())}`);
+    await shot('free-hover-stats');
+    moveTo(640, 600);
+    await sleep(1200);
+    note(`hover gone: ${where()}`);
 
     // A window below the island, then moved away again.
     await launch('org.gnome.Calculator.desktop', 3000);

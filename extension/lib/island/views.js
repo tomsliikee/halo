@@ -246,18 +246,41 @@ export function restView({date, time, unread}) {
     };
 }
 
-// The resting clock under the pointer: the clock, and below it what the
-// weather and the day hold. items: [{icon, text}] (glanceItems).
+// The resting clock under the pointer: the clock, below it what the
+// weather and the day hold, and below that how the computer is doing.
+// items: [{icon, text, stat}] (glanceItems, statsItems); update(rest,
+// items) takes new texts for the same icons.
 export function glanceView(rest, items) {
     const clock = restView(rest);
     clock.actor.x_align = Clutter.ActorAlign.CENTER;
-    const line = box('halo-island-glance', {x_align: Clutter.ActorAlign.CENTER});
-    for (const item of items) {
-        line.add_child(icon(item.icon, {size: 18, fill: true, styleClass: 'halo-island-accent-text'}));
-        line.add_child(text('island-small', {styleClass: 'halo-island-text halo-island-glance-text', text: item.text}));
-    }
-    const actor = box('halo-island-glancing', {vertical: true, children: [clock.actor, line]});
-    return {actor, update: next => clock.update(next)};
+    const labels = [];
+    const lines = [items.filter(item => !item.stat), items.filter(item => item.stat)]
+        .filter(group => group.length > 0)
+        .map((group, index, groups) => {
+            const last = index === groups.length - 1;
+            const line = box(`halo-island-glance${last ? '' : ' halo-island-glance-first'}`, {x_align: Clutter.ActorAlign.CENTER});
+            for (const item of group) {
+                const dim = item.stat ? 'halo-island-dim' : 'halo-island-accent-text';
+                line.add_child(icon(item.icon, {size: item.stat ? 16 : 18, fill: true, styleClass: dim}));
+                const label = text('island-small', {styleClass: `halo-island-text halo-island-glance-text${item.stat ? ' halo-island-dim' : ''}`, text: item.text});
+                labels.push(label);
+                line.add_child(label);
+            }
+            return line;
+        });
+    const actor = box('halo-island-glancing', {vertical: true, children: [clock.actor, ...lines]});
+    const order = [...items.filter(item => !item.stat), ...items.filter(item => item.stat)];
+    return {
+        actor,
+        update(next, nextItems = order) {
+            clock.update(next);
+            const texts = [...nextItems.filter(item => !item.stat), ...nextItems.filter(item => item.stat)];
+            texts.forEach((item, i) => {
+                if (labels[i] && labels[i].text !== item.text)
+                    labels[i].text = item.text;
+            });
+        },
+    };
 }
 
 // Docked: the clock's pill with a running thing beside the time, as small
