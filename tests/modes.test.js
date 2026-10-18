@@ -1,4 +1,4 @@
-import {barAway, handleRect, isSwipeUp, restShown, takesRoom} from '../extension/lib/bar/modes.js';
+import {anyOverlaps, barAway, grownWidth, growsFree, handleRect, isSwipeUp, restShown, takesRoom} from '../extension/lib/bar/modes.js';
 import {test, equal, done} from './harness.js';
 
 test('the bar is away in the hidden modes', () => equal(
@@ -23,5 +23,26 @@ test('the bar pushed down brings the clock in every mode', () => equal(
 
 test('a swipe up is mostly up and far enough', () => equal(
     [isSwipeUp(0, -20), isSwipeUp(0, -10), isSwipeUp(30, -20), isSwipeUp(0, 20)], [true, false, false, false]));
+
+const island = {x: 500, y: 8, width: 300, height: 36};
+const window = rect => ({rect, minimized: false, skipTaskbar: false, onMonitor: true});
+test('a window below the island takes its freedom', () => equal(
+    anyOverlaps(island, [window({x: 0, y: 0, width: 1280, height: 800})]), true));
+test('a window elsewhere, minimised or skipped leaves it free', () => equal(anyOverlaps(island, [
+    window({x: 0, y: 100, width: 1280, height: 700}),
+    {...window(island), minimized: true},
+    {...window(island), skipTaskbar: true},
+    {...window(island), onMonitor: false},
+]), false));
+test('the island grows by a quarter or a half', () => equal(
+    [grownWidth(200, 0), grownWidth(200, 25), grownWidth(200, 50)], [200, 250, 300]));
+test('only the free island in island mode grows', () => equal([
+    growsFree({mode: 'island', percent: 25, free: true}),
+    growsFree({mode: 'island', percent: 25, free: false}),
+    growsFree({mode: 'island', percent: 0, free: true}),
+    growsFree({mode: 'island', percent: 50, free: true, barDown: true}),
+    growsFree({mode: 'handle', percent: 50, free: true}),
+    growsFree({mode: 'bar', percent: 50, free: true}),
+], [true, false, false, false, false, false]));
 
 done('modes');

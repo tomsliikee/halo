@@ -10,6 +10,7 @@ import St from 'gi://St';
 import {spring, SPRINGS} from '../shared/choreo.js';
 import {icon, setIcon} from '../shared/icons.js';
 import {pressable} from '../shared/press.js';
+import {FREE_GROWS} from '../bar/modes.js';
 import {ISLAND_DROPS, ISLAND_EVENTS} from '../shared/settings.js';
 import {text} from '../shared/text.js';
 import {HaloSwitch} from './controls.js';
@@ -54,6 +55,7 @@ const BAR_MODE_NOTES = {
 };
 const HIDE_TIMES = [5, 10, 20, 30, 60].map(seconds => [seconds, `${seconds} s`]);
 const DROPS = ISLAND_DROPS.map(px => [px, px ? `${px} px` : 'None']);
+const GROWS = FREE_GROWS.map(percent => [percent, percent ? `+${percent} %` : 'Off']);
 
 const SPEEDS = [['quick', 'Quick'], ['normal', 'Normal'], ['slow', 'Slow']];
 const CLICKS = [['app', 'Opens the app'], ['large', 'Opens it larger']];
@@ -143,6 +145,13 @@ export class SettingsPage extends Page {
             value => ctx.settings.set('islandDrop', value)));
         shape.add_child(this._switchRow('Wide island', 'Opened looks twice as wide',
             s => s.islandWide, on => ctx.settings.set('islandWide', on)));
+        const grow = column('halo-qs-grow');
+        grow.add_child(text('qs-row-note', {styleClass: 'halo-qs-small', wrap: true,
+            text: 'Only the island: with no window below it, it grows wider'}));
+        grow.add_child(this._segmented(GROWS, () => ctx.settings.current.islandFreeGrow,
+            value => ctx.settings.set('islandFreeGrow', value)));
+        shape.add_child(grow);
+        this._segments.push({update: () => (grow.visible = ctx.settings.current.barMode === 'island')});
 
         const island = this.add(card('What opens the island'));
         this._jumpTo = section === 'island' ? click : null;

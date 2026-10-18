@@ -47,6 +47,33 @@ export function restShown({mode, barShown = false, handleOpen = false, swipedUnt
     return now >= swipedUntil;
 }
 
+// How much wider the island grows in "island" mode while no window lies
+// below it, in percent; 0 keeps it as it is.
+export const FREE_GROWS = [0, 25, 50];
+// Room around the grown island a window must keep for it to stay free.
+export const FREE_MARGIN = 8;
+
+// Rectangles are {x, y, width, height}.
+export function intersects(a, b) {
+    return a.x < b.x + b.width && b.x < a.x + a.width &&
+        a.y < b.y + b.height && b.y < a.y + a.height;
+}
+
+// windows: [{rect, minimized, skipTaskbar, onMonitor}]
+export function anyOverlaps(rect, windows) {
+    return windows.some(w => !w.minimized && !w.skipTaskbar && w.onMonitor && intersects(rect, w.rect));
+}
+
+export function grownWidth(width, percent) {
+    return Math.round(width * (1 + percent / 100));
+}
+
+// Whether the resting island grows: only in "island" mode, not while the
+// bar is pushed down, and only while it floats free.
+export function growsFree({mode, barDown = false, percent = 0, free = false}) {
+    return mode === 'island' && !barDown && percent > 0 && free;
+}
+
 // A drag on the island that sends it away: mostly upwards, far enough.
 export const SWIPE_PX = 16;
 

@@ -48,6 +48,9 @@ test('the drop takes only its steps', () => equal(
     [12, 0, true, false]));
 test('the wide island is a switch', () => equal(
     [parse('{"islandWide": true}').islandWide, parse('{"islandWide": "yes"}').islandWide], [true, false]));
+test('the free island grows by a quarter unless set otherwise', () => equal(
+    [DEFAULTS.islandFreeGrow, parse('{"islandFreeGrow": 50}').islandFreeGrow, parse('{"islandFreeGrow": 40}').islandFreeGrow, isValid('islandFreeGrow', 0)],
+    [25, 50, 25, true]));
 test('icons kept in the bar are a list of words', () => equal(
     parse('{"barIcons": ["panel:a", "panel:a", 3, ""]}').barIcons, ['panel:a']));
 test('the new events, the window switch off at first', () => equal(

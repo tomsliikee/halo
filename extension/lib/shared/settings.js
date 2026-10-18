@@ -4,7 +4,7 @@
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 
-import {BAR_MODES, HIDE_SECONDS} from '../bar/modes.js';
+import {BAR_MODES, FREE_GROWS, HIDE_SECONDS} from '../bar/modes.js';
 import {COLOURS} from './palettes.js';
 
 export const BAR_LAYOUTS = ['full', 'left', 'centre', 'right', 'islands'];
@@ -37,6 +37,7 @@ const CHOICES = {
     barMode: BAR_MODES,
     islandHideSeconds: HIDE_SECONDS,
     islandDrop: ISLAND_DROPS,
+    islandFreeGrow: FREE_GROWS,
 };
 
 // Keys that hold one switch per name.
@@ -94,6 +95,7 @@ export const DEFAULTS = Object.freeze({
     islandDrop: 0,
     // Its opened looks twice as wide.
     islandWide: false,
+    islandFreeGrow: 25,
     islandEvents: Object.freeze(switches(null, ISLAND_EVENTS, QUIET_EVENTS)),
     // Where it has no app (a timer, volume), a click opens the large look.
     islandClick: 'app',

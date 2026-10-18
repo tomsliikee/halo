@@ -15,10 +15,11 @@ import GLib from 'gi://GLib';
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
-import {handleRect, isSwipeUp, restShown} from '../bar/modes.js';
+import {grownWidth, growsFree, handleRect, isSwipeUp, restShown} from '../bar/modes.js';
 import {expressive, spring, SPRINGS, stretch} from '../shared/choreo.js';
 import {islandScheme, palette} from '../shared/palettes.js';
 import {setScheme} from '../shared/theme.js';
+import {FreeWatch} from './free.js';
 import {Handle} from './handle.js';
 import {accumulate, pick, placement, scrollIntent, shownWhileLocked} from './rank.js';
 import {IslandShape, MAX_RADIUS} from './shape.js';
@@ -122,6 +123,9 @@ export class Island {
         this._handleRunning = false;
         this._press = null;
         this._grab = null;
+        // "island" mode: no window lies below, the resting island grows.
+        this._freeWatch = null;
+        this._free = false;
 
         this._shape = new IslandShape({name: 'haloIsland'});
         this._bubble = new IslandShape({name: 'haloIslandBubble'});
@@ -252,6 +256,7 @@ export class Island {
         this._locked = locked;
         this._expanded = null;
         this._focus = null;
+        this._syncFree();
         this._render();
     }
 
@@ -409,8 +414,9 @@ export class Island {
         }
         if (!place.visible || !place.width)
             return null;
+        const width = place.width + 2 * this._freePad(place);
         return {
-            x: place.x - place.width / 2, y: place.y, width: place.width, height: place.height,
+            x: place.x - width / 2, y: place.y, width, height: place.height,
             radius: Math.min(place.height / 2, MAX_RADIUS), color: this._fill,
         };
     }
@@ -478,6 +484,7 @@ export class Island {
         if (key === this._placeKey && !force)
             return;
         this._placeKey = key;
+        this._syncFree(place);
         // What hangs from the clock follows it at once; a mode or the bar
         // pushed down changes what shows.
         if (this._docked || place.mode !== this._placedMode || Boolean(place.barDown) !== this._placedDown ||
@@ -500,6 +507,7 @@ export class Island {
             this._view?.actor.set_size(width, height);
             this._shape.resize(width, height, {animate: false});
         }
+        this._syncPad(main);
     }
 
     // Shown and reactive: an activity always; the resting island where
@@ -533,6 +541,8 @@ export class Island {
         this._grab = null;
         this._handle?.destroy();
         this._handle = null;
+        this._freeWatch?.destroy();
+        this._freeWatch = null;
         if (this._dockWait)
             GLib.source_remove(this._dockWait);
         this._dockWait = 0;
@@ -755,6 +765,7 @@ export class Island {
         this._syncTuck(away, animate);
         this._syncHandle(place, away && Boolean(main));
         this._syncDockWidth(dockWidth);
+        this._syncPad(main, animate);
         this._syncOutside();
         if (where.drop !== this._dropped) {
             this._dropped = where.drop;
@@ -1001,7 +1012,61 @@ export class Island {
     // opened look and the lock screen stay as they are.
     _syncPad(main, animate = true) {
         const on = Boolean(main) && this._hovered && !this._locked && !this._docked && !(this._expanded === main.id && main.large);
-        this._shape.setPad(on ? HOVER_X : 0, on ? HOVER_Y : 0, {animate});
+        if (on) {
+            this._shape.setPad(HOVER_X, HOVER_Y, {animate});
+            return;
+        }
+        // Free of windows, the clock (and what is docked in it) grows wider
+        // on both sides; what it holds keeps its size.
+        this._shape.setPad(!main || this._docked ? this._freePad() : 0, 0, {animate});
+    }
+
+    // The resting island's own width: the clock's, or the clock's pill
+    // with what is docked in it.
+    _baseWidth(place = this._place()) {
+        return this._docked && this._dockWidth ? this._dockWidth : place.width;
+    }
+
+    // The room added on each side while the island floats free.
+    _freePad(place = this._place()) {
+        const percent = this._settings.current.islandFreeGrow;
+        if (this._locked || this._rest.open || !growsFree({mode: place.mode, barDown: place.barDown, percent, free: this._free}))
+            return 0;
+        const base = this._baseWidth(place);
+        return Math.round((grownWidth(base, percent) - base) / 2);
+    }
+
+    // Watches the windows only while growing is possible at all.
+    _syncFree(place = this._place()) {
+        const wanted = !this._gone && !this._locked && place.mode === 'island' && this._settings.current.islandFreeGrow > 0;
+        if (!wanted) {
+            this._freeWatch?.destroy();
+            this._freeWatch = null;
+            this._free = false;
+            return;
+        }
+        if (!this._freeWatch) {
+            this._freeWatch = new FreeWatch({
+                rect: () => this._freeRect(),
+                onChange: free => {
+                    this._free = free;
+                    this._syncPad(this._pick().main);
+                },
+            });
+            this._free = this._freeWatch.free;
+        } else {
+            this._freeWatch.queue();
+        }
+    }
+
+    // Where the grown island would be: the widest it gets, so that growing
+    // never brings a window below it and back.
+    _freeRect() {
+        const place = this._place();
+        if (!place.visible || !place.width)
+            return null;
+        const width = grownWidth(Math.max(place.width, this._dockWidth), this._settings.current.islandFreeGrow);
+        return {x: Math.round(place.x - width / 2), y: Math.round(place.y), width, height: place.height};
     }
 
     // The pointer came onto the island or left it: at once it grows a
