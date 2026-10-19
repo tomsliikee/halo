@@ -8,7 +8,7 @@ import GLib from 'gi://GLib';
 
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
-import {hottest, memoryLeft, newProblems, problems} from '../health.js';
+import {cpuZones, hottest, memoryLeft, newProblems, problems} from '../health.js';
 import {healthText} from '../words.js';
 
 const CHECK_S = 60;
@@ -47,14 +47,15 @@ export class HealthSource {
         try {
             const children = Gio.File.new_for_path(THERMAL).enumerate_children('standard::name', Gio.FileQueryInfoFlags.NONE, null);
             for (let info = children.next_file(null); info; info = children.next_file(null)) {
+                const zone = `${THERMAL}/${info.get_name()}`;
                 if (info.get_name().startsWith('thermal_zone'))
-                    zones.push(`${THERMAL}/${info.get_name()}/temp`);
+                    zones.push({path: `${zone}/temp`, type: read(`${zone}/type`)?.trim() ?? ''});
             }
             children.close(null);
         } catch {
             // No sensors to read.
         }
-        return zones;
+        return cpuZones(zones);
     }
 
     _diskLeft() {

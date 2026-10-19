@@ -6,7 +6,7 @@ import {
     claudeItems, driveText, glanceItems, sizeText, statsItems, uptimeText, lockTitle, workspaceNote, workspaceTitle,
     healthText, phoneBatteryText, rainText, updatesText,
 } from '../extension/lib/island/words.js';
-import {hottest, memoryLeft, newProblems, problems} from '../extension/lib/island/health.js';
+import {cpuZones, hottest, memoryLeft, newProblems, problems} from '../extension/lib/island/health.js';
 import {newlyLow} from '../extension/lib/island/sources/phone.js';
 import * as Pomodoro from '../extension/lib/shared/pomodoro.js';
 import * as Timer from '../extension/lib/shared/timer.js';
@@ -197,6 +197,10 @@ test('sizes and uptimes in words', () => equal(
 
 test('the hottest sensor, odd readings left out', () => equal(hottest(['45000\n', '91500', 'x', '-1', '999000']), 91.5));
 test('no sensors', () => equal(hottest([]), null));
+test('only the processor\'s sensor is read when there is one', () => equal(
+    cpuZones([{path: 'a', type: 'acpitz'}, {path: 'b', type: 'x86_pkg_temp'}, {path: 'c', type: 'iwlwifi_1'}]), ['b']));
+test('without a processor sensor all are read', () => equal(
+    cpuZones([{path: 'a', type: 'acpitz'}, {path: 'c', type: 'iwlwifi_1'}]), ['a', 'c']));
 test('memory left', () => equal(memoryLeft('MemTotal:       1000 kB\nMemFree: 10 kB\nMemAvailable:    40 kB\n'), 0.04));
 test('a problem starts at its line and ends well below it', () => {
     const hot = problems({temperature: 90, memory: 0.5, disk: 0.5});

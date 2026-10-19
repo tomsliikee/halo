@@ -213,8 +213,17 @@ export class CenterPanel {
     }
 
     close({animated = true} = {}) {
-        if (!this.isOpen)
+        // A close still fading out ends now: on the lock screen no frame
+        // may come to end it, and its stage-sized catcher would stay.
+        if (!this.isOpen) {
+            if (!animated && this.actor.visible) {
+                stopSprings(this._morph);
+                this._card.remove_all_transitions();
+                this._morph.hide();
+                this.actor.hide();
+            }
             return;
+        }
         this.isOpen = false;
         if (this._grab)
             Main.popModal(this._grab);

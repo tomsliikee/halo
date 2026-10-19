@@ -49,6 +49,7 @@ import {loadSymbols, unloadSymbols} from './lib/shared/symbols.js';
 import {SystemState} from './lib/shared/system.js';
 import {TimerStore} from './lib/shared/timerstore.js';
 import {SchemeView, ThemeController} from './lib/shared/theme.js';
+import {WakeCheck} from './lib/shared/wakecheck.js';
 
 // The gap between the bar and a panel that opens below it.
 const TALLY = 'tally@thomashaiden';
@@ -59,6 +60,7 @@ const PANEL_GAP = 8;
 // and GNOME's own comes back in its place.
 export default class HaloExtension extends Extension {
     enable() {
+        this._wakeCheck = new WakeCheck();
         loadIcons(this.dir.get_child('icons'));
         loadSymbols(this.dir.get_child('symbols'));
         this._settings = new SettingsStore(settings => this._settingsChanged(settings));
@@ -102,6 +104,8 @@ export default class HaloExtension extends Extension {
     }
 
     disable() {
+        this._wakeCheck.destroy();
+        this._wakeCheck = null;
         Main.sessionMode.disconnectObject(this);
         this._stopIsland();
         this._stopCenter();

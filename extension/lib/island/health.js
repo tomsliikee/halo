@@ -15,6 +15,15 @@ export function hottest(texts) {
     return values.length > 0 ? Math.max(...values) : null;
 }
 
+// Which thermal zones to read, from [{path, type}]: the processor's own
+// sensor when there is one, as it is the one that runs hot and reads at
+// once; the firmware's zones take milliseconds each.
+const CPU_TYPES = ['x86_pkg_temp', 'cpu-thermal', 'cpu_thermal', 'k10temp', 'coretemp'];
+export function cpuZones(zones) {
+    const cpu = zones.filter(zone => CPU_TYPES.includes(zone.type));
+    return (cpu.length > 0 ? cpu : zones).map(zone => zone.path);
+}
+
 // The share of memory left, from /proc/meminfo, or null.
 export function memoryLeft(meminfo) {
     const field = name => Number(new RegExp(`^${name}:\\s+(\\d+)`, 'm').exec(meminfo ?? '')?.[1]);

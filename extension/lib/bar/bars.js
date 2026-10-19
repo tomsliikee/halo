@@ -183,8 +183,9 @@ export class Bars {
     }
 
     _rebuild() {
-        // The buttons go home first, or they would go with the old bar.
-        this._tray.restore();
+        // The buttons go home first, or they would go with the old bar; the
+        // tray lets go of the old bar's box, which is destroyed next.
+        this._tray.sync(null, this._trayIds);
         for (const bar of this._bars)
             bar.destroy();
         this._bars = Main.layoutManager.monitors.map((_monitor, index) => new Bar(index, this._theme, {
