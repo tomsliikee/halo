@@ -107,7 +107,7 @@ class WifiTile extends WatchingTile {
 
     // The Wi-Fi device in charge: the one GNOME's toggle shows.
     get deviceItem() {
-        return this._toggle?._itemBinding?.source ?? null;
+        return this._toggle?._getPrimaryItem?.() ?? null;
     }
 
     update() {
